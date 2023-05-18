@@ -1,0 +1,28 @@
+/* You can add global styles to this file, and also import other style files */
+.menu-list li a svg {
+    height: 20px !important;
+  }
+  
+  :host ::ng-deep {
+    .breadcrumb-item a {
+      // font-size: 1.2rem;
+      color: #00AC9A !important;
+    }
+  
+    .breadcrumb-item a:last-child {
+      color: #6c757d !important;
+    }
+  }
+  
+  .wrapper {
+    overflow-x: hidden;
+  }
+  
+  .page-body {
+      min-height: calc(100vh - 180px);
+      height: auto;
+  }
+  
+  .border-footer {
+    border: 1px solid #dee2e6;
+  }
