@@ -1,0 +1,9 @@
+<div class="card row">
+    <div class="card-body">
+    <form class="" *ngFor="let item of listData">
+        <div class="col-4">
+            <app-ng-select-custom [label]="item.labelName" [model]="model" [listDatas]="item.value"></app-ng-select-custom>
+        </div>
+    </form>
+    </div>
+</div>

@@ -1,0 +1,7 @@
+<label for="TextInput" class="form-label fw-bold">{{label}}</label>
+<div class="col-12">
+  <ng-select [(ngModel)]="model" name="model">
+    <ng-option *ngFor="let item of listDatas" [value]="item">{{
+      item}}</ng-option>
+  </ng-select>
+</div>

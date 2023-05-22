@@ -8,35 +8,6 @@
         <div class="img">
           <img class="w-50 ml-5" src="assets/images/VSIRIUS_Logo_Final_228x136.png" alt="VSIRIUS_Logo_Final">
         </div>
-        <div class="dropdown morphing scale-left">
-          <a class="dropdown-toggle more-icon" href="#" role="button" data-bs-toggle="dropdown"><i
-              class="fa fa-ellipsis-h"></i></a>
-          <ul class="dropdown-menu shadow border-0 p-2 mt-2" data-bs-popper="none">
-            <li class="fw-bold px-2">Quick Actions</li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" href="landing/index.html" aria-current="page">Landing page</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="inventory/index.html">Inventory</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="ecommerce/index.html">eCommerce</a>
-            </li>
-            <li><a class="dropdown-item" href="hrms/index.html">HRMS</a></li>
-            <li>
-              <hr class="dropdown-divider" />
-            </li>
-            <li>
-              <a class="dropdown-item" href="account-invoices.html">Invoices List</a>
-            </li>
-            <li>
-              <a class="dropdown-item" href="./account-create-invoices.html">Create Invoices</a>
-            </li>
-          </ul>
-        </div>
       </div>
 
       <div class="main-menu flex-grow-1">
@@ -44,13 +15,13 @@
           <li class="collapsed">
             <a class="m-link" href="/">
               <i class="fa fa-home"></i>
-              <span class="ms-2">Trang Chủ</span>
+              <span class="ms-2">Home</span>
             </a>
           </li>
           <ng-container>
             <!-- Menu level 0 -->
             <li class="collapsed">
-              <a class="m-link cursor-pointer">
+              <a class="m-link cursor-pointer" href="/product">
                 <i class="fa fa-home"></i>
                 <span class="ms-2">Vsirius Product</span>
               </a>
@@ -103,250 +74,14 @@
   </div>
 
   <div class="wrapper">
-    <header class="page-header sticky-top px-xl-4 px-sm-2 px-0 py-lg-2 py-1">
-      <div class="container-fluid">
-        <nav class="navbar">
-          <div class="d-flex">
-            <button type="button" class="btn btn-link d-none d-xl-block sidebar-mini-btn p-0 text-primary">
-              <span class="hamburger-icon">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-              </span>
-            </button>
-            <button type="button" class="btn btn-link d-block d-xl-none menu-toggle p-0 text-primary">
-              <span class="hamburger-icon">
-                <span class="line"></span>
-                <span class="line"></span>
-                <span class="line"></span>
-              </span>
-            </button>
-          </div>
-          <!-- SEARCH HEADER -->
-          <div class="header-left flex-grow-1 d-none d-md-block">
-            <div class="main-search px-3 flex-fill input-group ">
-              <input type="text" class="form-control" placeholder="Nhập từ khóa để tìm kiếm....">
-              <!-- Nút search -->
-              <button class="btn btn-primary border" type="button">
-                <i class="fa fa-search"></i>
-              </button>
-            </div>
-          </div>
-    
-          <ul class="header-right justify-content-end d-flex align-items-center mb-0">
-            <!-- menu Thông báo Notificatons -->
-            <li>
-              <div class="dropdown morphing scale-left notifications">
-                <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
-                  <div class="badge-wrap">
-                    <svg viewbox="0 0 16 16" [ngClass]="'bell-ring'" width="18px" height="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                      <path _ngcontent-lok-c48="" d="M8 1.91802L7.203 2.07902C6.29896 2.26322 5.48633 2.75412 4.90265 3.46864C4.31897 4.18316 4.0001 5.07741 4 6.00002C4 6.62802 3.866 8.19702 3.541 9.74202C3.381 10.509 3.165 11.308 2.878 12H13.122C12.835 11.308 12.62 10.51 12.459 9.74202C12.134 8.19702 12 6.62802 12 6.00002C11.9997 5.07758 11.6807 4.18357 11.097 3.46926C10.5134 2.75494 9.70087 2.26419 8.797 2.08002L8 1.91802ZM14.22 12C14.443 12.447 14.701 12.801 15 13H1C1.299 12.801 1.557 12.447 1.78 12C2.68 10.2 3 6.88002 3 6.00002C3 3.58002 4.72 1.56002 7.005 1.09902C6.99104 0.959974 7.00638 0.819547 7.05003 0.686794C7.09368 0.554041 7.16467 0.43191 7.25842 0.328279C7.35217 0.224647 7.4666 0.141815 7.59433 0.085125C7.72206 0.028435 7.86026 -0.000854492 8 -0.000854492C8.13974 -0.000854492 8.27794 0.028435 8.40567 0.085125C8.5334 0.141815 8.64783 0.224647 8.74158 0.328279C8.83533 0.43191 8.90632 0.554041 8.94997 0.686794C8.99362 0.819547 9.00896 0.959974 8.995 1.09902C10.1253 1.32892 11.1414 1.94238 11.8712 2.83552C12.6011 3.72866 12.9999 4.84659 13 6.00002C13 6.88002 13.32 10.2 14.22 12Z">
-                      </path>
-                      <path _ngcontent-lok-c48="" d="M9.41421 15.4142C9.03914 15.7893 8.53043 16 8 16C7.46957 16 6.96086 15.7893 6.58579 15.4142C6.21071 15.0391 6 14.5304 6 14H10C10 14.5304 9.78929 15.0391 9.41421 15.4142Z" fill="black" class="fill-secondary"></path>
-                    </svg>
-                    <!-- <div class="badge-with-number" *ngIf="listDataAmazon.length > 0">
-                      {{ listDataAmazon.length >= 10 ? "10+" : listDataAmazon.length }}
-                    </div> -->
-                  </div>
-                </a>
-                <!-- <div class="badge-wrap">
-                  <i class="fa solid fa-bell"></i>
-                  <div class="badge-with-number" *ngIf="listDataAmazon.length > 0">
-                    {{ listDataAmazon.length >= 100 ? "99+" : listDataAmazon.length }}
-                  </div>
-                </div> -->
-                <div id="NotificationsDiv" class="dropdown-menu shadow rounded-4 border-0 p-0 m-0">
-                  <div class="card w380">
-                    <div class="card-header p-3">
-                      <h6 class="card-title mb-0">Trung tâm thông báo</h6>
-                      <!-- <span class="badge bg-danger text-light">{{
-                        notification?.total
-                        }}</span> -->
-                    </div>
-                    <div class="tab-content card-body custom_scroll">
-                      <div class="tab-pane fade show active">
-                        <ul class="list-unstyled list mb-0">
-                          <!-- <li class="py-2 mb-1 border-bottom" *ngFor="let item of listDataAmazon">
-                            <div class="d-flex">
-                              <div class="avatar rounded-circle no-thumbnail">
-                                <i class="fa fa-envelope fa-lg"></i>
-                              </div>
-                              <div class="flex-fill ms-3">
-                                <p class="mb-0">
-                                  {{ item.are_batteries_included }}
-                                </p>
-                              </div>
-                            </div>
-                          </li> -->
-                          <!-- <li class="py-2 mb-1 border-bottom" *ngIf="notification?.total === 0">
-                            <a class="d-flex">
-                              <div class="flex-fill ms-3" *ngIf="notification?.total === 0">
-                                <p class="d-flex justify-content-between mb-0">
-                                  <span style="margin-left: 50px">Chưa có thông báo mới.</span>
-                                </p>
-                              </div>
-                            </a>
-                          </li> -->
-                        </ul>
-                      </div>
-                    </div>
-                    <a class="btn btn-primary text-light rounded-0">Xem tất cả</a>
-                  </div>
-                </div>
-              </div>
-            </li>
-    
-            <li class="d-none d-xl-inline-block">
-              <a class="nav-link fullscreen" href="javascript:void(0);">
-                <i [class]="'icon-size-actual'"></i>
-              
-              </a>
-            </li>
-            <!-- menu ngôn ngữ -->
-            <li class="d-none d-xl-inline-block">
-              <div class="dropdown morphing scale-left Language mx-sm-2">
-                <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
-                  <svg viewbox="0 0 16 16" width="18px" height="18px" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path class="fill-secondary"
-                      d="M4.545 6.714 4.11 8H3l1.862-5h1.284L8 8H6.833l-.435-1.286H4.545zm1.634-.736L5.5 3.956h-.049l-.679 2.022H6.18z">
-                    </path>
-                    <path
-                      d="M0 2a2 2 0 0 1 2-2h7a2 2 0 0 1 2 2v3h3a2 2 0 0 1 2 2v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-3H2a2 2 0 0 1-2-2V2zm2-1a1 1 0 0 0-1 1v7a1 1 0 0 0 1 1h7a1 1 0 0 0 1-1V2a1 1 0 0 0-1-1H2zm7.138 9.995c.193.301.402.583.63.846-.748.575-1.673 1.001-2.768 1.292.178.217.451.635.555.867 1.125-.359 2.08-.844 2.886-1.494.777.665 1.739 1.165 2.93 1.472.133-.254.414-.673.629-.89-1.125-.253-2.057-.694-2.82-1.284.681-.747 1.222-1.651 1.621-2.757H14V8h-3v1.047h.765c-.318.844-.74 1.546-1.272 2.13a6.066 6.066 0 0 1-.415-.492 1.988 1.988 0 0 1-.94.31z">
-                    </path>
-                  </svg>
-                </a>
-                <!-- Ngôn ngữ -->
-                <div class="dropdown-menu rounded-4 shadow border-0 p-0" data-bs-popper="none">
-                  <div class="card">
-                    <div class="list-group list-group-custom" style="width: 200px">
-                      <!-- <a href="#" class="list-group-item"
-                        ><span class="flag-icon flag-icon-gb me-2"></span>UK
-                        English</a
-                      > -->
-                      <a href="#" class="list-group-item"><span class="flag-icon flag-icon-vn me-2"></span>Tiếng
-                        Việt</a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-    
-            <!-- menu các hệ thống khác -->
-            <li class="d-none d-lg-inline-block">
-              <div class="dropdown morphing scale-left grid-menu mx-sm-2">
-                <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
-                  <svg viewbox="0 0 16 16" height="18px" width="18px" height="18px" fill="currentColor"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                      d="M2 10H5C5.26522 10 5.51957 10.1054 5.70711 10.2929C5.89464 10.4804 6 10.7348 6 11V14C6 14.2652 5.89464 14.5196 5.70711 14.7071C5.51957 14.8946 5.26522 15 5 15H2C1.73478 15 1.48043 14.8946 1.29289 14.7071C1.10536 14.5196 1 14.2652 1 14V11C1 10.7348 1.10536 10.4804 1.29289 10.2929C1.48043 10.1054 1.73478 10 2 10ZM11 1H14C14.2652 1 14.5196 1.10536 14.7071 1.29289C14.8946 1.48043 15 1.73478 15 2V5C15 5.26522 14.8946 5.51957 14.7071 5.70711C14.5196 5.89464 14.2652 6 14 6H11C10.7348 6 10.4804 5.89464 10.2929 5.70711C10.1054 5.51957 10 5.26522 10 5V2C10 1.73478 10.1054 1.48043 10.2929 1.29289C10.4804 1.10536 10.7348 1 11 1ZM11 10C10.7348 10 10.4804 10.1054 10.2929 10.2929C10.1054 10.4804 10 10.7348 10 11V14C10 14.2652 10.1054 14.5196 10.2929 14.7071C10.4804 14.8946 10.7348 15 11 15H14C14.2652 15 14.5196 14.8946 14.7071 14.7071C14.8946 14.5196 15 14.2652 15 14V11C15 10.7348 14.8946 10.4804 14.7071 10.2929C14.5196 10.1054 14.2652 10 14 10H11ZM11 0C10.4696 0 9.96086 0.210714 9.58579 0.585786C9.21071 0.960859 9 1.46957 9 2V5C9 5.53043 9.21071 6.03914 9.58579 6.41421C9.96086 6.78929 10.4696 7 11 7H14C14.5304 7 15.0391 6.78929 15.4142 6.41421C15.7893 6.03914 16 5.53043 16 5V2C16 1.46957 15.7893 0.960859 15.4142 0.585786C15.0391 0.210714 14.5304 0 14 0L11 0ZM2 9C1.46957 9 0.960859 9.21071 0.585786 9.58579C0.210714 9.96086 0 10.4696 0 11L0 14C0 14.5304 0.210714 15.0391 0.585786 15.4142C0.960859 15.7893 1.46957 16 2 16H5C5.53043 16 6.03914 15.7893 6.41421 15.4142C6.78929 15.0391 7 14.5304 7 14V11C7 10.4696 6.78929 9.96086 6.41421 9.58579C6.03914 9.21071 5.53043 9 5 9H2ZM9 11C9 10.4696 9.21071 9.96086 9.58579 9.58579C9.96086 9.21071 10.4696 9 11 9H14C14.5304 9 15.0391 9.21071 15.4142 9.58579C15.7893 9.96086 16 10.4696 16 11V14C16 14.5304 15.7893 15.0391 15.4142 15.4142C15.0391 15.7893 14.5304 16 14 16H11C10.4696 16 9.96086 15.7893 9.58579 15.4142C9.21071 15.0391 9 14.5304 9 14V11Z">
-                    </path>
-                    <path class="fill-secondary"
-                      d="M0.585786 0.585786C0.210714 0.960859 0 1.46957 0 2V5C0 5.53043 0.210714 6.03914 0.585786 6.41421C0.960859 6.78929 1.46957 7 2 7H5C5.53043 7 6.03914 6.78929 6.41421 6.41421C6.78929 6.03914 7 5.53043 7 5V2C7 1.46957 6.78929 0.960859 6.41421 0.585786C6.03914 0.210714 5.53043 0 5 0H2C1.46957 0 0.960859 0.210714 0.585786 0.585786Z">
-                    </path>
-                  </svg>
-                </a>
-                <div class="dropdown-menu rounded-4 shadow border-0 p-0" data-bs-popper="none">
-                  <div class="card">
-                    <div class="row g-1 text-center p-3" style="width: 302px">
-                      <div class="col-6">
-                        <a class="card p-3 color-600 lift align-items-center" href="/" title="">
-                          <svg viewbox="0 0 16 16" width="18px" height="18px" class="mb-3" fill="currentColor"
-                            xmlns="http://www.w3.org/2000/svg">
-                            <path class="fill-secondary"
-                              d="M8 4a.5.5 0 0 1 .5.5V6a.5.5 0 0 1-1 0V4.5A.5.5 0 0 1 8 4zM3.732 5.732a.5.5 0 0 1 .707 0l.915.914a.5.5 0 1 1-.708.708l-.914-.915a.5.5 0 0 1 0-.707zM2 10a.5.5 0 0 1 .5-.5h1.586a.5.5 0 0 1 0 1H2.5A.5.5 0 0 1 2 10zm9.5 0a.5.5 0 0 1 .5-.5h1.5a.5.5 0 0 1 0 1H12a.5.5 0 0 1-.5-.5zm.754-4.246a.389.389 0 0 0-.527-.02L7.547 9.31a.91.91 0 1 0 1.302 1.258l3.434-4.297a.389.389 0 0 0-.029-.518z">
-                            </path>
-                            <path fill-rule="evenodd"
-                              d="M0 10a8 8 0 1 1 15.547 2.661c-.442 1.253-1.845 1.602-2.932 1.25C11.309 13.488 9.475 13 8 13c-1.474 0-3.31.488-4.615.911-1.087.352-2.49.003-2.932-1.25A7.988 7.988 0 0 1 0 10zm8-7a7 7 0 0 0-6.603 9.329c.203.575.923.876 1.68.63C4.397 12.533 6.358 12 8 12s3.604.532 4.923.96c.757.245 1.477-.056 1.68-.631A7 7 0 0 0 8 3z">
-                            </path>
-                          </svg>
-                          <p class="mb-0 color-600">Dashboard</p>
-                          <small class="text-muted">View All</small>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </li>
-    
-            <li class="d-none d-sm-inline-block d-xl-none">
-              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#MynotesModal">
-                <svg viewbox="0 0 16 16" width="18px" height="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path class="fill-secondary"
-                    d="M1.5 0A1.5 1.5 0 0 0 0 1.5V13a1 1 0 0 0 1 1V1.5a.5.5 0 0 1 .5-.5H14a1 1 0 0 0-1-1H1.5z"></path>
-                  <path
-                    d="M3.5 2A1.5 1.5 0 0 0 2 3.5v11A1.5 1.5 0 0 0 3.5 16h6.086a1.5 1.5 0 0 0 1.06-.44l4.915-4.914A1.5 1.5 0 0 0 16 9.586V3.5A1.5 1.5 0 0 0 14.5 2h-11zM3 3.5a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 .5.5V9h-4.5A1.5 1.5 0 0 0 9 10.5V15H3.5a.5.5 0 0 1-.5-.5v-11zm7 11.293V10.5a.5.5 0 0 1 .5-.5h4.293L10 14.793z">
-                  </path>
-                </svg>
-              </a>
-            </li>
-    
-            <li class="d-none d-sm-inline-block d-xl-none">
-              <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#RecentChat">
-                <svg viewbox="0 0 16 16" width="18px" height="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M14 1a1 1 0 0 1 1 1v8a1 1 0 0 1-1 1H4.414A2 2 0 0 0 3 11.586l-2 2V2a1 1 0 0 1 1-1h12zM2 0a2 2 0 0 0-2 2v12.793a.5.5 0 0 0 .854.353l2.853-2.853A1 1 0 0 1 4.414 12H14a2 2 0 0 0 2-2V2a2 2 0 0 0-2-2H2z">
-                  </path>
-                  <path class="fill-secondary"
-                    d="M3 3.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zM3 6a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9A.5.5 0 0 1 3 6zm0 2.5a.5.5 0 0 1 .5-.5h5a.5.5 0 0 1 0 1h-5a.5.5 0 0 1-.5-.5z">
-                  </path>
-                </svg>
-              </a>
-            </li>
-    
-            <!-- menu thay đổi màu nền theme -->
-            <li>
-              <a class="nav-link quick-light-dark choose-skin" id="SidebarDark" style="cursor: pointer">
-                <svg data-theme="cyan" viewbox="0 0 16 16" width="18px" height="18px" fill="currentColor"
-                  xmlns="http://www.w3.org/2000/svg">
-                  <path
-                    d="M6 .278a.768.768 0 0 1 .08.858 7.208 7.208 0 0 0-.878 3.46c0 4.021 3.278 7.277 7.318 7.277.527 0 1.04-.055 1.533-.16a.787.787 0 0 1 .81.316.733.733 0 0 1-.031.893A8.349 8.349 0 0 1 8.344 16C3.734 16 0 12.286 0 7.71 0 4.266 2.114 1.312 5.124.06A.752.752 0 0 1 6 .278zM4.858 1.311A7.269 7.269 0 0 0 1.025 7.71c0 4.02 3.279 7.276 7.319 7.276a7.316 7.316 0 0 0 5.205-2.162c-.337.042-.68.063-1.029.063-4.61 0-8.343-3.714-8.343-8.29 0-1.167.242-2.278.681-3.286z">
-                  </path>
-                  <path class="fill-secondary"
-                    d="M10.794 3.148a.217.217 0 0 1 .412 0l.387 1.162c.173.518.579.924 1.097 1.097l1.162.387a.217.217 0 0 1 0 .412l-1.162.387a1.734 1.734 0 0 0-1.097 1.097l-.387 1.162a.217.217 0 0 1-.412 0l-.387-1.162A1.734 1.734 0 0 0 9.31 6.593l-1.162-.387a.217.217 0 0 1 0-.412l1.162-.387a1.734 1.734 0 0 0 1.097-1.097l.387-1.162zM13.863.099a.145.145 0 0 1 .274 0l.258.774c.115.346.386.617.732.732l.774.258a.145.145 0 0 1 0 .274l-.774.258a1.156 1.156 0 0 0-.732.732l-.258.774a.145.145 0 0 1-.274 0l-.258-.774a1.156 1.156 0 0 0-.732-.732l-.774-.258a.145.145 0 0 1 0-.274l.774-.258c.346-.115.617-.386.732-.732L13.863.1z">
-                  </path>
-                </svg>
-              </a>
-            </li>
-            <!-- Menu User -->
-            <li>
-              <div class="dropdown morphing scale-left user-profile mx-lg-3 mx-2">
-                <a class="nav-link dropdown-toggle after-none d-inline" href="#" role="button" data-bs-toggle="dropdown">
-                  <span class="font-weight-bold me-2"></span>
-                  <img class="avatar img-thumbnail rounded-circle shadow" [src]="'assets/img/profile_av.png'" alt="" />
-                </a>
-                <div class="dropdown-menu border-0 rounded-4 shadow p-0">
-                  <div class="card border-0 w240">
-    
-                    <div class="list-group m-2 mb-3">
-                      <button class="list-group-item list-group-item-action border-0">
-                        <i class="w30 fa fa-user"></i>Thông tin của tôi
-                      </button>
-                      <a class="list-group-item list-group-item-action border-0" style="cursor: pointer"><i
-                          class="w30 fa fa-credit-card"></i>Đổi mật khẩu</a>
-                      <a class="list-group-item list-group-item-action border-0" style="cursor: pointer"><i
-                          class="w30 fa fa-gear"></i>Cài đặt</a>
-                    </div>
-                    <button type="button" class="btn bg-secondary text-light text-uppercase rounded-0">
-                      Đăng xuất
-                    </button>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ul>
-        </nav>
-      </div>
-    </header>
-    
+    <app-header></app-header>
 
     <div class="page-toolbar px-xl-4 px-sm-2 px-3 py-4">
       <div class="container-fluid">
         <div class="align-items-center">
           <div class="col">
             <ol class="breadcrumb bg-transparent mb-0">
-              <!-- <ngx-breadcrumb></ngx-breadcrumb> -->
+              <ngx-breadcrumb></ngx-breadcrumb>
             </ol>
           </div>
         </div>
@@ -364,7 +99,7 @@
         <p class="col-lg-4 col-md-12 mb-0 text-muted">
           © 2023
           <a href="https://www.thememakker.com/" target="_blank" title="ThemeMakker Infotech LLP">
-            POWWER PI</a>, All Rights Reserved.
+            Back Office</a>, All Rights Reserved.
         </p>
 
         <ul class="nav col-lg-8 col-md-12 justify-content-end">
