@@ -24,6 +24,7 @@
     "jquery": "^3.6.1",
     "ngx-bootstrap": "10.3.0",
     "ngx-dynamic-breadcrumb": "2.0.0",
+    "notiflix": "3.2.5",
     "primeflex": "3.2.1",
     "primeicons": "5.0.0",
     "primeng": "16.0.0",

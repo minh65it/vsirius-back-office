@@ -5,6 +5,7 @@ import { Product } from '../../_shared/_models/product';
 import { Router } from '@angular/router';
 import { ProductService } from 'src/modules/_shared/_services/product.service';
 import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
+import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -20,8 +21,8 @@ export class MainComponent implements OnInit {
     { field: 'feed_product_type', header: 'feed_product_type' },
     { field: 'item_sku', header: 'item_sku' },
     { field: 'brand_name', header: 'brand_name' },
-    { field: 'external_product_id', header: 'external_product_id' },
-    { field: 'external_product_id_type', header: 'external_product_id_type' },
+    { field: 'item_type', header: 'item_type' },
+    { field: 'metal_type', header: 'metal_type' },
     // { field: 'item_name', header: 'item_name' },
     // { field: 'item_length_numeric', header: 'item_length_numeric' },
     // { field: 'item_length_numeric_unit_of_measure', header: 'item_length_numeric_unit_of_measure' },
@@ -53,7 +54,31 @@ export class MainComponent implements OnInit {
   numberPage = 50;
   listDataFilter: VsiriusFilter[] = [];
   listProductType: any[] = [];
-  constructor(private filterService: FilterService, private service: ProductService, private router: Router) {
+  listItemType: any[] = [];
+  listMetalType: any[] = [];
+  productType: string = '';
+  item_type: string = 'item_type';
+  metal_type: string = 'metal_type';
+  item_typeList: string[] = [];
+  metal_typeList: string[] = [];
+
+  itemTypeFilterParam: VsiriusFilter = {
+    fieldName: '',
+    itemType: '',
+    labelName: '',
+    value: []
+  };
+  metalTypeFilterParam: VsiriusFilter = {
+    fieldName: '',
+    itemType: '',
+    labelName: '',
+    value: []
+  }
+
+  constructor(private filterService: FilterService,
+    private service: ProductService,
+    private router: Router,
+    private notiflix: NgxNotiflixService) {
 
   }
   ngOnInit() {
@@ -528,24 +553,68 @@ export class MainComponent implements OnInit {
     }));
     this._selectedColumns = this.cols.filter(x => this.selectedColumnsInitial.find(y => y.field == x.field));
   }
-  loadFilter(){
+
+  loadFilter() {
     this.service.getDataFilter('').subscribe({
-      next:res=>{
-        this.listDataFilter = res;
-         res.map(item=>this.listProductType.push(item))
-        console.log(this.listProductType);
+      next: res => {
+        res.map(item => this.listProductType.push(item.value))
+      },
+      error: (err) => {
+        console.log(err);
       }
     })
   }
-  
+
   loadData() {
+    this.notiflix.showLoading();
     this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
       next: res => {
         this.listProducts = res.result;
         this.pagination = res.pagination;
+        this.notiflix.hideLoading();
+      },
+      error: err => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
       }
     })
   }
+
+  filterProductType(e: any) {
+    this.notiflix.showLoading();
+    this.productType = e;
+    this.service.getDataFilter(this.productType).subscribe({
+      next: res => {
+        this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
+        this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
+        this.notiflix.hideLoading();
+
+      },
+      error: (err) => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+  filterItemType(e: any) {
+    this.item_typeList = e;
+    this.itemTypeFilterParam = {
+      fieldName: 'item_type',
+      itemType: '',
+      labelName: '',
+      value: e
+    }
+  }
+  filterMetalType(e: any) {
+    this.metal_typeList = e;
+    this.metalTypeFilterParam = {
+      fieldName: 'metal_type',
+      itemType: '',
+      labelName: '',
+      value: e
+    }
+  }
+
   filterPagination(e: any) {
     if (e == 0) {
       e = 1
@@ -554,12 +623,17 @@ export class MainComponent implements OnInit {
     this.loadData();
   }
   // thay đổi phân trang 
-  pageChanged(event: any): void {
+  pageChanged(event: any) {
     this.pagination.pageNumber = event.page;
   }
 
   search() {
-    // this.pagination.pageNumber ==1 ? this.loadData() : 
+    this.filterParam = [];
+    this.filterParam.push(this.itemTypeFilterParam);
+    this.filterParam.push(this.metalTypeFilterParam);
+    console.log(this.filterParam);
+
+    this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   goToAdd() {
     this.router.navigate(['product/create']);
@@ -568,12 +642,46 @@ export class MainComponent implements OnInit {
   removeFilterSearch() {
     document.querySelector('.p-multiselect').classList.add('hidden');
   }
-  update(product:Product){
+
+  onFileSelected(event: any) {
+    debugger
+    const files: File = event.target.files;
+    console.log(files);
+    this.notiflix.showLoading();
+    this.service.importData(files).subscribe({
+      next: res => {
+        res.success ?
+          this.notiflix.success('Import file successfully')
+          : this.notiflix.error('Import file not successful');
+        this.notiflix.hideLoading();
+      },
+      error: err => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
+  update(product: Product) {
 
   }
 
-  delete(product:Product){
-    
+  delete(product: Product) {
+    this.notiflix.confirm('Message', 'Do you want delete product?', () => {
+      this.notiflix.showLoading();
+      this.service.delete(product.item_sku).subscribe({
+        next: res => {
+          res.success ? this.notiflix.success('Deleted product successfully') :
+            this.notiflix.error('Delete product not successful');
+          this.loadData();
+          this.notiflix.hideLoading();
+        },
+        error: err => {
+          this.notiflix.error(err);
+          this.notiflix.hideLoading();
+        }
+      })
+    })
   }
 }
 

@@ -1,6 +1,6 @@
 export interface OperationResult
 {
   error: string;
-  isSuccess: boolean;
+  success: boolean;
   data: any;
 }
