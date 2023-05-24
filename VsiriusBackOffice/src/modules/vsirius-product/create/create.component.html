@@ -1,9 +1,40 @@
-<div class="card row">
-    <div class="card-body">
-    <form class="" *ngFor="let item of listData">
-        <div class="col-4">
-            <app-ng-select-custom [label]="item.labelName" [model]="model" [listDatas]="item.value"></app-ng-select-custom>
+<div class="card ">
+    <div class="col-4 mt-2">
+        <div class="row">
+            <label for="TextInput" class="form-label fw-bold">Product Type</label>
+            <div class="col-12">
+                <ng-select [placeholder]="'feed_product_type...'" [disabled]="listData.length > 0"
+                    name="feed_product_type" (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
+                    <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
+                        item}}</ng-option>
+                </ng-select>
+            </div>
         </div>
-    </form>
+    </div>
+    <div class="card-body">
+        <form class="row">
+            <p-tabView [(activeIndex)]="activeIndex" >
+                    <p-tabPanel *ngFor="let group of scrollableTabs" [header]="group.title">
+                        <p>{{ group.content }}</p>
+                        <!-- <div class="row">
+                            <ng-container *ngFor="let item of listData">
+                                <div class="col-4 mb-2">
+                                    <app-ng-select-custom [label]="item.labelName"
+                                        (ngModelChange)="onSelectedOptionChange($event)" [model]="item.fieldName"
+                                        [listDatas]="item.value"></app-ng-select-custom>
+                                </div>
+                            </ng-container>
+                        </div> -->
+                    </p-tabPanel>
+                    <!-- <p-tabPanel [header]="group" [selected]="true">
+                        <ng-container *ngFor="let item of listFieldData">
+                            <div class="col-4 mb-2">
+                                <app-input-custom *ngIf="item.value == null" [label]="item.fieldName"
+                                    [model]="item.fieldName"></app-input-custom>
+                            </div>
+                        </ng-container>
+                    </p-tabPanel> -->
+            </p-tabView>
+        </form>
     </div>
 </div>

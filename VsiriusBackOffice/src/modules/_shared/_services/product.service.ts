@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { VsiriusFilter } from '../_models/vsirius-filter';
 import { Product } from '../_models/product';
@@ -25,11 +25,17 @@ export class ProductService {
     return this.http.get<VsiriusFilter[]>(this.baseUrl + '/Filter', { params: { feed_product_type } });
   }
 
+  getValueForAdd(feed_product_type?: string){
+    return this.http.get<VsiriusFilter[]>(this.baseUrl + '/GetValueForAdd', { params: { feed_product_type } });
+  }
+
   importData(fileExcel: File) {
     const formData = new FormData();
-    formData.append('fileExcel', fileExcel);
-    debugger
-    return this.http.post<OperationResult>(this.baseUrl + '/ImportExcel', formData);
+    formData.append('fileExcel', fileExcel, fileExcel.name);
+    const headers = new HttpHeaders();
+    // Thiết lập header 'Content-Type' là 'multipart/form-data'
+    headers.set('Content-Type', 'multipart/form-data');
+    return this.http.post<OperationResult>(this.baseUrl + '/ImportExcel', formData, { headers });
   }
 
   delete(item_sku: string) {

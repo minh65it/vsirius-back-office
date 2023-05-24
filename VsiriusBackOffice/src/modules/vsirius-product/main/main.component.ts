@@ -35,23 +35,23 @@ export class MainComponent implements OnInit {
   keyword: string = '';
   listChoosePagination = [
     {
-      key: 50,
-      value: '50 Trang'
+      key: 10,
+      value: '10 Page'
     },
     {
-      key: 10,
-      value: '10 Trang'
+      key: 50,
+      value: '50 Page'
     },
     {
       key: 100,
-      value: '100 Trang'
+      value: '100 Page'
     },
     {
       key: 200,
-      value: '200 Trang'
+      value: '200 Page'
     }
   ];
-  numberPage = 50;
+  numberPage = 10;
   listDataFilter: VsiriusFilter[] = [];
   listProductType: any[] = [];
   listItemType: any[] = [];
@@ -66,15 +66,17 @@ export class MainComponent implements OnInit {
     fieldName: '',
     itemType: '',
     labelName: '',
-    value: []
+    value: [],
+    groupName:''
   };
   metalTypeFilterParam: VsiriusFilter = {
     fieldName: '',
     itemType: '',
     labelName: '',
-    value: []
+    value: [],
+    groupName:''
   }
-
+  isShowSelect:boolean = true;
   constructor(private filterService: FilterService,
     private service: ProductService,
     private router: Router,
@@ -582,7 +584,10 @@ export class MainComponent implements OnInit {
 
   filterProductType(e: any) {
     this.notiflix.showLoading();
-    this.productType = e;
+    if (e != null || e != '') {
+      this.productType = e;
+    }
+    this.isShowSelect = false;
     this.service.getDataFilter(this.productType).subscribe({
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
@@ -602,7 +607,8 @@ export class MainComponent implements OnInit {
       fieldName: 'item_type',
       itemType: '',
       labelName: '',
-      value: e
+      value: e,
+      groupName:''
     }
   }
   filterMetalType(e: any) {
@@ -611,7 +617,8 @@ export class MainComponent implements OnInit {
       fieldName: 'metal_type',
       itemType: '',
       labelName: '',
-      value: e
+      value: e,
+      groupName:''
     }
   }
 
@@ -625,14 +632,13 @@ export class MainComponent implements OnInit {
   // thay đổi phân trang 
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;
+    this.loadData();
   }
 
   search() {
     this.filterParam = [];
     this.filterParam.push(this.itemTypeFilterParam);
     this.filterParam.push(this.metalTypeFilterParam);
-    console.log(this.filterParam);
-
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   goToAdd() {
@@ -644,8 +650,7 @@ export class MainComponent implements OnInit {
   }
 
   onFileSelected(event: any) {
-    debugger
-    const files: File = event.target.files;
+    const files: File = event.target.files[0] as File;
     console.log(files);
     this.notiflix.showLoading();
     this.service.importData(files).subscribe({

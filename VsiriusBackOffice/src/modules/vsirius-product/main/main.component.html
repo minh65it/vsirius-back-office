@@ -10,14 +10,14 @@
           </ng-select>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'item_type...'" name="item_type" [multiple]="true"
-            (ngModelChange)="filterItemType($event)" [(ngModel)]="item_type">
+          <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect"  [multiple]="true"
+            (ngModelChange)="filterItemType($event)" [(ngModel)]="item_type" name="item_type">
             <ng-option *ngFor="let item of listItemType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'metal_type...'" name="metal_type" [multiple]="true"
+          <ng-select [placeholder]="'metal_type...'" name="metal_type" [disabled]="isShowSelect" [multiple]="true"
             (ngModelChange)="filterMetalType($event)" [(ngModel)]="metal_type">
             <ng-option *ngFor="let item of listMetalType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
@@ -25,7 +25,7 @@
         </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="input-group">
-            <input class="form-control rounded" type="text" autocomplete="off" name="keyword"
+            <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off" name="keyword"
               placeholder="Enter search keywords...." />
             <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
               <i class="fa fa-search"></i>

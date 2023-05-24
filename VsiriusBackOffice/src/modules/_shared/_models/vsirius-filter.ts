@@ -3,4 +3,5 @@ export interface VsiriusFilter {
     labelName: string;
     value: string[];
     itemType: string;
+    groupName:string
 }

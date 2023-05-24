@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { Product } from 'src/modules/_shared/_models/product';
 import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
+import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { ProductService } from 'src/modules/_shared/_services/product.service';
 
 @Component({
@@ -8,140 +11,28 @@ import { ProductService } from 'src/modules/_shared/_services/product.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-
-  listData: VsiriusFilter[] = [{
-    "fieldName": "external_product_id_type",
-    "labelName": "Product ID Type",
-    "value": [
-      "EAN",
-      "GTIN",
-      "UPC",
-      "ASIN"
-    ],
-    "itemType": "bracelet"
-  },
-  {
-    "fieldName": "target_gender",
-    "labelName": "Target Gender",
-    "value": [
-      "Male",
-      "Unisex",
-      "Female"
-    ],
-    "itemType": "bracelet"
-  },
-  {
-    "fieldName": "item_type",
-    "labelName": "Category (item-type)",
-    "value": [
-      "link-bracelets",
-      "anklets",
-      "charm-bracelets",
-      "link-charm-bracelets",
-      "strand-bracelets",
-      "tennis-bracelets",
-      "stretch-bracelets",
-      "bangle-bracelets",
-      "wrap-bracelets",
-      "identification-bracelets",
-      "cuff-bracelets",
-      "bracelets"
-    ],
-    "itemType": "bracelet"
-  },
-  {
-    "fieldName": "metal_type",
-    "labelName": "Metal Type",
-    "value": [
-      "Bronze",
-      "Zinc Alloy",
-      "Aluminum",
-      "Brass",
-      "Sterling Silver",
-      "Tungsten Steel",
-      "Rose Gold",
-      "Yellow Gold",
-      "Silver",
-      "White Bronze",
-      "Pewter",
-      "Stainless Steel",
-      "Tungsten",
-      "Titanium",
-      "White Gold",
-      "Nickel",
-      "Copper"
-    ],
-    "itemType": "bracelet"
-  },
-  {
-    "fieldName": "material_type1",
-    "labelName": "Material Type",
-    "value": [
-      "Nylon",
-      "Metal",
-      "Stone",
-      "Porcelain",
-      "Aluminum ",
-      "Pewter",
-      "Stainless Steel",
-      "Resin",
-      "Titanium",
-      "White Gold",
-      "Copper",
-      "Polyvinyl Chloride",
-      "Bronze",
-      "Hemp",
-      "Polyester",
-      "Vinyl",
-      "Silicone",
-      "Rose Gold",
-      "Acetate",
-      "Suede",
-      "Yellow Gold",
-      "Silver",
-      "Alloy Steel",
-      "Polyurethane",
-      "Platinum Alloy",
-      "Faux Suede",
-      "Acrylic",
-      "Zinc Alloy",
-      "Brass",
-      "Glass",
-      "Leather",
-      "Iron",
-      "Plastic",
-      "Cotton",
-      "Sterling Silver ",
-      "Silk",
-      "Platinum",
-      "Rubber",
-      "Faux Leather",
-      "Fur",
-      "Wood",
-      "Zinc",
-      "Zirconium",
-      "Ceramic",
-      "Paper",
-      "German Silver",
-      "Nickel",
-      "Acrylonitrile Butadiene Styrene",
-      "Copper Alloy",
-      "Wool"
-    ],
-    "itemType": "bracelet"
-  }];
+  selectedOption: any;
+  listData: VsiriusFilter[] = [];
+  listFieldData: VsiriusFilter[] = [];
+  listProductType: any[] = [];
   model: string = 'feed product type';
-  constructor(private service: ProductService) { }
+  productType: string = '';
+  listFileds: VsiriusFilter[] = [];
+  groupName: string[] = [];
+  activeIndex: number = 0;
+  scrollableTabs: any[] = [];
+  constructor(private service: ProductService,
+    private router: Router,
+    private notiflix: NgxNotiflixService) { }
 
   ngOnInit() {
-    this.loadData();
+    this.loadDataProductType();
   }
-  
- 
-  loadData() {
-    this.service.getDataFilter('bracelet').subscribe({
+
+  loadDataProductType() {
+    this.service.getDataFilter('').subscribe({
       next: (res) => {
-        console.log(res);
+        this.listProductType = res.map(x => x.value);
       },
       error: (err) => {
         console.log(err);
@@ -149,4 +40,45 @@ export class CreateComponent implements OnInit {
     })
   }
 
+  filterProductType(e: string) {
+    this.loadData(e);
+    this.loadValueForAdd(e);
+  }
+
+  loadValueForAdd(e) {
+    this.notiflix.showLoading();
+    this.service.getValueForAdd(e).subscribe({
+      next: (res) => {
+        this.listFieldData = res.filter(x => x.value == null);
+        this.notiflix.hideLoading();
+      },
+      error: (err) => {
+        console.log(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
+  loadData(e) {
+    this.notiflix.showLoading();
+    this.service.getDataFilter(e).subscribe({
+      next: (res) => {
+        this.listData = res;
+        this.groupName = res.map(x => x.groupName);
+        this.groupName = this.groupName.filter((item, index) => this.groupName.indexOf(item) === index);
+        this.scrollableTabs = Array.from(
+          { length: this.groupName.length }, 
+          (_, i) => ({ title: this.groupName[i], content: `${this.groupName[i]}` }));
+        this.notiflix.hideLoading();
+      },
+      error: (err) => {
+        console.log(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+  onSelectedOptionChange(value: any) {
+    this.selectedOption = value;
+    console.log('hello');
+  }
 }
