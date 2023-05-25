@@ -7,7 +7,7 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     // component: DefaultLayoutComponent,
     data: {
-      breadcrumb: 'Trang Chủ',
+      breadcrumb: 'Home',
     },
     children: [
       {

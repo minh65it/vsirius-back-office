@@ -2,6 +2,6 @@ export interface VsiriusFilter {
     fieldName: string;
     labelName: string;
     value: string[];
-    itemType: string;
+    productType: string;
     groupName:string
 }

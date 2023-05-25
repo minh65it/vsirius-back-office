@@ -1,23 +1,83 @@
 @import '../node_modules/@ng-select/ng-select/themes/default.theme.css';
 body {
-    font-family: 'Quicksand';
-    position: relative;
-  }
+  font-family: 'Quicksand';
+  position: relative;
+}
+.input-error {
+  border-color: red;
+}
+
+.select-error {
+  border-color: red;
+}
+
+.table-scroll-view {
+  padding: 1.5rem 0 0 !important;
+  overflow-x: auto;
+}
+
 .p-element {
-    overflow-x: auto;
-  }
-  
+  overflow-x: auto;
+}
+
+.p-datatable table {
+  border: 1px solid #e9e6e1;
+  font-family: 'Quicksand' !important;
+}
+
+.p-datatable .p-datatable-thead>tr>th {
+  padding: 0.5rem 0.5rem !important;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 22.5px;
+}
+
+.p-datatable .p-datatable-thead tr th,
+.p-datatable .p-datatable-tbody tr td {
+  vertical-align: middle;
+  white-space: nowrap;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  border-right: 0;
+  border-bottom: 1px dashed #e9e6e1;
+  border-left: 1px dashed #e9e6e1;
+}
+
+.p-column-filter-menu-button {
+  width: 2rem;
+  height: 1rem;
+  color: #6c757d;
+  border: 0 none;
+  background: transparent;
+  border-radius: 50%;
+  transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
+}
+
+.form-check-input:checked {
+  background-color: #2794eb;
+  border-color: #2794eb;
+}
+
+.form-control:focus {
+  box-shadow: 0 0 10px rgb(25 24 24 / 15%);
+  background-color: #ffffff;
+  border-color: #2794eb;
+}
+
+.form-control:hover,
+.form-select:hover {
+  background-color: #ffffff;
+  border-color: #2794eb;
+  box-shadow: 0 0 10px rgb(25 24 24 / 15%);
+
   .p-datatable table {
     border: 1px solid #e9e6e1;
-    font-family: 'Quicksand' !important;
   }
-  .p-datatable .p-datatable-thead > tr > th {
+
+  .p-datatable .p-datatable-thead>tr>th {
     padding: 0.5rem 0.5rem !important;
-    font-size: 15px;
-    font-weight: 700;
-    line-height: 22.5px;
   }
-  
+
   .p-datatable .p-datatable-thead tr th,
   .p-datatable .p-datatable-tbody tr td {
     vertical-align: middle;
@@ -28,7 +88,7 @@ body {
     border-bottom: 1px dashed #e9e6e1;
     border-left: 1px dashed #e9e6e1;
   }
-  
+
   .p-column-filter-menu-button {
     width: 2rem;
     height: 1rem;
@@ -38,50 +98,4 @@ body {
     border-radius: 50%;
     transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
   }
-  
-  .form-check-input:checked {
-    background-color: #2794eb;
-    border-color: #2794eb;
-  }
-  
-  .form-control:focus {
-    box-shadow: 0 0 10px rgb(25 24 24 / 15%);
-    background-color: #ffffff;
-    border-color: #2794eb;
-  }
-  
-  .form-control:hover,
-  .form-select:hover {
-    background-color: #ffffff;
-    border-color: #2794eb;
-    box-shadow: 0 0 10px rgb(25 24 24 / 15%);
-  
-    .p-datatable table {
-      border: 1px solid #e9e6e1;
-    }
-  
-    .p-datatable .p-datatable-thead > tr > th {
-      padding: 0.5rem 0.5rem !important;
-    }
-  
-    .p-datatable .p-datatable-thead tr th,
-    .p-datatable .p-datatable-tbody tr td {
-      vertical-align: middle;
-      white-space: nowrap;
-      padding-left: 1rem;
-      padding-right: 1rem;
-      border-right: 0;
-      border-bottom: 1px dashed #e9e6e1;
-      border-left: 1px dashed #e9e6e1;
-    }
-  
-    .p-column-filter-menu-button {
-      width: 2rem;
-      height: 1rem;
-      color: #6c757d;
-      border: 0 none;
-      background: transparent;
-      border-radius: 50%;
-      transition: background-color 0.2s, color 0.2s, box-shadow 0.2s;
-    }
-  }
+}

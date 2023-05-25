@@ -20,7 +20,7 @@ const routes: Routes = [
     },
   },
   {
-    path:'update',
+    path:'update/:id',
     component:UpdateComponent,
     data: {
       breadcrumb: 'Update Product',

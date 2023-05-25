@@ -1,40 +1,65 @@
 <div class="card ">
-    <div class="col-4 mt-2">
-        <div class="row">
-            <label for="TextInput" class="form-label fw-bold">Product Type</label>
-            <div class="col-12">
-                <ng-select [placeholder]="'feed_product_type...'" [disabled]="listData.length > 0"
-                    name="feed_product_type" (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
-                    <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
-                        item}}</ng-option>
-                </ng-select>
+    <div class="row mt-2 ms-3 me-3">
+        <div class="col-4">
+            <div class="row">
+                <label for="TextInput" class="form-label fw-bold">Product Type<span class="text-danger">*</span></label>
+                <div class="col-12">
+                    <ng-select [placeholder]="'feed_product_type...'" [disabled]="listFieldData.length > 0"
+                        name="feed_product_type" (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
+                        <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
+                            item}}</ng-option>
+                    </ng-select>
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-8">
+            <div class="row">
+                <label for="TextInput" class="form-label fw-bold">Search Field</label>
+                <div class="col-12">
+                    <input class="form-control rounded" [disabled]="listFieldData.length == 0" type="text" autocomplete="off" name="keyword"
+                        placeholder="Enter search field...." [(ngModel)]="keyword" (ngModelChange)="searchField($event)" />
+                </div>
             </div>
         </div>
     </div>
     <div class="card-body">
         <form class="row">
-            <p-tabView [(activeIndex)]="activeIndex" >
-                    <p-tabPanel *ngFor="let group of scrollableTabs" [header]="group.title">
-                        <p>{{ group.content }}</p>
-                        <!-- <div class="row">
-                            <ng-container *ngFor="let item of listData">
-                                <div class="col-4 mb-2">
-                                    <app-ng-select-custom [label]="item.labelName"
-                                        (ngModelChange)="onSelectedOptionChange($event)" [model]="item.fieldName"
-                                        [listDatas]="item.value"></app-ng-select-custom>
-                                </div>
-                            </ng-container>
-                        </div> -->
-                    </p-tabPanel>
-                    <!-- <p-tabPanel [header]="group" [selected]="true">
-                        <ng-container *ngFor="let item of listFieldData">
-                            <div class="col-4 mb-2">
-                                <app-input-custom *ngIf="item.value == null" [label]="item.fieldName"
-                                    [model]="item.fieldName"></app-input-custom>
+            <p-tabView>
+                <p-tabPanel *ngFor="let group of groupName" [header]="group">
+                    <div class="row">
+                        <ng-container *ngFor="let item of listTabView(group)">
+                            <div class="col-3 mb-3" *ngIf="item.groupName == group && item.value != null">
+                                <app-ng-select-custom [label]="item.labelName"
+                                    [isValidate]="item.groupName == 'Required'"
+                                    (ngModelChange)="onSelectedOptionChange(item.fieldName, $event)"
+                                    [(ngModel)]="product[item.fieldName]" [name]="item.fieldName"
+                                    [listDatas]="item.value"></app-ng-select-custom>
+                            </div>
+                            <div class="col-3 mb-2" *ngIf="!item.value && item.groupName == group">
+                                <app-input-custom ngDefaultControl [label]="item.fieldName"
+                                    [isValidate]="item.groupName == 'Required'"
+                                    (valueChanged)="onInputValueChanged($event,item.fieldName)"
+                                    [model]="product[item.fieldName]"></app-input-custom>
                             </div>
                         </ng-container>
-                    </p-tabPanel> -->
+
+                    </div>
+                </p-tabPanel>
             </p-tabView>
         </form>
+    </div>
+    <div class="card-footer text-end" *ngIf="listFieldData.length > 0">
+        <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clear()">
+            <i class="fa fa-repeat" aria-hidden="true"></i>
+            Nhập lại
+        </button>
+        <button class="btn btn-success lift me-2 rounded-2" type="button" (click)="add()">
+            <i class="fa fa-save"></i> Lưu
+        </button>
+        <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+            <i class="fa fa-close"></i>
+            Hủy
+        </button>
     </div>
 </div>

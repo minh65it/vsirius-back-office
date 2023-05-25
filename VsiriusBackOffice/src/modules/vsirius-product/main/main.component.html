@@ -3,7 +3,7 @@
     <div class="card-header d-block">
       <form class="row g-3" (ngSubmit)="search()">
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'feed_product_type...'" name="feed_product_type"
+          <ng-select [placeholder]="'feed_product_type...'" [clearable]="productType == null" name="feed_product_type"
             (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
             <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
               item}}</ng-option>

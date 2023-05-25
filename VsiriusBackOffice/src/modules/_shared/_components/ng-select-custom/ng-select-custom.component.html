@@ -1,9 +1,10 @@
 <div class="row">
-  <label for="TextInput" class="form-label fw-bold">{{label}}</label>
+  <label for="TextInput" class="form-label fw-bold">{{label}} <span *ngIf="isValidate" class="text-danger">*</span></label>
   <div class="col-12">
-    <ng-select [(ngModel)]="model" name="model">
+    <ng-select [placeholder]="'Choose value '+label+'...'" [(ngModel)]="selectedItem" [name]="label" (change)="onSelectionChange($event)">
       <ng-option *ngFor="let item of listDatas" [value]="item">{{
-        item}}</ng-option>
-      </ng-select>
+        item}}
+      </ng-option>
+    </ng-select>
   </div>
 </div>
