@@ -5,7 +5,6 @@ import { Injectable } from "@angular/core";
 })
 export class FunctionUtility {
     ToFormData(formValue: any) {
-        debugger
         const formData = new FormData();
         for (const key of Object.keys(formValue)) {
             const value = formValue[key];

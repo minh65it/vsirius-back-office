@@ -720,7 +720,7 @@ export class MainComponent implements OnInit {
     if (e != null || e != '') {
       this.productType = e;
     }
-    this.productTypeFilter = {
+    this.productTypeFilter = <VsiriusFilter>{
       fieldName:'feed_product_type',
       productType:'',
       value:[e],
@@ -743,7 +743,7 @@ export class MainComponent implements OnInit {
   }
   filterItemType(e: any) {
     this.item_typeList = e;
-    this.itemTypeFilterParam = {
+    this.itemTypeFilterParam = <VsiriusFilter>{
       fieldName: 'item_type',
       productType: '',
       labelName: '',
@@ -753,7 +753,7 @@ export class MainComponent implements OnInit {
   }
   filterMetalType(e: any) {
     this.metal_typeList = e;
-    this.metalTypeFilterParam = {
+    this.metalTypeFilterParam = <VsiriusFilter>{
       fieldName: 'metal_type',
       productType: '',
       labelName: '',

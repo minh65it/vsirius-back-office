@@ -17,8 +17,8 @@
             <div class="row">
                 <label for="TextInput" class="form-label fw-bold">Search Field</label>
                 <div class="col-12">
-                    <input class="form-control rounded" [disabled]="listFieldData.length == 0" type="text" autocomplete="off" name="keyword"
-                        placeholder="Enter search field...." [(ngModel)]="keyword" (ngModelChange)="searchField($event)" />
+                    <input class="form-control rounded" type="text" [disabled]="isSearchField" autocomplete="off" name="keyword"
+                        placeholder="Enter search field...." [(ngModel)]="keyword" (ngModelChange)="searchField()"/>
                 </div>
             </div>
         </div>

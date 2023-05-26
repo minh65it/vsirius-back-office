@@ -14,6 +14,10 @@ const routes: Routes = [
         path: 'product',
         loadChildren: () => import('../vsirius-product/vsirius-product.module').then((m) => m.VsiriusProductModule),
       },
+      {
+        path: 'filter',
+        loadChildren: () => import('../vsirius-filter/vsirius-filter.module').then((m) => m.VsiriusFilterModule),
+      },
     ]
   }
 ];

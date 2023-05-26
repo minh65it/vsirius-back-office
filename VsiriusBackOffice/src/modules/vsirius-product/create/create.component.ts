@@ -11,9 +11,9 @@ import { ProductService } from 'src/modules/_shared/_services/product.service';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent implements OnInit {
-  selectedOption: any;
   listData: VsiriusFilter[] = [];
   listFieldData: VsiriusFilter[] = [];
+  listFieldDataSearch: VsiriusFilter[] = [];
   listProductType: any[] = [];
   model: string = 'feed product type';
   productType: string = 'Choose value...';
@@ -22,7 +22,8 @@ export class CreateComponent implements OnInit {
   product: Product = {} as Product;
   isFormValid: boolean = false;
   listExists: any[] = [];
-  keyword: string = ''
+  keyword: string = '';
+  isSearchField: boolean = true;
   constructor(private service: ProductService,
     private router: Router,
     private notiflix: NgxNotiflixService) { }
@@ -45,6 +46,7 @@ export class CreateComponent implements OnInit {
   filterProductType(e: string) {
     this.loadData(e);
     this.loadValueForAdd(e);
+    this.isSearchField = false;
     this.product.feed_product_type = e;
   }
 
@@ -53,6 +55,7 @@ export class CreateComponent implements OnInit {
     this.service.getValueForAdd(e).subscribe({
       next: (res) => {
         this.listFieldData = res;
+        this.listFieldDataSearch = res;
         this.notiflix.hideLoading();
       },
       error: (err) => {
@@ -89,18 +92,21 @@ export class CreateComponent implements OnInit {
     this.product[fieldName] = value;
   }
 
-  searchField(e){
-    console.log(e);
-    this.keyword = e;
-    this.listFieldData.filter(x=>x.fieldName.includes(this.keyword));
+  searchField() {
+    const filteredData = this.listFieldDataSearch.filter(x => x.fieldName.includes(this.keyword));
+    this.listFieldData = [...filteredData];
   }
 
   add() {
+    if (this.productType == '' || this.productType == null) {
+      this.product.feed_product_type = this.listProductType[0];
+    }
     this.notiflix.showLoading();
     this.service.create(this.product).subscribe({
       next: res => {
         res.success ? this.notiflix.success(res.message) :
           this.notiflix.error(res.message);
+        this.router.navigate(['/product']);
         this.notiflix.hideLoading();
       },
       error: err => {

@@ -6,11 +6,12 @@
                     <div class="row">
                         <ng-container *ngFor="let item of listTabView(group)">
                             <div class="col-3 mb-3" *ngIf="item.groupName == group && item.value != null">
-                                <app-ng-select-custom [label]="item.labelName"
-                                    [isValidate]="item.groupName == 'Required'"
+                                <label [for]="item.fieldName" class="form-label fw-bold">{{item.labelName}} <span *ngIf="item.groupName == 'Required'" class="text-danger">*</span></label>
+                                <ng-select 
                                     (ngModelChange)="onSelectedOptionChange(item.fieldName, $event)"
                                     [(ngModel)]="product[item.fieldName]" [name]="item.fieldName"
-                                    [listDatas]="item.value"></app-ng-select-custom>
+                                    [items]="item.value"
+                                    ></ng-select>
                             </div>
                             <div class="col-3 mb-2" *ngIf="!item.value && item.groupName == group">
                                 <app-input-custom ngDefaultControl [label]="item.fieldName"

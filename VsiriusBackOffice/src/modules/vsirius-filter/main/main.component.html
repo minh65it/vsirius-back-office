@@ -1,0 +1,330 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header d-block">
+            <form class="row g-3" (ngSubmit)="search()">
+                <!-- <div class="col-lg-3 col-md-3 col-sm-12">
+            <ng-select [placeholder]="'feed_product_type...'" [clearable]="productType == null" name="feed_product_type"
+              (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
+              <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
+                item}}</ng-option>
+            </ng-select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect"  [multiple]="true"
+              (ngModelChange)="filterItemType($event)" [(ngModel)]="item_type" name="item_type">
+              <ng-option *ngFor="let item of listItemType.toString().split(',')" [value]="item">{{
+                item}}</ng-option>
+            </ng-select>
+          </div>
+          <div class="col-lg-3 col-md-3 col-sm-12">
+            <ng-select [placeholder]="'metal_type...'" name="metal_type" [disabled]="isShowSelect" [multiple]="true"
+              (ngModelChange)="filterMetalType($event)" [(ngModel)]="metal_type">
+              <ng-option *ngFor="let item of listMetalType.toString().split(',')" [value]="item">{{
+                item}}</ng-option>
+            </ng-select>
+          </div> -->
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off"
+                            name="keyword" placeholder="Enter search keywords...." />
+                        <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                        <button class="btn btn-primary lift me-2 rounded-2" (click)="showAdd()" type="button">
+                            <i class="fa fa-plus"></i>
+                            Add new
+                        </button>
+                        <button class="btn btn-success lift me-2 rounded-2" type="button" (click)="fileInput.click()">
+                            <i class="fa fa-upload"></i>
+                            Import file
+                        </button>
+                        <input #fileInput type="file" style="display: none;" (change)="onFileSelected($event)">
+                    </div>
+                </div>
+
+            </form>
+            <div class="card-body table-scroll-view">
+                <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listFilters" dataKey="id"
+                    [rows]="listFilters.length">
+                    <!-- Thanh Chọn Cột -->
+                    <ng-template pTemplate="caption">
+                        <ng-select [placeholder]="'Tổng số trang...'" name="changePagination"
+                            (ngModelChange)="filterPagination($event)" [(ngModel)]="numberPage"
+                            class="prime-select-option">
+                            <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
+                                item.value}}</ng-option>
+                        </ng-select>
+                    </ng-template>
+                    <!-- Header -->
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="text-center"></th>
+                            <!-- STT -->
+                            <th class="text-center"> # </th>
+                            <!-- COLUMNS -->
+                            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
+                                <div class="d-flex justify-content-evenly">
+                                    <!-- Mặc định -->
+                                    <span>&nbsp;</span>
+                                    <!-- Label -->
+                                    <span class="text-capitalize">
+                                        {{item.header}}
+                                        <!-- Sort -->
+                                        <p-sortIcon [field]="item.field"></p-sortIcon>
+                                    </span>
+                                    <!-- tất cả trường không có filter -->
+                                    <span>
+                                        &nbsp;
+                                    </span>
+                                    <!-- Filter by Text -->
+                                    <p-columnFilter type="text"
+                                        *ngIf="item.field == 'title' ||  item.field == 'floor_Title' "
+                                        [field]="item.field" display="menu" [operator]="'or'" [showOperator]="false"
+                                        [showAddButton]="false" class="p-element float-end">
+                                        <div class="p-column-filter  p-column-filter-menu">
+                                            <button type="button" aria-haspopup="true"
+                                                class="p-column-filter-menu-button p-link" aria-expanded="false">
+                                                <span class="pi pi-filter-icon pi-filter "></span>
+                                            </button>
+                                        </div>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomType_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomStatus_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <!-- BODY -->
+                    <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-link btn-sm text-muted" (click)="updateShow(item)"
+                                    tooltip="Sửa" data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
+                                    <i class="fa fa-pencil text-warning"></i>
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm text-muted" tooltip="Xóa"
+                                    (click)="delete(item)">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </button>
+                            </td>
+                            <!-- STT -->
+                            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+                            <!-- DATA -->
+                            <td *ngFor="let col of columns">
+                                <ng-container *ngIf="col.field != 'price' ">{{item[col.field]}}</ng-container>
+                                <ng-container *ngIf="col.field == 'price' ">{{item[col.field] | number}}</ng-container>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- MESSAGE WHEN EMPTY -->
+                    <ng-template pTemplate="emptymessage" *ngIf="listFilters.length == 0">
+                        <tr>
+                            <td colspan="100%" class="text-center font-weight-bold">
+                                <span class="text-danger">No Data</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+                previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+            </pagination>
+        </div>
+    </div>
+</div>
+
+<!-- Modal Add -->
+<div bsModal #modalAdd="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="add()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase fw-bold">Thêm mới</h5>
+                <button type="button" class="btn-close" (click)="modalAdd.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">FieldName <span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter Field Name... " name="fieldName"
+                            [(ngModel)]="filterModel.fieldName" #fieldName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="fieldName.invalid && (fieldName.touched || fieldName.dirty || checkValidated)">
+                            <span>*Please enter fieldName </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Label Name <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Label Name..." class="form-control" name="labelName"
+                            [(ngModel)]="filterModel.labelName" #labelName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="labelName.invalid && (labelName.touched || labelName.dirty || checkValidated)">
+                            <span>*Please enter labelName </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Value <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Value..." class="form-control" name="value"
+                            [(ngModel)]="filterModel.value" #value="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="value.invalid && (value.touched || value.dirty || checkValidated)">
+                            <span>*Please enter Value </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Product Type <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Product Type..." class="form-control" name="productType"
+                            [(ngModel)]="filterModel.productType" #productType="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="productType.invalid && (productType.touched || productType.dirty || checkValidated)">
+                            <span>*Please enter Product Type </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Group Name <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Group Name..." class="form-control" name="groupName"
+                            [(ngModel)]="filterModel.groupName" #groupName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="groupName.invalid && (groupName.touched || groupName.dirty || checkValidated)">
+                            <span>*Please enter Group Name </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 text-center">
+                        <label class=" text-letter form-label fw-bold">Image</label><br>
+                        <div class="image-input avatar xl rounded-4" style="background-image: url({{image}})">
+                            <div class="avatar-wrapper rounded-circle"></div>
+                            <div class="file-input">
+                                <input type="file" #imageRef class="form-control" (change)="uploadFile($event)" name="file-input" id="file-input6">
+                                <label for="file-input6" class="fa fa-pencil shadow"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+                    <i class="fa fa-repeat" aria-hidden="true"></i>
+                    Nhập lại
+                </button>
+                <button class="btn btn-success me-2 lift rounded-2" type="submit">
+                    <i class="fa fa-save"></i> Lưu
+                </button>
+                <button class="btn btn-danger lift rounded-2" type="button" (click)="cancelAdd()">
+                    <i class="fa fa-close"></i>
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase fw-bold">Update filter</h5>
+                <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row g-3">
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">FieldName <span
+                                class="text-danger">*</span></label>
+                        <input type="text" class="form-control" placeholder="Enter Field Name... " name="fieldName"
+                            [(ngModel)]="filterModelUpdate.fieldName" #fieldName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="fieldName.invalid && (fieldName.touched || fieldName.dirty || checkValidated)">
+                            <span>*Please enter fieldName </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Label Name <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Label Name..." class="form-control" name="labelName"
+                            [(ngModel)]="filterModelUpdate.labelName" #labelName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="labelName.invalid && (labelName.touched || labelName.dirty || checkValidated)">
+                            <span>*Please enter labelName </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Value <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Value..." class="form-control" name="value"
+                            [(ngModel)]="filterModelUpdate.value" #Value="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="Value.invalid && (Value.touched || Value.dirty || checkValidated)">
+                            <span>*Please enter Value </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Product Type <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Product Type..." class="form-control" name="productType"
+                            [(ngModel)]="filterModelUpdate.productType" #ProductType="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="ProductType.invalid && (ProductType.touched || ProductType.dirty || checkValidated)">
+                            <span>*Please enter Product Type </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <label for="TextInput" class="form-label fw-bold">Group Name <span
+                                class="text-danger">*</span></label>
+                        <input type="text" placeholder="Enter Group Name..." class="form-control" name="groupName"
+                            [(ngModel)]="filterModelUpdate.groupName" #GroupName="ngModel" required />
+                        <div class="text-danger mt-2 d-flex align-items-center"
+                            *ngIf="GroupName.invalid && (GroupName.touched || GroupName.dirty || checkValidated)">
+                            <span>*Please enter Group Name </span>
+                        </div>
+                    </div>
+                    <div class="col-lg-2 col-md-2 text-center">
+                        <label class=" text-letter form-label fw-bold">Image</label><br>
+                        <div class="image-input avatar xl rounded-4" style="background-image: url({{image}})">
+                            <div class="avatar-wrapper rounded-circle"></div>
+                            <div class="file-input">
+                                <input type="file" #imageRef class="form-control" (change)="uploadFileUpdate($event)" name="file-input" id="file-input6">
+                                <label for="file-input6" class="fa fa-pencil shadow"></label>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success me-2 lift rounded-2" type="submit">
+                    <i class="fa fa-save"></i> Lưu
+                </button>
+                <button class="btn btn-danger lift rounded-2" type="button" (click)="cancelUpdate()">
+                    <i class="fa fa-close"></i>
+                    Hủy
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
