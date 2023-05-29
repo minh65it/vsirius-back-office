@@ -16,6 +16,7 @@ import { UpdateComponent } from './update/update.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { InputCustomModule } from 'src/modules/_shared/_components/input-custom/input-custom.module';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { CKEditorModule } from 'ng2-ckeditor';
 
 @NgModule({
   declarations: [
@@ -37,6 +38,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     NgSelectModule,
     TabViewModule,
     InputCustomModule,
+    CKEditorModule,
     ModalModule.forRoot(),
   ]
 })

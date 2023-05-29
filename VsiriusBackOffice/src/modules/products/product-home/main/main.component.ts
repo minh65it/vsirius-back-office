@@ -1,5 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
-import { FilterService } from 'primeng/api';
+import { Component, OnInit } from '@angular/core';
 import { VsiriusHomeProduct } from 'src/modules/_shared/_models/vsiriusHomeProduct';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { ProductHomeService } from 'src/modules/_shared/_services/products/product-home.service';

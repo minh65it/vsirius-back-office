@@ -39,11 +39,19 @@
                                     [items]="item.value"></ng-select>
                             </div>
 
-                            <div class="col-4 mb-2" *ngIf="!item.value && item.groupName == group">
+                            <div class="col-4 mb-2"
+                                *ngIf="!item.value && item.groupName == group && item.fieldName != 'product_description'">
                                 <app-input-custom ngDefaultControl [label]="item.fieldName"
                                     [isValidate]="item.groupName == 'Required'"
                                     (valueChanged)="onInputValueChanged($event,item.fieldName)"
                                     [model]="product[item.fieldName]"></app-input-custom>
+                            </div>
+                            <div class="col-12 mb-2" *ngIf="item.fieldName == 'product_description'">
+                                <label [for]="item.fieldName" class="form-label fw-bold label-custom">{{item.fieldName}}
+                                    <span *ngIf="item.groupName == 'Required'" class="text-danger">*</span></label>
+                                <ckeditor [(ngModel)]="product[item.fieldName]" [name]="item.fieldName"
+                                    [config]="ckeConfig">
+                                </ckeditor>
                             </div>
                         </ng-container>
 

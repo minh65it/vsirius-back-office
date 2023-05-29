@@ -21,6 +21,13 @@ export class UpdateComponent implements OnInit {
   product: Product = <Product>{};
   feed_product_type: string = '';
   item_sku: string = '';
+  ckeConfig = {
+    allowedContent: false,
+    extraPlugins: 'divarea,',
+    forcePasteAsPlainText: true,
+    removePlugins: 'exportpdf',
+    language: 'en',
+  }
   constructor(private route: ActivatedRoute,
     private service: ProductService,
     private router: Router,
@@ -37,7 +44,6 @@ export class UpdateComponent implements OnInit {
     this.service.currentProductSource.subscribe({
       next: res => {
         this.feed_product_type = res.feed_product_type;
-        this.loadDataTabView(this.feed_product_type);
         this.loadValueForAdd(this.feed_product_type);
         this.notiflix.hideLoading();
       },
@@ -49,28 +55,22 @@ export class UpdateComponent implements OnInit {
   }
 
   loadValueForAdd(e) {
+    this.notiflix.showLoading();
     this.service.getValueForAdd(e).subscribe({
       next: (res) => {
         this.listFieldData = res;
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  loadDataTabView(e) {
-    this.service.getDataFilter(e).subscribe({
-      next: (res) => {
         this.groupName = res.map(x => x.groupName);
         this.groupName = this.groupName.filter((item, index) => this.groupName.indexOf(item) === index);
+        this.notiflix.hideLoading();
       },
       error: (err) => {
+        this.notiflix.hideLoading();
         console.log(err);
       }
     })
   }
 
+ 
   loadData() {
     this.notiflix.showLoading();
     this.service.getDetail(this.item_sku).subscribe({
@@ -103,7 +103,7 @@ export class UpdateComponent implements OnInit {
       next: res => {
         res.success ? this.notiflix.success(res.message) :
           this.notiflix.error(res.message);
-        this.router.navigate(['/product']);
+        this.cancel();
         this.notiflix.hideLoading();
       },
       error: err => {

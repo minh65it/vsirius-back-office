@@ -59,6 +59,13 @@
               <span>*Please enter Group Name </span>
             </div>
           </div>
+          <div class=" col-md-12">
+            <div class="form-check form-switch mt-2">
+              <input class="form-check-input" type="checkbox" name="isActive" role="switch" id="isActive"
+                [checked]="filterModel.isActive" [(ngModel)]="filterModel.isActive" />
+              <label class="form-check-label fw-bold" for="isActive">Is Active</label>
+            </div>
+          </div>
         </div>
       </div>
       <div class="card-footer text-end mt-5">

@@ -69,10 +69,11 @@ export class MainComponent implements OnInit {
   isShowSelect: boolean = true;
   @ViewChild('modalAdd', { static: false }) modalAdd?: ModalDirective;
   productHomeModel: VsiriusHomeProduct = {
-    isLatest: true,
-    isPopular: true,
+    isLatest: false,
+    isPopular: false,
     item_sku: ''
   } as VsiriusHomeProduct;
+  listProductsHome: VsiriusHomeProduct[] = []; 
   constructor(private filterService: FilterService,
     private service: ProductService,
     private productHomeService:ProductHomeService,
@@ -85,6 +86,7 @@ export class MainComponent implements OnInit {
     this.registerFilter();
     this.loadFilter();
     this.loadData();
+    this.loadListProductInHome();
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -699,6 +701,20 @@ export class MainComponent implements OnInit {
     this._selectedColumns = this.cols.filter(x => this.selectedColumnsInitial.find(y => y.field == x.field));
   }
 
+  loadListProductInHome(){
+    this.notiflix.showLoading();
+    this.productHomeService.getData().subscribe({
+      next:res=>{
+        this.listProductsHome = res;
+        this.notiflix.hideLoading();
+      },
+      error:()=>{
+        this.notiflix.error('Error System');
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
   loadFilter() {
     this.service.getDataFilter('').subscribe({
       next: res => {
@@ -715,6 +731,7 @@ export class MainComponent implements OnInit {
     this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
       next: res => {
         this.listProducts = res.result;
+        console.log(this.listProductsHome);
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
@@ -742,6 +759,10 @@ export class MainComponent implements OnInit {
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
+        console.log(this.listItemType);
+        
+        console.log(this.listMetalType);
+        
         this.notiflix.hideLoading();
 
       },
@@ -848,13 +869,25 @@ export class MainComponent implements OnInit {
     })
   }
   chooseProductShowHome(item: Product) {
-    this.productHomeModel = {
-      item_sku: item.item_sku,
-      item_name:item.item_name,
-      isLatest:true,
-      isPopular:true,
-      isActive:true
-    } as VsiriusHomeProduct;
+    const index = this.listProductsHome.findIndex(x=>x.item_sku == item.item_sku);
+    if(index < 0){
+      this.productHomeModel = {
+        item_sku: item.item_sku,
+        item_name:item.item_name,
+        isLatest:false,
+        isPopular:false,
+        isActive:true
+      } as VsiriusHomeProduct;
+    }
+    else{
+      this.productHomeModel = {
+        item_sku: item.item_sku,
+        item_name:item.item_name,
+        isLatest:this.listProductsHome[index].isLatest,
+        isPopular:this.listProductsHome[index].isPopular,
+        isActive:true
+      } as VsiriusHomeProduct;
+    }
     this.modalAdd?.show();
   }
   send() {
@@ -877,5 +910,7 @@ export class MainComponent implements OnInit {
     this.router.navigate(['products/product-home']);
     
   }
+
+  
 }
 

@@ -25,6 +25,13 @@ export class CreateComponent implements OnInit {
   keyword: string = '';
   isSearchField: boolean = true;
   listFilter: VsiriusFilter[] = [];
+  ckeConfig = {
+    allowedContent: false,
+    extraPlugins: 'divarea,',
+    forcePasteAsPlainText: true,
+    removePlugins: 'exportpdf',
+    language: 'en',
+  }
   constructor(private service: ProductService,
     private router: Router,
     private notiflix: NgxNotiflixService) { }
@@ -57,9 +64,10 @@ export class CreateComponent implements OnInit {
       next: (res) => {
         this.listFieldData = res;
         this.listFieldDataSearch = res;
+        this.groupName = res.map(x => x.groupName);
+        this.groupName = this.groupName.filter((item, index) => this.groupName.indexOf(item) === index);
         this.listFilter = this.listFieldDataSearch.filter(x=>x.groupName == 'Required')
                                         .filter(item => /1$/.test(item.fieldName));
-        console.log(this.listFilter);
         this.notiflix.hideLoading();
       },
       error: (err) => {
@@ -74,8 +82,6 @@ export class CreateComponent implements OnInit {
     this.service.getDataFilter(e).subscribe({
       next: (res) => {
         this.listData = res;
-        this.groupName = res.map(x => x.groupName);
-        this.groupName = this.groupName.filter((item, index) => this.groupName.indexOf(item) === index);
         this.notiflix.hideLoading();
       },
       error: (err) => {
@@ -110,7 +116,7 @@ export class CreateComponent implements OnInit {
       next: res => {
         res.success ? this.notiflix.success(res.message) :
           this.notiflix.error(res.message);
-        this.router.navigate(['/product']);
+          this.cancel();
         this.notiflix.hideLoading();
       },
       error: err => {

@@ -19,6 +19,12 @@
                                     (valueChanged)="onInputValueChanged($event,item.fieldName)" [model]="product[item.fieldName]
                                     "></app-input-custom>
                             </div>
+                            <div class="col-12 mb-2" *ngIf="item.fieldName == 'product_description'">
+                                <label [for]="item.fieldName" class="form-label fw-bold label-custom">{{item.fieldName}}
+                                    <span *ngIf="item.groupName == 'Required'" class="text-danger">*</span></label>
+                                <ckeditor [(ngModel)]="product[item.fieldName]" [name]="item.fieldName" [config]="ckeConfig">
+                                </ckeditor>
+                              </div>
                         </ng-container>
                     </div>
                 </p-tabPanel>
