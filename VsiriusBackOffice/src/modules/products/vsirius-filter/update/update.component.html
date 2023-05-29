@@ -1,0 +1,75 @@
+<div class="card ">
+  <form #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-xxl-2 col-xl-2 col-md-3 row align-items-center justify-content-evenly">
+          <!-- <label class=" text-letter form-label fw-bold">Image</label><br> -->
+          <div class="image-input avatar xl rounded-4" style="background-image: url({{image}})">
+            <!-- <div class="avatar-wrapper rounded-circle"></div> -->
+            <div class="file-input">
+              <input type="file" #imageRef class="form-control" (change)="selectFileImage($event)" name="file-input"
+                id="file-input6">
+              <label for="file-input6" class="fa fa-pencil shadow"></label>
+            </div>
+          </div>
+        </div>
+        <div class="row g-3 col-10 ">
+          <div class="col-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">FieldName <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter Field Name... " name="fieldName"
+              [(ngModel)]="filterModel.fieldName" #fieldName="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="fieldName.invalid && (fieldName.touched || fieldName.dirty || checkValidated)">
+              <span>*Please enter Field Name </span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Label Name <span class="text-danger">*</span></label>
+            <input type="text" placeholder="Enter Label Name..." class="form-control" name="labelName"
+              [(ngModel)]="filterModel.labelName" #labelName="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="labelName.invalid && (labelName.touched || labelName.dirty || checkValidated)">
+              <span>*Please enter Label Name </span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Value <span class="text-danger">*</span></label>
+            <input type="text" placeholder="Enter Value..." class="form-control" name="value"
+              [(ngModel)]="filterModel.value" #value="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="value.invalid && (value.touched || value.dirty || checkValidated)">
+              <span>*Please enter Value </span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Product Type <span class="text-danger">*</span></label>
+            <input type="text" placeholder="Enter Product Type..." class="form-control" name="productType"
+              [(ngModel)]="filterModel.productType" #productType="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="productType.invalid && (productType.touched || productType.dirty || checkValidated)">
+              <span>*Please enter Product Type </span>
+            </div>
+          </div>
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Group Name <span class="text-danger">*</span></label>
+            <input type="text" placeholder="Enter Group Name..." class="form-control" name="groupName"
+              [(ngModel)]="filterModel.groupName" #groupName="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="groupName.invalid && (groupName.touched || groupName.dirty || checkValidated)">
+              <span>*Please enter Group Name </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card-footer text-end mt-5">
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Save
+        </button>
+        <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+          <i class="fa fa-close"></i>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

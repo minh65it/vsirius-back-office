@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Route, Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Product } from 'src/modules/_shared/_models/product';
 import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { ProductService } from 'src/modules/_shared/_services/product.service';
+import { ProductService } from 'src/modules/_shared/_services/products/product.service';
 
 @Component({
   selector: 'app-update',
@@ -113,6 +113,6 @@ export class UpdateComponent implements OnInit {
     })
   }
   cancel() {
-    this.router.navigate(['/product']);
+    this.router.navigate(['products/product']);
   }
 }

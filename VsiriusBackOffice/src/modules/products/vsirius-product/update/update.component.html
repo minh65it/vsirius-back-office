@@ -6,8 +6,8 @@
                     <div class="row">
                         <ng-container *ngFor="let item of listTabView(group)">
                             <div class="col-3 mb-3" *ngIf="item.groupName == group && item.value != null">
-                                <label [for]="item.fieldName" class="form-label fw-bold">{{item.labelName}} <span *ngIf="item.groupName == 'Required'" class="text-danger">*</span></label>
-                                <ng-select 
+                                <label [for]="item.fieldName" class="form-label fw-bold label-custom">{{item.labelName}} <span *ngIf="item.groupName == 'Required'" class="text-danger">*</span></label>
+                                <ng-select [placeholder]="'Choose '+ item.labelName + '.....'"
                                     (ngModelChange)="onSelectedOptionChange(item.fieldName, $event)"
                                     [(ngModel)]="product[item.fieldName]" [name]="item.fieldName"
                                     [items]="item.value"
@@ -27,11 +27,11 @@
     </div>
     <div class="card-footer text-end" *ngIf="listFieldData.length > 0">
         <button class="btn btn-success lift me-2 rounded-2" type="button" (click)="save()">
-            <i class="fa fa-save"></i> Lưu
+            <i class="fa fa-save"></i> Save
         </button>
         <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
             <i class="fa fa-close"></i>
-            Hủy
+            Cancel
         </button>
     </div>
 </div>

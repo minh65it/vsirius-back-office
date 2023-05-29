@@ -1,13 +1,10 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { NgForm } from '@angular/forms';
-import { ModalDirective } from 'ngx-bootstrap/modal';
+import { Router } from '@angular/router';
 import { FilterService } from 'primeng/api';
-import { environment } from 'src/environments/environment';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
-import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
 import { VsiriusFilterDto } from 'src/modules/_shared/_models/vsiriusFilterDto';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { VsiriusFilterService } from 'src/modules/_shared/_services/vsirius-filter.service';
+import { VsiriusFilterService } from 'src/modules/_shared/_services/products/vsirius-filter.service';
 
 @Component({
   selector: 'app-main',
@@ -44,22 +41,17 @@ export class MainComponent implements OnInit {
       value: '200 Page'
     }
   ];
-  filterModel: VsiriusFilterDto = {} as VsiriusFilterDto;
+
   filterModelUpdate: VsiriusFilterDto = {} as VsiriusFilterDto;
-  @ViewChild('modalAdd', { static: false }) modalAdd?: ModalDirective;
-
-  @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
-
-  @ViewChild('detailModal', { static: false }) detailModal?: ModalDirective;
-  @ViewChild('myForm', { static: false }) myForm?: NgForm;
 
   checkValidated: boolean = false;
   image: string = 'assets/images/NO-PHOTO_165x165.png';
-  url: string = environment.apiURL;
   @ViewChild('imageRef') imageRef: ElementRef;
+  imageFile:string = '';
   constructor(private notiflix: NgxNotiflixService,
     private filterService: FilterService,
-    private service: VsiriusFilterService) { }
+    private service: VsiriusFilterService,
+    private router:Router) { }
   ngOnInit() {
     this.generateTable();
     this.registerFilter();
@@ -153,95 +145,12 @@ export class MainComponent implements OnInit {
   }
 
   showAdd() {
-    this.modalAdd?.show();
+    this.router.navigate(['products/filter/create'])
   }
 
-  uploadFile(event) {
-    // this.imageRef.nativeElement.attributes.src.nodeValue = this.filterModel.fileImage
-    let reader = new FileReader(); // HTML5 FileReader API
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(event.target.files[0]);
-      this.filterModel.fileImage = event.target.files[0];
-      //When file uploads set it to file formcontrol
-      reader.onload = (e) => {
-        // called once readAsDataURL is completed
-        this.image = e.target.result.toString();
-      };
-    }
-  }
-
-  add() {
-    if (this.myForm.valid) {
-      this.checkValidated = false;
-      this.notiflix.showLoading();
-      this.service.create(this.filterModel).subscribe({
-        next: res => {
-          res.success ? this.notiflix.success(res.message) : this.notiflix.error(res.message);
-          this.loadData();
-          this.modalAdd?.hide();
-          this.clearForm();
-          this.notiflix.hideLoading();
-        },
-        error: () => {
-          this.notiflix.error('Error System');
-          this.notiflix.hideLoading();
-        }
-      })
-    }
-    else {
-      this.checkValidated = true;
-      this.notiflix.warning('Please enter filed required');
-    }
-  }
-
-  uploadFileUpdate(event) {
-    // this.imageRef.nativeElement.attributes.src.nodeValue = this.filterModelUpdate.fileImage
-    let reader = new FileReader(); // HTML5 FileReader API
-    if (event.target.files && event.target.files[0]) {
-      reader.readAsDataURL(event.target.files[0]);
-      this.filterModelUpdate.fileImage = event.target.files[0];
-      //When file uploads set it to file formcontrol
-      reader.onload = (e) => {
-        // called once readAsDataURL is completed
-        this.image = e.target.result.toString();
-      };
-    }
-  }
-  
   updateShow(model: VsiriusFilterDto) {
-    if (model.imageURL != null) {
-      this.image = this.url + this.filterModelUpdate.imageURL
-    }
-    this.filterModelUpdate = { ...model };
-    this.modalEdit?.show();
-  }
-
-  save() {
-    if (!this.filterModelUpdate.fileImage) {
-      this.filterModelUpdate.fileImage = this.image;
-    }
-    console.log(this.filterModelUpdate);
-
-    if (!this.checkValidated) {
-      this.notiflix.showLoading();
-      this.service.update(this.filterModelUpdate).subscribe({
-        next: res => {
-          res.success ? this.notiflix.success(res.message) : this.notiflix.error(res.message);
-          this.loadData();
-          this.modalEdit?.hide();
-          this.clearForm();
-          this.notiflix.hideLoading();
-        },
-        error: () => {
-          this.notiflix.error('Error System');
-          this.notiflix.hideLoading();
-        }
-      })
-    }
-    else {
-      this.checkValidated = true;
-      this.notiflix.warning('Please enter filed required');
-    }
+    this.service.paramEdit(model);
+    this.router.navigate(['products/filter/update'])
   }
 
   delete(model: VsiriusFilterDto) {
@@ -260,24 +169,5 @@ export class MainComponent implements OnInit {
         }
       })
     })
-  }
-
-  // xóa form
-  clearForm() {
-    this.myForm.resetForm(
-    );
-    this.filterModel = <VsiriusFilterDto>{}
-    this.checkValidated = false;
-  }
-
-
-  cancelAdd() {
-    this.clearForm();
-    this.modalAdd?.hide();
-  }
-
-  cancelUpdate() {
-    this.clearForm();
-    this.modalEdit?.hide();
   }
 }

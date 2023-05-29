@@ -1,122 +1,119 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { FilterService } from 'primeng/api';
+import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { Router } from '@angular/router';
-import { Product } from 'src/modules/_shared/_models/product';
 import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { ProductService } from 'src/modules/_shared/_services/product.service';
-
+import { Product } from 'src/modules/_shared/_models/product';
+import { ProductService } from 'src/modules/_shared/_services/products/product.service';
+import { ModalDirective } from 'ngx-bootstrap/modal';
+import { VsiriusHomeProduct } from 'src/modules/_shared/_models/vsiriusHomeProduct';
+import { ProductHomeService } from 'src/modules/_shared/_services/products/product-home.service';
 @Component({
-  selector: 'app-create',
-  templateUrl: './create.component.html',
-  styleUrls: ['./create.component.css']
+  selector: 'app-main',
+  templateUrl: './main.component.html',
+  styleUrls: ['./main.component.css']
 })
-export class CreateComponent implements OnInit {
-  listData: VsiriusFilter[] = [];
-  listFieldData: VsiriusFilter[] = [];
-  listFieldDataSearch: VsiriusFilter[] = [];
-  listProductType: any[] = [];
-  model: string = 'feed product type';
-  productType: string = 'Choose value...';
-  listFileds: VsiriusFilter[] = [];
-  groupName: string[] = [];
-  product: Product = {} as Product;
-  isFormValid: boolean = false;
-  listExists: any[] = [];
+export class MainComponent implements OnInit {
+  listProducts: Product[] = [];
+  _selectedColumns: any[];
+  activityValues: number[] = [0, 100];
+  customFilter = 'product-custom';
+  cols: any[];
+  selectedColumnsInitial: any[] = [
+    { field: 'feed_product_type', header: 'feed_product_type' },
+    { field: 'item_sku', header: 'item_sku' },
+    { field: 'brand_name', header: 'brand_name' },
+    { field: 'item_type', header: 'item_type' },
+    { field: 'metal_type', header: 'metal_type' }
+  ];
+  pagination: Pagination = <Pagination>{
+    pageNumber: 1,
+    pageSize: 10,
+  };
+  filterParam: VsiriusFilter[] = [];
   keyword: string = '';
-  isSearchField: boolean = true;
-  constructor(private service: ProductService,
-    private router: Router,
-    private notiflix: NgxNotiflixService) { }
-
-  ngOnInit() {
-    this.loadDataProductType();
-  }
-
-  loadDataProductType() {
-    this.service.getDataFilter('').subscribe({
-      next: (res) => {
-        this.listProductType = res.map(x => x.value);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    })
-  }
-
-  filterProductType(e: string) {
-    this.loadData(e);
-    this.loadValueForAdd(e);
-    this.isSearchField = false;
-    this.product.feed_product_type = e;
-  }
-
-  loadValueForAdd(e) {
-    this.notiflix.showLoading();
-    this.service.getValueForAdd(e).subscribe({
-      next: (res) => {
-        this.listFieldData = res;
-        this.listFieldDataSearch = res;
-        this.notiflix.hideLoading();
-      },
-      error: (err) => {
-        console.log(err);
-        this.notiflix.hideLoading();
-      }
-    })
-  }
-
-  loadData(e) {
-    this.notiflix.showLoading();
-    this.service.getDataFilter(e).subscribe({
-      next: (res) => {
-        this.listData = res;
-        this.groupName = res.map(x => x.groupName);
-        this.groupName = this.groupName.filter((item, index) => this.groupName.indexOf(item) === index);
-        this.notiflix.hideLoading();
-      },
-      error: (err) => {
-        console.log(err);
-        this.notiflix.hideLoading();
-      }
-    })
-  }
-  listTabView(tab): any[] {
-    return this.listFieldData.filter(x => x.groupName == tab);
-  }
-
-  onSelectedOptionChange(fieldName: any, value) {
-    this.product[fieldName] = value;
-  }
-
-  onInputValueChanged(value: any, fieldName) {
-    this.product[fieldName] = value;
-  }
-
-  searchField() {
-    const filteredData = this.listFieldDataSearch.filter(x => x.fieldName.includes(this.keyword));
-    this.listFieldData = [...filteredData];
-  }
-
-  add() {
-    if (this.productType == '' || this.productType == null) {
-      this.product.feed_product_type = this.listProductType[0];
+  listChoosePagination = [
+    {
+      key: 10,
+      value: '10 Page'
+    },
+    {
+      key: 50,
+      value: '50 Page'
+    },
+    {
+      key: 100,
+      value: '100 Page'
+    },
+    {
+      key: 200,
+      value: '200 Page'
     }
-    this.notiflix.showLoading();
-    this.service.create(this.product).subscribe({
-      next: res => {
-        res.success ? this.notiflix.success(res.message) :
-          this.notiflix.error(res.message);
-        this.router.navigate(['/product']);
-        this.notiflix.hideLoading();
-      },
-      error: err => {
-        this.notiflix.error('');
-        this.notiflix.hideLoading();
-      }
-    })
+  ];
+  numberPage = 10;
+  listDataFilter: VsiriusFilter[] = [];
+  listProductType: any[] = [];
+  listItemType: any[] = [];
+  listMetalType: any[] = [];
+  productType: string = 'Product Type';
+  item_type: string = 'item_type';
+  metal_type: string = 'metal_type';
+  item_typeList: string[] = [];
+  metal_typeList: string[] = [];
+  productTypeFilter: VsiriusFilter = <VsiriusFilter>{};
+  itemTypeFilterParam: VsiriusFilter = <VsiriusFilter>{
+  };
+  metalTypeFilterParam: VsiriusFilter = <VsiriusFilter>{
   }
-  clear() {
-    this.product = {
+  isShowSelect: boolean = true;
+  @ViewChild('modalAdd', { static: false }) modalAdd?: ModalDirective;
+  productHomeModel: VsiriusHomeProduct = {
+    isLatest: true,
+    isPopular: true,
+    item_sku: ''
+  } as VsiriusHomeProduct;
+  constructor(private filterService: FilterService,
+    private service: ProductService,
+    private productHomeService:ProductHomeService,
+    private router: Router,
+    private notiflix: NgxNotiflixService) {
+
+  }
+  ngOnInit() {
+    this.generateTable();
+    this.registerFilter();
+    this.loadFilter();
+    this.loadData();
+  }
+  @Input() get selectedColumns(): any[] {
+    return this._selectedColumns;
+  }
+
+  set selectedColumns(val: any[]) {
+    //restore original order
+    this._selectedColumns = this.cols.filter(col => val.includes(col));
+  }
+
+  registerFilter() {
+    this.filterService.register(
+      this.customFilter,
+      (value: string, filter: string): boolean => {
+        if (filter === undefined || filter === null || filter.trim() === "") {
+          return true;
+        }
+
+        if (value === undefined || value === null) {
+          return false;
+        }
+        return value.toString() === filter.toString();
+      }
+    );
+  }
+
+  generateTable() {
+    type ProductFields = keyof Product;
+    let product = <Product>{
       feed_product_type: '',
       item_sku: '',
       brand_name: '',
@@ -694,8 +691,191 @@ export class CreateComponent implements OnInit {
       isActive: true,
       status: 0
     };
+    const productFieldsArray: string[] = Object.keys(product) as ProductFields[];
+    this.cols = productFieldsArray.map(key => ({
+      field: key,
+      header: key.replace(/_/g, ' ')
+    }));
+    this._selectedColumns = this.cols.filter(x => this.selectedColumnsInitial.find(y => y.field == x.field));
   }
-  cancel() {
-    this.router.navigate(['/product']);
+
+  loadFilter() {
+    this.service.getDataFilter('').subscribe({
+      next: res => {
+        res.map(item => this.listProductType.push(item.value))
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    })
+  }
+
+  loadData() {
+    this.notiflix.showLoading();
+    this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
+      next: res => {
+        this.listProducts = res.result;
+        this.pagination = res.pagination;
+        this.notiflix.hideLoading();
+      },
+      error: err => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
+  filterProductType(e: any) {
+    this.notiflix.showLoading();
+    if (e != null || e != '') {
+      this.productType = e;
+    }
+    this.productTypeFilter = <VsiriusFilter>{
+      fieldName: 'feed_product_type',
+      productType: '',
+      value: [e],
+      labelName: '',
+      groupName: ''
+    }
+    this.isShowSelect = false;
+    this.service.getDataFilter(this.productType).subscribe({
+      next: res => {
+        this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
+        this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
+        this.notiflix.hideLoading();
+
+      },
+      error: (err) => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+  filterItemType(e: any) {
+    this.item_typeList = e;
+    this.itemTypeFilterParam = <VsiriusFilter>{
+      fieldName: 'item_type',
+      productType: '',
+      labelName: '',
+      value: e,
+      groupName: ''
+    }
+  }
+  filterMetalType(e: any) {
+    this.metal_typeList = e;
+    this.metalTypeFilterParam = <VsiriusFilter>{
+      fieldName: 'metal_type',
+      productType: '',
+      labelName: '',
+      value: e,
+      groupName: ''
+    }
+  }
+
+  filterPagination(e: any) {
+    if (e == 0) {
+      e = 1
+    }
+    this.pagination.pageSize = e;
+    this.loadData();
+  }
+  // thay đổi phân trang 
+  pageChanged(event: any) {
+    this.pagination.pageNumber = event.page;
+    this.loadData();
+  }
+
+  search() {
+    this.filterParam = [];
+    if (this.itemTypeFilterParam.value?.length > 0) {
+      this.filterParam.push(this.itemTypeFilterParam);
+    }
+    if (this.metalTypeFilterParam.value?.length > 0) {
+      this.filterParam.push(this.metalTypeFilterParam);
+    }
+    this.filterParam.push(this.productTypeFilter);
+    this.filterParam.length != 0 ? this.filterParam : [];
+    if(Object.keys(this.productTypeFilter).length === 0){
+      this.filterParam = [];
+    }
+    this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
+  }
+  goToAdd() {
+    this.router.navigate(['products/product/create']);
+  }
+
+  removeFilterSearch() {
+    document.querySelector('.p-multiselect').classList.add('hidden');
+  }
+
+  onFileSelected(event: any) {
+    const files: File = event.target.files[0] as File;
+    this.notiflix.showLoading();
+    this.service.importData(files).subscribe({
+      next: res => {
+        res.success ?
+          this.notiflix.success(res.message)
+          : this.notiflix.error(res.message);
+        this.notiflix.hideLoading();
+      },
+      error: err => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
+  update(product: Product) {
+    this.service.paramEdit(product);
+    this.router.navigate(['products/product/update/', product.item_sku]);
+  }
+
+  delete(product: Product) {
+    this.notiflix.confirm('Message', 'Do you want delete product?', () => {
+      this.notiflix.showLoading();
+      this.service.delete(product.item_sku).subscribe({
+        next: res => {
+          res.success ? this.notiflix.success(res.message) :
+            this.notiflix.error(res.message);
+          this.loadData();
+          this.notiflix.hideLoading();
+        },
+        error: err => {
+          this.notiflix.error(err);
+          this.notiflix.hideLoading();
+        }
+      })
+    })
+  }
+  chooseProductShowHome(item: Product) {
+    this.productHomeModel = {
+      item_sku: item.item_sku,
+      item_name:item.item_name,
+      isLatest:true,
+      isPopular:true,
+      isActive:true
+    } as VsiriusHomeProduct;
+    this.modalAdd?.show();
+  }
+  send() {
+    this.notiflix.showLoading();
+    this.productHomeService.createOrUpdate(this.productHomeModel).subscribe({
+      next: res => {
+        res.success ? this.notiflix.success(res.message) :
+          this.notiflix.error(res.message);
+        this.modalAdd?.hide();
+        this.notiflix.hideLoading();
+      },
+      error: err => {
+        this.notiflix.error(err);
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+
+  goToProductHome(){
+    this.router.navigate(['products/product-home']);
+    
   }
 }
+

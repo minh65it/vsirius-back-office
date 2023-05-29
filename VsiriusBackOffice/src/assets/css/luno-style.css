@@ -26748,9 +26748,9 @@ button:focus:not(:focus-visible) {
 }
 
 .avatar.xl {
-  width: 90px;
+  width: 165px;
   min-width: 90px;
-  height: 90px;
+  height: 165px;
 }
 
 .avatar.xxl {

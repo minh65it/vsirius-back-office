@@ -4,8 +4,9 @@
 
 export const environment = {
   production: false,
-  // apiURL: 'http://192.168.1.25:8082/api/'
-  apiURL: 'https://localhost:7182/api/'
+  apiURL: 'http://192.168.1.25:8082/api/',
+  imageURL: 'http://192.168.1.25:8082'
+  // apiURL: 'https://localhost:7182/api/'
 };
 
 /*

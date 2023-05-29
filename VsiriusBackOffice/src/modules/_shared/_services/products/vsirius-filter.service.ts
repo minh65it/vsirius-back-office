@@ -1,18 +1,24 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { FunctionUtility } from '../_helpers/function-utility';
-import { VsiriusFilter } from '../_models/vsirius-filter';
-import { PaginationParam, PaginationResult } from '../_helpers/pagination-utility';
-import { OperationResult } from '../_helpers/operation-result';
-import { VsiriusFilterDto } from '../_models/vsiriusFilterDto';
+import { BehaviorSubject } from 'rxjs';
+import { FunctionUtility } from '../../_helpers/function-utility';
+import { VsiriusFilterDto } from '../../_models/vsiriusFilterDto';
+import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
+import { OperationResult } from '../../_helpers/operation-result';
 
 @Injectable({
   providedIn: 'root'
 })
 export class VsiriusFilterService {
   baseUrl = environment.apiURL + 'VsiriusFilter';
+  filterSource = new BehaviorSubject<VsiriusFilterDto>({} as VsiriusFilterDto);
+  currentFitlterSource = this.filterSource.asObservable();
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
+
+  paramEdit(model: VsiriusFilterDto) {
+    this.filterSource.next(model);
+  }
 
   getFilters( pagination: PaginationParam, fullTextSearch: string) {
     const queryParams = {

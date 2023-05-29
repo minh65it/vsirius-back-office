@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
-import { VsiriusFilter } from '../_models/vsirius-filter';
-import { Product } from '../_models/product';
-import { PaginationParam, PaginationResult } from '../_helpers/pagination-utility';
-import { OperationResult } from '../_helpers/operation-result';
-import { FunctionUtility } from '../_helpers/function-utility';
 import { BehaviorSubject } from 'rxjs';
+import { FunctionUtility } from '../../_helpers/function-utility';
+import { Product } from '../../_models/product';
+import { VsiriusFilter } from '../../_models/vsirius-filter';
+import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
+import { OperationResult } from '../../_helpers/operation-result';
 @Injectable({
   providedIn: 'root'
 })

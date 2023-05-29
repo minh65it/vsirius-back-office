@@ -10,7 +10,7 @@
           </ng-select>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect"  [multiple]="true"
+          <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect" [multiple]="true"
             (ngModelChange)="filterItemType($event)" [(ngModel)]="item_type" name="item_type">
             <ng-option *ngFor="let item of listItemType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
@@ -40,6 +40,10 @@
               Import file
             </button>
             <input #fileInput type="file" style="display: none;" (change)="onFileSelected($event)">
+            <button class="btn btn-secondary lift me-2 rounded-2" (click)="goToProductHome()" type="button">
+              <i class="fa fa-arrow-right"></i>
+              Home product
+            </button>
           </div>
         </div>
 
@@ -117,8 +121,12 @@
           <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
             <tr>
               <td class="text-center">
-                <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)" tooltip="Sửa"
-                  data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
+                <button type="button" tooltip="chào" class="btn btn-link btn-sm text-muted"
+                  (click)="chooseProductShowHome(item)" tooltip="Sửa" data-bs-toggle="modal">
+                  <i class="fa fa-home text-primary"></i>
+                </button>
+                <button type="button" tooltip="chào" class="btn btn-link btn-sm text-muted" (click)="update(item)"
+                  tooltip="Sửa" data-bs-toggle="modal">
                   <i class="fa fa-pencil text-warning"></i>
                 </button>
                 <button type="button" class="btn btn-link btn-sm text-muted" tooltip="Xóa" (click)="delete(item)">
@@ -153,4 +161,39 @@
       </pagination>
     </div>
   </div>
+</div>
+
+<div bsModal #modalAdd="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="send()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Show Product Home</h5>
+        <button type="button" class="btn-close" (click)="modalAdd.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Item name : </label>
+            <span class="ms-2">{{productHomeModel.item_name}}</span>
+          </div>
+          <div class="col-md-12 d-flex">
+            <label for="TextInput" class="form-label fw-bold">IsLatest:</label>
+            <input class="form-check-input ms-2" [(ngModel)]="productHomeModel.isLatest" type="checkbox" name="isLatest"
+              role="switch" [checked]="productHomeModel.isLatest" />
+          </div>
+          <div class="col-md-12 d-flex">
+            <label for="TextInput" class="form-label fw-bold">IsPopular:</label>
+            <input class="form-check-input ms-2" [(ngModel)]="productHomeModel.isPopular" type="checkbox" name="isPopular"
+              role="switch" [checked]="productHomeModel.isPopular" />
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Save
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

@@ -6,7 +6,7 @@
           <!-- <span class="sm-txt">V</span><span>Sirius Back Office</span> -->
         </h4>
         <div class="img">
-          <img class="w-50 ml-5" src="assets/images/VSIRIUS_Logo_Final_228x136.png" alt="VSIRIUS_Logo_Final">
+          <img class="w-50 ms-5" src="assets/images/VSIRIUS_Logo_Final_228x136.png" alt="VSIRIUS_Logo_Final">
         </div>
       </div>
 
@@ -21,13 +21,13 @@
           <ng-container>
             <!-- Menu level 0 -->
             <li class="collapsed">
-              <a class="m-link cursor-pointer" href="/product">
+              <a class="m-link cursor-pointer" [routerLink]="'/products/product'">
                 <i class="fa fa-home"></i>
                 <span class="ms-2">Vsirius Product</span>
               </a>
             </li>
             <li class="collapsed">
-              <a class="m-link cursor-pointer" href="/filter">
+              <a class="m-link cursor-pointer" [routerLink]="'/products/filter'">
                 <i class="fa fa-home"></i>
                 <span class="ms-2">Vsirius Filter</span>
               </a>

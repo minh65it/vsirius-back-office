@@ -4,7 +4,12 @@ body {
   position: relative;
   font-size: 14px !important;
 }
-
+.label-custom{
+  font-size: 14px !important;
+}
+.p-tabview .p-tabview-panels {
+  min-height: 500px !important;
+}
 .table-scroll-view {
   padding: 1.5rem 0 0 !important;
   overflow-x: auto;

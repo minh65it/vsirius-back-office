@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TableModule } from 'primeng/table';
 import { FormsModule } from '@angular/forms';
@@ -13,9 +13,9 @@ import {TabViewModule} from'primeng/tabview';
 import { ButtonModule } from 'primeng/button';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
-import { NgSelectCustomModule } from '../_shared/_components/ng-select-custom/ng-select-custom.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { InputCustomModule } from '../_shared/_components/input-custom/input-custom.module';
+import { InputCustomModule } from 'src/modules/_shared/_components/input-custom/input-custom.module';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   declarations: [
@@ -35,9 +35,9 @@ import { InputCustomModule } from '../_shared/_components/input-custom/input-cus
     MultiSelectModule,
     ButtonModule,
     NgSelectModule,
-    NgSelectCustomModule,
     TabViewModule,
-    InputCustomModule
+    InputCustomModule,
+    ModalModule.forRoot(),
   ]
 })
 export class VsiriusProductModule { }
