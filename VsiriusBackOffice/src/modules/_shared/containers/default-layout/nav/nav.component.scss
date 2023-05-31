@@ -1,0 +1,34 @@
+.menu-list li a svg {
+  height: 20px !important;
+}
+
+:host ::ng-deep {
+  .breadcrumb-item a {
+    // font-size: 1.2rem;
+    color: #00AC9A !important;
+  }
+
+  .breadcrumb-item a:last-child {
+    color: #6c757d !important;
+  }
+}
+
+.wrapper {
+  overflow-x: hidden;
+}
+
+.page-body {
+    min-height: calc(100vh - 175px);
+    height: auto;
+}
+
+.border-footer {
+  border: 1px solid #dee2e6;
+}
+
+@media screen and (max-width: 768px) {
+  footer .col-md-12 {
+    text-align: center;
+    justify-content: center !important;
+  }
+}

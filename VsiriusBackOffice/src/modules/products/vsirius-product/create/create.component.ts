@@ -114,9 +114,13 @@ export class CreateComponent implements OnInit {
     this.notiflix.showLoading();
     this.service.create(this.product).subscribe({
       next: res => {
-        res.success ? this.notiflix.success(res.message) :
-          this.notiflix.error(res.message);
+        if(res.success ){
+          this.notiflix.success(res.message)
           this.cancel();
+         }
+         else{
+          this.notiflix.error(res.message);
+         }
         this.notiflix.hideLoading();
       },
       error: err => {

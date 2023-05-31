@@ -101,9 +101,13 @@ export class UpdateComponent implements OnInit {
     this.notiflix.showLoading();
     this.service.update(this.product).subscribe({
       next: res => {
-        res.success ? this.notiflix.success(res.message) :
+        if(res.success ){
+          this.notiflix.success(res.message)
+          this.cancel();
+         }
+         else{
           this.notiflix.error(res.message);
-        this.cancel();
+         }
         this.notiflix.hideLoading();
       },
       error: err => {

@@ -1,12 +1,16 @@
-// This file can be replaced during build by using the `fileReplacements` array.
-// `ng build` replaces `environment.ts` with `environment.prod.ts`.
-// The list of file replacements can be found in `angular.json`.
+const protocol: string = window.location.protocol;
+const hostname: string = window.location.hostname;
+const port: string = ':7021';
+const ip: string = `${ hostname }${ port }`;
+const baseUrl: string = `${ protocol }//${ ip }`;
 
-export const environment = {
+export const environment = {  
   production: false,
   imageURL: 'http://192.168.1.25:8082',
   // apiURL: 'http://192.168.1.25:8082/api/',
-  apiURL: 'https://localhost:7182/api/',
+  apiURL: 'https://localhost:7021/api/',
+  allowedDomains: [ip],
+  disallowedRoutes: [`${ ip }/api/Auth/Login`],
 };
 
 /*

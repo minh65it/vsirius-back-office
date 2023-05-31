@@ -1,0 +1,103 @@
+<div class="login-2 login-background">
+    <div class="login-background-inner">
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+      <div class="cube"></div>
+    </div>
+    <div class="login-2-inner">
+      <div class="container">
+        <div class="row login-box">
+          <div class="col-lg-6 align-self-center pad-0 form-info">
+            <div class="form-section align-self-center">
+              <div class="logo-2 logo">
+                <a href="#">
+                  <h3>Vsirius Back Office</h3>
+                </a>
+              </div>
+              <h3 class="text-uppercase login-title">Sing In</h3>
+              <div class="clearfix"></div>
+              <form class="row g-3" autocomplete="off" (ngSubmit)="login()">
+                <div class="col-12">
+                  <div class="mb-2">
+                    <label class="d-flex mb-2">Email</label>
+                    <input type="text" class="form-control" [(ngModel)]="model.email" name="email"
+                      #email="ngModel" required="" placeholder="Enter Email..."
+                       />
+                  </div>
+                  <div class="text-danger" *ngIf="email.invalid && email.touched" >
+                    <span class="form-label">*Please enter Email</span>
+                  </div>
+                </div>
+                <div class="col-12 ">
+                  <div class="mb-2 form-group">
+                    <div class="form-label">
+                      <span class="d-flex justify-content-between align-items-center">Password</span>
+                    </div>
+                    <div class="col-md-12">
+                      <input id="password" class="form-control" [type]="isShow ? 'text' : 'password'"
+                      placeholder="Nhập mật khẩu..." name="password" [(ngModel)]="model.password" minlength="3"
+                      #password="ngModel" required />
+                    <span toggle="#password-field" (click)="showPassword()"
+                      [class]="!isShow ? 'fa fa-fw fa-eye field-icon toggle-password' : 'fa fa-fw fa-eye-slash field-icon toggle-password'"></span>
+                    </div>
+                  </div>
+                  <div class="text-danger" *ngIf="password.invalid && password.touched">
+                    <span class="form-label">*Please enter password</span>
+                  </div>
+                </div>
+                <div class="form-group clearfix">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="flexCheckDefault" name="rememberPassword"
+                    [(ngModel)]="model.rememberMe"/>
+                    <label class="form-check-label" for="flexCheckDefault">
+                     Remember me
+                    </label>
+                  </div>
+                </div>
+                <div class="form-group clearfix">
+                  <button type="submit" class="btn btn-lg btn-info btn-theme">Login</button>
+                  <span class="d-flex justify-content-between float-end pt-2"><a class="text-primary cursor-pointer"
+                      >Forgot password?</a>
+                  </span>
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="col-lg-6 align-self-center pad-0 bg-img">
+            <div class="info clearfix">
+              <div class="box">
+                <span></span>
+                <span></span>
+                <span></span>
+                <span></span>
+                <div class="content">
+                  <div class="logo-2">
+                    <a href="#">
+                      <h3>Welcome to </h3>
+                    </a>
+                  </div>
+                  <h3>Vsirius Back Office</h3>
+                  <!-- <div class="social-list">
+                    <a href="#" class="facebook-bg">
+                      <i class="fa fa-facebook"></i>
+                    </a>
+                    <a href="#" class="twitter-bg">
+                      <i class="fa fa-twitter"></i>
+                    </a>
+                    <a href="#" class="google-bg">
+                      <i class="fa fa-google"></i>
+                    </a>
+                    <a href="#" class="linkedin-bg">
+                      <i class="fa fa-linkedin"></i>
+                    </a>
+                  </div> -->
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
