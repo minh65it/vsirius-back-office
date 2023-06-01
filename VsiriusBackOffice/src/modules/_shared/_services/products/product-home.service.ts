@@ -8,7 +8,7 @@ import { OperationResult } from '../../_helpers/operation-result';
   providedIn: 'root'
 })
 export class ProductHomeService {
-  baseUrl = environment.apiURL + 'VsiriusHomeProduct';
+  baseUrl = environment.apiProductURL + 'VsiriusHomeProduct';
 
   constructor(private http: HttpClient) { }
 

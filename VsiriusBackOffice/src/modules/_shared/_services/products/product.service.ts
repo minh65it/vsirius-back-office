@@ -11,7 +11,7 @@ import { OperationResult } from '../../_helpers/operation-result';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl = environment.apiURL + 'VsiriusProduct';
+  baseUrl = environment.apiProductURL + 'VsiriusProduct';
   productSource = new BehaviorSubject<Product>({} as Product);
   currentProductSource = this.productSource.asObservable();
 

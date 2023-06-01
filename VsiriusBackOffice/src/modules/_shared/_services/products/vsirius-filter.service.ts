@@ -11,7 +11,7 @@ import { OperationResult } from '../../_helpers/operation-result';
   providedIn: 'root'
 })
 export class VsiriusFilterService {
-  baseUrl = environment.apiURL + 'VsiriusFilter';
+  baseUrl = environment.apiProductURL + 'VsiriusFilter';
   filterSource = new BehaviorSubject<VsiriusFilterDto>({} as VsiriusFilterDto);
   currentFitlterSource = this.filterSource.asObservable();
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
