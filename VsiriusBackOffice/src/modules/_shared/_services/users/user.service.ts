@@ -5,6 +5,7 @@ import { PaginationParam, PaginationResult } from '../../_helpers/pagination-uti
 import { User } from '../../_models/user';
 import { OperationResult } from '../../_helpers/operation-result';
 import { BehaviorSubject } from 'rxjs';
+import { Role } from '../../_models/role';
 
 @Injectable({
   providedIn: 'root'
@@ -37,5 +38,21 @@ export class UserService {
 
   getDetail(mail: string){
     return this.http.get<User>(this.baseUrl + '/GetUser', { params: { mail } });
+  }
+
+  getAllRole(){
+    return this.http.get<Role[]>(this.baseUrl + '/GetAllRole');
+  }
+
+  createRole(role:Role){
+    return this.http.post<OperationResult>(this.baseUrl + '/CreateRoles', role);
+  }
+
+  deleteRole(id: string) {
+    return this.http.delete<OperationResult>(this.baseUrl + '/DeleteRole', { params: { id } });
+  }
+
+  updateRole(role:Role){
+    return this.http.put<OperationResult>(this.baseUrl + '/UpdateRole', role);
   }
 }

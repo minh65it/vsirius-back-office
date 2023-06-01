@@ -14,13 +14,16 @@ import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
+import { RoleMainComponent } from './role-main/role-main.component';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 
 @NgModule({
   declarations: [
     MainComponent,
     CreateComponent,
-    UpdateComponent
+    UpdateComponent,
+    RoleMainComponent
   ],
   imports: [
     CommonModule,
@@ -34,6 +37,7 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
     MultiSelectModule,
     ButtonModule,
     NgSelectModule,
+    ModalModule.forRoot()
   ]
 })
 export class UsersModule { }

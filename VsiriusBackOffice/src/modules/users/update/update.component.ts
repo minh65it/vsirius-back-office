@@ -15,7 +15,6 @@ export class UpdateComponent implements OnInit {
 
   checkValidated: boolean = false;
   userModel: User = {
-    roles:null
   } as User;
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,

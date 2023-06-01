@@ -1,0 +1,158 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header d-block">
+            <form class="row g-3">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off"
+                            name="keyword" placeholder="Enter search keywords...." />
+                        <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                        <button class="btn btn-primary lift me-2 rounded-2" (click)="goToAdd()" type="button">
+                            <i class="fa fa-plus"></i>
+                            Add new
+                        </button>
+                        
+                    </div>
+                </div>
+
+            </form>
+            <div class="card-body table-scroll-view">
+                <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listRoles" dataKey="id"
+                    [rows]="listRoles.length">
+                   
+                    <!-- Header -->
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <!-- STT -->
+                            <th class="text-center"> # </th>
+                            <!-- COLUMNS -->
+                            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
+                                <div class="d-flex justify-content-evenly">
+                                    <!-- Mặc định -->
+                                    <!-- <span>&nbsp;</span> -->
+                                    <!-- Label -->
+                                    <span class="text-capitalize">
+                                        {{item.header}}
+                                        <!-- Sort -->
+                                        <p-sortIcon [field]="item.field"></p-sortIcon>
+                                    </span>
+                                    <!-- tất cả trường không có filter -->
+                                    <!-- Filter by Text -->
+                                  
+                                </div>
+                            </th>
+                            <th class="text-center"></th>
+
+                        </tr>
+                    </ng-template>
+                    <!-- BODY -->
+                    <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+                        <tr>
+                         
+                            <!-- STT -->
+                            <td class="text-center"> {{ rowIndex + 1 }} </td>
+                            <!-- DATA -->
+                            <td *ngFor="let col of columns" class="text-center">
+                                <ng-container>{{item[col.field]}}</ng-container>
+                            </td>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)"
+                                    tooltip="Sửa" data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
+                                    <i class="fa fa-pencil text-warning"></i>
+                                </button>
+                                <button type="button" class="btn btn-link btn-sm text-muted" tooltip="Xóa"
+                                    (click)="delete(item)">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- MESSAGE WHEN EMPTY -->
+                    <ng-template pTemplate="emptymessage" *ngIf="listRoles.length == 0">
+                        <tr>
+                            <td colspan="100%" class="text-center font-weight-bold">
+                                <span class="text-danger">No Data</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+       
+    </div>
+</div>
+
+<div bsModal #modalAdd="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="add()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Create Role</h5>
+        <button type="button" class="btn-close" (click)="modalAdd.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Name <span
+                class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter name... " name="title"
+              [(ngModel)]="roleModel.name" #name="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="name.invalid && (name.touched || name.dirty || checkValidated)">
+              <span>*Please enter name </span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+          <i class="fa fa-repeat" aria-hidden="true"></i>
+          Nhập lại
+        </button>
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Lưu
+        </button>
+        <button class="btn btn-danger lift rounded-2" type="button" (click)="cancelAdd()">
+          <i class="fa fa-close"></i>
+          Hủy
+        </button>
+      </div>
+    </div>
+  </form>
+</div>
+
+
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Update Role</h5>
+        <button type="button" class="btn-close" (click)="modalAdd.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Name <span
+                class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter name... " name="title"
+              [(ngModel)]="roleModelUpdate.name" #name="ngModel" />
+           
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Lưu
+        </button>
+        <button class="btn btn-danger lift rounded-2" type="button" (click)="cancelUpdate()">
+          <i class="fa fa-close"></i>
+          Hủy
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

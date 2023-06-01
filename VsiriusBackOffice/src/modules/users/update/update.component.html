@@ -24,11 +24,8 @@
             <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Password <span class="text-danger">*</span></label>
               <input type="password" placeholder="Enter password..." class="form-control" name="password"
-                [(ngModel)]="userModel.password" #password="ngModel" required />
-              <div class="text-danger mt-2 d-flex align-items-center"
-                *ngIf="password.invalid && (password.touched || password.dirty || checkValidated)">
-                <span>*Please enter password </span>
-              </div>
+                [(ngModel)]="userModel.password" #password="ngModel" />
+             
             </div>
             <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Phone Number</label>
