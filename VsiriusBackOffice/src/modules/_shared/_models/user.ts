@@ -6,5 +6,6 @@ export interface User {
     phoneNumber:string;
     avatar:string;
     address:string;
+    isActive:boolean;
     roles:string[];
 }

@@ -15,7 +15,8 @@ export class CreateComponent {
 
   checkValidated: boolean = false;
   userModel: User = {
-    roles:null
+    roles:null,
+    isActive:true
   } as User;
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
