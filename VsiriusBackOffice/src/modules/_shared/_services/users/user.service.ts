@@ -36,8 +36,8 @@ export class UserService {
     return this.http.put<OperationResult>(this.baseUrl + '/UpdateUser', user);
   }
 
-  getDetail(mail: string){
-    return this.http.get<User>(this.baseUrl + '/GetUser', { params: { mail } });
+  getUserDetail(mail: string){
+    return this.http.get<User>(this.baseUrl + '/getUserDetail', { params: { mail } });
   }
 
   getAllRole(){

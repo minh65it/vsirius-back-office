@@ -21,25 +21,25 @@
           </li>
           <ng-container>
             <!-- Menu level 0 -->
-            <li class="collapsed">
+            <li class="collapsed" *ngIf="isProduct">
               <a class="m-link cursor-pointer" [routerLink]="'/products/product'">
                 <i class="fa fa-home"></i>
                 <span class="ms-2">Vsirius Product</span>
               </a>
             </li>
-            <li class="collapsed">
+            <li class="collapsed" *ngIf="isProduct">
               <a class="m-link cursor-pointer" [routerLink]="'/products/filter'">
                 <i class="fa fa-home"></i>
                 <span class="ms-2">Vsirius Filter</span>
               </a>
             </li>
-            <li class="collapsed">
+            <li class="collapsed" *ngIf="isAdmin">
               <a class="m-link cursor-pointer" [routerLink]="'/users'">
                 <i class="fa fa-user"></i>
                 <span class="ms-2">Users</span>
               </a>
             </li>
-            <li class="collapsed">
+            <li class="collapsed" *ngIf="isAdmin">
               <a class="m-link cursor-pointer" [routerLink]="'/customer'">
                 <i class="fa fa-users"></i>
                 <span class="ms-2">Customers</span>

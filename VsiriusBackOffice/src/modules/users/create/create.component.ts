@@ -27,6 +27,13 @@ export class CreateComponent {
   }
 
   add() {
+    debugger
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if(!emailRegex.test(this.userModel.email)){
+      this.checkValidated = true;
+      this.notiflix.warning('Please check field email');
+      return;
+    }
     if (this.myForm.valid) {
       this.checkValidated = false;
       this.notiflix.showLoading();

@@ -82,6 +82,10 @@
                     <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
                         <tr>
                             <td class="text-center">
+                                <button type="button" class="btn btn-link btn-sm text-muted" (click)="role(item)"
+                                    tooltip="Sửa" data-bs-toggle="modal">
+                                    <i class="fa fa-user text-success"></i>
+                                </button>
                                 <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)"
                                     tooltip="Sửa" data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
                                     <i class="fa fa-pencil text-warning"></i>
@@ -119,4 +123,34 @@
             </pagination>
         </div>
     </div>
+</div>
+
+<div bsModal #modalRole="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="addRole()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Add Role For User</h5>
+        <button type="button" class="btn-close" (click)="modalRole.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row g-3">
+          <div class="col-lg-6 col-md-6">
+            <label for="TextInput" class="form-label fw-bold">Role Name <span
+                class="text-danger">*</span></label>
+                <ng-select [placeholder]="'Choose role...'"  name="role"
+                 [(ngModel)]="userModel.roles" (ngModelChange)="changeRole($event)" [multiple]="true">
+                <ng-option *ngFor="let item of listRoles" [value]="item.name">{{
+                  item.name}}</ng-option>
+              </ng-select>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Lưu
+        </button>
+      </div>
+    </div>
+  </form>
 </div>

@@ -3,7 +3,7 @@
       <div class="card-body ">
         <div class="row">
           <div class="row g-3 col-xl-12 col-md-12">
-            <div class="col-xl-6 col-md-12">
+            <!-- <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Username <span class="text-danger">*</span></label>
               <input type="text" class="form-control" placeholder="Enter username... " name="userName"
                 [(ngModel)]="userModel.userName" #userName="ngModel" required />
@@ -11,10 +11,10 @@
                 *ngIf="userName.invalid && (userName.touched || userName.dirty || checkValidated)">
                 <span>*Please enter userName </span>
               </div>
-            </div>
+            </div> -->
             <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
-              <input type="text" placeholder="Enter email..." class="form-control" name="email"
+              <input type="email" placeholder="Enter email..." class="form-control" name="email"
                 [(ngModel)]="userModel.email" #email="ngModel" required />
               <div class="text-danger mt-2 d-flex align-items-center"
                 *ngIf="email.invalid && (email.touched || email.dirty || checkValidated)">
@@ -33,7 +33,7 @@
             <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Phone Number</label>
               <input type="text" placeholder="Enter phone number..." class="form-control" name="phoneNumber"
-                [(ngModel)]="userModel.phoneNumber" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" #phoneNumber="ngModel" />
+                [(ngModel)]="userModel.phoneNumber" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" #phoneNumber="ngModel" />
              
             </div>
             <div class="col-xl-6 col-md-12">

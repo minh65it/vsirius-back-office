@@ -11,5 +11,5 @@ export const environment = {
   // apiURL: 'http://192.168.1.25:8087/api/',
   apiURL: 'https://localhost:7021/api/',
   allowedDomains: [ip],
-  disallowedRoutes: [`${ ip }api/Auth/Login`],
+  disallowedRoutes: [`${ ip }/api/Auth/Login`],
 };

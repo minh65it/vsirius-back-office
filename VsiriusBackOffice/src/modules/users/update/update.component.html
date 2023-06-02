@@ -30,7 +30,7 @@
             <div class="col-xl-6 col-md-12">
               <label for="TextInput" class="form-label fw-bold">Phone Number</label>
               <input type="text" placeholder="Enter phone number..." class="form-control" name="phoneNumber"
-                [(ngModel)]="userModel.phoneNumber" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" #phoneNumber="ngModel" />
+                [(ngModel)]="userModel.phoneNumber" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" #phoneNumber="ngModel" />
              
             </div>
             <div class="col-xl-6 col-md-12">

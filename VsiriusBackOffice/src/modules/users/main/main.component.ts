@@ -1,6 +1,8 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
+import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
+import { Role } from 'src/modules/_shared/_models/role';
 import { User } from 'src/modules/_shared/_models/user';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { UserService } from 'src/modules/_shared/_services/users/user.service';
@@ -21,12 +23,19 @@ export class MainComponent implements OnInit {
     pageSize: 10,
   };
   keyword: string = '';
+  listRoles: Role[] = [];
+  userModel: User = {
+    roles: null
+  } as User;
+  roleName:string = '';
+  @ViewChild('modalRole', { static: false }) modalRole?: ModalDirective;
   constructor(private notiflix: NgxNotiflixService,
     private service: UserService,
     private router: Router) { }
   ngOnInit() {
     this.generateTable()
     this.loadData();
+    this.loadRole();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -95,6 +104,55 @@ export class MainComponent implements OnInit {
           this.notiflix.hideLoading();
         }
       })
+    })
+  }
+
+  loadRole() {
+    this.service.getAllRole().subscribe({
+      next: res => {
+        this.listRoles = res;
+      },
+      error: () => {
+
+      }
+    })
+  }
+  changeRole(e) {
+    this.userModel.roles = [];
+    this.userModel.roles = e;
+  }
+  loadDetailRole(mail){
+    this.service.getUserDetail(mail).subscribe({
+      next:res=>{
+        this.userModel.roles = res.roles 
+      }
+    })
+  }
+
+  role(item: User) {
+    this.loadDetailRole(item.email);
+    this.roleName=this.userModel.roles?.toString();
+    this.userModel = { ...item };
+    this.modalRole.show();
+  }
+
+  addRole() {
+    this.notiflix.showLoading();
+    this.service.update(this.userModel).subscribe({
+      next: res => {
+        if (res.success) {
+          this.notiflix.success(res.message);
+          this.modalRole?.hide();
+        }
+        else {
+          this.notiflix.error(res.message);
+        }
+        this.notiflix.hideLoading();
+      },
+      error: () => {
+        this.notiflix.error('Error System');
+        this.notiflix.hideLoading();
+      }
     })
   }
 }

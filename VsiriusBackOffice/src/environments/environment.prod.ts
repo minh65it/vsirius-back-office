@@ -6,5 +6,5 @@ export const environment = {
   apiUrl: `${ baseUrl }/api/`,
   baseUrl: `${ baseUrl }/`,
   allowedDomains: [ip],
-  disallowedRoutes: [`${ ip }/api/Auth`],
+  disallowedRoutes: [`${ ip }/api/Auth/Login`],
 };

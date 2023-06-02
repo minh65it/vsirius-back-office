@@ -34,6 +34,7 @@ export class AuthService {
           localStorage.setItem('USER', JSON.stringify(res.user));
           // localStorage.setItem('AVATAR', JSON.stringify(res.avartar));
           // localStorage.setItem('TYPE', JSON.stringify(res.type));
+          localStorage.setItem('ROLES',JSON.stringify(res.roles));
           localStorage.setItem('USERNAME', JSON.stringify(res.user.userName));
           this.decodedToken = this.jwtHelper.decodeToken(res.token);
           this.currentUser = res;
