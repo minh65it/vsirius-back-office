@@ -14,7 +14,8 @@ import { LoginComponent } from '../login/login.component';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AuthGuard } from './_guards/auth.guard';
 import { environment } from 'src/environments/environment';
-
+import { HashLocationStrategy, LocationStrategy } from '@angular/common';
+import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 export function tokenGetter()
 {
   return localStorage.getItem('TOKEN');
@@ -25,7 +26,7 @@ export function tokenGetter()
     DefaultLayoutComponent,
     NavComponent,
     HeaderComponent,
-    LoginComponent
+    LoginComponent,
    ],
   imports: [
     BrowserModule,
@@ -33,6 +34,7 @@ export function tokenGetter()
     BrowserAnimationsModule,
     NgSelectModule,
     FormsModule,
+    BsDatepickerModule.forRoot(),
     NgxBreadcrumbModule.forRoot(),
     HttpClientModule,
     JwtModule.forRoot({
@@ -44,7 +46,8 @@ export function tokenGetter()
     }),
   ],
   providers: [
-    AuthGuard
+    AuthGuard,
+    { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]

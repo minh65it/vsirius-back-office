@@ -21,6 +21,7 @@
     "@auth0/angular-jwt": "5.1.2",
     "@ng-select/ng-select": "8.1.1",
     "@types/ckeditor": "^4.9.10",
+    "@microsoft/signalr": "7.0.0",
     "bootstrap": "4.6.2",
     "font-awesome": "4.7.0",
     "jquery": "^3.6.1",

@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: DefaultLayoutComponent,
     data: {
       breadcrumb: 'Home',
@@ -29,12 +29,20 @@ const routes: Routes = [
         path:'customer',
         loadChildren: () => import('../customers/customers.module').then((m) => m.CustomersModule),
       },
+      {
+        path:'order-status',
+        loadChildren: () => import('../orders/order-status/order-status.module').then((m) => m.OrderStatusModule),
+      },
+      {
+        path:'orders',
+        loadChildren: () => import('../orders/orders/orders.module').then((m) => m.OrdersModule),
+      },
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes,{useHash:true})],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

@@ -26742,9 +26742,9 @@ button:focus:not(:focus-visible) {
 }
 
 .avatar.lg {
-  width: 56px;
+  width: 60px;
   min-width: 56px;
-  height: 56px;
+  height: 60px;
 }
 
 .avatar.xl {

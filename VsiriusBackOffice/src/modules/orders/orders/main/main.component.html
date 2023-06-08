@@ -1,0 +1,157 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header d-block">
+            <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <fieldset class="form-icon-group left-icon position-relative">
+                        <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
+                        class="form-control" placeholder="Choose time from" />
+                        <div class="form-icon position-absolute">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-lg-3 col-md-3 col-sm-6">
+                    <fieldset class="form-icon-group left-icon position-relative">
+                        <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
+                        class="form-control" placeholder="Choose time to" />
+                        <div class="form-icon position-absolute">
+                            <i class="fa fa-calendar" aria-hidden="true"></i>
+                        </div>
+                    </fieldset>
+                </div>
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off"
+                            name="keyword" placeholder="Enter search keywords...." />
+                        <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <div class="card-body table-scroll-view">
+                <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listVsiriusOrder" dataKey="id"
+                    [rows]="listVsiriusOrder.length">
+                   
+                    <!-- Header -->
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="text-center"></th>
+                            <!-- STT -->
+                            <th class="text-center"> # </th>
+                            <!-- COLUMNS -->
+                            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
+                                <div class="d-flex justify-content-evenly">
+                                    <!-- Mặc định -->
+                                    <span>&nbsp;</span>
+                                    <!-- Label -->
+                                    <span class="text-capitalize">
+                                        {{item.header}}
+                                        <!-- Sort -->
+                                        <p-sortIcon [field]="item.field"></p-sortIcon>
+                                    </span>
+                                    <!-- tất cả trường không có filter -->
+                                    <span>
+                                        &nbsp;
+                                    </span>
+                                    <!-- Filter by Text -->
+                                    <p-columnFilter type="text"
+                                        *ngIf="item.field == 'title' ||  item.field == 'floor_Title' "
+                                        [field]="item.field" display="menu" [operator]="'or'" [showOperator]="false"
+                                        [showAddButton]="false" class="p-element float-end">
+                                        <div class="p-column-filter  p-column-filter-menu">
+                                            <button type="button" aria-haspopup="true"
+                                                class="p-column-filter-menu-button p-link" aria-expanded="false">
+                                                <span class="pi pi-filter-icon pi-filter "></span>
+                                            </button>
+                                        </div>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomType_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomStatus_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <!-- BODY -->
+                    <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center">
+                                <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)"
+                                    tooltip="Sửa" data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
+                                    <i class="fa fa-pencil text-warning"></i>
+                                </button>
+                            </td>
+                            <!-- STT -->
+                            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+                            <!-- DATA -->
+                            <td *ngFor="let col of columns" [ngClass]="col.field == 'isActive' ? 'text-center':''">
+                                <ng-container *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate'">{{item[col.field]}}</ng-container>
+                                <ng-container *ngIf="col.field == 'birthDay'">{{item[col.field] | date}}</ng-container>
+                                <ng-container *ngIf="col.field == 'createOrderDate'">{{item[col.field] | date:'dd-MM-YYYY'}}</ng-container>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- MESSAGE WHEN EMPTY -->
+                    <ng-template pTemplate="emptymessage" *ngIf="listVsiriusOrder.length == 0">
+                        <tr>
+                            <td colspan="100%" class="text-center font-weight-bold">
+                                <span class="text-danger">No Data</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+                previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+            </pagination>
+        </div>
+    </div>
+</div>
+
+
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Update OrderStatus</h5>
+        <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+            <div class="flex flex-wrap gap-3" *ngFor="let item of listOrderStatus">
+                <div class="flex align-items-center">
+                    <p-radioButton name="pizza" value="Cheese"  inputId="ingredient1"></p-radioButton>
+                    <label for="ingredient1" class="ml-2">Cheese</label>
+                </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Lưu
+        </button>
+      </div>
+    </div>
+  </form>
+</div>

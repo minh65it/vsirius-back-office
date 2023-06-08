@@ -52,6 +52,7 @@
             <span class="ms-2">Home</span>
             <span class="arrow fa fa-angle-right ms-auto text-end"></span>
           </a>
+          
           <ul class="sub-menu collapse" [id]="'menu-' + menu.name" *ngIf="menu?.children">
             <li class="collapsed" *ngFor="let child of menu?.children">
               <a class="m-link cursor-pointer" (click)="changeRoute(child)">
@@ -116,16 +117,16 @@
     <footer class="page-footer px-xl-4 px-sm-2 px-0">
       <div class="container-fluid d-flex flex-wrap justify-content-between align-items-center">
 
-        <p class="col-lg-3 col-md-12 mb-0 text-muted">
-          © 2023
-          <a href="https://www.thememakker.com/" target="_blank" title="ThemeMakker Infotech LLP">
-            Back Office</a>, All Rights Reserved.
-        </p>
-        <ul class="nav col-lg-9 col-md-12 justify-content-end">
-          <p class="col-lg-4 col-md-12 mb-0 text-muted">
-            © Software Development By
+        <p class="col-lg-4 col-md-12 mb-0 text-muted">
+          © Software Development By
             <a href="https://www.thememakker.com/" target="_blank" title="ThemeMakker Infotech LLP">
               Trung IT</a>.
+        </p>
+        <ul class="nav col-lg-8 col-md-12 justify-content-end">
+          <p class="col-lg-4 col-md-12 mb-0 text-muted">
+            © 2023 Vsirius
+            <a href="https://www.thememakker.com/" target="_blank" title="ThemeMakker Infotech LLP">
+              Back Office</a>
           </p>
         </ul>
       </div>
