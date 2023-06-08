@@ -1,0 +1,63 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header d-block">
+      <form class="row g-3" (ngSubmit)="search()">
+        <div class="col-lg-12 col-md-12 col-sm-12">
+          <div class="input-group">
+            <input class="form-control rounded" type="text" [(ngModel)]="fullTextSearch" autocomplete="off"
+              name="keyword" placeholder="Enter search keywords...." />
+            <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+              <i class="fa fa-search"></i>
+              Search
+            </button>
+          </div>
+        </div>
+
+      </form>
+      <div class="card-body table-scroll-view">
+        <p-table responsiveLayout="scroll" [value]="listCartDto" dataKey="id" [rows]="listCartDto?.length">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width:5%"></th>
+              <th pSortableColumn="email" style="width:20%">Email <p-sortIcon field="email"></p-sortIcon></th>
+              <th pSortableColumn="quantityItem" style="width:20%">Quantity <p-sortIcon
+                  field="quantityItem"></p-sortIcon></th>
+              <th pSortableColumn="totalPrice" style="width:20%">Total price <p-sortIcon
+                  field="totalPrice"></p-sortIcon></th>
+              <th pSortableColumn="status" style="width:20%">Status<p-sortIcon field="status"></p-sortIcon></th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-cart>
+            <tr>
+              <td class="text-center">
+                <button type="button" class="btn btn-link btn-sm text-muted"
+                  (click)="detail(cart?.cartId, cart?.status)" tooltip="Chi tiết" data-bs-toggle="modal">
+                  <i class="fa fa-info text-success"></i>
+                </button>
+              </td>
+              <td>{{ cart.email | anonymousUsers }}</td>
+              <td>{{ cart.quantityItem }}</td>
+              <td>{{ cart.totalPrice | currency:'USD':'symbol':'1.2-2'}}</td>
+              <td>{{ cart.status == true ? "Shopping": "Cancel"}}</td>
+            </tr>
+          </ng-template>
+          <!-- MESSAGE WHEN EMPTY -->
+          <ng-template pTemplate="emptymessage" *ngIf="listCartDto?.length == 0">
+            <tr>
+              <td colspan="100%" class="text-center font-weight-bold">
+                <span class="text-danger">No Data</span>
+              </td>
+            </tr>`
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+      <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+        previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+      </pagination>
+    </div>
+  </div>
+</div>
