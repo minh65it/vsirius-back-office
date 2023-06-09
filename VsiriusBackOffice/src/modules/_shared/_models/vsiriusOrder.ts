@@ -1,8 +1,11 @@
+import { Product } from "./product";
+
 export interface VsiriusOrder {
     orderId: string;
     cartId: string;
     firstName: string | null;
     lastName: string | null;
+    phone:string;
     email: string | null;
     password: string | null;
     birthDay: string | null;
@@ -16,10 +19,11 @@ export interface VsiriusOrder {
     shipping: boolean | null;
     paymentMethod: number | null;
     note: string | null;
-    status: number | null;
+    statusId: number | null;
     createOrderDate: string | null;
     totalQuantityItem: number | null;
     totalPrice: number | null;
 
     statusName:string
+    listProducts: Product[];
 }

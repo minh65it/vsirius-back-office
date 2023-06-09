@@ -37,9 +37,12 @@ export class MainComponent implements OnInit {
   }
   searchFrom: Date = null;
   searchTo: Date = null;
+  createOrderDate: Date = null;
+  birthDay: Date = null;
   @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
   checkValidated: boolean = false;
   listOrderStatus:KeyValuePair[] = [];
+  chooseValueStatus: any;
   constructor(private notiflix: NgxNotiflixService,
     private service: OrderService,
     private statusService:OrderStatusService,
@@ -104,10 +107,11 @@ export class MainComponent implements OnInit {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
-  loadStatusOrder(){
+  loadStatusOrder(id){
     this.statusService.getListStatus().subscribe({
       next:res=>{
         this.listOrderStatus = res;
+        this.chooseValueStatus = this.listOrderStatus[this.listOrderStatus.findIndex(x=>x.key == id)];
       },
       error:()=>{
         
@@ -116,12 +120,15 @@ export class MainComponent implements OnInit {
   }
 
   update(item: VsiriusOrder) {
-    this.loadStatusOrder();
+    this.loadStatusOrder(item.statusId);
+    this.createOrderDate = new Date(item.createOrderDate);
+    this.birthDay = new Date(item.birthDay);
     this.modelEdit = { ...item };
     this.modalEdit.show();
   }
 
   save() {
+    this.modelEdit.statusId = this.chooseValueStatus.key;
     this.notiflix.showLoading();
     this.service.update(this.modelEdit).subscribe({
       next: res => {

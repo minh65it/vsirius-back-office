@@ -4,8 +4,9 @@
             <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <fieldset class="form-icon-group left-icon position-relative">
-                        <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
-                        class="form-control" placeholder="Choose time from" />
+                        <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
+                            placeholder="Choose time from" />
                         <div class="form-icon position-absolute">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </div>
@@ -13,8 +14,9 @@
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <fieldset class="form-icon-group left-icon position-relative">
-                        <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" 
-                        class="form-control" placeholder="Choose time to" />
+                        <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
+                            placeholder="Choose time to" />
                         <div class="form-icon position-absolute">
                             <i class="fa fa-calendar" aria-hidden="true"></i>
                         </div>
@@ -34,7 +36,7 @@
             <div class="card-body table-scroll-view">
                 <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listVsiriusOrder" dataKey="id"
                     [rows]="listVsiriusOrder.length">
-                   
+
                     <!-- Header -->
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -103,9 +105,11 @@
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
                             <td *ngFor="let col of columns" [ngClass]="col.field == 'isActive' ? 'text-center':''">
-                                <ng-container *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate'">{{item[col.field]}}</ng-container>
+                                <ng-container
+                                    *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate'">{{item[col.field]}}</ng-container>
                                 <ng-container *ngIf="col.field == 'birthDay'">{{item[col.field] | date}}</ng-container>
-                                <ng-container *ngIf="col.field == 'createOrderDate'">{{item[col.field] | date:'dd-MM-YYYY'}}</ng-container>
+                                <ng-container *ngIf="col.field == 'createOrderDate'">{{item[col.field] |
+                                    date:'dd-MM-YYYY'}}</ng-container>
                             </td>
                         </tr>
                     </ng-template>
@@ -132,26 +136,86 @@
 
 
 <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
-  aria-labelledby="dialog-sizes-name1">
-  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-uppercase fw-bold">Update OrderStatus</h5>
-        <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-            <div class="flex flex-wrap gap-3" *ngFor="let item of listOrderStatus">
-                <div class="flex align-items-center">
-                    <p-radioButton name="pizza" value="Cheese"  inputId="ingredient1"></p-radioButton>
-                    <label for="ingredient1" class="ml-2">Cheese</label>
+    aria-labelledby="dialog-sizes-name1">
+    <form class="modal-dialog modal-xl modal-dialog-scrollable" #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase fw-bold">Update Order</h5>
+                <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row mb-3">
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">FirstName</label>
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="modelEdit.firstName" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Last Name</label>
+                        <input type="text" class="form-control" name="lastName" [(ngModel)]="modelEdit.lastName" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Email</label>
+                        <input type="text" class="form-control" name="email" [(ngModel)]="modelEdit.email" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">BirthDay</label>
+                        <input type="text" class="form-control" bsDatepicker
+                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="birthDay" [(ngModel)]="birthDay" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Address1</label>
+                        <input type="text" class="form-control" name="address1" [(ngModel)]="modelEdit.address1" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Address2</label>
+                        <input type="text" class="form-control" name="address2" [(ngModel)]="modelEdit.address2" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">City</label>
+                        <input type="text" class="form-control" name="city" [(ngModel)]="modelEdit.city" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">State</label>
+                        <input type="text" class="form-control" name="state" [(ngModel)]="modelEdit.state" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">PostCode</label>
+                        <input type="text" class="form-control" name="postCode" [(ngModel)]="modelEdit.postCode" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Country</label>
+                        <input type="text" class="form-control" name="country" [(ngModel)]="modelEdit.country" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Note</label>
+                        <input type="text" class="form-control" name="note" [(ngModel)]="modelEdit.note" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Create Order Date</label>
+                        <input type="text" class="form-control" bsDatepicker
+                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="createOrderDate" [(ngModel)]="createOrderDate" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity </label>
+                        <input type="number" class="form-control" name="totalQuantityItem" [(ngModel)]="modelEdit.totalQuantityItem" />
+                    </div>
+                    <div class="col-8">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Order Status </label>
+                        <div class="d-flex justify-content-evenly mt-2">
+                            <div class="flex align-items-center" *ngFor="let item of listOrderStatus,let i = index">
+                                <p-radioButton [name]="item.key" [value]="item" [(ngModel)]="chooseValueStatus"
+                                    [inputId]="item.key + i"></p-radioButton>
+                                <label [for]="item.key + i" class="ms-2">{{item.value}}</label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-success me-2 lift rounded-2" type="submit">
+                    <i class="fa fa-save"></i> Save
+                </button>
+            </div>
         </div>
-      </div>
-      <div class="modal-footer">
-        <button class="btn btn-success me-2 lift rounded-2" type="submit">
-          <i class="fa fa-save"></i> Lưu
-        </button>
-      </div>
-    </div>
-  </form>
+    </form>
 </div>

@@ -1,4 +1,5 @@
 import { AfterViewInit, Component, OnInit } from '@angular/core';
+import { InitJsUtility } from '../../_helpers/int-js-utility';
 
 @Component({
   selector: 'app-default-layout',
@@ -7,6 +8,7 @@ import { AfterViewInit, Component, OnInit } from '@angular/core';
 export class DefaultLayoutComponent implements OnInit, AfterViewInit {
 
   constructor(
+    private initJsUtility: InitJsUtility
   ) { }
   
   ngOnInit() {
@@ -14,6 +16,7 @@ export class DefaultLayoutComponent implements OnInit, AfterViewInit {
   }
 
   ngAfterViewInit(): void {
+    this.initJsUtility.toggleNav();
   }
 
 }

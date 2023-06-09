@@ -1,4 +1,6 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { InitJsUtility } from "src/modules/_shared/_helpers/int-js-utility";
 import { VsiriusOrder } from "src/modules/_shared/_models/vsiriusOrder";
 import { NgxNotiflixService } from "src/modules/_shared/_services/ngx-notiflix.service";
 import { OrderService } from "src/modules/_shared/_services/orders/order.service";
@@ -11,19 +13,25 @@ import { AuthService } from "src/modules/_shared/_services/users/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent implements OnInit,OnDestroy {
   listOrder: VsiriusOrder[] = [];
+  orderModel :  VsiriusOrder = <VsiriusOrder>{};
   countNotification: number = 0;
   isNewNotification: boolean = false;
   time: any;
+  @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
   constructor(private authService: AuthService,
     private serviceOrder: OrderService,
     private notiflix: NgxNotiflixService,
+    private initJsUtility: InitJsUtility,
     private serviceSignalR: SignalRService) { }
 
   ngOnInit() {
     this.loadNotification();
     this.loadNotificationList();
+  }
+  ngAfterViewInit(): void {
+    this.initJsUtility.toggleChangeTheme();
   }
 
   loadNotification() {
@@ -55,17 +63,29 @@ export class HeaderComponent implements OnInit {
       this.isNewNotification = false;
     }, 4000);
   }
+  loadOrderByUser(email:string){
+    this.notiflix.showLoading();
+    this.serviceOrder.getTopGetOrderByUserOrder(email).subscribe({
+      next:res=>{
+        this.orderModel = res;
+        this.notiflix.hideLoading();
+      },
+      error:()=>{
+        this.notiflix.error('Error System');
+        this.notiflix.hideLoading();
+      }
+    })
+  }
   showNotification(item: VsiriusOrder)
   {
-    // this.seenNotificationModel = { ...item };
-    // this.detailModal.show();
+    this.loadOrderByUser(item?.email);
+    this.modalEdit.show();
   }
   delete(item: VsiriusOrder)
   {
     
   }
   showAll(){
-
   }
   playNoti() {
     let audio = new Audio();
@@ -76,5 +96,9 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.time);
   }
 }

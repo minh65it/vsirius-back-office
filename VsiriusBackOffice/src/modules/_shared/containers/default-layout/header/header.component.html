@@ -67,20 +67,20 @@
                             <i class="fa fa-envelope fa-lg"></i>
                           </div>
                           <div class="flex-fill ms-3">
-                            <p class="mb-0">
+                            <span class="mb-0 card-title">
                               <!-- Your New Campaign
                             <strong class="text-primary">Holiday Sale</strong>
                             is approved. -->
                             You have order from  {{ item.email }} 
-                            </p>
-                            <small class="mr-3">{{
+                            </span>
+                            <small class="me-3">{{
                               item.createOrderDate | date : "dd-MM-YYYY HH:mm"
                               }}</small>
                             <!-- <small class="mr-3" [ngClass]="item.isView ? 'text-primary' : 'text-danger' ">{{item.isView ? 'Đã xem' :
                               'Chưa xem'}}</small> -->
-                            <a (click)="showNotification(item)" class="view text-primary">Xem chi tiết</a>
+                            <a (click)="showNotification(item)" class="view text-primary">See detail</a>
                           </div>
-                          <i class="fa fa-trash text-danger" (click)="delete(item)"></i>
+                          <i class="fa fa-trash view text-danger" (click)="delete(item)"></i>
                         </div>
                       </li>
                       <li class="py-2 mb-1 border-bottom" *ngIf="listOrder.length === 0">
@@ -244,3 +244,118 @@
     </nav>
   </div>
 </header>
+
+
+
+<div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
+    aria-labelledby="dialog-sizes-name1">
+    <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase fw-bold">Detail Order</h5>
+                <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <div class="row">
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">First Name:</label>
+                    <span class="ms-2">{{orderModel.firstName}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Last Name:</label>
+                    <span class="ms-2">{{orderModel.lastName}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">BirthDay:</label>
+                    <span class="ms-2">{{orderModel.birthDay | date}}</span>
+                  </div>
+                 
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Email:</label>
+                    <span class="ms-2">{{orderModel.email}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Phone: </label>
+                    <span class="ms-2">{{orderModel.phone}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Address 1: </label>
+                    <span class="ms-2">{{orderModel.address1}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Address 2: </label>
+                    <span class="ms-2">{{orderModel.address2}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">City: </label>
+                    <span class="ms-2">{{orderModel.city}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">State: </label>
+                    <span class="ms-2">{{orderModel.state}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Post Code: </label>
+                    <span class="ms-2">{{orderModel.postCode}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Country: </label>
+                    <span class="ms-2">{{orderModel.country}}</span>
+                  </div>
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Order Date: </label>
+                    <span class="ms-2">{{
+                      orderModel.createOrderDate | date : "dd-MM-YYYY HH:mm"
+                      }}</span>
+                  </div>
+
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity: </label>
+                    <span class="ms-2">{{
+                      orderModel.totalQuantityItem
+                      }}</span>
+                  </div>
+
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Total Price: </label>
+                    <span class="ms-2">${{
+                      orderModel.totalPrice 
+                      }}</span>
+                  </div>
+
+                  <div class="col-4 mb-2">
+                    <label for="TextInput" class="form-label fw-bold label-custom">Note: </label>
+                    <span class="ms-2">{{
+                      orderModel.note
+                      }}</span>
+                  </div>
+              </div>
+              <h3 class="form-label">List Products</h3>
+              <div class="row">
+                <table class="table">
+                  <thead class="thead-dark">
+                    <tr>
+                      <th scope="col">#</th>
+                      <th scope="col">Image</th>
+                      <th scope="col">Name Product</th>
+                      <th scope="col">Price</th>
+                      <th scope="col">Quantity</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let item of orderModel.listProducts;let i = index">
+                      <th scope="row">{{i + 1}}</th>
+                      <td><img [src]="item.main_image_url" class="rounded lg avatar" [alt]=""></td>
+                      <td>{{item.item_name}}</td>
+                      <td>{{item.standard_price}}</td>
+                      <td>{{item.quantity}}</td>
+                    </tr>
+                  </tbody>
+                </table>
+                
+              </div>
+            </div>
+            
+        </div>
+    </form>
+</div>

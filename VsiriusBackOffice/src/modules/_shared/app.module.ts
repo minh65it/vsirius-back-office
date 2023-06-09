@@ -16,6 +16,7 @@ import { AuthGuard } from './_guards/auth.guard';
 import { environment } from 'src/environments/environment';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
+import { ModalModule } from 'ngx-bootstrap/modal';
 export function tokenGetter()
 {
   return localStorage.getItem('TOKEN');
@@ -37,6 +38,7 @@ export function tokenGetter()
     BsDatepickerModule.forRoot(),
     NgxBreadcrumbModule.forRoot(),
     HttpClientModule,
+    ModalModule.forChild(),
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

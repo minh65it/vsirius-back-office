@@ -21,8 +21,11 @@ export class OrderService {
     return this.http.put<OperationResult>(this.baseUrl + '/Update', dto);
   }
 
-  getTopOrder(){
+  getTopOrder() {
     return this.http.get<VsiriusOrder[]>(this.baseUrl + '/GetTopOrder');
   }
-
+  
+  getTopGetOrderByUserOrder(email: string) {
+    return this.http.get<VsiriusOrder>(this.baseUrl + '/GetOrderByUser', { params: { email } });
+  }
 }
