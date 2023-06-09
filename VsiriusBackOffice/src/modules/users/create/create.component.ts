@@ -29,9 +29,15 @@ export class CreateComponent {
   add() {
     debugger
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    const passwordRegex = /^[a-zA-Z0-9]+$/;
     if(!emailRegex.test(this.userModel.email)){
       this.checkValidated = true;
       this.notiflix.warning('Please check field email');
+      return;
+    }
+    if(!passwordRegex.test(this.userModel.password)){
+      this.checkValidated = true;
+      this.notiflix.warning('Password no special characters');
       return;
     }
     if (this.myForm.valid) {

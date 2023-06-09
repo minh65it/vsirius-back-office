@@ -21,8 +21,8 @@ export class MainComponent implements OnInit {
   customFilter = 'product-custom';
   cols: any[];
   selectedColumnsInitial: any[] = [
+    { field: 'main_image_url', header: 'main_image_url' },
     { field: 'feed_product_type', header: 'feed_product_type' },
-    { field: 'item_sku', header: 'item_sku' },
     { field: 'brand_name', header: 'brand_name' },
     { field: 'item_type', header: 'item_type' },
     { field: 'metal_type', header: 'metal_type' }
@@ -731,7 +731,6 @@ export class MainComponent implements OnInit {
     this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
       next: res => {
         this.listProducts = res.result;
-        console.log(this.listProductsHome);
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
@@ -759,10 +758,6 @@ export class MainComponent implements OnInit {
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
-        console.log(this.listItemType);
-        
-        console.log(this.listMetalType);
-        
         this.notiflix.hideLoading();
 
       },

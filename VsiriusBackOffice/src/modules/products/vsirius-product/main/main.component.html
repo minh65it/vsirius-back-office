@@ -136,9 +136,11 @@
               <!-- STT -->
               <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
               <!-- DATA -->
-              <td *ngFor="let col of columns">
-                <ng-container *ngIf="col.field != 'price' ">{{item[col.field]}}</ng-container>
-                <ng-container *ngIf="col.field == 'price' ">{{item[col.field] | number}}</ng-container>
+              <td *ngFor="let col of columns" [ngClass]="col.field == 'main_image_url' ? 'text-center' :''">
+                <ng-container *ngIf="col.field != 'main_image_url' ">{{item[col.field]}}</ng-container>
+                <ng-container *ngIf="col.field == 'main_image_url'" >
+                 <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'" class="rounded lg avatar" [alt]="item[col.field]">
+                </ng-container>
               </td>
             </tr>
           </ng-template>

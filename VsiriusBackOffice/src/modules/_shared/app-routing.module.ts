@@ -7,11 +7,11 @@ import { AuthGuard } from './_guards/auth.guard';
 const routes: Routes = [
   {
     path: 'login',
-    component:LoginComponent
+    component: LoginComponent
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    // canActivate: [AuthGuard],
     component: DefaultLayoutComponent,
     data: {
       breadcrumb: 'Home',
@@ -22,23 +22,31 @@ const routes: Routes = [
         loadChildren: () => import('../products/products.module').then((m) => m.ProductsModule),
       },
       {
-        path:'users',
+        path: 'users',
         loadChildren: () => import('../users/users.module').then((m) => m.UsersModule),
       },
       {
-        path:'customer',
+        path: 'customer',
         loadChildren: () => import('../customers/customers.module').then((m) => m.CustomersModule),
       },
       {
-        path:'cart',
+        path: 'cart',
         loadChildren: () => import('../cart/cart.module').then((m) => m.CartModule),
+      },
+      {
+        path: 'order-status',
+        loadChildren: () => import('../orders/order-status/order-status.module').then((m) => m.OrderStatusModule),
+      },
+      {
+        path: 'orders',
+        loadChildren: () => import('../orders/orders/orders.module').then((m) => m.OrdersModule),
       },
     ]
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  imports: [RouterModule.forRoot(routes, { useHash: true })],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

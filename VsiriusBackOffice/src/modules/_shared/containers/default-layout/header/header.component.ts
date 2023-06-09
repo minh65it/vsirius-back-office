@@ -1,4 +1,10 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { ModalDirective } from "ngx-bootstrap/modal";
+import { InitJsUtility } from "src/modules/_shared/_helpers/int-js-utility";
+import { VsiriusOrder } from "src/modules/_shared/_models/vsiriusOrder";
+import { NgxNotiflixService } from "src/modules/_shared/_services/ngx-notiflix.service";
+import { OrderService } from "src/modules/_shared/_services/orders/order.service";
+import { SignalRService } from "src/modules/_shared/_services/signalR.service";
 import { AuthService } from "src/modules/_shared/_services/users/auth.service";
 
 
@@ -7,13 +13,92 @@ import { AuthService } from "src/modules/_shared/_services/users/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit {
-  constructor(private authService:AuthService){}
+export class HeaderComponent implements OnInit,OnDestroy {
+  listOrder: VsiriusOrder[] = [];
+  orderModel :  VsiriusOrder = <VsiriusOrder>{};
+  countNotification: number = 0;
+  isNewNotification: boolean = false;
+  time: any;
+  @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
+  constructor(private authService: AuthService,
+    private serviceOrder: OrderService,
+    private notiflix: NgxNotiflixService,
+    private initJsUtility: InitJsUtility,
+    private serviceSignalR: SignalRService) { }
+
   ngOnInit() {
-   
+    this.loadNotification();
+    this.loadNotificationList();
   }
- 
-  logout(){
+  ngAfterViewInit(): void {
+    this.initJsUtility.toggleChangeTheme();
+  }
+
+  loadNotification() {
+    this.serviceSignalR.notificationChangedEmitter.subscribe(res => {
+      if (res != null) {
+        this.notiflix.info('1 New Order Has Been Placed');
+        this.changeAnimation();
+        this.loadNotificationList();
+      }
+    })
+  }
+
+  loadNotificationList() {
+    this.serviceOrder.getTopOrder().subscribe({
+      next: res => {
+        this.listOrder = res;
+      },
+      error: () => {
+
+      }
+    })
+  }
+
+  // rung chuông
+  changeAnimation() {
+    this.isNewNotification = true;
+    this.playNoti();
+    this.time = setTimeout(() => {
+      this.isNewNotification = false;
+    }, 4000);
+  }
+  loadOrderByUser(email:string){
+    this.notiflix.showLoading();
+    this.serviceOrder.getTopGetOrderByUserOrder(email).subscribe({
+      next:res=>{
+        this.orderModel = res;
+        this.notiflix.hideLoading();
+      },
+      error:()=>{
+        this.notiflix.error('Error System');
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+  showNotification(item: VsiriusOrder)
+  {
+    this.loadOrderByUser(item?.email);
+    this.modalEdit.show();
+  }
+  delete(item: VsiriusOrder)
+  {
+    
+  }
+  showAll(){
+  }
+  playNoti() {
+    let audio = new Audio();
+    audio.src = "../../../../../assets/audio/noti.wav";
+    audio.load();
+    audio.play();
+  }
+
+  logout() {
     this.authService.logout();
+  }
+
+  ngOnDestroy(): void {
+    clearTimeout(this.time);
   }
 }
