@@ -1,4 +1,4 @@
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -17,6 +17,7 @@ import { environment } from 'src/environments/environment';
 import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { AuthService } from './_services/users/auth.service';
 export function tokenGetter()
 {
   return localStorage.getItem('TOKEN');
@@ -49,6 +50,12 @@ export function tokenGetter()
   ],
   providers: [
     AuthGuard,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: (authService:AuthService)=>()=>authService.startCheckExpirationTime(),
+      multi: true,
+      deps: [AuthService]
+    },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],
   bootstrap: [AppComponent],

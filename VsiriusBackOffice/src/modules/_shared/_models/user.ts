@@ -5,7 +5,13 @@ export interface User {
     password:string;
     phoneNumber:string;
     avatar:string;
-    address:string;
+    address1:string;
+    address2:string;
     isActive:boolean;
+    fullName:string;
+    city:string;
+    state:string;
+    postCode:string;
+    country:string;
     roles:string[];
 }

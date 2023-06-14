@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Role } from 'src/modules/_shared/_models/role';
+import { EmployeeService } from 'src/modules/_shared/_services/employees/employee.service';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { UserService } from 'src/modules/_shared/_services/users/user.service';
 
@@ -19,8 +20,22 @@ export class RoleMainComponent implements OnInit {
   cols: any[];
 
   keyword: string = '';
-  roleModel: Role = {} as Role;
-  roleModelUpdate: Role = {} as Role;
+  roleModel: Role = {
+    claimType:[
+      "Create",
+      "Update",
+      "Delete",
+      "Read"
+    ]
+  } as Role;
+  roleModelUpdate: Role = {
+    claimType:[
+      "Create",
+      "Update",
+      "Delete",
+      "Read"
+    ]
+  } as Role;
   checkValidated: boolean = false;
   @ViewChild('modalAdd', { static: false }) modalAdd?: ModalDirective;
 
@@ -29,7 +44,7 @@ export class RoleMainComponent implements OnInit {
   @ViewChild('myForm', { static: false }) myForm?: NgForm;
 
   constructor(private notiflix: NgxNotiflixService,
-    private service: UserService,
+    private service: EmployeeService,
     private router: Router) { }
   ngOnInit() {
     this.generateTable()
@@ -80,7 +95,7 @@ export class RoleMainComponent implements OnInit {
   delete(item: Role) {
     this.notiflix.confirm('Message', 'Do you want delete role?', () => {
       this.notiflix.showLoading();
-      this.service.delete(item.id).subscribe({
+      this.service.deleteRole(item.id).subscribe({
         next: res => {
           res.success ? this.notiflix.success(res.message) :
             this.notiflix.error(res.message);

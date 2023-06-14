@@ -1,32 +1,15 @@
 const hostname: string ='192.168.1.25';
-
-// const port: string = ':7021';
-
-const port: string = ':8087';
-
-const ip: string = `${ hostname }${ port }`;
-
-
-
-
-// const baseUrl: string = `${ protocol }//${ ip }`;
-
-// const ip : string = 'https://localhost:7021/api/'
+const ip: string = `${ hostname }${ ':8087' }`;
+const ip1: string = `${ hostname }${ ':8082' }`;
+const ip2: string = `${ hostname }${ ':8090' }`;
 
 export const environment = {  
-
-  production: true,
-
+  production: false,
   imageURL: 'http://192.168.1.25:8082',
-
   apiProductURL: 'http://192.168.1.25:8082/api/',
-
   apiURL: 'http://192.168.1.25:8087/api/',
-
-  //apiURL: 'https://localhost:7021/api/',
-
-  allowedDomains: [ip],
-
+  apiOrderURL: 'http://192.168.1.25:8090/api/',
+  baseURL: 'http://192.168.1.25:8090',
+  allowedDomains: [ip,ip1,ip2],
   disallowedRoutes: [`${ ip }/api/Auth/Login`],
-
 };

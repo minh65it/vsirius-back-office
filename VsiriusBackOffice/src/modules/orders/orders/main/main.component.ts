@@ -1,5 +1,4 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { KeyValuePair } from 'src/modules/_shared/_helpers/key-value-pair';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
@@ -8,6 +7,7 @@ import { VsiriusOrder } from 'src/modules/_shared/_models/vsiriusOrder';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrderStatusService } from 'src/modules/_shared/_services/orders/order-status.service';
 import { OrderService } from 'src/modules/_shared/_services/orders/order.service';
+import { SignalRService } from 'src/modules/_shared/_services/signalR.service';
 
 @Component({
   selector: 'app-main',
@@ -41,13 +41,14 @@ export class MainComponent implements OnInit {
   birthDay: Date = null;
   @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
   checkValidated: boolean = false;
-  listOrderStatus:KeyValuePair[] = [];
+  listOrderStatus: KeyValuePair[] = [];
   chooseValueStatus: any;
   constructor(private notiflix: NgxNotiflixService,
     private service: OrderService,
-    private statusService:OrderStatusService,
-    private router: Router) { }
+    private statusService: OrderStatusService,
+    private serviceSignalR: SignalRService) { }
   ngOnInit() {
+    this.loadNotification();
     this.generateTable()
     this.loadData();
   }
@@ -76,6 +77,14 @@ export class MainComponent implements OnInit {
       { field: 'createOrderDate', header: 'Order Date' },
     ];
     this._selectedColumns = this.cols;
+  }
+
+  loadNotification() {
+    this.serviceSignalR.notificationChangedEmitter.subscribe(res => {
+      if (res != null) {
+        this.loadData();
+      }
+    })
   }
 
   loadData() {
@@ -107,14 +116,14 @@ export class MainComponent implements OnInit {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
-  loadStatusOrder(id){
+  loadStatusOrder(id) {
     this.statusService.getListStatus().subscribe({
-      next:res=>{
+      next: res => {
         this.listOrderStatus = res;
-        this.chooseValueStatus = this.listOrderStatus[this.listOrderStatus.findIndex(x=>x.key == id)];
+        this.chooseValueStatus = this.listOrderStatus[this.listOrderStatus.findIndex(x => x.key == id)];
       },
-      error:()=>{
-        
+      error: () => {
+
       }
     })
   }
@@ -134,6 +143,7 @@ export class MainComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.notiflix.success(res.message);
+          location.reload();
           this.modalEdit.hide();
           this.loadData();
         }

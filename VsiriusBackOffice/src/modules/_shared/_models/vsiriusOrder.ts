@@ -26,4 +26,5 @@ export interface VsiriusOrder {
 
     statusName:string
     listProducts: Product[];
+    isRead:boolean;
 }

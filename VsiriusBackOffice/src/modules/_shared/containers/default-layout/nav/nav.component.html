@@ -23,13 +23,13 @@
             <!-- Menu level 0 -->
             <li class="collapsed" *ngIf="isProduct">
               <a class="m-link cursor-pointer" [routerLink]="'/products/product'">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-product-hunt"></i>
                 <span class="ms-2">Vsirius Product</span>
               </a>
             </li>
             <li class="collapsed" *ngIf="isProduct">
               <a class="m-link cursor-pointer" [routerLink]="'/products/filter'">
-                <i class="fa fa-home"></i>
+                <i class="fa fa-bars"></i>
                 <span class="ms-2">Vsirius Filter</span>
               </a>
             </li>
@@ -40,9 +40,27 @@
               </a>
             </li>
             <li class="collapsed" *ngIf="isAdmin">
-              <a class="m-link cursor-pointer" [routerLink]="'/customer'">
+              <a class="m-link cursor-pointer" [routerLink]="'/employees'">
                 <i class="fa fa-users"></i>
-                <span class="ms-2">Customers</span>
+                <span class="ms-2">Employees</span>
+              </a>
+            </li>
+            <li class="collapsed" *ngIf="isAdmin">
+              <a class="m-link cursor-pointer" [routerLink]="'/orders'">
+                <i class="fa fa-shopping-bag"></i>
+                <span class="ms-2">Orders</span>
+              </a>
+            </li>
+            <li class="collapsed" *ngIf="isAdmin">
+              <a class="m-link cursor-pointer" [routerLink]="'/order-status'">
+                <i class="fa fa-circle"></i>
+                <span class="ms-2">Order Status</span>
+              </a>
+            </li>
+            <li class="collapsed" *ngIf="isAdmin">
+              <a class="m-link cursor-pointer" [routerLink]="'/contacts'">
+                <i class="fa fa-envelope-o"></i>
+                <span class="ms-2">Contacts</span>
               </a>
             </li>
             <!-- Menu level 1 -->

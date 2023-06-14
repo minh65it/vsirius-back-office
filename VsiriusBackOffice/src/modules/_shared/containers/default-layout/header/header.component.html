@@ -34,10 +34,14 @@
           <div class="dropdown morphing scale-left notifications">
             <a class="nav-link dropdown-toggle after-none" href="#" role="button" data-bs-toggle="dropdown">
               <div class="badge-wrap">
-                <svg viewbox="0 0 16 16" [ngClass]="{ 'bell-ring': isNewNotification }" width="18px" height="18px" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                  <path _ngcontent-lok-c48="" d="M8 1.91802L7.203 2.07902C6.29896 2.26322 5.48633 2.75412 4.90265 3.46864C4.31897 4.18316 4.0001 5.07741 4 6.00002C4 6.62802 3.866 8.19702 3.541 9.74202C3.381 10.509 3.165 11.308 2.878 12H13.122C12.835 11.308 12.62 10.51 12.459 9.74202C12.134 8.19702 12 6.62802 12 6.00002C11.9997 5.07758 11.6807 4.18357 11.097 3.46926C10.5134 2.75494 9.70087 2.26419 8.797 2.08002L8 1.91802ZM14.22 12C14.443 12.447 14.701 12.801 15 13H1C1.299 12.801 1.557 12.447 1.78 12C2.68 10.2 3 6.88002 3 6.00002C3 3.58002 4.72 1.56002 7.005 1.09902C6.99104 0.959974 7.00638 0.819547 7.05003 0.686794C7.09368 0.554041 7.16467 0.43191 7.25842 0.328279C7.35217 0.224647 7.4666 0.141815 7.59433 0.085125C7.72206 0.028435 7.86026 -0.000854492 8 -0.000854492C8.13974 -0.000854492 8.27794 0.028435 8.40567 0.085125C8.5334 0.141815 8.64783 0.224647 8.74158 0.328279C8.83533 0.43191 8.90632 0.554041 8.94997 0.686794C8.99362 0.819547 9.00896 0.959974 8.995 1.09902C10.1253 1.32892 11.1414 1.94238 11.8712 2.83552C12.6011 3.72866 12.9999 4.84659 13 6.00002C13 6.88002 13.32 10.2 14.22 12Z">
+                <svg viewbox="0 0 16 16" [ngClass]="{ 'bell-ring': isNewNotification }" width="18px" height="18px"
+                  fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                  <path _ngcontent-lok-c48=""
+                    d="M8 1.91802L7.203 2.07902C6.29896 2.26322 5.48633 2.75412 4.90265 3.46864C4.31897 4.18316 4.0001 5.07741 4 6.00002C4 6.62802 3.866 8.19702 3.541 9.74202C3.381 10.509 3.165 11.308 2.878 12H13.122C12.835 11.308 12.62 10.51 12.459 9.74202C12.134 8.19702 12 6.62802 12 6.00002C11.9997 5.07758 11.6807 4.18357 11.097 3.46926C10.5134 2.75494 9.70087 2.26419 8.797 2.08002L8 1.91802ZM14.22 12C14.443 12.447 14.701 12.801 15 13H1C1.299 12.801 1.557 12.447 1.78 12C2.68 10.2 3 6.88002 3 6.00002C3 3.58002 4.72 1.56002 7.005 1.09902C6.99104 0.959974 7.00638 0.819547 7.05003 0.686794C7.09368 0.554041 7.16467 0.43191 7.25842 0.328279C7.35217 0.224647 7.4666 0.141815 7.59433 0.085125C7.72206 0.028435 7.86026 -0.000854492 8 -0.000854492C8.13974 -0.000854492 8.27794 0.028435 8.40567 0.085125C8.5334 0.141815 8.64783 0.224647 8.74158 0.328279C8.83533 0.43191 8.90632 0.554041 8.94997 0.686794C8.99362 0.819547 9.00896 0.959974 8.995 1.09902C10.1253 1.32892 11.1414 1.94238 11.8712 2.83552C12.6011 3.72866 12.9999 4.84659 13 6.00002C13 6.88002 13.32 10.2 14.22 12Z">
                   </path>
-                  <path _ngcontent-lok-c48="" d="M9.41421 15.4142C9.03914 15.7893 8.53043 16 8 16C7.46957 16 6.96086 15.7893 6.58579 15.4142C6.21071 15.0391 6 14.5304 6 14H10C10 14.5304 9.78929 15.0391 9.41421 15.4142Z" fill="black" class="fill-secondary"></path>
+                  <path _ngcontent-lok-c48=""
+                    d="M9.41421 15.4142C9.03914 15.7893 8.53043 16 8 16C7.46957 16 6.96086 15.7893 6.58579 15.4142C6.21071 15.0391 6 14.5304 6 14H10C10 14.5304 9.78929 15.0391 9.41421 15.4142Z"
+                    fill="black" class="fill-secondary"></path>
                 </svg>
                 <div class="badge-with-number" *ngIf="listOrder.length > 0">
                   {{ listOrder.length >= 10 ? "10+" : listOrder.length }}
@@ -53,7 +57,7 @@
             <div id="NotificationsDiv" class="dropdown-menu shadow rounded-4 border-0 p-0 m-0">
               <div class="card w380">
                 <div class="card-header p-3">
-                  <h6 class="card-title mb-0">Trung tâm thông báo</h6>
+                  <h6 class="card-title mb-0">Notifications</h6>
                   <!-- <span class="badge bg-danger text-light">{{
                     notification?.total
                     }}</span> -->
@@ -71,7 +75,7 @@
                               <!-- Your New Campaign
                             <strong class="text-primary">Holiday Sale</strong>
                             is approved. -->
-                            You have order from  {{ item.email }} 
+                              You have order from {{ item.email }}
                             </span>
                             <small class="me-3">{{
                               item.createOrderDate | date : "dd-MM-YYYY HH:mm"
@@ -80,14 +84,17 @@
                               'Chưa xem'}}</small> -->
                             <a (click)="showNotification(item)" class="view text-primary">See detail</a>
                           </div>
-                          <i class="fa fa-trash view text-danger" (click)="delete(item)"></i>
+                          <div class="flex-fill ms-3">
+                            <i class="fa fa-trash view text-danger" (click)="delete(item)"></i>
+                            <i class="fa fa-check view text-success" *ngIf="item.isRead"></i>
+                          </div>
                         </div>
                       </li>
                       <li class="py-2 mb-1 border-bottom" *ngIf="listOrder.length === 0">
                         <a class="d-flex">
                           <div class="flex-fill ms-3" *ngIf="listOrder.length === 0">
                             <p class="d-flex justify-content-between mb-0">
-                              <span style="margin-left: 50px">Chưa có thông báo mới.</span>
+                              <span style="margin-left: 50px">Not have new message.</span>
                             </p>
                           </div>
                         </a>
@@ -95,7 +102,7 @@
                     </ul>
                   </div>
                 </div>
-                <a (click)="showAll()" class="btn btn-primary text-light rounded-0">Xem tất cả</a>
+                <a (click)="showAll()" class="btn btn-primary text-light rounded-0">Show All</a>
               </div>
             </div>
           </div>
@@ -104,7 +111,7 @@
         <li class="d-none d-xl-inline-block">
           <a class="nav-link fullscreen" href="javascript:void(0);">
             <i [class]="'icon-size-actual'"></i>
-          
+
           </a>
         </li>
         <!-- menu ngôn ngữ -->
@@ -248,114 +255,114 @@
 
 
 <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
-    aria-labelledby="dialog-sizes-name1">
-    <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title text-uppercase fw-bold">Detail Order</h5>
-                <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-              <div class="row">
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">First Name:</label>
-                    <span class="ms-2">{{orderModel.firstName}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Last Name:</label>
-                    <span class="ms-2">{{orderModel.lastName}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">BirthDay:</label>
-                    <span class="ms-2">{{orderModel.birthDay | date}}</span>
-                  </div>
-                 
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Email:</label>
-                    <span class="ms-2">{{orderModel.email}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Phone: </label>
-                    <span class="ms-2">{{orderModel.phone}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Address 1: </label>
-                    <span class="ms-2">{{orderModel.address1}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Address 2: </label>
-                    <span class="ms-2">{{orderModel.address2}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">City: </label>
-                    <span class="ms-2">{{orderModel.city}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">State: </label>
-                    <span class="ms-2">{{orderModel.state}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Post Code: </label>
-                    <span class="ms-2">{{orderModel.postCode}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Country: </label>
-                    <span class="ms-2">{{orderModel.country}}</span>
-                  </div>
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Order Date: </label>
-                    <span class="ms-2">{{
-                      orderModel.createOrderDate | date : "dd-MM-YYYY HH:mm"
-                      }}</span>
-                  </div>
+  aria-labelledby="dialog-sizes-name1">
+  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title text-uppercase fw-bold">Detail Order</h5>
+        <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">First Name:</label>
+            <span class="ms-2">{{orderModel.firstName}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Last Name:</label>
+            <span class="ms-2">{{orderModel.lastName}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">BirthDay:</label>
+            <span class="ms-2">{{orderModel.birthDay | date}}</span>
+          </div>
 
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity: </label>
-                    <span class="ms-2">{{
-                      orderModel.totalQuantityItem
-                      }}</span>
-                  </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Email:</label>
+            <span class="ms-2">{{orderModel.email}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Phone: </label>
+            <span class="ms-2">{{orderModel.phone}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Address 1: </label>
+            <span class="ms-2">{{orderModel.address1}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Address 2: </label>
+            <span class="ms-2">{{orderModel.address2}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">City: </label>
+            <span class="ms-2">{{orderModel.city}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">State: </label>
+            <span class="ms-2">{{orderModel.state}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Post Code: </label>
+            <span class="ms-2">{{orderModel.postCode}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Country: </label>
+            <span class="ms-2">{{orderModel.country}}</span>
+          </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Order Date: </label>
+            <span class="ms-2">{{
+              orderModel.createOrderDate | date : "dd-MM-YYYY HH:mm"
+              }}</span>
+          </div>
 
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Total Price: </label>
-                    <span class="ms-2">${{
-                      orderModel.totalPrice 
-                      }}</span>
-                  </div>
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity: </label>
+            <span class="ms-2">{{
+              orderModel.totalQuantityItem
+              }}</span>
+          </div>
 
-                  <div class="col-4 mb-2">
-                    <label for="TextInput" class="form-label fw-bold label-custom">Note: </label>
-                    <span class="ms-2">{{
-                      orderModel.note
-                      }}</span>
-                  </div>
-              </div>
-              <h3 class="form-label">List Products</h3>
-              <div class="row">
-                <table class="table">
-                  <thead class="thead-dark">
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Image</th>
-                      <th scope="col">Name Product</th>
-                      <th scope="col">Price</th>
-                      <th scope="col">Quantity</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr *ngFor="let item of orderModel.listProducts;let i = index">
-                      <th scope="row">{{i + 1}}</th>
-                      <td><img [src]="item.main_image_url" class="rounded lg avatar" [alt]=""></td>
-                      <td>{{item.item_name}}</td>
-                      <td>{{item.standard_price}}</td>
-                      <td>{{item.quantity}}</td>
-                    </tr>
-                  </tbody>
-                </table>
-                
-              </div>
-            </div>
-            
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Total Price: </label>
+            <span class="ms-2">${{
+              orderModel.totalPrice
+              }}</span>
+          </div>
+
+          <div class="col-4 mb-2">
+            <label for="TextInput" class="form-label fw-bold label-custom">Note: </label>
+            <span class="ms-2">{{
+              orderModel.note
+              }}</span>
+          </div>
         </div>
-    </form>
+        <h3 class="form-label">List Products</h3>
+        <div class="row">
+          <table class="table">
+            <thead class="thead-dark">
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Image</th>
+                <th scope="col">Name Product</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let item of orderModel.listProducts;let i = index">
+                <th scope="row">{{i + 1}}</th>
+                <td><img [src]="item.main_image_url" class="rounded lg avatar" [alt]=""></td>
+                <td>{{item.item_name}}</td>
+                <td>{{item.standard_price}}</td>
+                <td>{{item.quantity}}</td>
+              </tr>
+            </tbody>
+          </table>
+
+        </div>
+      </div>
+
+    </div>
+  </form>
 </div>

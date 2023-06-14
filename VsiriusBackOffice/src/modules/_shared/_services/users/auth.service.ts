@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { environment } from 'src/environments/environment';
 import { NgxNotiflixService } from '../ngx-notiflix.service';
-import { TokenRequestParam, UserForLoginParam ,UserReturned} from '../../_models/authDto';
+import { TokenRequestParam, UserForLoginParam, UserReturned } from '../../_models/authDto';
 import { map, of, tap } from 'rxjs';
 
 @Injectable({
@@ -16,7 +16,7 @@ export class AuthService {
   jwtHelper = new JwtHelperService();
   currentUser: UserReturned = <UserReturned>{};
   decodedToken: any;
-
+  private checkExpirationTime: any;
   constructor(
     private http: HttpClient,
     private router: Router,
@@ -28,61 +28,32 @@ export class AuthService {
       tap(res => {
         if (res) {
           if (model.rememberMe) {
-            localStorage.setItem('REFRESH_TOKEN', res.refreshToken);
+            localStorage.setItem('REFRESH_TOKEN', res.token);
+            const expirationDate = new Date().getTime() + 3 * 24 * 60 * 60 * 1000; // thời gian hết hạn là sau 3 ngày
+            // const expirationDate = new Date().setMinutes(new Date().getMinutes() + 3);
+            localStorage.setItem('expirationTime', JSON.stringify(expirationDate));
           }
           localStorage.setItem('TOKEN', res.token);
           localStorage.setItem('USER', JSON.stringify(res.user));
-          // localStorage.setItem('AVATAR', JSON.stringify(res.avartar));
-          // localStorage.setItem('TYPE', JSON.stringify(res.type));
-          localStorage.setItem('ROLES',JSON.stringify(res.roles));
+          localStorage.setItem('ROLES', JSON.stringify(res.roles));
           localStorage.setItem('USERNAME', JSON.stringify(res.user.userName));
           this.decodedToken = this.jwtHelper.decodeToken(res.token);
           this.currentUser = res;
-          this.startRefreshTokenTimer();
         }
       }),
     );
   }
 
-  refreshToken() {
-    let refreshToken: string = localStorage.getItem('REFRESH_TOKEN');
-
-    if (refreshToken) {
-      let tokenRequest: TokenRequestParam = <TokenRequestParam>{ token: refreshToken };
-      return this.http.post<UserReturned>(`${this.baseUrl}RefreshToken`, tokenRequest)
-        .pipe(
-          map((res) => {
-            localStorage.setItem('TOKEN', res.token);
-            localStorage.setItem('USER', JSON.stringify(res.userId));
-            localStorage.setItem('AVATAR', JSON.stringify(res.avartar));
-            localStorage.setItem('TYPE', JSON.stringify(res.type));
-            localStorage.setItem('USERNAME', JSON.stringify(res.userName));
-            this.decodedToken = this.jwtHelper.decodeToken(res.token);
-            this.currentUser = res;
-            this.startRefreshTokenTimer();
-            return res;
-          }));
-    } else {
-      return of(null);
-    }
-  }
-
   logout() {
     this.notiflix.showLoading();
-    let tokenRequest: TokenRequestParam = { token: localStorage.getItem('REFRESH_TOKEN') } as TokenRequestParam;
-    this.http.post<any>(`${this.baseUrl}RevokeToken`, tokenRequest).subscribe();
     localStorage.removeItem('TOKEN');
     localStorage.removeItem('REFRESH_TOKEN');
     localStorage.removeItem('USER');
-    localStorage.removeItem('MENUS');
-    localStorage.removeItem('AVATAR');
-    localStorage.removeItem('TYPE');
+    localStorage.removeItem('ROLES');
     localStorage.removeItem('USERNAME');
-    localStorage.removeItem('CUSTOMERID');
-    this.stopRefreshTokenTimer();
-    this.decodedToken = null;
-    this.notiflix.hideLoading();
+    localStorage.removeItem('expirationTime');
     this.router.navigate(['/login']);
+    this.notiflix.hideLoading();
   }
 
   loggedIn() {
@@ -98,15 +69,17 @@ export class AuthService {
     return +localStorage.getItem('USER');
   }
 
-  private startRefreshTokenTimer() {
-    // Gán timeout để làm mới token trước 1 phút nó hết hạn
-    const expires = new Date(this.decodedToken.exp * 1000);
-    const timeout = expires.getTime() - Date.now() - (60 * 1000);
-    this.refreshTokenTimeout = setTimeout(() => this.refreshToken().subscribe(), timeout);
+  startCheckExpirationTime() {
+    this.checkExpirationTime = setInterval(() => {
+      // Lấy thời gian hiện tại và thời gian hết hạn của token từ localStorage
+      const currentTime = new Date().getTime();
+      const expirationTime = localStorage.getItem('expirationTime');
+      // Nếu thời gian hết hạn của token đã qua thì logout
+      if (expirationTime && currentTime > +expirationTime) {
+        this.logout();
+        // Dừng việc kiểm tra thời gian hết hạn của token
+        clearInterval(this.checkExpirationTime);
+      }
+    }, 30 * 60 * 1000); // Kiểm tra sau mỗi 30p
   }
-
-  private stopRefreshTokenTimer() {
-    clearTimeout(this.refreshTokenTimeout);
-  }
-
 }

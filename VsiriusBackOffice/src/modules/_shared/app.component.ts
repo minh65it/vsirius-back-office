@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { SignalRService } from './_services/signalR.service';
+import { AuthService } from './_services/users/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,9 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.serviceSignalR.startConnection();
+    this.serviceSignalR.startConnectionContact();
     this.serviceSignalR.addNotificationChangedListener();
+    this.serviceSignalR.addNotificationContactChangedListener()
   }
   title = 'VsiriusBackOffice';
 }
