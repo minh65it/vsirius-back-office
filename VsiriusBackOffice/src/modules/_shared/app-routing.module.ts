@@ -45,6 +45,10 @@ const routes: Routes = [
         path: 'contacts',
         loadChildren: () => import('../contacts/contacts.module').then((m) => m.ContactsModule),
       },
+      {
+        path: 'system-logging',
+        loadChildren: () => import('../system-logging/system-logging.module').then((m) => m.SystemLoggingModule),
+      },
     ]
   }
 ];
