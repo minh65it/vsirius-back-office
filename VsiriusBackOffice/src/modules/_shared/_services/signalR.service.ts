@@ -3,12 +3,14 @@ import { VsiriusOrder } from '../_models/vsiriusOrder';
 import { HttpClient } from '@angular/common/http';
 import * as signalR from '@microsoft/signalr';
 import { environment } from 'src/environments/environment';
+import { Contact } from '../_models/contact';
 @Injectable({
   providedIn: 'root'
 })
 export class SignalRService {
   private hubConnection: signalR.HubConnection;
   notificationChangedEmitter: EventEmitter<VsiriusOrder>;
+  notificationContactChangedEmitter: EventEmitter<Contact>;
 
   constructor(private http: HttpClient)
   {
@@ -34,6 +36,21 @@ export class SignalRService {
       .start()
       .catch((err: string) => console.log('Error while starting connection: ' + err));
   }
+
+  startConnectionContact()
+  {
+    this.hubConnection = new signalR.HubConnectionBuilder()
+      .withUrl(`${ environment.baseCSRURL }/contactHub`, {
+        skipNegotiation: true,
+        transport: signalR.HttpTransportType.WebSockets
+      })
+      .withAutomaticReconnect()
+      .build();
+
+    this.hubConnection
+      .start()
+      .catch((err: string) => console.log('Error while starting connection: ' + err));
+  }
   /**
    * vd
    */
@@ -45,4 +62,11 @@ export class SignalRService {
     });
   }
 
+
+  addNotificationContactChangedListener(){
+    this.hubConnection.on("ContactNotification", (data: Contact) =>
+    {
+      this.notificationContactChangedEmitter.emit(data);
+    });
+  }
 }

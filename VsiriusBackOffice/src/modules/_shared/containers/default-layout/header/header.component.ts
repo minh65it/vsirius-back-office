@@ -1,4 +1,5 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
+import { Router } from "@angular/router";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { InitJsUtility } from "src/modules/_shared/_helpers/int-js-utility";
 import { VsiriusOrder } from "src/modules/_shared/_models/vsiriusOrder";
@@ -24,12 +25,15 @@ export class HeaderComponent implements OnInit,OnDestroy {
     private serviceOrder: OrderService,
     private notiflix: NgxNotiflixService,
     private initJsUtility: InitJsUtility,
-    private serviceSignalR: SignalRService) { }
+    private serviceSignalR: SignalRService,
+    private router:Router) { }
 
   ngOnInit() {
     this.loadNotification();
     this.loadNotificationList();
+    this.loadContactNotification();
   }
+
   ngAfterViewInit(): void {
     this.initJsUtility.toggleChangeTheme();
   }
@@ -44,6 +48,14 @@ export class HeaderComponent implements OnInit,OnDestroy {
     })
   }
 
+  loadContactNotification(){
+    this.serviceSignalR.notificationContactChangedEmitter.subscribe(res => {
+      if (res != null) {
+        this.notiflix.info('You have a new contact letter');
+        this.changeAnimation();
+      }
+    })
+  }
   loadNotificationList() {
     this.serviceOrder.getTopOrder().subscribe({
       next: res => {
@@ -63,9 +75,10 @@ export class HeaderComponent implements OnInit,OnDestroy {
       this.isNewNotification = false;
     }, 4000);
   }
-  loadOrderByUser(email:string){
+
+  loadOrderByUser(orderId:string){
     this.notiflix.showLoading();
-    this.serviceOrder.getTopGetOrderByUserOrder(email).subscribe({
+    this.serviceOrder.getDetail(orderId).subscribe({
       next:res=>{
         this.orderModel = res;
         this.notiflix.hideLoading();
@@ -76,16 +89,31 @@ export class HeaderComponent implements OnInit,OnDestroy {
       }
     })
   }
+
   showNotification(item: VsiriusOrder)
   {
-    this.loadOrderByUser(item?.email);
+    this.loadOrderByUser(item?.orderId);
+    item.isRead = true;
+    this.update(item);
     this.modalEdit.show();
   }
+
+  update(item:VsiriusOrder){
+    this.serviceOrder.update(item).subscribe({
+      next:res=>{
+        if(res.success)
+        this.notiflix.success(`Seen order notice at ${new Date(item.createOrderDate).toLocaleString()}`);
+      }
+    })
+  }
+
   delete(item: VsiriusOrder)
   {
-    
+      this.listOrder = this.listOrder.filter(x=>x.orderId != item.orderId);
   }
+
   showAll(){
+    this.router.navigate(['orders']);
   }
   playNoti() {
     let audio = new Audio();

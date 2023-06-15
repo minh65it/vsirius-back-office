@@ -28,8 +28,8 @@ export class UserService {
     return this.http.post<OperationResult>(this.baseUrl + '/CreateUser', user);
   }
 
-  delete(id: string) {
-    return this.http.delete<OperationResult>(this.baseUrl + '/DeleteUser', { params: { id } });
+  delete(user:User) {
+    return this.http.put<OperationResult>(this.baseUrl + '/DeleteUser', user);
   }
 
   update(user:User){
@@ -38,21 +38,5 @@ export class UserService {
 
   getUserDetail(mail: string){
     return this.http.get<User>(this.baseUrl + '/getUserDetail', { params: { mail } });
-  }
-
-  getAllRole(){
-    return this.http.get<Role[]>(this.baseUrl + '/GetAllRole');
-  }
-
-  createRole(role:Role){
-    return this.http.post<OperationResult>(this.baseUrl + '/CreateRoles', role);
-  }
-
-  deleteRole(id: string) {
-    return this.http.delete<OperationResult>(this.baseUrl + '/DeleteRole', { params: { id } });
-  }
-
-  updateRole(role:Role){
-    return this.http.put<OperationResult>(this.baseUrl + '/UpdateRole', role);
   }
 }

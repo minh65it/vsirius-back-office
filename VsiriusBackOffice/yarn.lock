@@ -5202,9 +5202,9 @@ primeicons@5.0.0:
   integrity sha512-heygWF0X5HFI1otlZE62pp6ye7sZ8om78J9au2BRkg8O7Y8AHTZ9qKMRzchZUHLe8zUAvdi6hZzzm9XxgwIExw==
 
 primeng@16.0.0:
-  version "16.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/primeng/-/primeng-16.0.0-rc.2.tgz#3cc7adab145d0232532b5c186723d86adba11ade"
-  integrity sha512-jJr7cQ+s4fSlyuFK6sHIcRVnRvA1oEDzMW56ybm2tC2HXuozOkLF06eYqk7xwgbyD7vyyQIHjmPd8f2VcH89VA==
+  version "16.0.0"
+  resolved "https://registry.yarnpkg.com/primeng/-/primeng-16.0.0.tgz#39fa3aa49bfb02c892769722a2b8a4d33762780b"
+  integrity sha512-z8fSYc2rS7gkqHOz+hcIt2bTHFRa/COYIqnYBuit4ATwPC/O//lC/sVRTfFfisy2a2fDXnoOEsNzOK58ZJzB2A==
   dependencies:
     tslib "^2.3.0"
 

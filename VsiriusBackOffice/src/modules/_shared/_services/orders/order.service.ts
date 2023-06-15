@@ -28,4 +28,7 @@ export class OrderService {
   getTopGetOrderByUserOrder(email: string) {
     return this.http.get<VsiriusOrder>(this.baseUrl + '/GetOrderByUser', { params: { email } });
   }
+  getDetail(orderId: string) {
+    return this.http.get<VsiriusOrder>(this.baseUrl + '/GetDetail', { params: { orderId } });
+  }
 }

@@ -1,20 +1,18 @@
-const hostname: string = '42.113.172.2';
-// const port: string = ':7021';
-const port: string = ':8087';
-const ip: string = `${hostname}${port}`;
+const hostname: string = '192.168.1.25';
+const ipIdentity: string = `${hostname}${':8087'}`;
+const ipProduct: string = `${hostname}${':8082'}`;
+const ipOrder: string = `${hostname}${':8090'}`;
 export const environment = {
-  production: true,
-  apiCartURL: 'http://42.113.172.2:8088/api/',
-  allowedDomains: [ip],
-  disallowedRoutes: [`${ip}/api/Auth/Login`],
-  imageURL: 'http://42.113.172.2:8082',
-  apiProductURL: 'http://42.113.172.2:8082/api/',
-  apiURL: 'http://42.113.172.2:8087/api/',
-
-
-  apiOrderURL: 'http://42.113.172.2:8090/api/',
-  // apiOrderURL: `${ protocol }//${ ip }/api/`,
-  // apiURL: 'https://localhost:7014/api/',
-  // baseURL: 'https://localhost:7014/',
-  baseURL: 'http://42.113.172.2:8090',
+  production: false,
+  imageURL: 'http://192.168.1.25:8082',
+  apiProductURL: 'http://192.168.1.25:8082/api/',
+  apiURL: 'http://192.168.1.25:8087/api/',
+  apiOrderURL: 'http://192.168.1.25:8090/api/',
+  baseURL: 'http://192.168.1.25:8090',
+  apiCSRURL: 'http://192.168.1.25:8091/api/',
+  apiCartURL: 'http://192.168.1.25:8088/api/',
+  imageURLIdentity: 'http://192.168.1.25:8087/',
+  baseCSRURL: 'https://localhost:7152',
+  allowedDomains: [ipIdentity, ipProduct, ipOrder],
+  disallowedRoutes: [`${ipIdentity}/api/Auth/Login`],
 };

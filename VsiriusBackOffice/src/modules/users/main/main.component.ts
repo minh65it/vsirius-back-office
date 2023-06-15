@@ -35,7 +35,7 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.generateTable()
     this.loadData();
-    this.loadRole();
+    // this.loadRole();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -49,10 +49,11 @@ export class MainComponent implements OnInit {
 
   generateTable() {
     this.cols = [
+      { field: 'avatar', header: 'Avatar' },
       { field: 'email', header: 'Email' },
-      { field: 'userName', header: 'UserName' },
       { field: 'phoneNumber', header: 'Phone Number' },
-      { field: 'address', header: 'address' },
+      { field: 'address1', header: 'address 1' },
+      { field: 'address2', header: 'address 2' },
     ];
     this._selectedColumns = this.cols;
   }
@@ -81,10 +82,6 @@ export class MainComponent implements OnInit {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
-  goToAdd() {
-    this.router.navigate(['/users/create'])
-  }
-
   update(item: User) {
     this.service.paramEdit(item);
     this.router.navigate(['users/update']);
@@ -92,7 +89,7 @@ export class MainComponent implements OnInit {
   delete(item: User) {
     this.notiflix.confirm('Message', 'Do you want delete user?', () => {
       this.notiflix.showLoading();
-      this.service.delete(item.id).subscribe({
+      this.service.delete(item).subscribe({
         next: res => {
           res.success ? this.notiflix.success(res.message) :
             this.notiflix.error(res.message);
@@ -100,59 +97,10 @@ export class MainComponent implements OnInit {
           this.notiflix.hideLoading();
         },
         error: err => {
-          this.notiflix.error(err);
+          this.notiflix.error('Error System');
           this.notiflix.hideLoading();
         }
       })
-    })
-  }
-
-  loadRole() {
-    this.service.getAllRole().subscribe({
-      next: res => {
-        this.listRoles = res;
-      },
-      error: () => {
-
-      }
-    })
-  }
-  changeRole(e) {
-    this.userModel.roles = [];
-    this.userModel.roles = e;
-  }
-  loadDetailRole(mail){
-    this.service.getUserDetail(mail).subscribe({
-      next:res=>{
-        this.userModel.roles = res.roles 
-      }
-    })
-  }
-
-  role(item: User) {
-    this.loadDetailRole(item.email);
-    this.roleName=this.userModel.roles?.toString();
-    this.userModel = { ...item };
-    this.modalRole.show();
-  }
-
-  addRole() {
-    this.notiflix.showLoading();
-    this.service.update(this.userModel).subscribe({
-      next: res => {
-        if (res.success) {
-          this.notiflix.success(res.message);
-          this.modalRole?.hide();
-        }
-        else {
-          this.notiflix.error(res.message);
-        }
-        this.notiflix.hideLoading();
-      },
-      error: () => {
-        this.notiflix.error('Error System');
-        this.notiflix.hideLoading();
-      }
     })
   }
 }
