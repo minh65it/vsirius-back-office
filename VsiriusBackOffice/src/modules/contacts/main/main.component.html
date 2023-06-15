@@ -78,7 +78,7 @@
                         <tr>
                             <td class="text-center">
                                 <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)"
-                                    [tooltip]="item.status ? 'Read':'Unread'">
+                                    [tooltip]="item.status ? 'Read':'Unread'" [disabled]="item.status">
                                     <i [class]="!item.status ? 'fa fa-times text-danger':'fa fa-check text-success'" aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-link btn-sm text-muted" (click)="detail(item)"

@@ -14,4 +14,5 @@ export interface User {
     postCode:string;
     country:string;
     roles:string[];
+    isChecked:boolean
 }

@@ -17,7 +17,7 @@ export const environment = {
   // apiURL: 'https://localhost:7021/api/',
   apiOrderURL: 'http://192.168.1.25:8090/api/',
   apiCSRURL: 'https://localhost:7152/api/',
-  baseCSRURL: 'https://localhost:7152',
+  baseCSRURL: 'http://192.168.1.25:8091',
   // apiOrderURL: `https://localhost:7014/api/`,
   // apiURL: 'https://localhost:7014/api/',
   // baseURL: 'https://localhost:7014',

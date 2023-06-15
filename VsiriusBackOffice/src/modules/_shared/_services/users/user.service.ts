@@ -5,7 +5,6 @@ import { PaginationParam, PaginationResult } from '../../_helpers/pagination-uti
 import { User } from '../../_models/user';
 import { OperationResult } from '../../_helpers/operation-result';
 import { BehaviorSubject } from 'rxjs';
-import { Role } from '../../_models/role';
 
 @Injectable({
   providedIn: 'root'

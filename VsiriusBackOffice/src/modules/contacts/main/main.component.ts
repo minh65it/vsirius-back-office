@@ -2,8 +2,10 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { Contact } from 'src/modules/_shared/_models/contact';
+import { ContactSignalRService } from 'src/modules/_shared/_services/contact-signalR.service';
 import { ContactService } from 'src/modules/_shared/_services/contacts/contact.service';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { SignalRService } from 'src/modules/_shared/_services/signalR.service';
 
 @Component({
   selector: 'app-main',
@@ -28,10 +30,12 @@ export class MainComponent implements OnInit {
   @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
   user: any = JSON.parse(localStorage.getItem('USER'));
   constructor(private notiflix: NgxNotiflixService,
+    private serviceSignalR: ContactSignalRService,
     private service: ContactService) { }
   ngOnInit() {
     this.generateTable()
     this.loadData();
+    this.loadContactNotification();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -52,6 +56,13 @@ export class MainComponent implements OnInit {
       { field: 'createTime', header: 'Create Time' },
     ];
     this._selectedColumns = this.cols;
+  }
+  loadContactNotification(){
+    this.serviceSignalR.notificationContactChangedEmitter.subscribe(res => {
+      if (res != null) {
+        this.loadData();
+      }
+    })
   }
 
   loadData() {

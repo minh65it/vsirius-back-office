@@ -1,0 +1,136 @@
+<div class="card ">
+    <form #myForm="ngForm" autocomplete="off" (ngSubmit)="add()">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <label for="TextInput" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter Name... " name="name"
+                        [(ngModel)]="notificationModel.name" #name="ngModel" required />
+                    <div class="text-danger mt-2 d-flex align-items-center"
+                        *ngIf="name.invalid && (name.touched || name.dirty || checkValidated)">
+                        <span>*Please enter Name </span>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 mt-2">
+                    <label for="TextInput" class="form-label fw-bold">Content <span class="text-danger">*</span></label>
+                    <ckeditor [(ngModel)]="notificationModel.content" name="content" [config]="ckeConfig">
+                    </ckeditor>
+                </div>
+                <div class="col-md-12 mt-2">
+                    <div class="form-check form-switch ">
+                        <input class="form-check-input" type="checkbox" name="isAll" role="switch" id="isAll"
+                            [checked]="notificationModel.isAll" [(ngModel)]="notificationModel.isAll" />
+                        <label class="form-check-label fw-bold" for="isAll">Is All</label>
+                    </div>
+                </div>
+
+                <div class="col-md-12 mt-2" *ngIf="!notificationModel.isAll">
+                    <div class="card">
+                        <div class="card-header d-block">
+                            <form class="row g-3" (ngSubmit)="search()">
+                                <div class="col-lg-12 col-md-12 col-sm-12">
+                                    <div class="input-group">
+                                        <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off"
+                                            name="keyword1" placeholder="Enter search users...." />
+                                        <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+                                            <i class="fa fa-search"></i>
+                                            Search
+                                        </button>
+                                    </div>
+                                </div>
+                            </form>
+                            <div class="card-body table-scroll-view">
+                                <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listUsers" dataKey="id"
+                                    [rows]="listUsers.length">
+                                   
+                                    <!-- Header -->
+                                    <ng-template pTemplate="header" let-columns>
+                                        <tr>
+                                            <th class="text-center">
+                                                <input class="form-check-input" type="checkbox" name="isCheckAll" role="switch"
+                                                [checked]="isCheckAll" [(ngModel)]="isCheckAll" (ngModelChange)="changeCheckAll($event)" />
+                                            </th>
+                                            <!-- STT -->
+                                            <th class="text-center"> # </th>
+                                            <!-- COLUMNS -->
+                                            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
+                                                <div class="d-flex justify-content-evenly">
+                                                    <!-- Mặc định -->
+                                                    <span>&nbsp;</span>
+                                                    <!-- Label -->
+                                                    <span class="text-capitalize">
+                                                        {{item.header}}
+                                                        <!-- Sort -->
+                                                        <p-sortIcon [field]="item.field"></p-sortIcon>
+                                                    </span>
+                                                    <!-- tất cả trường không có filter -->
+                                                    <span>
+                                                        &nbsp;
+                                                    </span>
+                                                   
+                                                </div>
+                                            </th>
+                                        </tr>
+                                    </ng-template>
+                                    <!-- BODY -->
+                                    <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+                                        <tr>
+                                            <td class="text-center">
+                                                    <input class="form-check-input" type="checkbox" [name]="item.isChecked + rowIndex + 2" role="switch"
+                                                    [checked]="item.isChecked" [(ngModel)]="item.isChecked"  />
+                                            </td>
+                                            <!-- STT -->
+                                            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+                                            <!-- DATA -->
+                                            <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
+                                               
+                                                <ng-container *ngIf="col.field != 'avatar'">{{item[col.field]}}</ng-container>
+                                                <ng-container *ngIf="col.field == 'avatar' ">
+                                                    <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'" [name]="item[col.field] + rowIndex" class="rounded lg avatar" [alt]="item[col.field]">
+                                                </ng-container>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                    <!-- MESSAGE WHEN EMPTY -->
+                                    <ng-template pTemplate="emptymessage" *ngIf="listUsers.length == 0">
+                                        <tr>
+                                            <td colspan="100%" class="text-center font-weight-bold">
+                                                <span class="text-danger">No Data</span>
+                                            </td>
+                                        </tr>
+                                    </ng-template>
+                                </p-table>
+                            </div>
+                        </div>
+                        <!-- Pagination -->
+                        <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+                            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+                                previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" name="pagination" (pageChanged)="pageChanged($event)"
+                                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+                            </pagination>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 mt-2" *ngIf="notificationModel.isAll">
+                    <label for="TextInput" class="form-label fw-bold">Hide Time</label>
+                    <input type="text" [(ngModel)]="endDate" name="endDate" bsDatepicker
+                    [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
+                    placeholder="Choose notification hiding time" />
+                </div>
+            </div>
+        </div>
+        <div class="card-footer text-end mt-5">
+            <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+                <i class="fa fa-repeat" aria-hidden="true"></i>
+                Reset
+            </button>
+            <button class="btn btn-success me-2 lift rounded-2" type="submit">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+                <i class="fa fa-close"></i>
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>

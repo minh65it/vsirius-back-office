@@ -18,6 +18,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthService } from './_services/users/auth.service';
+import { ContactSignalRService } from './_services/contact-signalR.service';
 export function tokenGetter()
 {
   return localStorage.getItem('TOKEN');
@@ -55,6 +56,13 @@ export function tokenGetter()
       useFactory: (authService:AuthService)=>()=>authService.startCheckExpirationTime(),
       multi: true,
       deps: [AuthService]
+    },
+     //  Khởi động SignalR
+     {
+      provide: APP_INITIALIZER,
+      useFactory: (contactSignalrService: ContactSignalRService) => () => contactSignalrService.startConnectionContact(),
+      deps: [ContactSignalRService],
+      multi: true,
     },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
   ],

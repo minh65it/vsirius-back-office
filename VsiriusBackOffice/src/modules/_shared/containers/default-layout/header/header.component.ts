@@ -3,6 +3,7 @@ import { Router } from "@angular/router";
 import { ModalDirective } from "ngx-bootstrap/modal";
 import { InitJsUtility } from "src/modules/_shared/_helpers/int-js-utility";
 import { VsiriusOrder } from "src/modules/_shared/_models/vsiriusOrder";
+import { ContactSignalRService } from "src/modules/_shared/_services/contact-signalR.service";
 import { NgxNotiflixService } from "src/modules/_shared/_services/ngx-notiflix.service";
 import { OrderService } from "src/modules/_shared/_services/orders/order.service";
 import { SignalRService } from "src/modules/_shared/_services/signalR.service";
@@ -26,12 +27,13 @@ export class HeaderComponent implements OnInit,OnDestroy {
     private notiflix: NgxNotiflixService,
     private initJsUtility: InitJsUtility,
     private serviceSignalR: SignalRService,
+    private contactServiceSignalR:ContactSignalRService,
     private router:Router) { }
 
   ngOnInit() {
+    this.loadContactNotification();
     this.loadNotification();
     this.loadNotificationList();
-    this.loadContactNotification();
   }
 
   ngAfterViewInit(): void {
@@ -49,13 +51,14 @@ export class HeaderComponent implements OnInit,OnDestroy {
   }
 
   loadContactNotification(){
-    this.serviceSignalR.notificationContactChangedEmitter.subscribe(res => {
+    this.contactServiceSignalR.notificationContactChangedEmitter.subscribe(res => {
       if (res != null) {
         this.notiflix.info('You have a new contact letter');
         this.changeAnimation();
       }
     })
   }
+  
   loadNotificationList() {
     this.serviceOrder.getTopOrder().subscribe({
       next: res => {
