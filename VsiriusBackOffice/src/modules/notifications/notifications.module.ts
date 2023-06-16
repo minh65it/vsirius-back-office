@@ -17,7 +17,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { TooltipModule } from 'ngx-bootstrap/tooltip';
 import { CKEditorModule } from 'ng2-ckeditor';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
-
+import { DragDropModule } from 'primeng/dragdrop';
 @NgModule({
   declarations: [
     MainComponent,
@@ -38,6 +38,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
     NgSelectModule,
     CKEditorModule,
     ModalModule.forRoot(),
+    DragDropModule,
     BsDatepickerModule.forRoot(),
   ]
 })

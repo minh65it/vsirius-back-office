@@ -7,6 +7,7 @@ import { NgForm } from '@angular/forms';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { User } from 'src/modules/_shared/_models/user';
 import { UserService } from 'src/modules/_shared/_services/users/user.service';
+import { environment } from 'src/environments/environment';
 @Component({
   selector: 'app-create',
   templateUrl: './create.component.html',
@@ -17,7 +18,7 @@ export class CreateComponent {
 
   checkValidated: boolean = false;
   notificationModel: Notification = {
-    isAll : true
+    isAll: true
   } as Notification;
   ckeConfig = {
     allowedContent: false,
@@ -27,6 +28,7 @@ export class CreateComponent {
     language: 'en',
   }
   listUsers: User[] = [];
+  listUsersChoose: User[] = [];
   _selectedColumns: any[];
   activityValues: number[] = [0, 100];
   customFilter = 'filter-custom';
@@ -39,11 +41,13 @@ export class CreateComponent {
   keyword: string = '';
   userModel: User = {
     roles: null,
-    isChecked : false
+    isChecked: false
   } as User;
   roleName: string = '';
-  isCheckAll:boolean = false;
+  isCheckAll: boolean = false;
   user: any = JSON.parse(localStorage.getItem('USER'));
+  imageURL : string = environment.baseCSRURL;
+  image : string = '';
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
     private userService: UserService,
@@ -52,7 +56,6 @@ export class CreateComponent {
   ngOnInit() {
     this.generateTable()
     this.loadData();
-    // this.loadRole();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -78,7 +81,16 @@ export class CreateComponent {
     this.userService.getAllUsers(this.pagination, this.keyword).subscribe({
       next: res => {
         this.listUsers = res.result;
-        this.listUsers.map(x=>x.isChecked = false);
+        this.listUsers.map(x => x.isChecked = false);
+        this.listUsers.forEach(x=>{
+          if(x.avatar != null){
+            this.image = this.imageURL + '/' + x.avatar;
+            console.log(this.image);
+          }
+          else{
+            this.image = 'assets/images/NO-PHOTO_165x165.png'
+          }
+        })
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
@@ -98,18 +110,33 @@ export class CreateComponent {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
-  changeCheckAll(e){
-    this.isCheckAll = this.listUsers.every(x=>x.isChecked);
-    e ? this.listUsers.map(x=>x.isChecked = true) :  this.listUsers.map(x=>x.isChecked = false);
+  changeCheckAll(e) {
+    this.isCheckAll = this.listUsers.every(x => x.isChecked = true);
+    e ? this.listUsers.map(x => x.isChecked = true) : this.listUsers.map(x => x.isChecked = false);
+  }
+
+  changeCheckItem(e) {
+    e.isChecked = true;
+    const index = this.listUsers.findIndex(x => x.id == e.id);
+    console.log();
+    this.listUsersChoose.includes(this.listUsers[index]) ?
+      this.listUsersChoose = this.listUsersChoose
+      :
+      this.listUsersChoose.push(this.listUsers[index]);
+  }
+  
+  deleteSendUser(user){
+    this.listUsersChoose = this.listUsersChoose.filter(x=>x.id != user.id);
+    this.listUsers.filter(x=>x.id == user.id).map(x=>x.isChecked = false);
   }
 
   add() {
-    if(this.notificationModel.isAll){
+    if (this.notificationModel.isAll) {
       this.notificationModel.endDate = this.endDate;
       this.notificationModel.users = [];
     }
-    else{
-      this.notificationModel.users = this.listUsers.filter(x=>x.isChecked).map(x=>x.id);
+    else {
+      this.notificationModel.users = this.listUsersChoose.map(x => x.id);
     }
     this.notificationModel.createBy = this.user.id;
     if (this.myForm.valid) {
