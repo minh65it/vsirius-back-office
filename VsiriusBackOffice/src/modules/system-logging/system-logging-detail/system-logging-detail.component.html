@@ -1,0 +1,57 @@
+<div class="modal-header">
+  <h4 class="modal-title pull-left">System logging detail</h4>
+  <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="hideModal()">
+    <span aria-hidden="true" class="visually-hidden">&times;</span>
+  </button>
+</div>
+<div class="modal-body">
+  <div class="row">
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="projectName">Project Name</label>
+      <div class="input-group">
+        <p class="form-control input-detail">{{dataDetail.projectName}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="controllerName">Controller Name</label>
+      <div class="input-group">
+        <p class="form-control input-detail">{{dataDetail.controllerName}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="method">Method</label>
+      <div class="input-group">
+        <p class="form-control input-detail">
+          {{dataDetail.method}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="timeStamp">Time Stamp</label>
+      <div class="input-group">
+        <p class="form-control input-detail">{{dataDetail.timeStamp | date : 'MM/dd/YY HH:mm'}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="level">Level</label>
+      <div class="input-group">
+        <p class="form-control input-detail">{{dataDetail.level}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-6 col-md-6 col-sm-12">
+      <label for="message">Message</label>
+      <div class="input-group">
+        <p class="form-control input-detail">{{dataDetail.message}}</p>
+      </div>
+    </div>
+    <div class="form-group col-lg-12 col-md-12 col-sm-12">
+      <label for="exception">Exception</label>
+      <div class="input-group">
+        <textarea class="form-control input-detail" rows="5" style="overflow: auto;">{{dataDetail.exception}}</textarea>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div class="modal-footer">
+  <button type="button" class="btn btn-default" (click)="hideModal()">bỏ qua</button>
+</div>
