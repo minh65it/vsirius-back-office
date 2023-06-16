@@ -13,8 +13,8 @@ export const environment = {
   apiCSRURL: 'http://192.168.1.25:8091/api/',
   apiCartURL: 'http://192.168.1.25:8088/api/',
   apiSystemURL: 'http://192.168.1.25:8086/api/',
-  baseCSRURL: 'https://localhost:7152',
   baseURL: 'http://192.168.1.25:8090',
+  baseCSRURL: 'http://192.168.1.25:8091',
   allowedDomains: [ipIdentity, ipProduct, ipOrder],
   disallowedRoutes: [`${ipIdentity}/api/Auth/Login`],
 };

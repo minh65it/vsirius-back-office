@@ -13,9 +13,7 @@ export class AppComponent implements OnInit {
   
   ngOnInit() {
     this.serviceSignalR.startConnection();
-    this.serviceSignalR.startConnectionContact();
     this.serviceSignalR.addNotificationChangedListener();
-    this.serviceSignalR.addNotificationContactChangedListener()
   }
   title = 'VsiriusBackOffice';
 }

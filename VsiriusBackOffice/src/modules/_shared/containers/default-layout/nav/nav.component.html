@@ -35,13 +35,13 @@
             </li>
             <li class="collapsed" *ngIf="isAdmin">
               <a class="m-link cursor-pointer" [routerLink]="'/users'">
-                <i class="fa fa-user"></i>
+                <i class="fa fa-users"></i>
                 <span class="ms-2">Users</span>
               </a>
             </li>
             <li class="collapsed" *ngIf="isAdmin">
               <a class="m-link cursor-pointer" [routerLink]="'/employees'">
-                <i class="fa fa-users"></i>
+                <i class="fa fa-user"></i>
                 <span class="ms-2">Employees</span>
               </a>
             </li>
@@ -59,7 +59,7 @@
             </li>
             <li class="collapsed" *ngIf="isAdmin">
               <a class="m-link cursor-pointer" [routerLink]="'/contacts'">
-                <i class="fa fa-envelope-o"></i>
+                <i class="fa fa-envelope"></i>
                 <span class="ms-2">Contacts</span>
               </a>
             </li>
@@ -73,6 +73,12 @@
               <a class="m-link cursor-pointer" [routerLink]="'/system-logging'">
                 <i class="fa fa-gear"></i>
                 <span class="ms-2">System Logging</span>
+              </a>
+            </li>
+            <li class="collapsed">
+              <a class="m-link cursor-pointer" [routerLink]="'/notifications'">
+                <i class="fa fa-bell"></i>
+                <span class="ms-2">Notifications</span>
               </a>
             </li>
             <!-- Menu level 1 -->

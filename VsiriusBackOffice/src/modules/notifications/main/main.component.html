@@ -1,0 +1,124 @@
+<div class="col-md-12">
+    <div class="card">
+        <div class="card-header d-block">
+            <form class="row g-3" (ngSubmit)="search()">
+                <div class="col-lg-12 col-md-12 col-sm-12">
+                    <div class="input-group">
+                        <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off"
+                            name="keyword" placeholder="Enter search keywords...." />
+                        <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                        <button class="btn btn-primary lift me-2 rounded-2" (click)="goToAdd()" type="button">
+                            <i class="fa fa-plus"></i>
+                            Add new
+                          </button>
+                    </div>
+                </div>
+
+            </form>
+            <div class="card-body table-scroll-view">
+                <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listNotifications" dataKey="id"
+                    [rows]="listNotifications.length">
+                   
+                    <!-- Header -->
+                    <ng-template pTemplate="header" let-columns>
+                        <tr>
+                            <th class="text-center"></th>
+                            <!-- STT -->
+                            <th class="text-center"> # </th>
+                            <!-- COLUMNS -->
+                            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
+                                <div class="d-flex justify-content-evenly">
+                                    <!-- Mặc định -->
+                                    <span>&nbsp;</span>
+                                    <!-- Label -->
+                                    <span class="text-capitalize">
+                                        {{item.header}}
+                                        <!-- Sort -->
+                                        <p-sortIcon [field]="item.field"></p-sortIcon>
+                                    </span>
+                                    <!-- tất cả trường không có filter -->
+                                    <span>
+                                        &nbsp;
+                                    </span>
+                                    <!-- Filter by Text -->
+                                    <p-columnFilter type="text"
+                                        *ngIf="item.field == 'title' ||  item.field == 'floor_Title' "
+                                        [field]="item.field" display="menu" [operator]="'or'" [showOperator]="false"
+                                        [showAddButton]="false" class="p-element float-end">
+                                        <div class="p-column-filter  p-column-filter-menu">
+                                            <button type="button" aria-haspopup="true"
+                                                class="p-column-filter-menu-button p-link" aria-expanded="false">
+                                                <span class="pi pi-filter-icon pi-filter "></span>
+                                            </button>
+                                        </div>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomType_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                    <p-columnFilter *ngIf="item.field == 'roomStatus_Title'" [field]="item.field"
+                                        [showOperator]="false" matchMode="equals" display="menu">
+                                        <ng-template pTemplate="filter" let-value let-filter="filterCallback">
+                                            <ng-template let-option pTemplate="item">
+                                                <span
+                                                    [class]="'customer-badge status-' + option.value">{{option.label}}</span>
+                                            </ng-template>
+                                        </ng-template>
+                                    </p-columnFilter>
+                                </div>
+                            </th>
+                        </tr>
+                    </ng-template>
+                    <!-- BODY -->
+                    <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+                        <tr>
+                            <td class="text-center">
+                                <!-- <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)">
+                                    <i class="fa fa-pencil text-warning"></i>
+                                </button> -->
+                                <button type="button" class="btn btn-link btn-sm text-muted" tooltip="Delete"
+                                    (click)="delete(item)">
+                                    <i class="fa fa-trash text-danger"></i>
+                                </button>
+                            </td>
+                            <!-- STT -->
+                            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+                            <!-- DATA -->
+                            <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
+                                <ng-container *ngIf="col.field != 'createTime' && col.field != 'content' ">{{item[col.field]}}</ng-container>
+                                <ng-container *ngIf="col.field == 'content' ">{{item[col.field].split('').length > 15 ? item[col.field].split('').splice(0,9).join('') +
+                                    '........' : item[col.field]}}</ng-container>
+                                <ng-container *ngIf="col.field == 'createTime' ">
+                                    {{item[col.field] | date:"dd-MM-YYYY HH:mm"}}
+                                </ng-container>
+                            </td>
+                        </tr>
+                    </ng-template>
+                    <!-- MESSAGE WHEN EMPTY -->
+                    <ng-template pTemplate="emptymessage" *ngIf="listNotifications.length == 0">
+                        <tr>
+                            <td colspan="100%" class="text-center font-weight-bold">
+                                <span class="text-danger">No Data</span>
+                            </td>
+                        </tr>
+                    </ng-template>
+                </p-table>
+            </div>
+        </div>
+        <!-- Pagination -->
+        <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+            <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+                previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+                nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+            </pagination>
+        </div>
+    </div>
+</div>

@@ -49,6 +49,10 @@ const routes: Routes = [
         path: 'system-logging',
         loadChildren: () => import('../system-logging/system-logging.module').then((m) => m.SystemLoggingModule),
       },
+      {
+        path: 'notifications',
+        loadChildren: () => import('../notifications/notifications.module').then((m) => m.NotificationsModule),
+      },
     ]
   }
 ];
