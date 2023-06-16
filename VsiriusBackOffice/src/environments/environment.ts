@@ -16,7 +16,7 @@ export const environment = {
   imageURLIdentity: 'http://192.168.1.25:8087/',
   // apiURL: 'https://localhost:7021/api/',
   apiOrderURL: 'http://192.168.1.25:8090/api/',
-  apiCSRURL: 'https://localhost:7152/api/',
+  apiCSRURL: 'http://192.168.1.25:8091/api/',
   baseCSRURL: 'http://192.168.1.25:8091',
   // apiOrderURL: `https://localhost:7014/api/`,
   // apiURL: 'https://localhost:7014/api/',
