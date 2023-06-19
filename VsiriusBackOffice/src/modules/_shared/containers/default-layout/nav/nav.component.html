@@ -81,6 +81,12 @@
                 <span class="ms-2">Notifications</span>
               </a>
             </li>
+            <li class="collapsed" *ngIf="isAdmin">
+              <a class="m-link cursor-pointer" [routerLink]="'/drivenHtmlPagess'">
+                <i class="fa fa-columns"></i>
+                <span class="ms-2">Driven Html Pages</span>
+              </a>
+            </li>
             <!-- Menu level 1 -->
             <!-- <li class="collapsed">
           <a class="m-link" data-bs-toggle="collapse" href="#">

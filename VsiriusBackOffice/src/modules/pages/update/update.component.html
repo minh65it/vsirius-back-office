@@ -1,0 +1,48 @@
+<div class="card ">
+    <form #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+        <div class="card-body ">
+            <div class="row">
+                <div class="col-xl-12 col-md-12">
+                    <label for="TextInput" class="form-label fw-bold">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter Name... " name="name"
+                        [(ngModel)]="DrivenHtmlPagesModel.title" #name="ngModel" required />
+                    <div class="text-danger mt-2 d-flex align-items-center"
+                        *ngIf="name.invalid && (name.touched || name.dirty || checkValidated)">
+                        <span>*Please enter Name </span>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 mt-2">
+                    <label for="TextInput" class="form-label fw-bold">URL <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" placeholder="Enter URL... " name="url"
+                        [(ngModel)]="DrivenHtmlPagesModel.url" #url="ngModel" required />
+                    <div class="text-danger mt-2 d-flex align-items-center"
+                        *ngIf="url.invalid && (url.touched || url.dirty || checkValidated)">
+                        <span>*Please enter URL </span>
+                    </div>
+                </div>
+                <div class="col-xl-12 col-md-12 mt-2">
+                    <label for="TextInput" class="form-label fw-bold">Content <span class="text-danger">*</span></label>
+                    <ckeditor [(ngModel)]="DrivenHtmlPagesModel.description" name="description" [config]="ckeConfig">
+                    </ckeditor>
+                </div>
+                <div class="col-md-12 mt-2">
+                    <div class="form-check form-switch ">
+                        <input class="form-check-input" type="checkbox" name="isShow" role="switch" id="isShow"
+                            [checked]="DrivenHtmlPagesModel.isShow" [(ngModel)]="DrivenHtmlPagesModel.isShow" />
+                        <label class="form-check-label fw-bold" for="isShow">Is Show</label>
+                    </div>
+                </div>
+               
+            </div>
+        </div>
+        <div class="card-footer text-end mt-5">
+            <button class="btn btn-success me-2 lift rounded-2" type="submit">
+                <i class="fa fa-save"></i> Save
+            </button>
+            <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+                <i class="fa fa-close"></i>
+                Cancel
+            </button>
+        </div>
+    </form>
+</div>
