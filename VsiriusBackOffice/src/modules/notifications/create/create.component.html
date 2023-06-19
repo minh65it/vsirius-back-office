@@ -13,8 +13,9 @@
                 </div>
                 <div class="col-xl-12 col-md-12 mt-2">
                     <label for="TextInput" class="form-label fw-bold">Content <span class="text-danger">*</span></label>
-                    <ckeditor [(ngModel)]="notificationModel.content" name="content" [config]="ckeConfig">
-                    </ckeditor>
+                    <!-- <ckeditor [(ngModel)]="notificationModel.content" name="content" [config]="ckeConfig">
+                    </ckeditor> -->
+                    <textarea class="form-control" cols="200" [(ngModel)]="notificationModel.content" name="content"></textarea>
                 </div>
                 <div class="col-md-12 mt-2">
                     <div class="form-check form-switch ">

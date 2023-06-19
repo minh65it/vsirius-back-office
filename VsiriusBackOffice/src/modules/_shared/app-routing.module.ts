@@ -45,6 +45,10 @@ const routes: Routes = [
         path:'notifications',
         loadChildren: () => import('../notifications/notifications.module').then((m) => m.NotificationsModule),
       },
+      {
+        path:'drivenHtmlPagess',
+        loadChildren: () => import('../pages/pages.module').then((m) => m.PagesModule),
+      },
     ]
   }
 ];

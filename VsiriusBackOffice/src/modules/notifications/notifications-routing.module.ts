@@ -18,13 +18,6 @@ const routes: Routes = [
     data: {
       breadcrumb: 'Create Notification',
     },
-  },
-  {
-    path:'update',
-    component:UpdateComponent,
-    data: {
-      breadcrumb: 'Update Notification',
-    },
   }
 ];
 
