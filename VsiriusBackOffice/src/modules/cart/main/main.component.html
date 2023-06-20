@@ -31,9 +31,14 @@
             <tr>
               <td class="text-center">
                 <button type="button" class="btn btn-link btn-sm text-muted"
-                  (click)="detail(cart?.cartId, cart?.status)" tooltip="Chi tiết" data-bs-toggle="modal">
+                  *ngIf="cart?.status === false; else ordered" (click)="detail(cart?.cartId, cart?.status)"
+                  tooltip="Chi tiết" data-bs-toggle="modal">
                   <i class="fa fa-info text-success"></i>
                 </button>
+                <ng-template #ordered>
+                  <p>Ordered</p>
+                </ng-template>
+
               </td>
               <td>{{ cart.email | anonymousUsers }}</td>
               <td>{{ cart.quantityItem }}</td>

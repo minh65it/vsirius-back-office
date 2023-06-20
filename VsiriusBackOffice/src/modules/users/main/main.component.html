@@ -10,7 +10,7 @@
                             <i class="fa fa-search"></i>
                             Search
                         </button>
-                     
+
                     </div>
                 </div>
 
@@ -18,7 +18,7 @@
             <div class="card-body table-scroll-view">
                 <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listUsers" dataKey="id"
                     [rows]="listUsers.length">
-                   
+
                     <!-- Header -->
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -93,7 +93,8 @@
                             <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
                                 <ng-container *ngIf="col.field != 'avatar' ">{{item[col.field]}}</ng-container>
                                 <ng-container *ngIf="col.field == 'avatar' ">
-                                    <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'" class="rounded lg avatar" [alt]="item[col.field]">
+                                    <img [src]="item[col.field] != null ? urlAvatar+item[col.field] : 'assets/images/NO-PHOTO_165x165.png'"
+                                        class="rounded lg avatar" [alt]="urlAvatar+item[col.field]">
                                 </ng-container>
                             </td>
                         </tr>

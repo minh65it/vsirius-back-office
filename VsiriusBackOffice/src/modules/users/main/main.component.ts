@@ -1,6 +1,7 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
+import { environment } from 'src/environments/environment';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { Role } from 'src/modules/_shared/_models/role';
 import { User } from 'src/modules/_shared/_models/user';
@@ -13,6 +14,7 @@ import { UserService } from 'src/modules/_shared/_services/users/user.service';
   styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
+  urlAvatar = environment.imageURLIdentity;
   listUsers: User[] = [];
   _selectedColumns: any[];
   activityValues: number[] = [0, 100];
@@ -27,7 +29,7 @@ export class MainComponent implements OnInit {
   userModel: User = {
     roles: null
   } as User;
-  roleName:string = '';
+  roleName: string = '';
   @ViewChild('modalRole', { static: false }) modalRole?: ModalDirective;
   constructor(private notiflix: NgxNotiflixService,
     private service: UserService,
