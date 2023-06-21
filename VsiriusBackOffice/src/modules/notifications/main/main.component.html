@@ -92,10 +92,10 @@
                             <!-- STT -->
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
-                            <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
-                                <ng-container *ngIf="col.field != 'createTime' && col.field != 'content' ">{{item[col.field]}}</ng-container>
-                                <ng-container *ngIf="col.field == 'content' ">{{item[col.field].split('').length > 15 ? item[col.field].split('').splice(0,9).join('') +
-                                    '........' : item[col.field]}}</ng-container>
+                            <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :'' || col.field == 'content' ? 'td-custom' :''">
+                                <ng-container *ngIf="col.field != 'createTime' ">{{item[col.field]}}</ng-container>
+                                <!-- <ng-container *ngIf="col.field == 'content' ">{{item[col.field].split('').length > 15 ? item[col.field].split('').splice(0,9).join('') +
+                                    '........' : item[col.field]}}</ng-container> -->
                                 <ng-container *ngIf="col.field == 'createTime' ">
                                     {{item[col.field] | date:"dd-MM-YYYY HH:mm"}}
                                 </ng-container>

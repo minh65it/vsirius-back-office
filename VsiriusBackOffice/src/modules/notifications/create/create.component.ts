@@ -38,6 +38,7 @@ export class CreateComponent {
     pageSize: 10,
   };
   endDate: Date = null;
+  startDate: Date = null;
   keyword: string = '';
   userModel: User = {
     roles: null,
@@ -46,8 +47,8 @@ export class CreateComponent {
   roleName: string = '';
   isCheckAll: boolean = false;
   user: any = JSON.parse(localStorage.getItem('USER'));
-  imageURL : string = environment.baseCSRURL;
-  image : string = '';
+  imageURL: string = environment.baseCSRURL;
+  image: string = '';
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
     private userService: UserService,
@@ -82,12 +83,12 @@ export class CreateComponent {
       next: res => {
         this.listUsers = res.result;
         this.listUsers.map(x => x.isChecked = false);
-        this.listUsers.forEach(x=>{
-          if(x.avatar != null){
+        this.listUsers.forEach(x => {
+          if (x.avatar != null) {
             this.image = this.imageURL + '/' + x.avatar;
             console.log(this.image);
           }
-          else{
+          else {
             this.image = 'assets/images/NO-PHOTO_165x165.png'
           }
         })
@@ -124,14 +125,15 @@ export class CreateComponent {
       :
       this.listUsersChoose.push(this.listUsers[index]);
   }
-  
-  deleteSendUser(user){
-    this.listUsersChoose = this.listUsersChoose.filter(x=>x.id != user.id);
-    this.listUsers.filter(x=>x.id == user.id).map(x=>x.isChecked = false);
+
+  deleteSendUser(user) {
+    this.listUsersChoose = this.listUsersChoose.filter(x => x.id != user.id);
+    this.listUsers.filter(x => x.id == user.id).map(x => x.isChecked = false);
   }
 
   add() {
     if (this.notificationModel.isAll) {
+      this.notificationModel.startDate = this.startDate;
       this.notificationModel.endDate = this.endDate;
       this.notificationModel.users = [];
     }
@@ -144,7 +146,12 @@ export class CreateComponent {
       this.notiflix.showLoading();
       this.service.create(this.notificationModel).subscribe({
         next: res => {
-          res.success ? this.notiflix.success(res.message) : this.notiflix.error(res.message);
+          if (!res.success) {
+            this.notiflix.error(res.message);
+            this.notiflix.hideLoading();
+            return;
+          }
+          this.notiflix.success(res.message)
           this.cancel();
           this.notiflix.hideLoading();
         },

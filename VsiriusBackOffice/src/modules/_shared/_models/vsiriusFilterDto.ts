@@ -1,5 +1,5 @@
 export interface VsiriusFilterDto {
-    fifterId: number;
+    filterId: number;
     fieldName: string | null;
     labelName: string | null;
     value: string | null;

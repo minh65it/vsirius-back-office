@@ -158,10 +158,16 @@
 
                 </div>
                 <div class="col-md-4 mt-2" *ngIf="notificationModel.isAll">
-                    <label for="TextInput" class="form-label fw-bold">Hide Time</label>
+                    <label for="TextInput" class="form-label fw-bold">Show From Date</label>
+                    <input type="text" [(ngModel)]="startDate" name="endDate" bsDatepicker
+                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
+                        placeholder="Choose notification start date" />
+                </div>
+                <div class="col-md-4 mt-2" *ngIf="notificationModel.isAll">
+                    <label for="TextInput" class="form-label fw-bold">Show To Date</label>
                     <input type="text" [(ngModel)]="endDate" name="endDate" bsDatepicker
                         [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
-                        placeholder="Choose notification hiding time" />
+                        placeholder="Choose notification end date" />
                 </div>
             </div>
         </div>

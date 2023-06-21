@@ -8,6 +8,7 @@ export interface Notification {
   createTime: string;
   isAll: boolean;
   isView: boolean;
+  startDate: string | Date;
   endDate: string | Date;
   users: string[];
 }
