@@ -156,7 +156,7 @@ export class MainComponent implements OnInit {
   delete(model: VsiriusFilterDto) {
     this.notiflix.confirm('Message', 'Do you want delete filter?', () => {
       this.notiflix.showLoading();
-      this.service.delete(model.fifterId).subscribe({
+      this.service.delete(model.filterId).subscribe({
         next: res => {
           res.success ? this.notiflix.success(res.message) :
             this.notiflix.error(res.message);

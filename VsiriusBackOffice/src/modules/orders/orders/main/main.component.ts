@@ -1,4 +1,5 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
+import { Router } from '@angular/router';
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { KeyValuePair } from 'src/modules/_shared/_helpers/key-value-pair';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
@@ -45,6 +46,7 @@ export class MainComponent implements OnInit {
   chooseValueStatus: any;
   constructor(private notiflix: NgxNotiflixService,
     private service: OrderService,
+    private router:Router,
     private statusService: OrderStatusService,
     private serviceSignalR: SignalRService) { }
   ngOnInit() {
@@ -64,15 +66,13 @@ export class MainComponent implements OnInit {
 
   generateTable() {
     this.cols = [
-      { field: 'cartId', header: 'cart code' },
-      { field: 'totalQuantityItem', header: 'total Quantity' },
-      { field: 'totalPrice', header: 'total price' },
       { field: 'firstName', header: 'firstName' },
       { field: 'lastName', header: 'lastName' },
       { field: 'email', header: 'email' },
-      { field: 'birthDay', header: 'birthDay' },
       { field: 'address1', header: 'address1' },
       { field: 'city', header: 'city' },
+      { field: 'totalQuantityItem', header: 'total Quantity' },
+      { field: 'totalPrice', header: 'total price' },
       { field: 'statusName', header: 'status' },
       { field: 'createOrderDate', header: 'Order Date' },
     ];
@@ -157,5 +157,8 @@ export class MainComponent implements OnInit {
         this.notiflix.hideLoading();
       }
     })
+  }
+  goToOrderStatus(){
+    this.router.navigate(['order-status'])
   }
 }
