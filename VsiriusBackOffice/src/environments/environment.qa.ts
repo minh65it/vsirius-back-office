@@ -2,7 +2,7 @@ const hostname: string = '192.168.1.186';
 const ipIdentity: string = `${hostname}${':8087'}`;
 const ipProduct: string = `${hostname}${':8082'}`;
 const ipOrder: string = `${hostname}${':8090'}`;
-
+const ipContact: string = `${hostname}${':8091'}`;
 export const environment = {
   production: true,
   imageURL: 'http://192.168.1.186:8082',
@@ -15,6 +15,6 @@ export const environment = {
   apiCartURL: 'http://192.168.1.186:8088/api/',
   apiSystemURL: 'http://192.168.1.186:8086/api/',
   baseURL: 'http://192.168.1.186:8090',
-  allowedDomains: [ipIdentity, ipProduct, ipOrder],
+  allowedDomains: [ipIdentity, ipProduct, ipOrder, ipContact],
   disallowedRoutes: [`${ipIdentity}/api/Auth/Login`],
 };
