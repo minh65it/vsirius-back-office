@@ -48,14 +48,11 @@ export class UpdateComponent implements OnInit {
       reader.onload = (e) => {
         // called once readAsDataURL is completed
         this.image = e.target.result.toString();
-        const base64 = reader.result.toString().split(',')[1];
-        this.userModel.avatar = base64;
+        this.userModel.avatar = this.image;
       };
     }
   
   save() {
-    console.log(this.userModel.avatar);
-    
     const passwordRegex = /^[a-zA-Z0-9]+$/;
     if (!passwordRegex.test(this.userModel.password)) {
       this.checkValidated = true;

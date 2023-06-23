@@ -34,8 +34,9 @@ export class CreateComponent implements OnInit {
       reader.onload = (e) => {
         // called once readAsDataURL is completed
         this.image = e.target.result.toString();
+        this.userModel.avatar = this.image;
       };
-    }
+    } 
   }
   save() {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;

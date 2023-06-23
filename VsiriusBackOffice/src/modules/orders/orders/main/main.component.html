@@ -2,6 +2,12 @@
     <div class="card">
         <div class="card-header d-block">
             <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+                <div class="col-12">
+                    <button class="btn btn-primary float-end lift me-2 rounded-2" (click)="goToOrderStatus()" type="button">
+                        <i class="fa fa-arrow-right"></i>
+                        Order Status
+                      </button>
+                </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <fieldset class="form-icon-group left-icon position-relative">
                         <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
@@ -30,10 +36,7 @@
                             <i class="fa fa-search"></i>
                             Search
                         </button>
-                        <button class="btn btn-secondary lift me-2 rounded-2" (click)="goToOrderStatus()" type="button">
-                            <i class="fa fa-arrow-right"></i>
-                            Order Status
-                          </button>
+                       
                     </div>
                 </div>
             </form>
