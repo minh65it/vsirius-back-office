@@ -8,9 +8,7 @@ import { AuthService } from './_services/users/auth.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-
-  constructor( private serviceSignalR: SignalRService){}
-  
+  constructor(private serviceSignalR: SignalRService) { }
   ngOnInit() {
     this.serviceSignalR.startConnection();
     this.serviceSignalR.addNotificationChangedListener();

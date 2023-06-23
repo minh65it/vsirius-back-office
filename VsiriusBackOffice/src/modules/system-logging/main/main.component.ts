@@ -16,8 +16,7 @@ export class MainComponent implements OnInit {
 
   logParams: LogParams = <LogParams>{};
   filterProjectName: string[] = [];
-  filterControllerName: string[] = [];
-  filterMethodName: string[] = [];
+  filterUrl: string[] = [];
   listLogDto: LogDto[];
   pagination: Pagination = {
     pageNumber: 1,
@@ -26,7 +25,7 @@ export class MainComponent implements OnInit {
   fullTextSearch: string = '';
   searchFrom: Date = null;
   searchTo: Date = null;
-
+  maxDate: Date = new Date();
   constructor(private systemLoggingService: SystemLoggingService,
     private notiflix: NgxNotiflixService,
     private modalService: BsModalService) { }
@@ -48,49 +47,32 @@ export class MainComponent implements OnInit {
       }
     })
   }
-  getFilterControllerName() {
-    this.systemLoggingService.getFilterControllerName(this.logParams.projectName).subscribe({
+  getFilterURL() {
+    this.systemLoggingService.getFilterURL(this.logParams.projectName).subscribe({
       next: res => {
-        this.filterControllerName = res;
+        this.filterUrl = res;
       },
       error: () => {
       }
     })
   }
-  getFilterMethodName() {
-    this.systemLoggingService.getFilterMethodName(this.logParams.projectName, this.logParams.controllerName)
-      .subscribe({
-        next: res => {
-          this.filterMethodName = res;
-        },
-        error: () => {
-        }
-      })
-  }
   changeFilterProjectName(event: any) {
-    this.logParams.controllerName = null;
-    this.logParams.method = null;
-    this.getFilterControllerName();
+    this.logParams.uRL = null;
+    this.getFilterURL();
   }
   clearProjectName() {
-    this.logParams.method = null;
-    this.logParams.controllerName = null
-    this.filterControllerName = [];
+    this.logParams.uRL = null;
+    this.filterUrl = [];
   }
-  changeFilterControllerName(event: any) {
-    this.logParams.method = null;
-    this.getFilterMethodName();
+  changeFilterUrl(event: any) {
   }
-  clearController() {
-    this.logParams.method = null;
-    this.filterMethodName = [];
-  }
-  changeFilterMethodName(event: any) {
+  clearFilterUrl() {
+
   }
 
   getListLog() {
-    this.logParams.timeStampFrom = this.searchFrom?.toDateString() ?? null;
-    this.logParams.timeStampTo = this.searchTo?.toDateString() ?? null;
+    this.logParams.timeStampFrom = this.searchFrom?.toLocaleDateString() ?? null;
+    this.logParams.timeStampTo = this.searchTo?.toLocaleDateString() ?? null;
     const params: LogParams = Object.entries(Object.assign({}, this.logParams))
       .reduce((acc, [key, value]) => {
         if (value !== null) {
@@ -124,6 +106,7 @@ export class MainComponent implements OnInit {
     };
     this.logParams = <LogParams>{};
     this.listLogDto = [];
+    this.fullTextSearch = '';
   }
   getDetail(logId: string) {
     const initialState: ModalOptions = {

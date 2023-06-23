@@ -4,7 +4,7 @@ export interface LogDto {
     level: string | null;
     timeStamp: string | null;
     exception: string | null;
-    controllerName: string | null;
+    url: string | null;
     projectName: string | null;
-    method: string | null;
+    correlationId: string;
 }

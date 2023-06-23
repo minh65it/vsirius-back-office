@@ -2,32 +2,25 @@
   <div class="card">
     <div class="card-header d-block">
       <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
-        <div class="col-lg-4 col-md-4 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <ng-select [placeholder]="'Project Name...'" name="projectName" (close)="changeFilterProjectName($event)"
             [(ngModel)]="logParams.projectName" (clear)="clearProjectName()">
             <ng-option *ngFor="let item of filterProjectName" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <ng-select [placeholder]="'Controller Name...'" name="filterControllerName" (clear)="clearController()"
-            (close)="changeFilterControllerName($event)" [(ngModel)]="logParams.controllerName">
-            <ng-option *ngFor="let item of filterControllerName" [value]="item">{{
-              item}}</ng-option>
-          </ng-select>
-        </div>
-        <div class="col-lg-4 col-md-4 col-sm-12">
-          <ng-select [placeholder]="'Method Name...'" name="filterMethodName" (close)="changeFilterMethodName($event)"
-            [(ngModel)]="logParams.method">
-            <ng-option *ngFor="let item of filterMethodName" [value]="item">{{
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Url...'" name="filterUrl" (clear)="clearFilterUrl()"
+            (close)="changeFilterUrl($event)" [(ngModel)]="logParams.uRL">
+            <ng-option *ngFor="let item of filterUrl" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
           <fieldset class="form-icon-group left-icon position-relative">
-            <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
-              [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY' }" class="form-control"
-              placeholder="Choose time from" />
+            <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker [maxDate]="maxDate"
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY', adaptivePosition: true }"
+              class="form-control" placeholder="Choose time from" />
             <div class="form-icon position-absolute">
               <i class="fa fa-calendar" aria-hidden="true"></i>
             </div>
@@ -35,9 +28,9 @@
         </div>
         <div class="col-lg-3 col-md-3 col-sm-6">
           <fieldset class="form-icon-group left-icon position-relative">
-            <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
-              [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY' }" class="form-control"
-              placeholder="Choose time to" />
+            <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker [minDate]="searchFrom"
+              [maxDate]="maxDate" [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY', adaptivePosition: true }"
+              class="form-control" placeholder="Choose time to" />
             <div class="form-icon position-absolute">
               <i class="fa fa-calendar" aria-hidden="true"></i>
             </div>
@@ -57,7 +50,6 @@
             </button>
           </div>
         </div>
-
       </form>
       <div class="card-body table-scroll-view">
         <p-table responsiveLayout="scroll" [value]="listLogDto" dataKey="id" [rows]="listLogDto?.length">
@@ -66,9 +58,11 @@
               <th style="width:5%"></th>
               <th pSortableColumn="projectName" style="width:20%">Project Name <p-sortIcon
                   field="projectName"></p-sortIcon></th>
-              <th pSortableColumn="controllerName" style="width:20%">Controller Name <p-sortIcon
-                  field="controllerName"></p-sortIcon></th>
-              <th pSortableColumn="method" style="width:20%">Method <p-sortIcon field="method"></p-sortIcon></th>
+              <th pSortableColumn="url" style="width:20%">Url <p-sortIcon field="url"></p-sortIcon></th>
+              <th pSortableColumn="exception"
+                style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">Exception
+                <p-sortIcon field="exception"></p-sortIcon>
+              </th>
               <th pSortableColumn="level" style="width:20%">Level<p-sortIcon field="level"></p-sortIcon></th>
               <th pSortableColumn="timeStamp" style="width:20%">Date<p-sortIcon field="timeStamp"></p-sortIcon></th>
             </tr>
@@ -82,8 +76,9 @@
                 </button>
               </td>
               <td>{{ log.projectName }}</td>
-              <td>{{ log.controllerName }}</td>
-              <td>{{ log.method }}</td>
+              <td>{{ log.url }}</td>
+              <td style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">{{ log.exception }}
+              </td>
               <td>{{ log.level }}</td>
               <td>{{ log.timeStamp | date : 'MM/dd/YY' }}</td>
             </tr>

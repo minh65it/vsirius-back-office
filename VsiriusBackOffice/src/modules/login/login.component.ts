@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { UserForLoginParam } from '../_shared/_models/authDto';
 import { AuthService } from '../_shared/_services/users/auth.service';
 import { Router } from '@angular/router';
@@ -9,7 +9,7 @@ import { NgxNotiflixService } from '../_shared/_services/ngx-notiflix.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
 })
-export class LoginComponent {
+export class LoginComponent implements OnInit {
   model: UserForLoginParam = <UserForLoginParam>{
 
   }
@@ -17,6 +17,14 @@ export class LoginComponent {
   constructor(private authService: AuthService,
     private router: Router,
     private notiflix: NgxNotiflixService) { }
+  ngOnInit() {
+    if (this.authService.loggedIn()) {
+      this.router.navigate(['/']);
+    }
+    else {
+      this.router.navigate(['/login']);
+    }
+  }
   showPassword() {
     this.isShow = !this.isShow;
   }

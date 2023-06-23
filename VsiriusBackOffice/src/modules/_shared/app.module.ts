@@ -1,4 +1,4 @@
-import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { APP_INITIALIZER, CUSTOM_ELEMENTS_SCHEMA, ErrorHandler, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,18 +19,19 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthService } from './_services/users/auth.service';
 import { ContactSignalRService } from './_services/contact-signalR.service';
-export function tokenGetter()
-{
+import { GlobalErrorHandler } from './_helpers/log-interceptor ';
+import { SystemLoggingService } from './_services/system-logging.service';
+export function tokenGetter() {
   return localStorage.getItem('TOKEN');
 }
 @NgModule({
-  declarations: [	
+  declarations: [
     AppComponent,
     DefaultLayoutComponent,
     NavComponent,
     HeaderComponent,
     LoginComponent,
-   ],
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -53,18 +54,21 @@ export function tokenGetter()
     AuthGuard,
     {
       provide: APP_INITIALIZER,
-      useFactory: (authService:AuthService)=>()=>authService.startCheckExpirationTime(),
+      useFactory: (authService: AuthService) => () => authService.startCheckExpirationTime(),
       multi: true,
       deps: [AuthService]
     },
-     //  Khởi động SignalR
-     {
+    //  Khởi động SignalR
+    {
       provide: APP_INITIALIZER,
       useFactory: (contactSignalrService: ContactSignalRService) => () => contactSignalrService.startConnectionContact(),
       deps: [ContactSignalRService],
       multi: true,
     },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
+    //System logging 
+    SystemLoggingService,
+    { provide: ErrorHandler, useClass: GlobalErrorHandler }
   ],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
