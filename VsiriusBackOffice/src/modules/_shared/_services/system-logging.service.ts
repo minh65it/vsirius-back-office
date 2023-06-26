@@ -13,6 +13,8 @@ import { Router } from '@angular/router';
 export class SystemLoggingService {
 
   baseUrl = environment.apiSystemURL + 'Log/';
+  clientId = "BackOffice";
+  clientSecret = "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJkYXRhIjoiNTI1NmZlNmQtNGYzMy00NjcxLTk2ZjQtYTIwZjRhOTFlZjg5LUJhY2tPZmZpY2UiLCJuYmYiOjE2ODc1MDc1MDIsImV4cCI6MTY4NzUxMTEwMiwiaWF0IjoxNjg3NTA3NTAyfQ."
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -22,20 +24,28 @@ export class SystemLoggingService {
       ...logParams,
       keyword,
     }
-    return this.http.get<PaginationResult<LogDto>>(this.baseUrl + 'GetListLog', { params: queryParams });
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<PaginationResult<LogDto>>(this.baseUrl + 'GetListLog', { params: queryParams, headers: { clientId, clientSecret } },);
   }
   getDetail(logId: string) {
-    return this.http.get<LogDto>(this.baseUrl + 'GetLog', { params: { logId } });
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<LogDto>(this.baseUrl + 'GetLog', { params: { logId }, headers: { clientId, clientSecret } });
   }
   getFilterProjectName() {
-    return this.http.get<string[]>(this.baseUrl + 'FilterProjectName');
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<string[]>(this.baseUrl + 'FilterProjectName', { headers: { clientId, clientSecret } });
   }
   getFilterURL(projectName: string) {
-    return this.http.get<string[]>(this.baseUrl + 'FilterURL', { params: { projectName } });
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<string[]>(this.baseUrl + 'FilterURL', { params: { projectName }, headers: { clientId, clientSecret } });
   }
   writeLogs(error: string) {
-    const clientId = "BackOffice";
-    const clientSecret = "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJkYXRhIjoiNTI1NmZlNmQtNGYzMy00NjcxLTk2ZjQtYTIwZjRhOTFlZjg5LUJhY2tPZmZpY2UiLCJuYmYiOjE2ODc1MDc1MDIsImV4cCI6MTY4NzUxMTEwMiwiaWF0IjoxNjg3NTA3NTAyfQ."
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
     let log: LogDto = {
       logId: "00000000-0000-0000-0000-000000000000",
       message: null,
