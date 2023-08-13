@@ -9,8 +9,9 @@ import { ListCartDetailsDto } from '../../_models/cart/list-cart-detail-dto';
   providedIn: 'root'
 })
 export class CartService {
-  baseUrl = environment.apiCartURL + 'VsiriusCart/';
-
+  baseUrl = environment.apiOrderURL + 'VsiriusCart/';
+  clientId = environment.clientIdCart;
+  clientSecret = environment.clientSecretCart;
   constructor(private http: HttpClient) { }
 
   getListCartAll(pagination: PaginationParam, fullTextSearch: string) {
@@ -18,10 +19,14 @@ export class CartService {
       ...pagination,
       fullTextSearch,
     }
-    return this.http.get<PaginationResult<ListCartDto>>(this.baseUrl + 'ListCartAll', { params: queryParams });
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<PaginationResult<ListCartDto>>(this.baseUrl + 'ListCartAll', { params: queryParams, headers: { clientId, clientSecret } });
   }
   getCardDetailByCartId(cartId: string, isDelete: boolean) {
     const params = { cartId, isDelete };
-    return this.http.get<ListCartDetailsDto[]>(this.baseUrl + 'GetCartDetailByCartId', { params: params });
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<ListCartDetailsDto[]>(this.baseUrl + 'GetCartDetailByCartId', { params: params, headers: { clientId, clientSecret } });
   }
 }
