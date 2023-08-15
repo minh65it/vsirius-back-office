@@ -26,14 +26,14 @@ export class ProductService {
       ...pagination,
       keyWord,
     }
-    return this.http.post<PaginationResult<Product>>(this.baseUrl, filterParam, { params: queryParams });
+    return this.http.post<PaginationResult<Product>>(this.baseUrl + '/GetAllBackOffice', filterParam, { params: queryParams });
   }
 
   getDataFilter(feed_product_type?: string) {
     return this.http.get<VsiriusFilter[]>(this.baseUrl + '/Filter', { params: { feed_product_type } });
   }
 
-  getValueForAdd(feed_product_type?: string){
+  getValueForAdd(feed_product_type?: string) {
     return this.http.get<VsiriusFilter[]>(this.baseUrl + '/GetValueForAdd', { params: { feed_product_type } });
   }
 
@@ -45,7 +45,7 @@ export class ProductService {
     return this.http.post<OperationResult>(this.baseUrl + '/ImportExcel', formData, { headers });
   }
 
-  create(product:Product){
+  create(product: Product) {
     return this.http.post<OperationResult>(this.baseUrl + '/CreateProduct', product);
   }
 
@@ -53,11 +53,11 @@ export class ProductService {
     return this.http.delete<OperationResult>(this.baseUrl, { params: { item_sku } });
   }
 
-  update(product:Product){
-    return this.http.put<OperationResult>(this.baseUrl , product);
+  update(product: Product) {
+    return this.http.put<OperationResult>(this.baseUrl, product);
   }
 
-  getDetail(item_sku: string){
+  getDetail(item_sku: string) {
     return this.http.get<Product>(this.baseUrl + '/SKU', { params: { item_sku } });
   }
 }
