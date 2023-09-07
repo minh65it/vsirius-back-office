@@ -20,22 +20,24 @@ export class UpdateComponent implements OnInit {
   url: string = environment.imageURL;
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
-    private service: VsiriusFilterService) { }
+    private service: VsiriusFilterService
+  ) { }
   ngOnInit() {
     this.loadDataFormUpdate();
   }
-  loadDataFormUpdate(){
+  loadDataFormUpdate() {
     this.notiflix.showLoading();
     this.service.currentFitlterSource.subscribe({
-      next:res=>{
-        if(Object.keys(res).length === 0){
+      next: res => {
+        if (Object.keys(res).length === 0) {
           this.cancel();
         }
-        res.imageURL != null ? this.image = this.url + res?.imageURL : this.image ;
+        res.imageURL != null ? this.image = this.url + res?.imageURL : this.image;
+
         this.filterModel = res;
         this.notiflix.hideLoading();
       },
-      error:()=>{
+      error: () => {
         this.notiflix.hideLoading();
       }
     })
@@ -59,9 +61,14 @@ export class UpdateComponent implements OnInit {
       this.notiflix.showLoading();
       this.service.update(this.filterModel).subscribe({
         next: res => {
-          res.success ? this.notiflix.success(res.message) : this.notiflix.error(res.message);
-          this.cancel();
-          this.notiflix.hideLoading();
+          if (res.success) {
+            this.notiflix.success(res.message);
+            this.notiflix.hideLoading();
+            this.cancel();
+          } else {
+            this.notiflix.error(res.message);
+            this.notiflix.hideLoading();
+          }
         },
         error: () => {
           this.notiflix.error('Error System');

@@ -18,5 +18,6 @@ export interface VsiriusFilterDto {
     createdDateTo: string | null;
     updatedDateFrom: string | null;
     updatedDateTo: string | null;
-    fileImage:  string | File;
+    fileImage: string | File;
+    title: string | null;
 }

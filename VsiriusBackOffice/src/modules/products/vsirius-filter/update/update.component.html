@@ -13,9 +13,9 @@
             </div>
           </div>
         </div>
-        <div class="row g-3 col-10 ">
-          <div class="col-6 col-md-6">
-            <label for="TextInput" class="form-label fw-bold">FieldName <span class="text-danger">*</span></label>
+        <div class="row g-3 col-xl-9 col-md-12">
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Field Name <span class="text-danger">*</span></label>
             <input type="text" class="form-control" placeholder="Enter Field Name... " name="fieldName"
               [(ngModel)]="filterModel.fieldName" #fieldName="ngModel" required />
             <div class="text-danger mt-2 d-flex align-items-center"
@@ -23,7 +23,7 @@
               <span>*Please enter Field Name </span>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Label Name <span class="text-danger">*</span></label>
             <input type="text" placeholder="Enter Label Name..." class="form-control" name="labelName"
               [(ngModel)]="filterModel.labelName" #labelName="ngModel" required />
@@ -32,7 +32,7 @@
               <span>*Please enter Label Name </span>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Value <span class="text-danger">*</span></label>
             <input type="text" placeholder="Enter Value..." class="form-control" name="value"
               [(ngModel)]="filterModel.value" #value="ngModel" required />
@@ -41,16 +41,21 @@
               <span>*Please enter Value </span>
             </div>
           </div>
-          <div class="col-lg-6 col-md-6">
-            <label for="TextInput" class="form-label fw-bold">Product Type <span class="text-danger">*</span></label>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Title</label>
+            <input type="text" placeholder="Enter Title..." class="form-control" name="titleProduct"
+              [(ngModel)]="filterModel.title" #titleProduct="ngModel" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Product Type</label>
             <input type="text" placeholder="Enter Product Type..." class="form-control" name="productType"
-              [(ngModel)]="filterModel.productType" #productType="ngModel" required />
-            <div class="text-danger mt-2 d-flex align-items-center"
+              [(ngModel)]="filterModel.productType" #productType="ngModel" />
+            <!-- <div class="text-danger mt-2 d-flex align-items-center"
               *ngIf="productType.invalid && (productType.touched || productType.dirty || checkValidated)">
               <span>*Please enter Product Type </span>
-            </div>
+            </div> -->
           </div>
-          <div class="col-lg-6 col-md-6">
+          <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Group Name <span class="text-danger">*</span></label>
             <input type="text" placeholder="Enter Group Name..." class="form-control" name="groupName"
               [(ngModel)]="filterModel.groupName" #groupName="ngModel" required />
@@ -59,8 +64,14 @@
               <span>*Please enter Group Name </span>
             </div>
           </div>
-          <div class=" col-md-12">
-            <div class="form-check form-switch mt-2">
+          <div class="col-xl-2 col-md-2">
+            <label for="TextInput" class="form-label fw-bold">Order by</label>
+            <input type="number" placeholder="Enter Order number..." class="form-control" name="orderId"
+              [(ngModel)]="filterModel.orderId" #orderId="ngModel" />
+          </div>
+          <div class=" col-md-2">
+            <label for="TextInput" class="form-label fw-bold">&emsp;</label>
+            <div class="form-check form-switch mt-3">
               <input class="form-check-input" type="checkbox" name="isActive" role="switch" id="isActive"
                 [checked]="filterModel.isActive" [(ngModel)]="filterModel.isActive" />
               <label class="form-check-label fw-bold" for="isActive">Is Active</label>

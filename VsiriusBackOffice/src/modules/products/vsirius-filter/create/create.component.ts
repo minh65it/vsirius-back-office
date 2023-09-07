@@ -43,9 +43,14 @@ export class CreateComponent implements OnInit {
       this.notiflix.showLoading();
       this.service.create(this.filterModel).subscribe({
         next: res => {
-          res.success ? this.notiflix.success(res.message) : this.notiflix.error(res.message);
-          this.cancel();
-          this.notiflix.hideLoading();
+          if (res.success) {
+            this.notiflix.success(res.message);
+            this.notiflix.hideLoading();
+            this.cancel();
+          } else {
+            this.notiflix.error(res.message);
+            this.notiflix.hideLoading();
+          }
         },
         error: () => {
           this.notiflix.error('Error System');

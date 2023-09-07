@@ -47,11 +47,11 @@ export class MainComponent implements OnInit {
   checkValidated: boolean = false;
   image: string = 'assets/images/NO-PHOTO_165x165.png';
   @ViewChild('imageRef') imageRef: ElementRef;
-  imageFile:string = '';
+  imageFile: string = '';
   constructor(private notiflix: NgxNotiflixService,
     private filterService: FilterService,
     private service: VsiriusFilterService,
-    private router:Router) { }
+    private router: Router) { }
   ngOnInit() {
     this.generateTable();
     this.registerFilter();
