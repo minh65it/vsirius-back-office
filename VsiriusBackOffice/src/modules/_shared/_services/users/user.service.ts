@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
-import { User } from '../../_models/user';
+import { UpdatePassword, User } from '../../_models/user';
 import { OperationResult } from '../../_helpers/operation-result';
 import { BehaviorSubject } from 'rxjs';
 
@@ -15,27 +15,30 @@ export class UserService {
   currentUserSource = this.userSource.asObservable();
   constructor(private http: HttpClient) { }
 
-  paramEdit(model:User){
+  paramEdit(model: User) {
     this.userSource.next(model);
   }
 
-  getAllUsers(pagination:PaginationParam,textSearch:string){
-    return this.http.get<PaginationResult<User>>(this.baseUrl + '/GetAllUser',{params:{...pagination,textSearch}});
+  getAllUsers(pagination: PaginationParam, textSearch: string) {
+    return this.http.get<PaginationResult<User>>(this.baseUrl + '/GetAllUser', { params: { ...pagination, textSearch } });
   }
 
-  create(user:User){
+  create(user: User) {
     return this.http.post<OperationResult>(this.baseUrl + '/CreateUser', user);
   }
 
-  delete(user:User) {
+  delete(user: User) {
     return this.http.put<OperationResult>(this.baseUrl + '/DeleteUser', user);
   }
 
-  update(user:User){
+  update(user: User) {
     return this.http.put<OperationResult>(this.baseUrl + '/UpdateUser', user);
   }
+  updatePassword(model: UpdatePassword) {
+    return this.http.put<OperationResult>(this.baseUrl + '/UpdatePasswordByAdmin', model);
+  }
 
-  getUserDetail(mail: string){
+  getUserDetail(mail: string) {
     return this.http.get<User>(this.baseUrl + '/getUserDetail', { params: { mail } });
   }
 }

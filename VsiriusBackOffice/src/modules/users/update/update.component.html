@@ -1,95 +1,118 @@
 <div class="card ">
-    <form #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
-      <div class="card-body ">
-        <div class="row">
-          <div class="row g-3 col-xl-12 col-md-12">
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Username <span class="text-danger">*</span></label>
-              <input type="text" class="form-control" disabled placeholder="Enter username... " name="userName"
-                [(ngModel)]="userModel.userName" #userName="ngModel" required />
-              <div class="text-danger mt-2 d-flex align-items-center"
-                *ngIf="userName.invalid && (userName.touched || userName.dirty || checkValidated)">
-                <span>*Please enter userName </span>
+  <form #myForm="ngForm" autocomplete="off" (ngSubmit)="save()">
+    <div class="card-body ">
+      <div class="row">
+        <div class="row g-3 col-xl-12 col-md-12">
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
+            <input type="text" placeholder="Enter email..." disabled class="form-control" name="email"
+              [(ngModel)]="userModel.email" #email="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="email.invalid && (email.touched || email.dirty || checkValidated)">
+              <span>*Please enter email </span>
+            </div>
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Phone Number</label>
+            <div class="input-group mb-3">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="phoneNumber">+1</span>
               </div>
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Email <span class="text-danger">*</span></label>
-              <input type="text" placeholder="Enter email..." disabled class="form-control" name="email"
-                [(ngModel)]="userModel.email" #email="ngModel" required />
-              <div class="text-danger mt-2 d-flex align-items-center"
-                *ngIf="email.invalid && (email.touched || email.dirty || checkValidated)">
-                <span>*Please enter email </span>
-              </div>
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Password <span class="text-danger">*</span></label>
-              <input type="password" placeholder="Enter password..." class="form-control" name="password"
-                [(ngModel)]="userModel.password" #password="ngModel" />
-             
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Phone Number</label>
               <input type="text" placeholder="Enter phone number..." class="form-control" name="phoneNumber"
-                [(ngModel)]="userModel.phoneNumber" maxlength="10" onkeypress="return /[0-9]/i.test(event.key)" onpaste="return false;" #phoneNumber="ngModel" />
-             
+                [(ngModel)]="userModel.phoneNumber" pattern="[0-9]{10}" #phoneNumber="ngModel" />
             </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Address 1</label>
-              <input type="text" placeholder="Enter Address..." class="form-control" name="address1"
-                [(ngModel)]="userModel.address1"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Address 2</label>
-              <input type="text" placeholder="Enter Address..." class="form-control" name="address2"
-                [(ngModel)]="userModel.address2"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">FullName</label>
-              <input type="text" placeholder="Enter FullName..." class="form-control" name="fullName"
-                [(ngModel)]="userModel.fullName"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">City</label>
-              <input type="text" placeholder="Enter city..." class="form-control" name="city"
-                [(ngModel)]="userModel.city"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">State</label>
-              <input type="text" placeholder="Enter state..." class="form-control" name="state"
-                [(ngModel)]="userModel.state"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">PostCode</label>
-              <input type="text" placeholder="Enter postCode..." class="form-control" name="postCode"
-                [(ngModel)]="userModel.postCode"  />
-            </div>
-            <div class="col-xl-6 col-md-12">
-              <label for="TextInput" class="form-label fw-bold">Country</label>
-              <input type="text" placeholder="Enter country..." class="form-control" name="country"
-                [(ngModel)]="userModel.country"  />
-            </div>
-            <div class=" col-md-12">
-              <div class="form-check form-switch mt-2">
-                <input class="form-check-input" type="checkbox" name="isActive" role="switch" id="isActive"
-                  [checked]="userModel.isActive" [(ngModel)]="userModel.isActive" />
-                <label class="form-check-label fw-bold" for="isActive">Is Active</label>
-              </div>
+
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Address 1</label>
+            <input type="text" placeholder="Enter Address..." class="form-control" name="address1"
+              [(ngModel)]="userModel.address1" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Address 2</label>
+            <input type="text" placeholder="Enter Address..." class="form-control" name="address2"
+              [(ngModel)]="userModel.address2" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Full Name</label>
+            <input type="text" placeholder="Enter FullName..." class="form-control" name="fullName"
+              [(ngModel)]="userModel.fullName" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">City</label>
+            <input type="text" placeholder="Enter city..." class="form-control" name="city"
+              [(ngModel)]="userModel.city" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Post Code</label>
+            <input type="text" placeholder="Enter postCode..." class="form-control" name="postCode"
+              [(ngModel)]="userModel.postCode" />
+          </div>
+          <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Country</label>
+            <input type="text" placeholder="Enter country..." class="form-control" name="country"
+              [(ngModel)]="userModel.country" />
+          </div>
+          <div class=" col-md-12">
+            <div class="form-check form-switch mt-2">
+              <input class="form-check-input" type="checkbox" name="isActive" role="switch" id="isActive"
+                [checked]="userModel.isActive" [(ngModel)]="userModel.isActive" />
+              <label class="form-check-label fw-bold" for="isActive">Is Active</label>
             </div>
           </div>
         </div>
-        <div class="card-footer text-end mt-5">
-          <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
-            <i class="fa fa-repeat" aria-hidden="true"></i>
-            Reset
-          </button>
-          <button class="btn btn-success me-2 lift rounded-2" type="submit">
-            <i class="fa fa-save"></i> Save
-          </button>
-          <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
-            <i class="fa fa-close"></i>
-            Cancel
-          </button>
+      </div>
+      <div class="card-footer text-end mt-5">
+        <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+          <i class="fa fa-repeat" aria-hidden="true"></i>
+          Reset
+        </button>
+        <button class="btn btn-success me-2 lift rounded-2" type="submit">
+          <i class="fa fa-save"></i> Save
+        </button>
+        <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+          <i class="fa fa-close"></i>
+          Cancel
+        </button>
+      </div>
+    </div>
+  </form>
+  <!-- Update Password -->
+  <form #myFormPassword="ngForm" autocomplete="off" (ngSubmit)="updatePassword()">
+    <div class="card-body ">
+      <div class="row">
+        <h4>Change password</h4>
+      </div>
+      <div class="row">
+        <div class="row g-3 col-xl-12 col-md-12">
+          <div class="form-group col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">New Password (If new password is null then default
+              password is "welcome123")</label>
+            <div class="input-group">
+              <input [type]="showNew ? 'text' : 'password'" placeholder="Enter new password..." class="form-control"
+                name="password" [(ngModel)]="formPassword.password" #password="ngModel" />
+              <div class="input-group-append" (click)="showPassword()" *ngIf="!showNew">
+                <button class="btn btn-outline-danger" type="button">Show</button>
+              </div>
+              <div class="input-group-append" (click)="showPassword()" *ngIf="showNew">
+                <button class="btn btn-outline-danger" type="button">Hide</button>
+              </div>
+            </div>
+            <!-- <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="password.invalid && (password.touched || password.dirty || checkValidatedPassword)">
+              <span>*Please enter password </span>
+            </div> -->
+          </div>
+          <div class="form-group col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">&nbsp;</label>
+            <div class="input-group">
+              <button class="btn btn-success left rounded-2" type="submit">
+                <i class="fa fa-save"></i> Update password
+              </button>
+            </div>
+          </div>
         </div>
       </div>
-    </form>
-  </div>
+    </div>
+  </form>
+</div>

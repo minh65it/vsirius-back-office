@@ -90,12 +90,21 @@
                             <!-- STT -->
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
-                            <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
-                                <ng-container *ngIf="col.field != 'avatar' ">{{item[col.field]}}</ng-container>
-                                <ng-container *ngIf="col.field == 'avatar' ">
-                                    <img [src]="item[col.field] != null ? urlAvatar+item[col.field] : 'assets/images/NO-PHOTO_165x165.png'"
-                                        class="rounded lg avatar" [alt]="urlAvatar+item[col.field]">
-                                </ng-container>
+                            <td>
+                                <img [src]="item[item.field] != null ? urlAvatar+item[item.field] : 'assets/images/NO-PHOTO_165x165.png'"
+                                    class="rounded lg avatar" [alt]="urlAvatar+item[item.field]">
+                            </td>
+                            <td>
+                                {{item.email}}
+                            </td>
+                            <td>
+                                {{item.phoneNumber | phoneNumber}}
+                            </td>
+                            <td>
+                                {{item.address1}}
+                            </td>
+                            <td>
+                                {{item.address2}}
                             </td>
                         </tr>
                     </ng-template>

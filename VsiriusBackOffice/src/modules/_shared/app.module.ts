@@ -59,12 +59,12 @@ export function tokenGetter() {
       deps: [AuthService]
     },
     //  Khởi động SignalR
-    {
-      provide: APP_INITIALIZER,
-      useFactory: (contactSignalrService: ContactSignalRService) => () => contactSignalrService.startConnectionContact(),
-      deps: [ContactSignalRService],
-      multi: true,
-    },
+    // {
+    //   provide: APP_INITIALIZER,
+    //   useFactory: (contactSignalrService: ContactSignalRService) => () => contactSignalrService.startConnectionContact(),
+    //   deps: [ContactSignalRService],
+    //   multi: true,
+    // },
     { provide: LocationStrategy, useClass: HashLocationStrategy },
     //System logging 
     SystemLoggingService,

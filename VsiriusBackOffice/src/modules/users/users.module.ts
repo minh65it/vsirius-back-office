@@ -15,6 +15,7 @@ import { ButtonModule } from 'primeng/button';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { PhoneNumberPipe } from '../_shared/_pipes/phone-number.pipe';
 
 
 @NgModule({
@@ -22,6 +23,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     MainComponent,
     CreateComponent,
     UpdateComponent,
+    PhoneNumberPipe
   ],
   imports: [
     CommonModule,
