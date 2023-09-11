@@ -24,6 +24,11 @@
 
           </div>
           <div class="col-xl-6 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Full Name</label>
+            <input type="text" placeholder="Enter FullName..." class="form-control" name="fullName"
+              [(ngModel)]="userModel.fullName" />
+          </div>
+          <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Address 1</label>
             <input type="text" placeholder="Enter Address..." class="form-control" name="address1"
               [(ngModel)]="userModel.address1" />
@@ -34,16 +39,16 @@
               [(ngModel)]="userModel.address2" />
           </div>
           <div class="col-xl-6 col-md-12">
-            <label for="TextInput" class="form-label fw-bold">Full Name</label>
-            <input type="text" placeholder="Enter FullName..." class="form-control" name="fullName"
-              [(ngModel)]="userModel.fullName" />
-          </div>
-          <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">City</label>
             <input type="text" placeholder="Enter city..." class="form-control" name="city"
               [(ngModel)]="userModel.city" />
           </div>
-          <div class="col-xl-6 col-md-12">
+          <div class="col-xl-3 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">State</label>
+            <input type="text" placeholder="Enter state..." class="form-control" name="state"
+              [(ngModel)]="userModel.state" />
+          </div>
+          <div class="col-xl-3 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Post Code</label>
             <input type="text" placeholder="Enter postCode..." class="form-control" name="postCode"
               [(ngModel)]="userModel.postCode" />

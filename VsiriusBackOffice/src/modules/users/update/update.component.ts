@@ -46,6 +46,7 @@ export class UpdateComponent implements OnInit {
       this.checkValidated = false;
       this.notiflix.showLoading();
       this.userModel.phoneNumber = "+1" + this.userModel.phoneNumber;
+      this.userModel.avatar = null;
       this.service.update(this.userModel).subscribe({
         next: res => {
           if (res.success) {
