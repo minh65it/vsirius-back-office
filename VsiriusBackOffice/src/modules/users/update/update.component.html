@@ -21,42 +21,75 @@
               <input type="text" placeholder="Enter phone number..." class="form-control" name="phoneNumber"
                 [(ngModel)]="userModel.phoneNumber" pattern="[0-9]{10}" #phoneNumber="ngModel" />
             </div>
-
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="phoneNumber.invalid && (phoneNumber.touched || phoneNumber.dirty || checkValidated)">
+              <span>*Please enter the correct phone number</span>
+            </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Full Name</label>
-            <input type="text" placeholder="Enter FullName..." class="form-control" name="fullName"
-              [(ngModel)]="userModel.fullName" />
+            <input type="text" placeholder="Enter FullName..." pattern="[a-zA-Z\s]{1,50}" class="form-control"
+              name="fullName" [(ngModel)]="userModel.fullName" #fullName="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="fullName.invalid && (fullName.touched || fullName.dirty || checkValidated)">
+              <span>*Please enter the correct full name</span>
+            </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Address 1</label>
-            <input type="text" placeholder="Enter Address..." class="form-control" name="address1"
-              [(ngModel)]="userModel.address1" />
+            <input type="text" placeholder="Enter Address..." pattern="[\sa-zA-Z0-9_,-]{1,50}" class="form-control"
+              name="address1" [(ngModel)]="userModel.address1" #address1="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="address1.invalid && (address1.touched || address1.dirty || checkValidated)">
+              <span>*Please enter the correct address 1</span>
+            </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Address 2</label>
-            <input type="text" placeholder="Enter Address..." class="form-control" name="address2"
-              [(ngModel)]="userModel.address2" />
+            <input type="text" placeholder="Enter Address..." pattern="[\sa-zA-Z0-9_,-]{1,50}" class="form-control"
+              name="address2" [(ngModel)]="userModel.address2" #address2="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="address2.invalid && (address2.touched || address2.dirty || checkValidated)">
+              <span>*Please enter the correct address 2</span>
+            </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">City</label>
-            <input type="text" placeholder="Enter city..." class="form-control" name="city"
-              [(ngModel)]="userModel.city" />
-          </div>
-          <div class="col-xl-3 col-md-12">
-            <label for="TextInput" class="form-label fw-bold">State</label>
-            <input type="text" placeholder="Enter state..." class="form-control" name="state"
-              [(ngModel)]="userModel.state" />
-          </div>
-          <div class="col-xl-3 col-md-12">
-            <label for="TextInput" class="form-label fw-bold">Post Code</label>
-            <input type="text" placeholder="Enter postCode..." class="form-control" name="postCode"
-              [(ngModel)]="userModel.postCode" />
+            <input type="text" placeholder="Enter city..." pattern="[\sa-zA-Z_-]{1,50}" class="form-control" name="city"
+              [(ngModel)]="userModel.city" #city="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="city.invalid && (city.touched || city.dirty || checkValidated)">
+              <span>*Please enter the correct city</span>
+            </div>
           </div>
           <div class="col-xl-6 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Country</label>
-            <input type="text" placeholder="Enter country..." class="form-control" name="country"
-              [(ngModel)]="userModel.country" />
+            <ng-select [(ngModel)]="userModel.country" placeholder="Enter country..." pattern="(United States|Canada)"
+              (change)="changeCountry()" [clearable]="false" name="country" #country="ngModel">
+              <ng-option *ngFor="let c of listCountry" [value]="c.id">{{c.name}}</ng-option>
+            </ng-select>
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="country.invalid && (country.touched || country.dirty || checkValidated)">
+              <span>*Please enter the correct country</span>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">State</label>
+            <input type="text" placeholder="Enter state..." pattern="[\sa-zA-Z_-]{1,50}" class="form-control"
+              name="state" [(ngModel)]="userModel.state" #state="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="state.invalid && (state.touched || state.dirty || checkValidated)">
+              <span>*Please enter the correct state</span>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-12">
+            <label for="TextInput" class="form-label fw-bold">Post Code</label>
+            <input type="text" placeholder="Enter post code..." pattern="{{patternPostCode}}" class="form-control"
+              name="postCode" [(ngModel)]="userModel.postCode" #postCode="ngModel" />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="postCode.invalid && (postCode.touched || postCode.dirty || checkValidated)">
+              <span>*Please enter the correct post code US: XXXXX, Canada: XXX XXX</span>
+            </div>
           </div>
           <div class=" col-md-12">
             <div class="form-check form-switch mt-2">

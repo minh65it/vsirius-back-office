@@ -21,6 +21,11 @@ export class UpdateComponent implements OnInit {
   userModel: User = {
   } as User;
   formPassword: UpdatePassword = <UpdatePassword>{};
+  listCountry = [
+    { id: "United States", name: 'United States' },
+    { id: "Canada", name: 'Canada' }
+  ];
+  patternPostCode: string = '';
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
     private service: UserService) { }
@@ -28,6 +33,7 @@ export class UpdateComponent implements OnInit {
   ngOnInit() {
     this.loadData();
     this.userModel.phoneNumber = this.userModel.phoneNumber?.substring(2);
+    this.changeCountry();
   }
   loadData() {
     this.notiflix.showLoading();
@@ -114,5 +120,11 @@ export class UpdateComponent implements OnInit {
   }
   showOldPassword() {
     this.showOld = !this.showOld;
+  }
+  changeCountry() {
+    if (this.userModel.country === 'Canada')
+      this.patternPostCode = '[a-zA-Z0-9]{3}\\s[a-zA-Z0-9]{3}';
+    else
+      this.patternPostCode = '[0-9]{5}';
   }
 }
