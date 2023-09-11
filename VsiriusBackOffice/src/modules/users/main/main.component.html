@@ -91,8 +91,8 @@
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
                             <td>
-                                <img [src]="item[item.field] != null ? urlAvatar+item[item.field] : 'assets/images/NO-PHOTO_165x165.png'"
-                                    class="rounded lg avatar" [alt]="urlAvatar+item[item.field]">
+                                <img [src]="item.avatar != null ? urlAvatar+item.avatar : 'assets/images/NO-PHOTO_165x165.png'"
+                                    class="rounded lg avatar" [alt]="urlAvatar+item.avatar">
                             </td>
                             <td>
                                 {{item.email}}

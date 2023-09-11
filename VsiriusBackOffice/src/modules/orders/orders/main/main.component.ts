@@ -46,7 +46,7 @@ export class MainComponent implements OnInit {
   chooseValueStatus: any;
   constructor(private notiflix: NgxNotiflixService,
     private service: OrderService,
-    private router:Router,
+    private router: Router,
     private statusService: OrderStatusService,
     private serviceSignalR: SignalRService) { }
   ngOnInit() {
@@ -66,10 +66,9 @@ export class MainComponent implements OnInit {
 
   generateTable() {
     this.cols = [
-      { field: 'firstName', header: 'firstName' },
-      { field: 'lastName', header: 'lastName' },
+      { field: 'fullName', header: 'full Name' },
       { field: 'email', header: 'email' },
-      { field: 'address1', header: 'address1' },
+      { field: 'address1', header: 'address 1' },
       { field: 'city', header: 'city' },
       { field: 'totalQuantityItem', header: 'total Quantity' },
       { field: 'totalPrice', header: 'total price' },
@@ -143,7 +142,7 @@ export class MainComponent implements OnInit {
       next: res => {
         if (res.success) {
           this.notiflix.success(res.message);
-          location.reload();
+          //location.reload();
           this.modalEdit.hide();
           this.loadData();
         }
@@ -158,7 +157,7 @@ export class MainComponent implements OnInit {
       }
     })
   }
-  goToOrderStatus(){
+  goToOrderStatus() {
     this.router.navigate(['order-status'])
   }
 }

@@ -53,11 +53,13 @@ export class UpdateComponent implements OnInit {
             this.cancel();
           }
           else {
+            this.userModel.phoneNumber = this.userModel.phoneNumber?.substring(2);
             this.notiflix.error(res.message);
           }
           this.notiflix.hideLoading();
         },
         error: () => {
+          this.userModel.phoneNumber = this.userModel.phoneNumber?.substring(2);
           this.notiflix.error('Error System');
           this.notiflix.hideLoading();
         }

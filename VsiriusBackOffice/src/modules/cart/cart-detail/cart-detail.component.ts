@@ -34,8 +34,6 @@ export class CartDetailComponent implements OnInit {
       {
         next: res => {
           this.dataDetail = res;
-          console.log(res);
-
           this.notiflix.hideLoading();
         },
         error: () => {

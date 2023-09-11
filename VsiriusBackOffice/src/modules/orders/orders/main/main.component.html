@@ -3,10 +3,11 @@
         <div class="card-header d-block">
             <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
                 <div class="col-12">
-                    <button class="btn btn-primary float-end lift me-2 rounded-2" (click)="goToOrderStatus()" type="button">
+                    <button class="btn btn-primary float-end lift me-2 rounded-2" (click)="goToOrderStatus()"
+                        type="button">
                         <i class="fa fa-arrow-right"></i>
                         Order Status
-                      </button>
+                    </button>
                 </div>
                 <div class="col-lg-3 col-md-3 col-sm-6">
                     <fieldset class="form-icon-group left-icon position-relative">
@@ -36,7 +37,7 @@
                             <i class="fa fa-search"></i>
                             Search
                         </button>
-                       
+
                     </div>
                 </div>
             </form>
@@ -154,11 +155,7 @@
                 <div class="row mb-3">
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">FirstName</label>
-                        <input type="text" class="form-control" name="firstName" [(ngModel)]="modelEdit.firstName" />
-                    </div>
-                    <div class="col-4 mb-2">
-                        <label for="TextInput" class="form-label fw-bold label-custom">Last Name</label>
-                        <input type="text" class="form-control" name="lastName" [(ngModel)]="modelEdit.lastName" />
+                        <input type="text" class="form-control" name="firstName" [(ngModel)]="modelEdit.fullName" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Email</label>
@@ -167,7 +164,8 @@
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">BirthDay</label>
                         <input type="text" class="form-control" bsDatepicker
-                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="birthDay" [(ngModel)]="birthDay" />
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="birthDay"
+                            [(ngModel)]="birthDay" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Address1</label>
@@ -200,11 +198,13 @@
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Create Order Date</label>
                         <input type="text" class="form-control" bsDatepicker
-                        [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="createOrderDate" [(ngModel)]="createOrderDate" />
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="createOrderDate"
+                            [(ngModel)]="createOrderDate" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity </label>
-                        <input type="number" class="form-control" name="totalQuantityItem" [(ngModel)]="modelEdit.totalQuantityItem" />
+                        <input type="number" class="form-control" name="totalQuantityItem"
+                            [(ngModel)]="modelEdit.totalQuantityItem" />
                     </div>
                     <div class="col-8">
                         <label for="TextInput" class="form-label fw-bold label-custom">Order Status </label>
