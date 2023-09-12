@@ -13,7 +13,7 @@ import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.s
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss']
 })
-export class MainComponent implements OnInit{
+export class MainComponent implements OnInit {
   listEmployees: Employee[] = [];
   _selectedColumns: any[];
   activityValues: number[] = [0, 100];
@@ -28,8 +28,8 @@ export class MainComponent implements OnInit{
   EmployeeModel: Employee = {
     roles: null
   } as Employee;
-  roleName:string = '';
-  imgUrl:string = environment.imageURLIdentity;
+  roleName: string = '';
+  imgUrl: string = environment.imageURLIdentity;
   @ViewChild('modalRole', { static: false }) modalRole?: ModalDirective;
   constructor(private notiflix: NgxNotiflixService,
     private service: EmployeeService,
@@ -53,7 +53,7 @@ export class MainComponent implements OnInit{
     this.cols = [
       { field: 'avatar', header: 'Avatar' },
       { field: 'email', header: 'Email' },
-      { field: 'phoneNumber', header: 'Phone Number' },
+      { field: 'phone', header: 'Phone Number' },
       { field: 'address1', header: 'address 1' },
       { field: 'address2', header: 'address 2' },
     ];
@@ -65,8 +65,8 @@ export class MainComponent implements OnInit{
     this.service.getAllEmployees(this.pagination, this.keyword).subscribe({
       next: res => {
         this.listEmployees = res.result;
-       this.listEmployees.map(x=>{
-         x.avatar != null ? x.avatar = this.imgUrl + x.avatar : ''
+        this.listEmployees.map(x => {
+          x.avatar != null ? x.avatar = this.imgUrl + x.avatar : '';
         });
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
@@ -130,24 +130,25 @@ export class MainComponent implements OnInit{
     this.EmployeeModel.roles = e;
   }
 
-  loadDetailRole(mail){
+  loadDetailRole(mail) {
     this.service.getEmployeeDetail(mail).subscribe({
-      next:res=>{
-        this.EmployeeModel.roles = res.roles 
+      next: res => {
+        this.EmployeeModel.roles = res.roles;
+        this.EmployeeModel.phoneNumber = this.EmployeeModel.phoneNumber?.substring(2);
+        this.EmployeeModel.avatar = null;
       }
     })
   }
 
   role(item: Employee) {
     this.loadDetailRole(item.email);
-    this.roleName=this.EmployeeModel.roles?.toString();
+    this.roleName = this.EmployeeModel.roles?.toString();
     this.EmployeeModel = { ...item };
     this.modalRole.show();
   }
 
   addRole() {
     this.notiflix.showLoading();
-    console.log(this.EmployeeModel);
     this.service.update(this.EmployeeModel).subscribe({
       next: res => {
         if (res.success) {
@@ -166,7 +167,7 @@ export class MainComponent implements OnInit{
     })
   }
 
-  goToRoles(){
+  goToRoles() {
     this.router.navigate(['employees/role'])
   }
 }

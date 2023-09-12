@@ -32,9 +32,19 @@ export class UpdateComponent implements OnInit {
       next: res => {
         if (Object.keys(res).length === 0) {
           this.cancel();
+        } else {
+          this.userModel = res;
+          this.notiflix.hideLoading();
+          this.loadDetail();
         }
+      }
+    })
+  }
+  loadDetail() {
+    this.service.getEmployeeDetail(this.userModel.email).subscribe({
+      next: res => {
         this.userModel = res;
-        this.notiflix.hideLoading();
+        this.userModel.phoneNumber = this.userModel.phoneNumber?.substring(2);
       }
     })
   }
@@ -42,16 +52,16 @@ export class UpdateComponent implements OnInit {
     let reader = new FileReader(); // HTML5 FileReader API
     if (event.target.files && event.target.files[0]) {
       reader.readAsDataURL(event.target.files[0]);
-    
-      }
-      //When file uploads set it to file formcontrol
-      reader.onload = (e) => {
-        // called once readAsDataURL is completed
-        this.image = e.target.result.toString();
-        this.userModel.avatar = this.image;
-      };
+
     }
-  
+    //When file uploads set it to file formcontrol
+    reader.onload = (e) => {
+      // called once readAsDataURL is completed
+      this.image = e.target.result.toString();
+      this.userModel.avatar = this.image;
+    };
+  }
+
   save() {
     const passwordRegex = /^[a-zA-Z0-9]+$/;
     if (!passwordRegex.test(this.userModel.password)) {
