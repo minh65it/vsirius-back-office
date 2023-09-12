@@ -23,6 +23,7 @@ export class MainComponent implements OnInit {
     pageSize: 10,
   };
   keyword: string = '';
+  idCount: number = 0;
   model: OrderStatus = {
     isActive: true
   } as OrderStatus;
@@ -84,12 +85,21 @@ export class MainComponent implements OnInit {
   }
 
   goToAdd() {
+    //lấy id hiện tại của list order status
+    this.service.getListStatus().subscribe({
+      next: res => {
+        this.idCount = res?.length + 1;
+      },
+      error: () => {
+      }
+    });
     this.modalAdd.show();
   }
   add() {
     if (this.myForm.valid) {
       this.checkValidated = false;
       this.notiflix.showLoading();
+      this.model.id = this.idCount;
       this.service.create(this.model).subscribe({
         next: res => {
           if (res.success) {
@@ -172,7 +182,7 @@ export class MainComponent implements OnInit {
   clearForm() {
     this.myForm.resetForm(
       {
-        isActive:true
+        isActive: true
       }
     );
     this.model = {} as OrderStatus;

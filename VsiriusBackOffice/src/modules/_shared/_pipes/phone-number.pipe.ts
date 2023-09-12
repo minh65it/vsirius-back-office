@@ -6,6 +6,8 @@ import { Pipe, PipeTransform } from '@angular/core';
 export class PhoneNumberPipe implements PipeTransform {
 
   transform(value: string, args?: any): any {
+    if (value == null)
+      return null;
     const countryCodeStr = value.slice(0, 2);
     const areaCodeStr = value.slice(2, 5);
     const midSectionStr = value.slice(5, 8);

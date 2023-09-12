@@ -131,8 +131,16 @@ export class MainComponent implements OnInit {
     this.loadStatusOrder(item.statusId);
     this.createOrderDate = new Date(item.createOrderDate);
     this.birthDay = new Date(item.birthDay);
-    this.modelEdit = { ...item };
+    this.getDetail(item.orderId);
     this.modalEdit.show();
+  }
+  getDetail(orderId: string) {
+    this.service.getDetail(orderId).subscribe({
+      next: (res) => {
+        this.modelEdit = res;
+      },
+      error: () => { }
+    });
   }
 
   save() {

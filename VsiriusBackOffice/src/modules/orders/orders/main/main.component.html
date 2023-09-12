@@ -154,12 +154,16 @@
             <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-4 mb-2">
-                        <label for="TextInput" class="form-label fw-bold label-custom">FirstName</label>
-                        <input type="text" class="form-control" name="firstName" [(ngModel)]="modelEdit.fullName" />
+                        <label for="TextInput" class="form-label fw-bold label-custom">Full Name</label>
+                        <input type="text" class="form-control" name="fullName" [(ngModel)]="modelEdit.fullName" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Email</label>
                         <input type="text" class="form-control" name="email" [(ngModel)]="modelEdit.email" />
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Phone Number</label>
+                        <input type="text" class="form-control" name="phone" [(ngModel)]="modelEdit.phone" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">BirthDay</label>
@@ -168,11 +172,11 @@
                             [(ngModel)]="birthDay" />
                     </div>
                     <div class="col-4 mb-2">
-                        <label for="TextInput" class="form-label fw-bold label-custom">Address1</label>
+                        <label for="TextInput" class="form-label fw-bold label-custom">Address 1</label>
                         <input type="text" class="form-control" name="address1" [(ngModel)]="modelEdit.address1" />
                     </div>
                     <div class="col-4 mb-2">
-                        <label for="TextInput" class="form-label fw-bold label-custom">Address2</label>
+                        <label for="TextInput" class="form-label fw-bold label-custom">Address 2</label>
                         <input type="text" class="form-control" name="address2" [(ngModel)]="modelEdit.address2" />
                     </div>
                     <div class="col-4 mb-2">
@@ -198,7 +202,7 @@
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Create Order Date</label>
                         <input type="text" class="form-control" bsDatepicker
-                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" name="createOrderDate"
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY hh:mm a' }" name="createOrderDate"
                             [(ngModel)]="createOrderDate" />
                     </div>
                     <div class="col-4 mb-2">

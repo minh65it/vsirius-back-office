@@ -12,12 +12,12 @@ import { KeyValuePair } from '../../_helpers/key-value-pair';
 export class OrderStatusService {
   baseUrl = environment.apiOrderURL + 'OrderStatus';
   constructor(private http: HttpClient) { }
-  
-  getData(pagination:PaginationParam,keyword:string){
-    return this.http.get<PaginationResult<OrderStatus>>(this.baseUrl + '/GetData',{params:{...pagination,keyword}});
+
+  getData(pagination: PaginationParam, keyword: string) {
+    return this.http.get<PaginationResult<OrderStatus>>(this.baseUrl + '/GetData', { params: { ...pagination, keyword } });
   }
 
-  create(dto:OrderStatus){
+  create(dto: OrderStatus) {
     return this.http.post<OperationResult>(this.baseUrl + '/Create', dto);
   }
 
@@ -25,11 +25,11 @@ export class OrderStatusService {
     return this.http.delete<OperationResult>(this.baseUrl + '/Delete', { params: { id } });
   }
 
-  update(dto:OrderStatus){
+  update(dto: OrderStatus) {
     return this.http.put<OperationResult>(this.baseUrl + '/Update', dto);
   }
 
-  getListStatus(){
+  getListStatus() {
     return this.http.get<KeyValuePair[]>(this.baseUrl + '/GetListStatus');
   }
 }
