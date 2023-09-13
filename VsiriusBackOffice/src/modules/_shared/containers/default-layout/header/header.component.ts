@@ -1,6 +1,7 @@
 import { Component, OnDestroy, OnInit, ViewChild } from "@angular/core";
 import { Router } from "@angular/router";
 import { ModalDirective } from "ngx-bootstrap/modal";
+import { RoleName } from "src/modules/_shared/_constants/role-name.enum";
 import { InitJsUtility } from "src/modules/_shared/_helpers/int-js-utility";
 import { VsiriusOrder } from "src/modules/_shared/_models/vsiriusOrder";
 import { ContactSignalRService } from "src/modules/_shared/_services/contact-signalR.service";
@@ -15,11 +16,12 @@ import { AuthService } from "src/modules/_shared/_services/users/auth.service";
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss']
 })
-export class HeaderComponent implements OnInit,OnDestroy {
+export class HeaderComponent implements OnInit, OnDestroy {
   listOrder: VsiriusOrder[] = [];
-  orderModel :  VsiriusOrder = <VsiriusOrder>{};
+  orderModel: VsiriusOrder = <VsiriusOrder>{};
   countNotification: number = 0;
   isNewNotification: boolean = false;
+  isShowOrder: boolean = false;
   time: any;
   @ViewChild('modalEdit', { static: false }) modalEdit?: ModalDirective;
   constructor(private authService: AuthService,
@@ -27,13 +29,17 @@ export class HeaderComponent implements OnInit,OnDestroy {
     private notiflix: NgxNotiflixService,
     private initJsUtility: InitJsUtility,
     private serviceSignalR: SignalRService,
-    private contactServiceSignalR:ContactSignalRService,
-    private router:Router) { }
+    private contactServiceSignalR: ContactSignalRService,
+    private router: Router) { }
 
   ngOnInit() {
     this.loadContactNotification();
-    this.loadNotification();
-    this.loadNotificationList();
+    let roleTmp = localStorage.getItem('ROLES');
+    if (roleTmp.includes(RoleName.IS_Admin) || roleTmp.includes(RoleName.IS_Order)) {
+      this.loadNotification();
+      this.loadNotificationList();
+      this.isShowOrder = true;
+    }
   }
 
   ngAfterViewInit(): void {
@@ -50,7 +56,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
     })
   }
 
-  loadContactNotification(){
+  loadContactNotification() {
     this.contactServiceSignalR.notificationContactChangedEmitter.subscribe(res => {
       if (res != null) {
         this.notiflix.info('You have a new contact letter');
@@ -58,7 +64,7 @@ export class HeaderComponent implements OnInit,OnDestroy {
       }
     })
   }
-  
+
   loadNotificationList() {
     this.serviceOrder.getTopOrder().subscribe({
       next: res => {
@@ -79,43 +85,41 @@ export class HeaderComponent implements OnInit,OnDestroy {
     }, 4000);
   }
 
-  loadOrderByUser(orderId:string){
+  loadOrderByUser(orderId: string) {
     this.notiflix.showLoading();
     this.serviceOrder.getDetail(orderId).subscribe({
-      next:res=>{
+      next: res => {
         this.orderModel = res;
         this.notiflix.hideLoading();
       },
-      error:()=>{
+      error: () => {
         this.notiflix.error('Error System');
         this.notiflix.hideLoading();
       }
     })
   }
 
-  showNotification(item: VsiriusOrder)
-  {
+  showNotification(item: VsiriusOrder) {
     this.loadOrderByUser(item?.orderId);
     item.isRead = true;
     this.update(item);
     this.modalEdit.show();
   }
 
-  update(item:VsiriusOrder){
+  update(item: VsiriusOrder) {
     this.serviceOrder.update(item).subscribe({
-      next:res=>{
-        if(res.success)
-        this.notiflix.success(`Seen order notice at ${new Date(item.createOrderDate).toLocaleString()}`);
+      next: res => {
+        if (res.success)
+          this.notiflix.success(`Seen order notice at ${new Date(item.createOrderDate).toLocaleString()}`);
       }
     })
   }
 
-  delete(item: VsiriusOrder)
-  {
-      this.listOrder = this.listOrder.filter(x=>x.orderId != item.orderId);
+  delete(item: VsiriusOrder) {
+    this.listOrder = this.listOrder.filter(x => x.orderId != item.orderId);
   }
 
-  showAll(){
+  showAll() {
     this.router.navigate(['orders']);
   }
   playNoti() {

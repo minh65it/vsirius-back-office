@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 import { FunctionUtility } from 'src/modules/_shared/_helpers/function-utility';
 import { Employee } from 'src/modules/_shared/_models/employee';
 import { EmployeeService } from 'src/modules/_shared/_services/employees/employee.service';
@@ -19,6 +20,7 @@ export class UpdateComponent implements OnInit {
     roles: []
   } as Employee;
   image: string = 'assets/images/NO-PHOTO_165x165.png';
+  urlAvatar = environment.imageURLIdentity;
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
     private service: EmployeeService) { }
@@ -45,6 +47,10 @@ export class UpdateComponent implements OnInit {
       next: res => {
         this.userModel = res;
         this.userModel.phoneNumber = this.userModel.phoneNumber?.substring(2);
+        if (this.userModel.avatar !== null) {
+          this.image = this.urlAvatar + this.userModel.avatar;
+          this.userModel.avatar = null;
+        };
       }
     })
   }
@@ -87,7 +93,7 @@ export class UpdateComponent implements OnInit {
           this.notiflix.error('Error System');
           this.notiflix.hideLoading();
         }
-      })
+      });
     }
     else {
       this.checkValidated = true;

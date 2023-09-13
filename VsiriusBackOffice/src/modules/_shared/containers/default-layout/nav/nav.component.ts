@@ -1,5 +1,5 @@
-import { Component, OnDestroy, OnInit, Renderer2 } from '@angular/core';
-import { RoleName } from 'src/modules/_shared/_constants/role-name.enum';
+import { Component, OnInit } from '@angular/core';
+import { MenuRoles, RoleName } from 'src/modules/_shared/_constants/role-name.enum';
 
 
 @Component({
@@ -9,27 +9,26 @@ import { RoleName } from 'src/modules/_shared/_constants/role-name.enum';
 })
 export class NavComponent implements OnInit {
   isAdmin: boolean = false;
-  isProduct:boolean = false;
-  listRoles: any;
-  constructor(
-
-  ) {
-
-  }
+  isProduct: boolean = false;
+  menu: MenuRoles = <MenuRoles>{}
+  listRoles: string[];
+  constructor() { }
 
   ngOnInit() {
     this.loadData();
   }
 
   loadData() {
-    this.listRoles = localStorage.getItem('ROLES');
-    
-    if (this.listRoles.includes(RoleName.IS_ADMIN)) {
-      this.isAdmin = true;
-      this.isProduct = true;
-    }
-    if(this.listRoles.includes(RoleName.IS_PRODUCT)){
-      this.isProduct = true;
-    }
+    this.listRoles = JSON.parse(localStorage.getItem('ROLES'));
+    const roleNameArray: string[] = Object.values(RoleName);
+
+    this.listRoles.forEach(i => {
+      roleNameArray.forEach(i2 => {
+        if (i.includes(i2)) {
+          this.menu[i2] = true;
+        }
+      });
+    });
+
   }
 }

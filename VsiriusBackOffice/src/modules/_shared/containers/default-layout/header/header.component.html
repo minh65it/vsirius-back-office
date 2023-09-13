@@ -54,7 +54,7 @@
                 {{ notification?.total >= 100 ? "99+" : notification?.total }}
               </div>
             </div> -->
-            <div id="NotificationsDiv" class="dropdown-menu shadow rounded-4 border-0 p-0 m-0">
+            <div *ngIf="isShowOrder" id="NotificationsDiv" class="dropdown-menu shadow rounded-4 border-0 p-0 m-0">
               <div class="card w380">
                 <div class="card-header p-3">
                   <h6 class="card-title mb-0">Notifications</h6>

@@ -15,7 +15,8 @@
                     <label for="TextInput" class="form-label fw-bold">Content <span class="text-danger">*</span></label>
                     <!-- <ckeditor [(ngModel)]="notificationModel.content" name="content" [config]="ckeConfig">
                     </ckeditor> -->
-                    <textarea class="form-control" cols="200" [(ngModel)]="notificationModel.content" name="content"></textarea>
+                    <textarea class="form-control" cols="200" [(ngModel)]="notificationModel.content"
+                        name="content"></textarea>
                 </div>
                 <div class="col-md-12 mt-2">
                     <div class="form-check form-switch ">
@@ -53,8 +54,7 @@
                                                     <tr>
                                                         <th class="text-center">
                                                             <input class="form-check-input" type="checkbox"
-                                                                name="isCheckAll"
-                                                                [(ngModel)]="isCheckAll"
+                                                                name="isCheckAll" [(ngModel)]="isCheckAll"
                                                                 (ngModelChange)="changeCheckAll($event)" />
                                                         </th>
                                                         <!-- STT -->
@@ -82,12 +82,11 @@
                                                 </ng-template>
                                                 <!-- BODY -->
                                                 <ng-template pTemplate="body" let-item let-columns="columns"
-                                                    let-rowIndex="rowIndex" >
-                                                    <tr (click)="changeCheckItem(item)"  >
+                                                    let-rowIndex="rowIndex">
+                                                    <tr (click)="changeCheckItem(item)">
                                                         <td class="text-center">
                                                             <input class="form-check-input" type="checkbox"
-                                                                [name]="'item_' + rowIndex"
-                                                                [(ngModel)]="item.isChecked"
+                                                                [name]="'item_' + rowIndex" [(ngModel)]="item.isChecked"
                                                                 [disabled]="item.isChecked"
                                                                 (ngModelChange)="changeCheckItem(item)" />
                                                         </td>
@@ -102,9 +101,13 @@
                                                             <ng-container
                                                                 *ngIf="col.field != 'avatar'">{{item[col.field]}}</ng-container>
                                                             <ng-container *ngIf="col.field == 'avatar' ">
-                                                                <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'"
-                                                                    [name]="item[col.field] + rowIndex"
-                                                                    class="rounded lg avatar" [alt]="item[col.field]">
+                                                                <img *ngIf="item?.avatar?.includes('upload/user/') || item?.avatar == null; else elseBlock"
+                                                                    [src]="item.avatar != null ? urlAvatar+item.avatar : 'assets/images/NO-PHOTO_165x165.png'"
+                                                                    class="rounded lg avatar"
+                                                                    [alt]="urlAvatar+item.avatar">
+                                                                <ng-template #elseBlock><img [src]="item.avatar"
+                                                                        class="rounded lg avatar" [alt]="item.avatar">
+                                                                </ng-template>
                                                             </ng-container>
                                                         </td>
                                                     </tr>
@@ -122,12 +125,12 @@
                                     </div>
                                     <div class="col-md-4" style="height: 998px; overflow-y: auto;">
                                         <div class="col-12 md:col-6 drag-column mt-2">
-                                        <h3>List of users to be notified</h3>
+                                            <h3>List of users to be notified</h3>
                                             <div *ngFor="let user of listUsersChoose;let i = index">
                                                 <div class="product-item" pDraggable="products">
                                                     <div class="image-container">
-                                                        <img [src]="image"
-                                                            [name]="user.avatar + i" class="product-image" />
+                                                        <img [src]="image" [name]="user.avatar + i"
+                                                            class="product-image" />
                                                     </div>
                                                     <div class="product-list-detail">
                                                         <h5 class="mb-2">{{user.email}}</h5>
@@ -135,7 +138,8 @@
                                                         <span class="text-info">{{user.phoneNumber}}</span>
                                                     </div>
                                                     <div style="cursor: pointer;">
-                                                       <i class="fa fa-trash text-danger" (click)="deleteSendUser(user)"></i>
+                                                        <i class="fa fa-trash text-danger"
+                                                            (click)="deleteSendUser(user)"></i>
                                                     </div>
                                                 </div>
                                             </div>

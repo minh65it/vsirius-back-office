@@ -47,7 +47,7 @@ export class CreateComponent {
   roleName: string = '';
   isCheckAll: boolean = false;
   user: any = JSON.parse(localStorage.getItem('USER'));
-  imageURL: string = environment.baseCSRURL;
+  urlAvatar = environment.imageURLIdentity;
   image: string = '';
   constructor(private notiflix: NgxNotiflixService,
     private router: Router,
@@ -83,15 +83,19 @@ export class CreateComponent {
       next: res => {
         this.listUsers = res.result;
         this.listUsers.map(x => x.isChecked = false);
-        this.listUsers.forEach(x => {
-          if (x.avatar != null) {
-            this.image = this.imageURL + '/' + x.avatar;
-            console.log(this.image);
-          }
-          else {
-            this.image = 'assets/images/NO-PHOTO_165x165.png'
-          }
-        })
+        //this.listUsers.forEach(x => {
+        // if (x.avatar != null) {
+        //   if (x.avatar.includes('upload/user')) {
+        //     this.image = this.urlAvatar + x.avatar;
+        //   }
+        //   else
+        //     this.image = x.avatar;
+        // }
+        // else {
+        //   this.image = 'assets/images/NO-PHOTO_165x165.png'
+        // }
+        //});
+
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
