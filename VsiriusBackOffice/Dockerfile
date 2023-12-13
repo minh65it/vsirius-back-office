@@ -33,9 +33,9 @@ FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 AS final
 COPY --from=build C:/app/dist/vsirius-back-office C:/dist/vsirius-back-office
 
 # Cấu hình nginx
-RUN powershell -Command Add-WindowsFeature Web-Server; \
-    Remove-Item -Recurse C:\inetpub\wwwroot\*; \
-    Copy-Item -Recurse C:\dist\vsirius-back-office\* C:\inetpub\wwwroot\*
+RUN powershell.exe -Command Add-WindowsFeature Web-Server; \
+    Remove-Item -Recurse C:/inetpub/wwwroot/*; \
+    Copy-Item -Recurse C:/dist/vsirius-back-office/* C:/inetpub/wwwroot/*
 
 # Mở cổng 80
 EXPOSE 80
