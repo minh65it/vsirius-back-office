@@ -24,7 +24,7 @@ RUN powershell.exe -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPo
 RUN yarn -i
 
 # Xây dựng ứng dụng Angular
-RUN ng build --configuration production
+RUN npm run build --prod
 
 # Đặt hình ảnh cơ sở cho nginx
 FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 AS final
@@ -33,9 +33,9 @@ FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 AS final
 COPY --from=build C:/app/dist/vsirius-back-office C:/dist/vsirius-back-office
 
 # Cấu hình nginx
-RUN powershell.exe -Command Add-WindowsFeature Web-Server; \
-    Remove-Item -Recurse C:/inetpub/wwwroot/*; \
-    Copy-Item -Recurse C:/dist/vsirius-back-office/* C:/inetpub/wwwroot/*
+RUN Add-WindowsFeature Web-Server; \
+    Remove-Item -Recurse C:\inetpub\wwwroot\* -Force; \
+    Copy-Item -Recurse C:\dist\vsirius-back-office\* C:\inetpub\wwwroot\;
 
 # Mở cổng 80
 EXPOSE 80
