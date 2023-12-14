@@ -16,6 +16,7 @@ RUN npm install -g @angular/cli
 COPY . .
 
 # Run ng build through npm to create dist folder
+RUN npm i --legacy-peer-deps
 
 RUN ng build
 
