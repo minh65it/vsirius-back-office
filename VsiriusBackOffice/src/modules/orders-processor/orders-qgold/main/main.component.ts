@@ -1,5 +1,6 @@
-import { OrderProcessor } from './../../../_shared/_models/orderProcessor';
+import { OrderProcessor } from '../../../_shared/_models/order-processor/orderProcessor';
 import { Component, Input, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 
 @Component({
@@ -24,7 +25,9 @@ export class MainComponent implements OnInit {
   cols: any[];
 
 
-  constructor() { }
+  constructor(
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
@@ -44,4 +47,8 @@ export class MainComponent implements OnInit {
 
   detail(item: OrderProcessor) { }
   pageChanged(event: any) { }
+
+  submitLink() {
+    this.router.navigate(['/orders-processor/submit-qgold'])
+  }
 }

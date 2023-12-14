@@ -1,0 +1,161 @@
+<div class="card ">
+  <form #myForm="ngForm" autocomplete="off" (ngSubmit)="submitOrder()">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-xl-12 col-md-12">
+          <label for="TextInput" class="form-label fw-bold">Ship to name <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter Name... " name="shipToName"
+            [(ngModel)]="qgoldFtpOrderObject.shipToName" #shipToName="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToName.invalid && (shipToName.touched || shipToName.dirty || checkValidated)">
+            <span>*Ship to name </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to address 1 <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to address 1... " name="address1"
+            [(ngModel)]="qgoldFtpOrderObject.shipToAddress1" #address1="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="address1.invalid && (address1.touched || address1.dirty || checkValidated)">
+            <span>*Ship to address 1 </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to address 2 <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to address 2... " name="address2"
+            [(ngModel)]="qgoldFtpOrderObject.shipToAddress2" #address2="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="address2.invalid && (address2.touched || address2.dirty || checkValidated)">
+            <span>*Ship to address 2 </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to address 3 <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to address 3... " name="address3"
+            [(ngModel)]="qgoldFtpOrderObject.shipToAddress3" #address3="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="address3.invalid && (address3.touched || address3.dirty || checkValidated)">
+            <span>*Ship to address 3 </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to city <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to city... " name="shipToCity"
+            [(ngModel)]="qgoldFtpOrderObject.shipToCity" #shipToCity="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToCity.invalid && (shipToCity.touched || shipToCity.dirty || checkValidated)">
+            <span>*Ship to city </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to state province <span
+              class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to state province... "
+            name="shipToState_Province" [(ngModel)]="qgoldFtpOrderObject.shipToState_Province"
+            #shipToState_Province="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToState_Province.invalid && (shipToState_Province.touched || shipToState_Province.dirty || checkValidated)">
+            <span>*Ship to state province </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to zip <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to zip... " name="shipToZip"
+            [(ngModel)]="qgoldFtpOrderObject.shipToZip" #shipToZip="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToZip.invalid && (shipToZip.touched || shipToZip.dirty || checkValidated)">
+            <span>*Ship to zip </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to country code <span
+              class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to country code... " name="shipToCountryCode"
+            [(ngModel)]="qgoldFtpOrderObject.shipToCountryCode" #shipToCountryCode="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToCountryCode.invalid && (shipToCountryCode.touched || shipToCountryCode.dirty || checkValidated)">
+            <span>*Ship to country code </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to phone <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to phone... " name="shipToPhone"
+            [(ngModel)]="qgoldFtpOrderObject.shipToPhone" #shipToPhone="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToPhone.invalid && (shipToPhone.touched || shipToPhone.dirty || checkValidated)">
+            <span>*Ship to phone </span>
+          </div>
+        </div>
+        <!--  -->
+        <div class="col-xl-12 col-md-12 mt-2">
+          <label for="TextInput" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
+          <textarea class="form-control" cols="200" [(ngModel)]="qgoldFtpOrderObject.description"
+            placeholder="Enter description..." name="content"></textarea>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship method code <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship method code... " name="ship_Method_Code"
+            [(ngModel)]="qgoldFtpOrderObject.ship_Method_Code" #ship_Method_Code="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="ship_Method_Code.invalid && (ship_Method_Code.touched || ship_Method_Code.dirty || checkValidated)">
+            <span>*Ship method code </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship option code <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship option code... " name="ship_Option_Code"
+            [(ngModel)]="qgoldFtpOrderObject.ship_Option_Code" #ship_Option_Code="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="ship_Option_Code.invalid && (ship_Option_Code.touched || ship_Option_Code.dirty || checkValidated)">
+            <span>*Ship option code </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Gift message <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter gift message... " name="gift_Message"
+            [(ngModel)]="qgoldFtpOrderObject.gift_Message" #gift_Message="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="gift_Message.invalid && (gift_Message.touched || gift_Message.dirty || checkValidated)">
+            <span>*Gift message </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Cust order number <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter cust order number... " name="cust_Order_Number"
+            [(ngModel)]="qgoldFtpOrderObject.cust_Order_Number" #cust_Order_Number="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="cust_Order_Number.invalid && (cust_Order_Number.touched || cust_Order_Number.dirty || checkValidated)">
+            <span>*Cust order number </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Seller order id <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter seller order id... " name="amz_Order_ID"
+            [(ngModel)]="qgoldFtpOrderObject.amz_Order_ID" #amz_Order_ID="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="amz_Order_ID.invalid && (amz_Order_ID.touched || amz_Order_ID.dirty || checkValidated)">
+            <span>*Seller order id </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Amazon item id <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter amazon item id... " name="amz_Item_ID"
+            [(ngModel)]="qgoldFtpOrderObject.amz_Item_ID" #amz_Item_ID="ngModel" />
+        </div>
+      </div>
+    </div>
+    <div class="card-footer text-end mt-5">
+      <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+        Reset
+      </button>
+      <button class="btn btn-success me-2 lift rounded-2" type="submit">
+        <i class="fa fa-save"></i> Save
+      </button>
+      <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+        <i class="fa fa-close"></i>
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

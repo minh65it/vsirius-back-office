@@ -1,4 +1,4 @@
-import { OrderProcessor } from './../../_models/orderProcessor';
+import { OrderProcessor } from '../../_models/order-processor/orderProcessor';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';

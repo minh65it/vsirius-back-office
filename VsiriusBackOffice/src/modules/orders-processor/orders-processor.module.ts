@@ -10,10 +10,12 @@ import { ButtonModule } from 'primeng/button';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MainComponent } from './orders-qgold/main/main.component';
+import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 
 @NgModule({
   declarations: [
-    MainComponent
+    MainComponent,
+    SubmitOrderComponent
   ],
   imports: [
     CommonModule,
