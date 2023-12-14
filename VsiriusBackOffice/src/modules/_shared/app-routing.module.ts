@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: DefaultLayoutComponent,
     data: {
       breadcrumb: 'Home',
@@ -42,6 +42,10 @@ const routes: Routes = [
         loadChildren: () => import('../orders/orders/orders.module').then((m) => m.OrdersModule),
       },
       {
+        path: 'orders-processor',
+        loadChildren: () => import('../orders-processor/orders-processor.module').then((m) => m.OrdersProcessorModule),
+      },
+      {
         path: 'contacts',
         loadChildren: () => import('../contacts/contacts.module').then((m) => m.ContactsModule),
       },
@@ -54,7 +58,7 @@ const routes: Routes = [
         loadChildren: () => import('../notifications/notifications.module').then((m) => m.NotificationsModule),
       },
       {
-        path:'drivenHtmlPagess',
+        path: 'drivenHtmlPagess',
         loadChildren: () => import('../pages/pages.module').then((m) => m.PagesModule),
       },
     ]

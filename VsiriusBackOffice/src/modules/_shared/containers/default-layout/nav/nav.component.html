@@ -51,6 +51,12 @@
                 <span class="ms-2">Orders</span>
               </a>
             </li>
+            <li class="collapsed" *ngIf="menu.Admin || menu.OrderProcessor">
+              <a class="m-link cursor-pointer" [routerLink]="'/orders-processor'" routerLinkActive="active">
+                <i class="fa fa-shopping-basket"></i>
+                <span class="ms-2">Orders Processor</span>
+              </a>
+            </li>
 
             <li class="collapsed" *ngIf="menu.Admin || menu.DrivenHTML">
               <a class="m-link cursor-pointer" [routerLink]="'/contacts'" routerLinkActive="active">

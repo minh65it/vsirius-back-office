@@ -1,44 +1,38 @@
-# Sử dụng hình ảnh cơ sở Windows Server Core
-FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS build
+FROM node:18.19.0-alpine As build
 
-WORKDIR C:/app
 
-# Sao chép source code
+WORKDIR /usr/src/app
+
+
+COPY ./ /usr/src/app/
+
+# Run npm install @angular/cli
+
+
+RUN npm install -g @angular/cli
+
+# Copy all files
+
 COPY . .
 
-# Cài đặt Node.js và npm
-RUN powershell.exe -Command "Invoke-WebRequest -Uri https://nodejs.org/dist/latest-v18.x/node-v18.19.0-x64.msi -OutFile nodejs.msi" && \
-    powershell.exe -Command "Start-Process msiexec.exe -Wait -ArgumentList '/i nodejs.msi /quiet'" && \
-    powershell.exe -Command "Remove-Item nodejs.msi"
+# Run ng build through npm to create dist folder
 
-# Cài đặt yarn
-RUN npm install -g yarn
-
-# Cài đặt Angular CLI và các dependencies
-RUN npm install -g @angular/cli@16
-
-#execution policy
-RUN powershell.exe -Command "Set-ExecutionPolicy -Scope CurrentUser -ExecutionPolicy RemoteSigned"
-
-# Cài đặt các packages cần thiết
-RUN yarn -i
-
-# Xây dựng ứng dụng Angular
 RUN npm run build --prod
 
-# Đặt hình ảnh cơ sở cho nginx
-FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS final
 
-# Sao chép tệp từ hình ảnh build trước đó
-COPY --from=build C:/app/dist/vsirius-back-office C:/dist/vsirius-back-office
+# ARG NODE_ENV=production
 
-# Cấu hình nginx
-RUN powershell.exe -Command "Install-WindowsFeature -Name Web-Server;" && \
-    powershell.exe -Command "Remove-Item -Recurse C:\inetpub\wwwroot\* -Force;" && \
-    powershell.exe -Command "Copy-Item -Recurse C:\dist\vsirius-back-office\* C:\inetpub\wwwroot\;"
+# ENV NODE_ENV=$NODE_ENV
 
-# Mở cổng 80
+# ENV API_URL=http://192.168.1.25:8082/api/
+
+
+# Define nginx for front-end server
+
+FROM nginx:latest
+
+# Copy dist from ng build to nginx html folder
+
+COPY --from=build /usr/src/app/dist/vsirius-back-office /usr/share/nginx/html
+
 EXPOSE 80
-
-# Đặt lệnh chạy khi container được khởi động
-CMD ["C:\\windows\\system32\\inetsrv\\w3svc.exe"]

@@ -4,6 +4,7 @@ export const RoleName = {
      IS_User: 'User',
      IS_Employee: 'Employee',
      IS_Order: 'Order',
+     IS_Order_Processor: 'OrderProcessor',
      IS_Cart: 'Cart',
      IS_System: 'System',
      IS_Notification: 'Notification',
@@ -16,6 +17,7 @@ export interface MenuRoles {
      User: boolean;
      Employee: boolean;
      Order: boolean;
+     OrderProcessor: boolean;
      Cart: boolean;
      System: boolean;
      Notification: boolean;
