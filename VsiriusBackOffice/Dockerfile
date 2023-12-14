@@ -27,15 +27,15 @@ RUN yarn -i
 RUN npm run build --prod
 
 # Đặt hình ảnh cơ sở cho nginx
-FROM mcr.microsoft.com/windows/nanoserver:ltsc2019 AS final
+FROM mcr.microsoft.com/windows/servercore:ltsc2019 AS final
 
 # Sao chép tệp từ hình ảnh build trước đó
 COPY --from=build C:/app/dist/vsirius-back-office C:/dist/vsirius-back-office
 
 # Cấu hình nginx
-RUN Add-WindowsFeature Web-Server; \
-    Remove-Item -Recurse C:\inetpub\wwwroot\* -Force; \
-    Copy-Item -Recurse C:\dist\vsirius-back-office\* C:\inetpub\wwwroot\;
+RUN powershell.exe -Command "Install-WindowsFeature -Name Web-Server;" && \
+    powershell.exe -Command "Remove-Item -Recurse C:\inetpub\wwwroot\* -Force;" && \
+    powershell.exe -Command "Copy-Item -Recurse C:\dist\vsirius-back-office\* C:\inetpub\wwwroot\;"
 
 # Mở cổng 80
 EXPOSE 80
