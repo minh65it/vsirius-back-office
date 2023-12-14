@@ -12,6 +12,7 @@ export class NavComponent implements OnInit {
   isProduct: boolean = false;
   menu: MenuRoles = <MenuRoles>{}
   listRoles: string[];
+  listOrder: string[] = ["Qgold", "Amazon", "Walmart"];
   constructor() { }
 
   ngOnInit() {
@@ -31,4 +32,5 @@ export class NavComponent implements OnInit {
     });
 
   }
+  changeRoute() { }
 }

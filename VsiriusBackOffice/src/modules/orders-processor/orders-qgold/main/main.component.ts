@@ -5,7 +5,7 @@ import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css']
+  styleUrls: ['./main.component.scss']
 })
 export class MainComponent implements OnInit {
 

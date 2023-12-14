@@ -4,7 +4,7 @@ import { MainComponent } from './orders-qgold/main/main.component';
 
 const routes: Routes = [
   {
-    path: '',
+    path: 'Qgold',
     component: MainComponent,
     data: {
       breadcrumb: 'Order Qgold',

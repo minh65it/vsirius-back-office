@@ -51,11 +51,22 @@
                 <span class="ms-2">Orders</span>
               </a>
             </li>
+
             <li class="collapsed" *ngIf="menu.Admin || menu.OrderProcessor">
-              <a class="m-link cursor-pointer" [routerLink]="'/orders-processor'" routerLinkActive="active">
+              <a data-bs-toggle="collapse" class="m-link cursor-pointer" [routerLink]="'/orders-processor'"
+                routerLinkActive="active">
                 <i class="fa fa-shopping-basket"></i>
                 <span class="ms-2">Orders Processor</span>
+                <span class="arrow fa fa-angle-right ms-auto text-end"></span>
               </a>
+              <ul class="sub-menu collapsed">
+                <li class="collapsed" *ngFor="let child of listOrder">
+                  <a class="m-link cursor-pointer" [routerLink]="'/orders-processor/'+ child" routerLinkActive="active">
+                    <i class="fa fa-shopping-cart"></i>
+                    <span class="ms-2 " style="cursor: pointer;">{{child}}</span>
+                  </a>
+                </li>
+              </ul>
             </li>
 
             <li class="collapsed" *ngIf="menu.Admin || menu.DrivenHTML">
