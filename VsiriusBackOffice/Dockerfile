@@ -7,11 +7,9 @@ WORKDIR /usr/src/app
 COPY ./ /usr/src/app/
 
 # Run npm install @angular/cli
-# Cài đặt yarn
-RUN npm install -g yarn
 
-# Cài đặt Angular CLI và các dependencies
-RUN npm install -g @angular/cli@16
+
+RUN npm install -g @angular/cli
 
 # Copy all files
 
@@ -19,11 +17,7 @@ COPY . .
 
 # Run ng build through npm to create dist folder
 
-# Cài đặt các packages cần thiết
-RUN yarn -i
-
-# Xây dựng ứng dụng Angular
-RUN ng build --configuration production
+RUN npm run build
 
 
 # ARG NODE_ENV=production
