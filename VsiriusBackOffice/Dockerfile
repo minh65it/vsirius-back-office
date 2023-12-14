@@ -17,7 +17,7 @@ COPY . .
 
 # Run ng build through npm to create dist folder
 
-RUN npm run build
+RUN ng build
 
 
 # ARG NODE_ENV=production
