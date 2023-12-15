@@ -23,7 +23,7 @@
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Ship to address 2 <span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter ship to address 2... " name="address2"
-            [(ngModel)]="qgoldFtpOrderObject.shipToAddress2" #address2="ngModel" required />
+            [(ngModel)]="qgoldFtpOrderObject.shipToAddress2" #address2="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="address2.invalid && (address2.touched || address2.dirty || checkValidated)">
             <span>*Ship to address 2 </span>
@@ -32,7 +32,7 @@
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Ship to address 3 <span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter ship to address 3... " name="address3"
-            [(ngModel)]="qgoldFtpOrderObject.shipToAddress3" #address3="ngModel" required />
+            [(ngModel)]="qgoldFtpOrderObject.shipToAddress3" #address3="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="address3.invalid && (address3.touched || address3.dirty || checkValidated)">
             <span>*Ship to address 3 </span>
@@ -52,7 +52,7 @@
               class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter ship to state province... "
             name="shipToState_Province" [(ngModel)]="qgoldFtpOrderObject.shipToState_Province"
-            #shipToState_Province="ngModel" required />
+            #shipToState_Province="ngModel" required [maxLength]="2" />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="shipToState_Province.invalid && (shipToState_Province.touched || shipToState_Province.dirty || checkValidated)">
             <span>*Ship to state province </span>
@@ -87,6 +87,42 @@
           </div>
         </div>
         <!--  -->
+        <div class="row" *ngFor="let itemQgold of listItemQgold; index as i">
+          <div class="col-xl-3 col-md-3 mt-1">
+            <label for="TextInput" class="form-label fw-bold">Item <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter ship to country code... " name="item{{i}}"
+              [(ngModel)]="itemQgold.item" #item="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="item.invalid && (item.touched || item.dirty || checkValidated)">
+              <span>*Item </span>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-3 mt-1">
+            <label for="TextInput" class="form-label fw-bold">Ship to phone <span class="text-danger">*</span></label>
+            <input type="text" class="form-control" placeholder="Enter ship to phone... " name="qty{{i}}"
+              [(ngModel)]="itemQgold.qty" #qty="ngModel" required />
+            <div class="text-danger mt-2 d-flex align-items-center"
+              *ngIf="qty.invalid && (qty.touched || qty.dirty || checkValidated)">
+              <span>*Qty </span>
+            </div>
+          </div>
+          <div class="col-xl-3 col-md-3 mt-1">
+            <label for="TextInput" class="form-label fw-bold">&nbsp;</label>
+            <div class="form">
+              <button class="btn btn-danger lift rounded-2" type="button" (click)="removeItem(i)">
+                <i class="fa fa-trash"></i>
+                Remove Item
+              </button>
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-12 col-md-12 mt-2">
+          <button class="btn btn-info lift rounded-2" type="button" (click)="addItem()">
+            <i class="fa fa-plus"></i>
+            Add Item
+          </button>
+        </div>
+        <!--  -->
         <div class="col-xl-12 col-md-12 mt-2">
           <label for="TextInput" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
           <textarea class="form-control" cols="200" [(ngModel)]="qgoldFtpOrderObject.description"
@@ -98,7 +134,7 @@
             [(ngModel)]="qgoldFtpOrderObject.ship_Method_Code" #ship_Method_Code="ngModel" required />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="ship_Method_Code.invalid && (ship_Method_Code.touched || ship_Method_Code.dirty || checkValidated)">
-            <span>*Ship method code </span>
+            <span>*Ship method code CA: 1701, Standard: 1102, Second Day: 220, Expedited: 1100 </span>
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
@@ -113,7 +149,7 @@
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Gift message <span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter gift message... " name="gift_Message"
-            [(ngModel)]="qgoldFtpOrderObject.gift_Message" #gift_Message="ngModel" required />
+            [(ngModel)]="qgoldFtpOrderObject.gift_Message" #gift_Message="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="gift_Message.invalid && (gift_Message.touched || gift_Message.dirty || checkValidated)">
             <span>*Gift message </span>
@@ -122,7 +158,7 @@
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Cust order number <span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter cust order number... " name="cust_Order_Number"
-            [(ngModel)]="qgoldFtpOrderObject.cust_Order_Number" #cust_Order_Number="ngModel" required />
+            [(ngModel)]="qgoldFtpOrderObject.cust_Order_Number" #cust_Order_Number="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="cust_Order_Number.invalid && (cust_Order_Number.touched || cust_Order_Number.dirty || checkValidated)">
             <span>*Cust order number </span>
