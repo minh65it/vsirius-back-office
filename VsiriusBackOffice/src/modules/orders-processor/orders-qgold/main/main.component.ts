@@ -1,4 +1,3 @@
-import { OrderProcessor } from '../../../_shared/_models/order-processor/orderProcessor';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
@@ -101,7 +100,8 @@ export class MainComponent implements OnInit {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
-  detail(item: OrderProcessor) {
+  detail(item: QgoldOrderDTO) {
+    this.service.currentID(item.orderQgoldId);
     this.router.navigate(['/orders-processor/detail-qgold']);
   }
   pageChanged(event: any) {

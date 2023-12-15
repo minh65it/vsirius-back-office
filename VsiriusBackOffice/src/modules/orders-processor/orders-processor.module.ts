@@ -12,11 +12,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { MainComponent } from './orders-qgold/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
 
 @NgModule({
   declarations: [
     MainComponent,
-    SubmitOrderComponent
+    SubmitOrderComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,

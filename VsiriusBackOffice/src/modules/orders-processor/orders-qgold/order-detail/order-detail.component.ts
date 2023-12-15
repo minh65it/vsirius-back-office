@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { QgoldOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
+import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
 
 @Component({
   selector: 'app-order-detail',
@@ -7,9 +11,45 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OrderDetailComponent implements OnInit {
 
-  constructor() { }
+  qgoldOrderDetail: QgoldOrderDetailDTO = {} as QgoldOrderDetailDTO;
+  id: string = '';
+  constructor(
+    private router: Router,
+    private service: OrdersQgoldService,
+    private notiflix: NgxNotiflixService,
+  ) { }
 
   ngOnInit() {
+    this.loadData();
+  }
+  loadData() {
+    this.service.currentIdOrder.subscribe({
+      next: res => {
+        if (Object.keys(res).length === 0) {
+          this.back();
+        } else {
+          this.id = res;
+          this.getDetail();
+        }
+      }
+    })
   }
 
+  getDetail() {
+    this.notiflix.showLoading();
+    this.service.getDetail(this.id).subscribe({
+      next: res => {
+        console.log(res);
+        this.qgoldOrderDetail = res;
+        this.notiflix.hideLoading();
+      },
+      error: () => {
+        this.notiflix.error('Error System');
+        this.notiflix.hideLoading();
+      }
+    })
+  }
+  back() {
+    this.router.navigate(['/orders-processor/Qgold']);
+  }
 }
