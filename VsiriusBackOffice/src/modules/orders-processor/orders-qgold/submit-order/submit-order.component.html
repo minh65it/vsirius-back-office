@@ -21,7 +21,7 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Ship to address 2 <span class="text-danger">*</span></label>
+          <label for="TextInput" class="form-label fw-bold">Ship to address 2 </label>
           <input type="text" class="form-control" placeholder="Enter ship to address 2... " name="address2"
             [(ngModel)]="qgoldFtpOrderObject.shipToAddress2" #address2="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
@@ -30,7 +30,7 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Ship to address 3 <span class="text-danger">*</span></label>
+          <label for="TextInput" class="form-label fw-bold">Ship to address 3 </label>
           <input type="text" class="form-control" placeholder="Enter ship to address 3... " name="address3"
             [(ngModel)]="qgoldFtpOrderObject.shipToAddress3" #address3="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
@@ -98,8 +98,8 @@
             </div>
           </div>
           <div class="col-xl-3 col-md-3 mt-1">
-            <label for="TextInput" class="form-label fw-bold">Ship to phone <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="Enter ship to phone... " name="qty{{i}}"
+            <label for="TextInput" class="form-label fw-bold">Qty <span class="text-danger">*</span></label>
+            <input type="number" class="form-control" placeholder="Enter qty... " name="qty{{i}}"
               [(ngModel)]="itemQgold.qty" #qty="ngModel" required />
             <div class="text-danger mt-2 d-flex align-items-center"
               *ngIf="qty.invalid && (qty.touched || qty.dirty || checkValidated)">
@@ -147,7 +147,7 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Gift message <span class="text-danger">*</span></label>
+          <label for="TextInput" class="form-label fw-bold">Gift message </label>
           <input type="text" class="form-control" placeholder="Enter gift message... " name="gift_Message"
             [(ngModel)]="qgoldFtpOrderObject.gift_Message" #gift_Message="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
@@ -156,7 +156,7 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Cust order number <span class="text-danger">*</span></label>
+          <label for="TextInput" class="form-label fw-bold">Cust order number </label>
           <input type="text" class="form-control" placeholder="Enter cust order number... " name="cust_Order_Number"
             [(ngModel)]="qgoldFtpOrderObject.cust_Order_Number" #cust_Order_Number="ngModel" />
           <div class="text-danger mt-2 d-flex align-items-center"
@@ -174,7 +174,7 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Amazon item id <span class="text-danger">*</span></label>
+          <label for="TextInput" class="form-label fw-bold">Amazon item id </label>
           <input type="text" class="form-control" placeholder="Enter amazon item id... " name="amz_Item_ID"
             [(ngModel)]="qgoldFtpOrderObject.amz_Item_ID" #amz_Item_ID="ngModel" />
         </div>

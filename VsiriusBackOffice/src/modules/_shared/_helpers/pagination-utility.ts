@@ -15,3 +15,11 @@ export class PaginationResult<T> {
   result: T[];
   pagination: Pagination;
 }
+
+export interface PaginationResult2<T> {
+  data: T[];
+  pageNumber: number;
+  pageSize: number;
+  totalCount: number;
+  pageCount: number;
+}

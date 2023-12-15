@@ -13,7 +13,7 @@ export const environment = {
     apiURL: 'http://118.69.37.20:8087/api/',
     imageURLIdentity: 'http://118.69.37.20:8087/',
     apiOrderURL: 'http://118.69.37.20:8090/api/',
-    apiOrderProcessorURL: 'http://118.69.37.20:XXX/api/_test',
+    apiOrderProcessorURL: 'http://118.69.37.20:8089/api/',
     apiCSRURL: 'http://118.69.37.20:8091/api/',
     baseCSRURL: 'http://118.69.37.20:8091',
     clientIdCart: "OrderApi",

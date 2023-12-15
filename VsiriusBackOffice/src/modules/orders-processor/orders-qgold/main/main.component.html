@@ -9,43 +9,77 @@
     </div>
     <div class="card-header d-block">
       <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
-        <div class="col-12">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <fieldset class="">
+            <input type="text" [(ngModel)]="searchQgoldProcessParam.orderQgoldId" name="orderQgoldId"
+              class="form-control" placeholder="Order Qgold Id..." />
+          </fieldset>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Order Status...'" (ngModelChange)="getOrderStatus($event)"
+            [(ngModel)]="searchQgoldProcessParam.orderStatus" name="orderStatus">
+            <ng-option *ngFor="let item of orderQgoldStatusOptions" [value]="item.value">{{
+              item.key}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <fieldset class="form-icon-group left-icon position-relative">
             <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
-              [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
-              placeholder="Choose time from" />
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+              placeholder="From Date..." />
             <div class="form-icon position-absolute">
               <i class="fa fa-calendar" aria-hidden="true"></i>
             </div>
           </fieldset>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="col-lg-3 col-md-6 col-sm-12">
           <fieldset class="form-icon-group left-icon position-relative">
             <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
-              [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY' }" class="form-control"
-              placeholder="Choose time to" />
+              [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+              placeholder="To Date..." />
             <div class="form-icon position-absolute">
               <i class="fa fa-calendar" aria-hidden="true"></i>
             </div>
           </fieldset>
         </div>
-        <div class="col-lg-12 col-md-12 col-sm-12">
-          <div class="input-group">
-            <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off" name="keyword"
-              placeholder="Enter search keywords...." />
-            <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
-              <i class="fa fa-search"></i>
-              Search
-            </button>
-
-          </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <fieldset>
+            <input type="text" [(ngModel)]="searchQgoldProcessParam.buyerName" name="BuyerName" class="form-control"
+              placeholder="Buyer Name..." />
+          </fieldset>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <fieldset>
+            <input type="text" [(ngModel)]="searchQgoldProcessParam.style" name="style" class="form-control"
+              placeholder="Style..." />
+          </fieldset>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <fieldset>
+            <input type="text" [(ngModel)]="searchQgoldProcessParam.marketplace" name="marketplace" class="form-control"
+              placeholder="Marketplace..." />
+          </fieldset>
+        </div>
+        <div class="col-lg-3 col-md-6 col-sm-12">
+          <fieldset>
+            <input type="text" [(ngModel)]="searchQgoldProcessParam.marketOrderId" name="marketOrderId"
+              class="form-control" placeholder="MarketOrder Id..." />
+          </fieldset>
+        </div>
+        <div class="col d-flex justify-content-end">
+          <button type="submit" class="btn btn-success border lift rounded-2">
+            <i class="fa fa-search"></i>
+            Search
+          </button>
+          <button type="button" (click)="clean()" class="btn btn-secondary border lift rounded-2">
+            <i class="fa fa-search"></i>
+            Clean
+          </button>
         </div>
       </form>
       <div class="card-body table-scroll-view">
-        <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listVsiriusOrder" dataKey="id"
-          [rows]="listVsiriusOrder.length">
+        <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listQgoldOrder" dataKey="id"
+          [rows]="listQgoldOrder.length">
 
           <!-- Header -->
           <ng-template pTemplate="header" let-columns>
@@ -103,9 +137,9 @@
           <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
             <tr>
               <td class="text-center">
-                <button type="button" class="btn btn-link btn-sm text-muted" (click)="detail(item)" tooltip="Sửa"
+                <button type="button" class="btn btn-link btn-sm text-muted" (click)="detail(item)" tooltip="detail"
                   data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
-                  <i class="fa fa-pencil text-warning"></i>
+                  <i class="fa fa-info text-info"></i>
                 </button>
               </td>
               <!-- STT -->
@@ -113,15 +147,28 @@
               <!-- DATA -->
               <td *ngFor="let col of columns" [ngClass]="col.field == 'isActive' ? 'text-center':''">
                 <ng-container
-                  *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate'">{{item[col.field]}}</ng-container>
-                <ng-container *ngIf="col.field == 'birthDay'">{{item[col.field] | date}}</ng-container>
-                <ng-container *ngIf="col.field == 'createOrderDate'">{{item[col.field] |
-                  date:'dd-MM-YYYY'}}</ng-container>
-              </td>
+                  *ngIf="col.field != 'orderDate' && col.field != 'items'">{{item[col.field]}}</ng-container>
+                <ng-container *ngIf="col.field == 'items'">
+            <tr class="w-100" *ngFor="let i of item[col.field]">
+              <div class="d-flex justify-content-around">
+                <div>
+                  {{i.style}}
+                </div>
+                <div style="width: 20px !important;">
+                </div>
+                <div>
+                  {{i.qty}}
+                </div>
+              </div>
+            </tr>
+            </ng-container>
+            <ng-container *ngIf="col.field == 'orderDate'">{{item[col.field] |
+              date:'YYYY-MM-dd'}}</ng-container>
+            </td>
             </tr>
           </ng-template>
           <!-- MESSAGE WHEN EMPTY -->
-          <ng-template pTemplate="emptymessage" *ngIf="listVsiriusOrder.length == 0">
+          <ng-template pTemplate="emptymessage" *ngIf="listQgoldOrder.length == 0">
             <tr>
               <td colspan="100%" class="text-center font-weight-bold">
                 <span class="text-danger">No Data</span>
@@ -132,7 +179,7 @@
       </div>
     </div>
     <!-- Pagination -->
-    <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+    <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.pageCount > 1">
       <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
         previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
         nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">

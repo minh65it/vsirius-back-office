@@ -11,6 +11,7 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MainComponent } from './orders-qgold/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.c
     ButtonModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
+    NgSelectModule
   ],
 })
 export class OrdersProcessorModule { }
