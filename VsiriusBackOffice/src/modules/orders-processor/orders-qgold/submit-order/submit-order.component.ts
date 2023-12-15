@@ -42,7 +42,7 @@ export class SubmitOrderComponent implements OnInit {
             this.notiflix.hideLoading();
             return;
           }
-          this.notiflix.success(res.message)
+          this.notiflix.success(res.message);
           this.cancel();
           this.notiflix.hideLoading();
         },
