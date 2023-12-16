@@ -52,7 +52,8 @@
               </a>
             </li>
 
-            <li class="collapsed" *ngIf="menu.Admin || menu.OrderProcessor">
+            <!-- <li class="collapsed" *ngIf="menu.Admin || menu.OrderProcessor"> -->
+            <li class="collapsed" >
               <a (click)="toggleCollapse()" data-bs-toggle="collapsed" class="m-link cursor-pointer"
                 [routerLink]="'/orders-processor'" routerLinkActive="active">
                 <i class="fa fa-shopping-basket"></i>

@@ -14,6 +14,7 @@ import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-process
 export class MainComponent implements OnInit {
 
   listQgoldOrder: QgoldOrderDTO[] = [];
+  listDelete: QgoldOrderDTO[] = [];
   searchQgoldProcessParam: SearchQgoldProcessParam = {} as SearchQgoldProcessParam;
   _selectedColumns: any[];
   activityValues: number[] = [0, 100];
@@ -33,6 +34,7 @@ export class MainComponent implements OnInit {
   cols: any[];
   selectedOrderStatus: OrderQgoldStatus | null = null;
 
+  isCheckAll: boolean = false;
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
@@ -67,6 +69,7 @@ export class MainComponent implements OnInit {
       { field: 'tracking', header: 'Tracking' },
       { field: 'shipVia', header: 'Ship Via' },
       { field: 'marketplace', header: 'Marketplace' },
+      { field: 'isDelete', header: 'isDelete' },
     ];
     this._selectedColumns = this.cols;
   }
@@ -76,8 +79,7 @@ export class MainComponent implements OnInit {
     this.notiflix.showLoading();
     this.service.getData(this.pagination, this.searchQgoldProcessParam).subscribe({
       next: res => {
-        console.log(res);
-
+        this.isCheckAll = false;
         this.pagination = res;
         this.listQgoldOrder = res.data;
         this.notiflix.hideLoading();
@@ -95,7 +97,6 @@ export class MainComponent implements OnInit {
   search() {
     this.searchQgoldProcessParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
     this.searchQgoldProcessParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
-    console.log(this.searchQgoldProcessParam);
 
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
@@ -118,5 +119,39 @@ export class MainComponent implements OnInit {
     this.searchFrom.setDate(new Date().getDate() - 15);
     this.searchQgoldProcessParam = {} as SearchQgoldProcessParam;
     this.search();
+  }
+  chooseOrder(item: QgoldOrderDTO) {
+    item.isDelete = !item.isDelete;
+    this.listDelete = this.listQgoldOrder.filter(x => x.isDelete);
+    if (this.listDelete.length > 0)
+      this.isCheckAll = this.listQgoldOrder.every(rel => rel.isDelete);
+    else
+      this.isCheckAll = false;
+  }
+  checkAll() {
+    this.listQgoldOrder.map(item => {
+      item.isDelete = this.isCheckAll;
+      return item;
+    });
+    this.listDelete = this.listQgoldOrder.filter(x => x.isDelete);
+  }
+  deleteAll() {
+    if (this.listDelete.length === 0)
+      return;
+    this.notiflix.confirm('Message', 'Do you want delete orders?', () => {
+      this.notiflix.showLoading();
+      // this.service.deleteOrder(this.listDelete).subscribe({
+      //   next: res => {
+      //     res.success ? this.notiflix.success(res.message) :
+      //       this.notiflix.error(res.message);
+      //     this.loadData();
+      //     this.notiflix.hideLoading();
+      //   },
+      //   error: err => {
+      //     this.notiflix.error(err);
+      //     this.notiflix.hideLoading();
+      //   }
+      // })
+    })
   }
 }

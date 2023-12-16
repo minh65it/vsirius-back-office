@@ -11,6 +11,7 @@ export interface QgoldOrderDTO {
     total: string | null;
     marketplace: string | null;
     marketOrderId: string | null;
+    isDelete: boolean;
 }
 
 export interface QgoldOrderDetailDTO {

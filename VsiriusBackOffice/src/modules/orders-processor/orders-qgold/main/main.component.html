@@ -79,7 +79,6 @@
     <div class="card-body table-scroll-view">
       <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listQgoldOrder" dataKey="id"
         [rows]="listQgoldOrder.length">
-
         <!-- Header -->
         <ng-template pTemplate="header" let-columns>
           <tr>
@@ -87,48 +86,31 @@
             <!-- STT -->
             <th class="text-center"> # </th>
             <!-- COLUMNS -->
-            <th [pSortableColumn]="item.field" class="text-center" *ngFor="let item of columns">
-              <div class="d-flex justify-content-evenly">
-                <!-- Mặc định -->
-                <span>&nbsp;</span>
-                <!-- Label -->
-                <span class="text-capitalize">
-                  {{item.header}}
-                  <!-- Sort -->
-                  <p-sortIcon [field]="item.field"></p-sortIcon>
-                </span>
-                <!-- tất cả trường không có filter -->
-                <span>
-                  &nbsp;
-                </span>
-                <!-- Filter by Text -->
-                <p-columnFilter type="text" *ngIf="item.field == 'title' ||  item.field == 'floor_Title' "
-                  [field]="item.field" display="menu" [operator]="'or'" [showOperator]="false" [showAddButton]="false"
-                  class="p-element float-end">
-                  <div class="p-column-filter  p-column-filter-menu">
-                    <button type="button" aria-haspopup="true" class="p-column-filter-menu-button p-link"
-                      aria-expanded="false">
-                      <span class="pi pi-filter-icon pi-filter "></span>
-                    </button>
+            <th [pSortableColumn]="item.field" [pSortableColumnDisabled]="item.field === 'isDelete'" class="text-center"
+              *ngFor="let item of columns">
+              <ng-container *ngIf="item.header != 'isDelete'">
+                <div class="d-flex justify-content-evenly">
+                  <!-- Label -->
+                  <span class="text-capitalize">
+                    {{item.header}}
+                    <!-- Sort -->
+                    <p-sortIcon [field]="item.field"></p-sortIcon>
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="item.header == 'isDelete'">
+                <div class="text-center">
+                  <button type="button" (click)="deleteAll()" class="btn btn-sm btn-danger border lift rounded-2">
+                    <i class="fa fa-trash"></i>
+                    Delete All
+                  </button>
+                  <div class="custom-control custom-checkbox checkAll">
+                    <input type="checkbox" class="custom-control-input" id="isCheckAll" [(ngModel)]="isCheckAll"
+                      (change)="checkAll()">
+                    <label class="custom-control-label" for="isCheckAll"></label>
                   </div>
-                </p-columnFilter>
-                <p-columnFilter *ngIf="item.field == 'roomType_Title'" [field]="item.field" [showOperator]="false"
-                  matchMode="equals" display="menu">
-                  <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                    <ng-template let-option pTemplate="item">
-                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-                    </ng-template>
-                  </ng-template>
-                </p-columnFilter>
-                <p-columnFilter *ngIf="item.field == 'roomStatus_Title'" [field]="item.field" [showOperator]="false"
-                  matchMode="equals" display="menu">
-                  <ng-template pTemplate="filter" let-value let-filter="filterCallback">
-                    <ng-template let-option pTemplate="item">
-                      <span [class]="'customer-badge status-' + option.value">{{option.label}}</span>
-                    </ng-template>
-                  </ng-template>
-                </p-columnFilter>
-              </div>
+                </div>
+              </ng-container>
             </th>
           </tr>
         </ng-template>
@@ -144,8 +126,10 @@
             <!-- STT -->
             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
             <!-- DATA -->
-            <td *ngFor="let col of columns" [ngClass]="col.field == 'isActive' ? 'text-center':''">
-              <ng-container *ngIf="col.field != 'orderDate' && col.field != 'items'">{{item[col.field]}}</ng-container>
+            <td *ngFor="let col of columns; index as ii" [ngClass]="col.field == 'isActive' ? 'text-center':''">
+              <ng-container *ngIf="col.field != 'orderDate' && col.field != 'items' && col.field != 'isDelete'">
+                {{item[col.field]}}
+              </ng-container>
               <ng-container *ngIf="col.field == 'items'">
           <tr class="w-100" *ngFor="let i of item[col.field]">
             <div class="d-flex justify-content-around">
@@ -162,6 +146,13 @@
           </ng-container>
           <ng-container *ngIf="col.field == 'orderDate'">{{item[col.field] |
             date:'YYYY-MM-dd'}}</ng-container>
+          <ng-container *ngIf="col.field == 'isDelete'" style="width: 80px;">
+            <div class="custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="item[col.field]" id="{{ii}}"
+                (click)="chooseOrder(item)">
+              <label class="custom-control-label" for="{{ii}}"></label>
+            </div>
+          </ng-container>
           </td>
           </tr>
         </ng-template>
