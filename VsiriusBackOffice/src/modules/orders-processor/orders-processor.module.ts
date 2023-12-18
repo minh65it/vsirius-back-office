@@ -9,16 +9,24 @@ import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
-import { MainComponent } from './orders-qgold/main/main.component';
+import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.component';
+import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
+import { YesNoPipe } from '../_shared/_pipes/yesNo.pipe';
 
 @NgModule({
   declarations: [
-    MainComponent,
+    YesNoPipe,
+    //Qgold
+    MainQgoldComponent,
     SubmitOrderComponent,
-    OrderDetailComponent
+    OrderDetailComponent,
+    //Amazon
+    MainAmazonComponent,
+    OrderDetailAmazonComponent,
   ],
   imports: [
     CommonModule,

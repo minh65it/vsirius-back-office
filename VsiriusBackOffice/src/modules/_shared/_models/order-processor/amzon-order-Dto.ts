@@ -1,0 +1,72 @@
+export interface AmazonOrderDTO {
+    amazonOrderId: string | null;
+    qgoldOrderId: string | null;
+    isSubmitted: boolean | null;
+    orderStatus: string | null;
+    fulfillmentChannel: string | null;
+    paymentMethod: string | null;
+    orderType: string | null;
+    salesChannel: string | null;
+    shipServiceLevel: string | null;
+    total: string | null;
+    marketplaceId: string | null;
+    shipmentServiceLevelCategory: string | null;
+    purchaseDate: string | null;
+    earliestShipDate: string | null;
+    latestShipDate: string | null;
+    earliestDeliveryDate: string | null;
+    latestDeliveryDate: string | null;
+    buyerName: string | null;
+    addressLine1: string | null;
+    addressLine2: string | null;
+    addressLine3: string | null;
+    city: string | null;
+    stateOrRegion: string | null;
+    postalCode: string | null;
+    countryCode: string | null;
+    phone: string | null;
+    buyerEmail: string | null;
+    orderItemList: ItemAmazon[] | null;
+    isDelete: boolean;
+}
+
+export interface ItemAmazon {
+    aSIN: string | null;
+    sellerSKU: string | null;
+    orderItemId: string | null;
+    title: string | null;
+    quantityOrdered: number | null;
+    itemPrice: string | null;
+    shippingPrice: string | null;
+}
+
+export interface AmazonOrderDetailDTO {
+    amazonOrderId: string | null;
+    qgoldOrderId: string | null;
+    isSubmitted: boolean | null;
+    orderStatus: string | null;
+    fulfillmentChannel: string | null;
+    paymentMethod: string | null;
+    orderType: string | null;
+    salesChannel: string | null;
+    shipServiceLevel: string | null;
+    total: string | null;
+    marketplaceId: string | null;
+    shipmentServiceLevelCategory: string | null;
+    purchaseDate: string | null;
+    earliestShipDate: string | null;
+    latestShipDate: string | null;
+    earliestDeliveryDate: string | null;
+    latestDeliveryDate: string | null;
+    buyerName: string | null;
+    addressLine1: string | null;
+    addressLine2: string | null;
+    addressLine3: string | null;
+    city: string | null;
+    stateOrRegion: string | null;
+    postalCode: string | null;
+    countryCode: string | null;
+    phone: string | null;
+    buyerEmail: string | null;
+    orderItemList: ItemAmazon[] | null;
+}

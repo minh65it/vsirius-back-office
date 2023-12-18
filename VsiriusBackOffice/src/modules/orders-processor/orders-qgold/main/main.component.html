@@ -16,7 +16,7 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <ng-select [placeholder]="'Order Status...'" (ngModelChange)="getOrderStatus($event)"
-          [(ngModel)]="searchQgoldProcessParam.orderStatus" name="orderStatus">
+          [(ngModel)]="searchQgoldProcessParam.orderStatus" name="orderStatus" [clearable]="false">
           <ng-option *ngFor="let item of orderQgoldStatusOptions" [value]="item.value">{{
             item.key}}</ng-option>
         </ng-select>
@@ -77,12 +77,12 @@
       </div>
     </form>
     <div class="card-body table-scroll-view">
+      <p class="font-weight-bold">{{pagination.totalCount}} Results </p>
       <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listQgoldOrder" dataKey="id"
         [rows]="listQgoldOrder.length">
         <!-- Header -->
         <ng-template pTemplate="header" let-columns>
           <tr>
-            <th class="text-center"></th>
             <!-- STT -->
             <th class="text-center"> # </th>
             <!-- COLUMNS -->
@@ -117,17 +117,22 @@
         <!-- BODY -->
         <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
           <tr>
-            <td class="text-center">
-              <button type="button" class="btn btn-link btn-sm text-muted" (click)="detail(item)" tooltip="detail"
-                data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
-                <i class="fa fa-info text-info"></i>
-              </button>
-            </td>
             <!-- STT -->
             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
             <!-- DATA -->
-            <td *ngFor="let col of columns; index as ii" [ngClass]="col.field == 'isActive' ? 'text-center':''">
-              <ng-container *ngIf="col.field != 'orderDate' && col.field != 'items' && col.field != 'isDelete'">
+            <td *ngFor="let col of columns; index as ii">
+              <ng-container *ngIf="col.field == 'orderQgoldId'">
+                <div class="text-info" style="cursor: pointer;" (click)="detail(item)">
+                  {{item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field == 'marketOrderId'">
+                <div class="text-info" style="cursor: pointer;" (click)="detailMarket(item)">
+                  {{item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field != 'orderQgoldId' && col.field != 'orderDate' 
+                && col.field != 'items' && col.field != 'isDelete' && col.field != 'marketOrderId'">
                 {{item[col.field]}}
               </ng-container>
               <ng-container *ngIf="col.field == 'items'">

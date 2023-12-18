@@ -4,6 +4,7 @@ import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagi
 import { OrderQgoldStatus, SearchQgoldProcessParam } from 'src/modules/_shared/_helpers/params/search-qgold-process-param';
 import { QgoldOrderDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
 
 @Component({
@@ -22,13 +23,12 @@ export class MainComponent implements OnInit {
 
   searchFrom: Date = new Date();
   searchTo: Date = new Date();
-  keyword: string = "";
 
   pagination: PaginationResult2<QgoldOrderDTO> = {
     data: [],
     pageNumber: 1,
     pageSize: 25,
-    totalCount: 10,
+    totalCount: null,
     pageCount: 1
   };
   cols: any[];
@@ -39,6 +39,7 @@ export class MainComponent implements OnInit {
     private router: Router,
     private service: OrdersQgoldService,
     private notiflix: NgxNotiflixService,
+    private serviceAmazon: OrdersAmazonService,
   ) { }
 
   ngOnInit() {
@@ -63,12 +64,13 @@ export class MainComponent implements OnInit {
       { field: 'orderDate', header: 'Order Date' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
+      { field: 'marketplace', header: 'Marketplace' },
+      { field: 'marketOrderId', header: 'Market Order Id' },
       { field: 'items', header: 'items' },
       { field: 'total', header: 'Total' },
       { field: 'zipCode', header: 'Zip Code' },
       { field: 'tracking', header: 'Tracking' },
       { field: 'shipVia', header: 'Ship Via' },
-      { field: 'marketplace', header: 'Marketplace' },
       { field: 'isDelete', header: 'isDelete' },
     ];
     this._selectedColumns = this.cols;
@@ -104,6 +106,12 @@ export class MainComponent implements OnInit {
   detail(item: QgoldOrderDTO) {
     this.service.currentID(item.orderQgoldId);
     this.router.navigate(['/orders-processor/detail-qgold']);
+  }
+  detailMarket(item: QgoldOrderDTO) {
+    if (item.marketplace.includes('Amazon')) {
+      this.serviceAmazon.currentID(item.marketOrderId);
+      this.router.navigate(['/orders-processor/detail-amazon']);
+    }
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;

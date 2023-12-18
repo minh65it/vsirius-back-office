@@ -12,163 +12,164 @@
   <div class="card-body">
     <div class="row">
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Order Qgold Id </label>
+        <label class="form-label fw-bold">Order Qgold Id </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
-            {{qgoldOrderDetail.orderQgoldId}}
+            {{qgoldOrderDetail?.orderQgoldId}}
           </p>
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">PO Qgold </label>
+        <label class="form-label fw-bold">PO Qgold </label>
         <div class="form-control font-weight-normal" style="height: 35px;">
-          {{qgoldOrderDetail.pOQgold}}
+          {{qgoldOrderDetail?.pOQgold}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Status </label>
+        <label class="form-label fw-bold">Status </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.status}}
+          {{qgoldOrderDetail?.status}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Location </label>
+        <label class="form-label fw-bold">Location </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.location}}
+          {{qgoldOrderDetail?.location}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Date </label>
+        <label class="form-label fw-bold">Date </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.date}}
+          {{qgoldOrderDetail?.date | date:'YYYY-MM-dd'}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Total </label>
+        <label class="form-label fw-bold">Total </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.total}}
+          {{qgoldOrderDetail?.total}}
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
-        <label class="form-label fw-light">Ship To Text </label>
+        <label class="form-label fw-bold">Ship To Text </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipToText}}
+          {{qgoldOrderDetail?.shipToText}}
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
-        <label class="form-label fw-light">Ship To Address 1 </label>
+        <label class="form-label fw-bold">Ship To Address 1 </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipToAddress1}}
+          {{qgoldOrderDetail?.shipToAddress1}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Due Date </label>
+        <label class="form-label fw-bold">Due Date </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.dueDate}}
+          {{qgoldOrderDetail?.dueDate}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Term </label>
+        <label class="form-label fw-bold">Term </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.term}}
+          {{qgoldOrderDetail?.term}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Ship Via Code </label>
+        <label class="form-label fw-bold">Ship Via Code </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipViaCode}}
+          {{qgoldOrderDetail?.shipViaCode}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Ship Option Code </label>
+        <label class="form-label fw-bold">Ship Option Code </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipOptionCode}}
+          {{qgoldOrderDetail?.shipOptionCode}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Marketplace </label>
+        <label class="form-label fw-bold">Marketplace </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.marketplace}}
+          {{qgoldOrderDetail?.marketplace}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Market Order Id </label>
-        <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.marketOrderId}}
+        <label class="form-label fw-bold">Market Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailMarket(qgoldOrderDetail)">
+          {{qgoldOrderDetail?.marketOrderId}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Ship To Phone </label>
+        <label class="form-label fw-bold">Ship To Phone </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipToPhone}}
+          {{qgoldOrderDetail?.shipToPhone}}
         </div>
       </div>
-      <div class="col-xl-12 col-md-12 mt-2">
-        <label class="form-label fw-light">Items </label>
-        <div class="form-control" [style.height.px]="50 * qgoldOrderDetail.items.length">
-          <div class="form mt-1" *ngFor="let item of qgoldOrderDetail.items">
-            Style: {{item.style}}, &nbsp; Qty: {{item.qty}}, &nbsp; Price: {{item.price}}
+      <div class="col-xl-12 col-md-12 mt-2" *ngIf="qgoldOrderDetail?.items">
+        <label class="form-label fw-bold">Items </label>
+        <div class="form-control" [style.height.px]="50 * qgoldOrderDetail?.items.length">
+          <div class="form mt-1" *ngFor="let item of qgoldOrderDetail?.items">
+            Style: {{item?.style}}, &nbsp; Qty: {{item?.qty}}, &nbsp; Price: {{item?.price}}
           </div>
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Zip Code </label>
+        <label class="form-label fw-bold">Zip Code </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.zipCode}}
+          {{qgoldOrderDetail?.zipCode}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Sold To Text </label>
+        <label class="form-label fw-bold">Sold To Text </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.soldToText}}
+          {{qgoldOrderDetail?.soldToText}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Sold To Address 1 </label>
+        <label class="form-label fw-bold">Sold To Address 1 </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.soldToAddress1}}
+          {{qgoldOrderDetail?.soldToAddress1}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Sold To Address 2 </label>
+        <label class="form-label fw-bold">Sold To Address 2 </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.soldToAddress2}}
+          {{qgoldOrderDetail?.soldToAddress2}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Document Type </label>
+        <label class="form-label fw-bold">Document Type </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.documentType}}
+          {{qgoldOrderDetail?.documentType}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Placed By </label>
+        <label class="form-label fw-bold">Placed By </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.placedBy}}
+          {{qgoldOrderDetail?.placedBy}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Placed Via </label>
+        <label class="form-label fw-bold">Placed Via </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.placedVia}}
+          {{qgoldOrderDetail?.placedVia}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Ship Via </label>
+        <label class="form-label fw-bold">Ship Via </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.shipVia}}
+          {{qgoldOrderDetail?.shipVia}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Packaging Option </label>
+        <label class="form-label fw-bold">Packaging Option </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.packagingOption}}
+          {{qgoldOrderDetail?.packagingOption}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-light">Tracking </label>
+        <label class="form-label fw-bold">Tracking </label>
         <div class="form-control" style="height: 35px;">
-          {{qgoldOrderDetail.tracking}}
+          {{qgoldOrderDetail?.tracking}}
         </div>
       </div>
     </div>

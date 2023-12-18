@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { QgoldOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
 
 @Component({
@@ -17,6 +18,7 @@ export class OrderDetailComponent implements OnInit {
     private router: Router,
     private service: OrdersQgoldService,
     private notiflix: NgxNotiflixService,
+    private serviceAmazon: OrdersAmazonService,
   ) { }
 
   ngOnInit() {
@@ -39,7 +41,6 @@ export class OrderDetailComponent implements OnInit {
     this.notiflix.showLoading();
     this.service.getDetail(this.id).subscribe({
       next: res => {
-        console.log(res);
         this.qgoldOrderDetail = res;
         this.notiflix.hideLoading();
       },
@@ -48,6 +49,12 @@ export class OrderDetailComponent implements OnInit {
         this.notiflix.hideLoading();
       }
     })
+  }
+  detailMarket(item: QgoldOrderDetailDTO) {
+    if (item.marketplace.includes('Amazon')) {
+      this.serviceAmazon.currentID(item.marketOrderId);
+      this.router.navigate(['/orders-processor/detail-amazon']);
+    }
   }
   back() {
     this.router.navigate(['/orders-processor/Qgold']);

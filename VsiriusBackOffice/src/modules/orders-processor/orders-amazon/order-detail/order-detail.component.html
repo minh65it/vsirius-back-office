@@ -1,0 +1,171 @@
+<div class="card ">
+  <div class="card-header d-flex flex-row-reverse">
+    <div class="">
+      <fieldset class="form-icon-group left-icon position-relative">
+        <button type="button" class="btn btn-sm btn-secondary" (click)="back()">
+          <i class="fa fa-arrow-left"></i>
+          Back
+        </button>
+      </fieldset>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Amazon Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{amazonOrderDetail?.amazonOrderId}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Qgold Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailSupplier(amazonOrderDetail)">
+          {{amazonOrderDetail?.qgoldOrderId}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Submitted </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.isSubmitted | yesNo}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Status </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.orderStatus}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Fulfillment Channel </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.fulfillmentChannel}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Payment Method </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.paymentMethod}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Order Type </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.orderType}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Total </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.total}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Shipment Service Level Category </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.shipmentServiceLevelCategory}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Purchase Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.purchaseDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Earliest Ship Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.earliestShipDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Latest Ship Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.latestShipDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Earliest Delivery Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.earliestDeliveryDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Latest Delivery Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.latestDeliveryDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Buyer Name </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.buyerName}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Phone </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.phone}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2" *ngIf="amazonOrderDetail?.orderItemList">
+        <label class="form-label fw-bold">Item List </label>
+        <div class="form-control" [style.height.px]="50 * amazonOrderDetail?.orderItemList.length">
+          <div class="form mt-1" *ngFor="let item of amazonOrderDetail?.orderItemList">
+            Style: {{item?.sellerSKU}}, &nbsp; Qty: {{item?.quantityOrdered}}, &nbsp; Price: {{item?.itemPrice}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Address Line 1 </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.addressLine1}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Address Line 2 </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.addressLine2}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Address Line 3 </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.addressLine3}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">City </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.city}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">State Or Region </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.stateOrRegion}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Postal Code </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.postalCode}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Country Code </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.countryCode}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Buyer Email </label>
+        <div class="form-control" style="height: 35px;">
+          {{amazonOrderDetail?.buyerEmail}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
