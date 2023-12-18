@@ -2,6 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { OrderQgoldStatus, SearchQgoldProcessParam } from 'src/modules/_shared/_helpers/params/search-qgold-process-param';
+import { QgoldFtpOrderObject } from 'src/modules/_shared/_models/order-processor/qgold-ftp-order-object';
 import { QgoldOrderDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
@@ -119,6 +120,8 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
+    const model = {} as QgoldFtpOrderObject;
+    this.service.currentReOrder(model);
     this.router.navigate(['/orders-processor/submit-qgold']);
   }
   clean() {

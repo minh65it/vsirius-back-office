@@ -25,6 +25,18 @@ export class SubmitOrderComponent implements OnInit {
 
   ngOnInit() {
     this.listItemQgold.push({} as QgoldFtpOrderItem);
+    this.loadData();
+  }
+  loadData() {
+    this.service.currentReSubmitOrder.subscribe({
+      next: res => {
+        if (Object.keys(res).length === 0) {
+          //this.cancel();
+        } else {
+          this.qgoldFtpOrderObject = res;
+        }
+      }
+    })
   }
 
   submitOrder() {
@@ -35,22 +47,22 @@ export class SubmitOrderComponent implements OnInit {
       this.notiflix.showLoading();
       let dataSubmit: QgoldFtpOrderObject[] = [];
       dataSubmit.push(this.qgoldFtpOrderObject);
-      this.service.submitOrder(dataSubmit).subscribe({
-        next: res => {
-          if (!res.success) {
-            this.notiflix.error(res.message);
-            this.notiflix.hideLoading();
-            return;
-          }
-          this.notiflix.success(res.message);
-          this.cancel();
-          this.notiflix.hideLoading();
-        },
-        error: () => {
-          this.notiflix.error('Error System');
-          this.notiflix.hideLoading();
-        }
-      });
+      // this.service.submitOrder(dataSubmit).subscribe({
+      //   next: res => {
+      //     if (!res.success) {
+      //       this.notiflix.error(res.message);
+      //       this.notiflix.hideLoading();
+      //       return;
+      //     }
+      //     this.notiflix.success(res.message);
+      //     this.cancel();
+      //     this.notiflix.hideLoading();
+      //   },
+      //   error: () => {
+      //     this.notiflix.error('Error System');
+      //     this.notiflix.hideLoading();
+      //   }
+      // });
     }
     else {
       this.checkValidated = true;

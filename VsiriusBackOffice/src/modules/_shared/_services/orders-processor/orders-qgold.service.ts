@@ -21,10 +21,16 @@ export class OrdersQgoldService {
   IdOrder = new BehaviorSubject<string>('');
   currentIdOrder = this.IdOrder.asObservable();
 
+  reSubmitOrder = new BehaviorSubject<QgoldFtpOrderObject>({} as QgoldFtpOrderObject);
+  currentReSubmitOrder = this.reSubmitOrder.asObservable();
+
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
 
   currentID(id: string) {
     this.IdOrder.next(id);
+  }
+  currentReOrder(model: QgoldFtpOrderObject) {
+    this.reSubmitOrder.next(model);
   }
 
   getData(pagination: PaginationParam, param: SearchQgoldProcessParam) {

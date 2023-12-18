@@ -1,12 +1,15 @@
 <div class="card ">
   <div class="card-header d-flex flex-row-reverse">
-    <div class="">
-      <fieldset class="form-icon-group left-icon position-relative">
-        <button type="button" class="btn btn-sm btn-secondary" (click)="back()">
-          <i class="fa fa-arrow-left"></i>
-          Back
-        </button>
-      </fieldset>
+    <div class="col d-flex justify-content-end">
+      <button *ngIf="amazonOrderDetail != null" class="btn btn-danger me-2 lift rounded-2" type="button"
+        (click)="ReSubmitQgold(amazonOrderDetail)">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+        Re-Submit to Qgold
+      </button>
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
     </div>
   </div>
   <div class="card-body">

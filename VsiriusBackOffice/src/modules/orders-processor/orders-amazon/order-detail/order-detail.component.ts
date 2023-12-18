@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AmazonOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/amzon-order-Dto';
+import { QgoldFtpOrderItem, QgoldFtpOrderObject } from 'src/modules/_shared/_models/order-processor/qgold-ftp-order-object';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
@@ -59,5 +60,45 @@ export class OrderDetailComponent implements OnInit {
   back() {
     this.router.navigate(['/orders-processor/Amazon']);
   }
+  ReSubmitQgold(item: AmazonOrderDetailDTO) {
+    const model = {} as QgoldFtpOrderObject;
+    model.shipToName = item.buyerName;
+    model.shipToAddress1 = item.addressLine1;
+    model.shipToAddress2 = item.addressLine2;
+    model.shipToAddress3 = item.addressLine3;
+    model.shipToCity = item.city;
+    model.shipToState_Province = item.stateOrRegion;
+    model.shipToZip = item.postalCode;
+    model.shipToCountryCode = item.countryCode;
+    model.shipToPhone = item.phone;
+    model.amz_Order_ID = item.amazonOrderId;
+    model.ship_Option_Code = '100';
+    switch (item.shipmentServiceLevelCategory) {
+      case 'Standard':
+        model.ship_Method_Code = '1102';
+        break;
+      case 'Second Day':
+        model.ship_Method_Code = '220';
+        break;
+      case 'Expedited':
+        model.ship_Method_Code = '1100';
+        break;
+      case 'Ca':
+        model.ship_Method_Code = '1701';
+        break;
+      default: {
+        model.ship_Method_Code = '1102';
+        break;
+      }
+    }
+    item.orderItemList.forEach(el => {
+      let ii = {} as QgoldFtpOrderItem;
+      ii.item = el.sellerSKU;
+      ii.qty = el.quantityOrdered.toString();
+      console.log(ii);
 
+    });
+    this.serviceQgold.currentReOrder(model);
+    this.router.navigate(['/orders-processor/submit-qgold']);
+  }
 }
