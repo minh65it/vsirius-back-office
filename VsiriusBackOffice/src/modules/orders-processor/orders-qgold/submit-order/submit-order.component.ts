@@ -25,6 +25,7 @@ export class SubmitOrderComponent implements OnInit {
 
   ngOnInit() {
     this.listItemQgold.push({} as QgoldFtpOrderItem);
+    this.qgoldFtpOrderObject.item = []
     this.loadData();
   }
   loadData() {
@@ -34,6 +35,8 @@ export class SubmitOrderComponent implements OnInit {
           //this.cancel();
         } else {
           this.qgoldFtpOrderObject = res;
+          this.listItemQgold = [];
+          this.listItemQgold = res.item;
         }
       }
     })
@@ -41,7 +44,6 @@ export class SubmitOrderComponent implements OnInit {
 
   submitOrder() {
     this.qgoldFtpOrderObject.item = this.listItemQgold;
-    console.log(this.qgoldFtpOrderObject);
     if (this.myForm.valid) {
       this.checkValidated = false;
       this.notiflix.showLoading();

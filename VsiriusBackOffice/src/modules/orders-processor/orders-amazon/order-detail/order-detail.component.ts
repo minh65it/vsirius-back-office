@@ -91,12 +91,12 @@ export class OrderDetailComponent implements OnInit {
         break;
       }
     }
+    model.item = [];
+    let ii = {} as QgoldFtpOrderItem;
     item.orderItemList.forEach(el => {
-      let ii = {} as QgoldFtpOrderItem;
       ii.item = el.sellerSKU;
-      ii.qty = el.quantityOrdered.toString();
-      console.log(ii);
-
+      ii.qty = el.quantityOrdered?.toString();
+      model.item.push(ii);
     });
     this.serviceQgold.currentReOrder(model);
     this.router.navigate(['/orders-processor/submit-qgold']);

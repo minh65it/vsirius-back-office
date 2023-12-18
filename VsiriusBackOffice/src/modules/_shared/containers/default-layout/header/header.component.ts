@@ -35,7 +35,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
   ngOnInit() {
     this.loadContactNotification();
     let roleTmp = localStorage.getItem('ROLES');
-    if (roleTmp.includes(RoleName.IS_Admin) || roleTmp.includes(RoleName.IS_Order)) {
+    if (roleTmp?.includes(RoleName.IS_Admin) || roleTmp?.includes(RoleName.IS_Order)) {
       this.loadNotification();
       this.loadNotificationList();
       this.isShowOrder = true;

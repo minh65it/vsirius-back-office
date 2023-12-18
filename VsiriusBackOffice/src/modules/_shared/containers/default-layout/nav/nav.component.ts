@@ -24,7 +24,7 @@ export class NavComponent implements OnInit {
     this.listRoles = JSON.parse(localStorage.getItem('ROLES'));
     const roleNameArray: string[] = Object.values(RoleName);
 
-    this.listRoles.forEach(i => {
+    this.listRoles?.forEach(i => {
       roleNameArray.forEach(i2 => {
         if (i.includes(i2)) {
           this.menu[i2] = true;
