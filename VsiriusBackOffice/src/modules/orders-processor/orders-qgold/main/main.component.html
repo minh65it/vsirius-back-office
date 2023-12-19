@@ -9,12 +9,14 @@
   <div class="card-header d-block">
     <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Order Qgold Id</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="searchQgoldProcessParam.orderQgoldId" name="orderQgoldId" class="form-control"
             placeholder="Order Qgold Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Order Status</label>
         <ng-select [placeholder]="'Order Status...'" (ngModelChange)="getOrderStatus($event)"
           [(ngModel)]="searchQgoldProcessParam.orderStatus" name="orderStatus" [clearable]="false">
           <ng-option *ngFor="let item of orderQgoldStatusOptions" [value]="item.value">{{
@@ -22,6 +24,7 @@
         </ng-select>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Date</label>
         <fieldset class="form-icon-group left-icon position-relative">
           <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
             [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
@@ -32,6 +35,7 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Date</label>
         <fieldset class="form-icon-group left-icon position-relative">
           <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
             [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
@@ -42,24 +46,28 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Buyer Name</label>
         <fieldset>
           <input type="text" [(ngModel)]="searchQgoldProcessParam.buyerName" name="BuyerName" class="form-control"
             placeholder="Buyer Name..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Style</label>
         <fieldset>
           <input type="text" [(ngModel)]="searchQgoldProcessParam.style" name="style" class="form-control"
             placeholder="Style..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Marketplace</label>
         <fieldset>
           <input type="text" [(ngModel)]="searchQgoldProcessParam.marketplace" name="marketplace" class="form-control"
             placeholder="Marketplace..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">MarketOrder Id</label>
         <fieldset>
           <input type="text" [(ngModel)]="searchQgoldProcessParam.marketOrderId" name="marketOrderId"
             class="form-control" placeholder="MarketOrder Id..." />

@@ -9,29 +9,34 @@
   <div class="card-header d-block">
     <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Amazon Order Id</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="amazonSearchParam.amazonOrderId" name="amazonOrderId" class="form-control"
             placeholder="Amazon Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Qgold Order Id</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="amazonSearchParam.qgoldOrderId" name="qgoldOrderId" class="form-control"
             placeholder="Qgold Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">SKU</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="amazonSearchParam.sKU" name="sKU" class="form-control" placeholder="SKU..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Buyer Name</label>
         <fieldset>
           <input type="text" [(ngModel)]="amazonSearchParam.buyerName" name="BuyerName" class="form-control"
             placeholder="Buyer Name..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Date</label>
         <fieldset class="form-icon-group left-icon position-relative">
           <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
             [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
@@ -42,6 +47,7 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Date</label>
         <fieldset class="form-icon-group left-icon position-relative">
           <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
             [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
@@ -52,12 +58,14 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Address Line 1</label>
         <fieldset>
           <input type="text" [(ngModel)]="amazonSearchParam.addressLine1" name="addressLine1" class="form-control"
-            placeholder="Address Line..." />
+            placeholder="Address Line 1..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Submitted</label>
         <ng-select [placeholder]="'Submitted...'" (ngModelChange)="getIsSubmitted($event)"
           [(ngModel)]="amazonSearchParam.isSubmitted" name="isSubmitted" [clearable]="false">
           <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{

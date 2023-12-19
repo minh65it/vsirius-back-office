@@ -90,7 +90,7 @@
         <div class="row" *ngFor="let itemQgold of listItemQgold; index as i">
           <div class="col-xl-3 col-md-3 mt-1">
             <label for="TextInput" class="form-label fw-bold">Item <span class="text-danger">*</span></label>
-            <input type="text" class="form-control" placeholder="Enter ship to country code... " name="item{{i}}"
+            <input type="text" class="form-control" placeholder="Enter item... " name="item{{i}}"
               [(ngModel)]="itemQgold.item" #item="ngModel" required />
             <div class="text-danger mt-2 d-flex align-items-center"
               *ngIf="item.invalid && (item.touched || item.dirty || checkValidated)">
