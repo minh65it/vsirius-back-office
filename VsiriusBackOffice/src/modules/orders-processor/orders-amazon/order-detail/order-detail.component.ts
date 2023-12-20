@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { AmazonOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/amzon-order-Dto';
 import { QgoldFtpOrderItem, QgoldFtpOrderObject } from 'src/modules/_shared/_models/order-processor/qgold-ftp-order-object';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
@@ -15,6 +16,7 @@ export class OrderDetailComponent implements OnInit {
 
   amazonOrderDetail: AmazonOrderDetailDTO = {} as AmazonOrderDetailDTO;
   id: string = '';
+  subscription = Subscription.EMPTY;
   constructor(
     private router: Router,
     private service: OrdersAmazonService,
@@ -26,7 +28,7 @@ export class OrderDetailComponent implements OnInit {
     this.loadData();
   }
   loadData() {
-    this.service.currentIdOrder.subscribe({
+    this.subscription = this.service.currentIdOrder.subscribe({
       next: res => {
         if (Object.keys(res).length === 0) {
           this.back();
@@ -40,12 +42,13 @@ export class OrderDetailComponent implements OnInit {
 
   getDetail() {
     this.notiflix.showLoading();
-    this.service.getDetail(this.id).subscribe({
+    this.subscription = this.service.getDetail(this.id).subscribe({
       next: res => {
         this.amazonOrderDetail = res;
         this.notiflix.hideLoading();
       },
       error: () => {
+        this.amazonOrderDetail = null;
         this.notiflix.error('Error System');
         this.notiflix.hideLoading();
       }
@@ -98,7 +101,11 @@ export class OrderDetailComponent implements OnInit {
       ii.qty = el.quantityOrdered?.toString();
       model.item.push(ii);
     });
+    model.marketplace = "Amazon";
     this.serviceQgold.currentReOrder(model);
     this.router.navigate(['/orders-processor/submit-qgold']);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

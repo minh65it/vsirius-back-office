@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { QgoldOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
@@ -14,6 +15,7 @@ export class OrderDetailComponent implements OnInit {
 
   qgoldOrderDetail: QgoldOrderDetailDTO = {} as QgoldOrderDetailDTO;
   id: string = '';
+  subscription = Subscription.EMPTY;
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
@@ -25,7 +27,7 @@ export class OrderDetailComponent implements OnInit {
     this.loadData();
   }
   loadData() {
-    this.service.currentIdOrder.subscribe({
+    this.subscription = this.service.currentIdOrder.subscribe({
       next: res => {
         if (Object.keys(res).length === 0) {
           this.back();
@@ -39,7 +41,7 @@ export class OrderDetailComponent implements OnInit {
 
   getDetail() {
     this.notiflix.showLoading();
-    this.service.getDetail(this.id).subscribe({
+    this.subscription = this.service.getDetail(this.id).subscribe({
       next: res => {
         this.qgoldOrderDetail = res;
         this.notiflix.hideLoading();
@@ -58,5 +60,8 @@ export class OrderDetailComponent implements OnInit {
   }
   back() {
     this.router.navigate(['/orders-processor/Qgold']);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

@@ -180,9 +180,13 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Amazon item id </label>
-          <input type="text" class="form-control" placeholder="Enter amazon item id... " name="amz_Item_ID"
-            [(ngModel)]="qgoldFtpOrderObject.amz_Item_ID" #amz_Item_ID="ngModel" />
+          <label for="TextInput" class="form-label fw-bold">Marketplace <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Marketplace... " name="marketplace"
+            [(ngModel)]="qgoldFtpOrderObject.marketplace" #market_place="ngModel" required="" />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="market_place.invalid && (market_place.touched || market_place.dirty || checkValidated)">
+            <span>*Marketplace: Vsirius, Amazon, Walmart </span>
+          </div>
         </div>
       </div>
     </div>

@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { QgoldFtpOrderItem, QgoldFtpOrderObject } from 'src/modules/_shared/_models/order-processor/qgold-ftp-order-object';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
@@ -18,6 +19,7 @@ export class SubmitOrderComponent implements OnInit {
   qgoldFtpOrderObject: QgoldFtpOrderObject = {} as QgoldFtpOrderObject;
   listItemQgold: QgoldFtpOrderItem[] = [];
   isNewSubmit: boolean = true;
+  subscription = Subscription.EMPTY;
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
@@ -26,11 +28,12 @@ export class SubmitOrderComponent implements OnInit {
 
   ngOnInit() {
     this.listItemQgold.push({} as QgoldFtpOrderItem);
+    this.qgoldFtpOrderObject.marketplace = "Vsirius";
     this.qgoldFtpOrderObject.item = []
     this.loadData();
   }
   loadData() {
-    this.service.currentReSubmitOrder.subscribe({
+    this.subscription = this.service.currentReSubmitOrder.subscribe({
       next: res => {
         if (Object.keys(res).length === 0) {
           //this.cancel();
@@ -52,7 +55,7 @@ export class SubmitOrderComponent implements OnInit {
       dataSubmit.push(this.qgoldFtpOrderObject);
       //this.notiflix.showLoading();
       if (this.isNewSubmit) {
-        // this.service.submitOrder(dataSubmit).subscribe({
+        //this.subscription = this.service.submitOrder(dataSubmit).subscribe({
         //   next: res => {
         //     if (!res.success) {
         //       this.notiflix.error(res.message);
@@ -69,7 +72,7 @@ export class SubmitOrderComponent implements OnInit {
         //   }
         // });
       } else {
-        // this.service.callReSubmitOrder(dataSubmit).subscribe({
+        //this.subscription = this.service.callReSubmitOrder(dataSubmit).subscribe({
         //   next: res => {
         //     if (!res.success) {
         //       this.notiflix.error(res.message);
@@ -105,5 +108,8 @@ export class SubmitOrderComponent implements OnInit {
   }
   removeItem(i: number) {
     this.listItemQgold.splice(i, 1);
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }

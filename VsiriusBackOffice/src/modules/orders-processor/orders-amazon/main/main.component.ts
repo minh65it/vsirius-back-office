@@ -1,5 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
 import { PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { AmazonProcessSearchParam } from 'src/modules/_shared/_helpers/params/search-amazon-process-param';
 import { AmazonOrderDTO } from 'src/modules/_shared/_models/order-processor/amzon-order-Dto';
@@ -36,6 +37,25 @@ export class MainComponent implements OnInit {
   ];
 
   isCheckAll: boolean = false;
+  subscription = Subscription.EMPTY;
+  listChoosePagination = [
+    {
+      key: 25,
+      value: '25 results'
+    },
+    {
+      key: 50,
+      value: '50 results'
+    },
+    {
+      key: 100,
+      value: '100 results'
+    },
+    {
+      key: 200,
+      value: '200 results'
+    }
+  ];
   constructor(
     private router: Router,
     private service: OrdersAmazonService,
@@ -81,7 +101,7 @@ export class MainComponent implements OnInit {
 
   loadData() {
     this.notiflix.showLoading();
-    this.service.getData(this.pagination, this.amazonSearchParam).subscribe({
+    this.subscription = this.service.getData(this.pagination, this.amazonSearchParam).subscribe({
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
@@ -150,7 +170,7 @@ export class MainComponent implements OnInit {
       return;
     this.notiflix.confirm('Message', 'Do you want delete orders?', () => {
       this.notiflix.showLoading();
-      // this.service.deleteOrder(this.listDelete).subscribe({
+      //this.subscription = this.service.deleteOrder(this.listDelete).subscribe({
       //   next: res => {
       //     res.success ? this.notiflix.success(res.message) :
       //       this.notiflix.error(res.message);
@@ -163,6 +183,18 @@ export class MainComponent implements OnInit {
       //   }
       // })
     })
+  }
+  filterPagination(e: any) {
+    if (e == 0) {
+      e = 1
+    }
+    this.pagination.pageSize = e;
+    console.log(e);
+    
+    this.loadData();
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 
 }

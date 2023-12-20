@@ -11,10 +11,12 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.component';
 import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
+import { MainComponent as MainWalmartComponent } from './orders-walmart/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 import { YesNoPipe } from '../_shared/_pipes/yesNo.pipe';
 
 @NgModule({
@@ -27,6 +29,9 @@ import { YesNoPipe } from '../_shared/_pipes/yesNo.pipe';
     //Amazon
     MainAmazonComponent,
     OrderDetailAmazonComponent,
+    //Walmart
+    MainWalmartComponent,
+    OrderDetailWalmartComponent,
   ],
   imports: [
     CommonModule,

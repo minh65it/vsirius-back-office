@@ -2,9 +2,11 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.component';
 import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
+import { MainComponent as MainWalmartComponent } from './orders-walmart/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -40,6 +42,20 @@ const routes: Routes = [
     component: OrderDetailAmazonComponent,
     data: {
       breadcrumb: 'Order Detail Amazon',
+    },
+  },
+  {
+    path: 'Walmart',
+    component: MainWalmartComponent,
+    data: {
+      breadcrumb: 'Orders Walmart',
+    },
+  },
+  {
+    path: 'detail-walmart',
+    component: OrderDetailWalmartComponent,
+    data: {
+      breadcrumb: 'Order Detail Walmart',
     },
   },
 ];

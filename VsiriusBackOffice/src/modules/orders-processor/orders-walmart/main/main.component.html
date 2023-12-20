@@ -1,0 +1,228 @@
+<div class="card">
+  <div class="card-header d-flex flex-row-reverse">
+    <div class="">
+      <fieldset class="form-icon-group left-icon position-relative">
+        <button type="button" class="btn btn-primary" (click)="submitLink()">Submit new order to Qgold</button>
+      </fieldset>
+    </div>
+  </div>
+  <div class="card-header d-block">
+    <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Purchase Order Id</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="walmartSearchParam.purchaseOrderId" name="purchaseOrderId"
+            class="form-control" placeholder="Purchase Order Id..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Customer Order Id</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="walmartSearchParam.customerOrderId" name="customerOrderId"
+            class="form-control" placeholder="Customer Order Id..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Qgold Order Id</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="walmartSearchParam.qgoldOrderId" name="qgoldOrderId" class="form-control"
+            placeholder="Qgold Order Id..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Tracking Number</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="walmartSearchParam.trackingNumber" name="trackingNumber" class="form-control"
+            placeholder="Tracking Number..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Buyer Name</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="walmartSearchParam.buyerName" name="BuyerName" class="form-control"
+            placeholder="Buyer Name..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Address 1</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="walmartSearchParam.address1" name="address1" class="form-control"
+            placeholder="Address 1..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Order Status</label>
+        <ng-select [placeholder]="'Order Status...'" (ngModelChange)="getOrderStatus($event)"
+          [(ngModel)]="walmartSearchParam.orderStatus" name="orderStatus" [clearable]="false">
+          <ng-option *ngFor="let item of orderWalmartStatusOptions" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">SKU</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="walmartSearchParam.sKU" name="sKU" class="form-control"
+            placeholder="SKU..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="From Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="To Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Submitted</label>
+        <ng-select [placeholder]="'Submitted...'" (ngModelChange)="getIsSubmitted($event)"
+          [(ngModel)]="walmartSearchParam.isSubmitted" name="isSubmitted" [clearable]="false">
+          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold"><br></label>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success border lift rounded-2">
+            <i class="fa fa-search"></i>
+            Search
+          </button>
+          <button type="button" (click)="clean()" class="btn btn-secondary border lift rounded-2">
+            <i class="fa fa-refresh"></i>
+            Clean
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="card-body table-scroll-view">
+      <div class="d-flex align-items-center col-lg-6 col-md-6 col-sm-6">
+        <p class="font-weight-bold">{{pagination.totalCount}} Results </p>
+        &nbsp;
+        <ng-select [placeholder]="'page size...'" name="changePagination" (ngModelChange)="filterPagination($event)"
+          [(ngModel)]="pagination.pageSize" class="prime-select-option" [clearable]="false">
+          <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
+            item.value}}</ng-option>
+        </ng-select>
+      </div>
+      <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listWalmartOrder" dataKey="id"
+        [rows]="listWalmartOrder.length">
+        <!-- Header -->
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <!-- STT -->
+            <th class="text-center"> # </th>
+            <!-- COLUMNS -->
+            <th [pSortableColumn]="item.field" [pSortableColumnDisabled]="item.field === 'isDelete'" class="text-center"
+              *ngFor="let item of columns">
+              <ng-container *ngIf="item.header != 'isDelete'">
+                <div class="d-flex justify-content-evenly">
+                  <!-- Label -->
+                  <span class="text-capitalize">
+                    {{item.header}}
+                    <!-- Sort -->
+                    <p-sortIcon [field]="item.field"></p-sortIcon>
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="item.header == 'isDelete'">
+                <div class="text-center">
+                  <button type="button" (click)="deleteAll()" class="btn btn-sm btn-danger border lift rounded-2">
+                    <i class="fa fa-trash"></i>
+                    Delete All
+                  </button>
+                  <div class="custom-control custom-checkbox checkAll">
+                    <input type="checkbox" class="custom-control-input" id="isCheckAll" [(ngModel)]="isCheckAll"
+                      (change)="checkAll()">
+                    <label class="custom-control-label" for="isCheckAll"></label>
+                  </div>
+                </div>
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <!-- BODY -->
+        <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+          <tr>
+            <!-- STT -->
+            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+            <!-- DATA -->
+            <td *ngFor="let col of columns; index as ii">
+              <ng-container *ngIf="col.field == 'purchaseOrderId'">
+                <div class="text-info" style="cursor: pointer;" (click)="detail(item)" target="_blank">
+                  {{item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field == 'qgoldOrderId'">
+                <div class="text-info" style="cursor: pointer;" (click)="detailSupplier(item)" target="_blank">
+                  {{item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field != 'purchaseOrderId' && col.field != 'isSubmitted' && col.field != 'items' 
+                && col.field != 'isDelete' && col.field != 'orderDate' && col.field != 'qgoldOrderId'">
+                {{item[col.field]}}
+              </ng-container>
+              <ng-container *ngIf="col.field == 'items'">
+          <tr class="w-100" *ngFor="let i of item[col.field]">
+            <div class="d-flex justify-content-around">
+              <div>
+                {{i.sku}}
+              </div>
+              <div style="width: 20px !important;">
+              </div>
+              <div>
+                {{i.quantity}}
+              </div>
+              <div style="width: 20px !important;">
+              </div>
+              <div>
+                {{i.orderStatus}}
+              </div>
+            </div>
+          </tr>
+          </ng-container>
+          <ng-container *ngIf="col.field == 'isSubmitted'">{{item[col.field] | yesNo}}</ng-container>
+          <ng-container *ngIf="col.field == 'orderDate'">{{item[col.field] | date:'YYYY-MM-dd'}}</ng-container>
+          <ng-container *ngIf="col.field == 'isDelete'" style="width: 80px;">
+            <div class="custom-control custom-checkbox d-flex justify-content-center">
+              <input type="checkbox" class="custom-control-input" [(ngModel)]="item[col.field]" id="{{ii}}"
+                (click)="chooseOrder(item)">
+              <label class="custom-control-label" for="{{ii}}"></label>
+            </div>
+          </ng-container>
+          </td>
+          </tr>
+        </ng-template>
+        <!-- MESSAGE WHEN EMPTY -->
+        <ng-template pTemplate="emptymessage" *ngIf="listWalmartOrder.length == 0">
+          <tr>
+            <td colspan="100%" class="text-center font-weight-bold">
+              <span class="text-danger">No Data</span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.pageCount > 1">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+      previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+      nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+    </pagination>
+  </div>
+</div>

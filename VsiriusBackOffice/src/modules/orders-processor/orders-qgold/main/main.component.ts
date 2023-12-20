@@ -1,12 +1,14 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
+import { Subscription } from 'rxjs';
+import { PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { OrderQgoldStatus, SearchQgoldProcessParam } from 'src/modules/_shared/_helpers/params/search-qgold-process-param';
 import { QgoldFtpOrderObject } from 'src/modules/_shared/_models/order-processor/qgold-ftp-order-object';
 import { QgoldOrderDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
+import { OrdersWalmartService } from 'src/modules/_shared/_services/orders-processor/orders-walmart.service';
 
 @Component({
   selector: 'app-main',
@@ -34,13 +36,32 @@ export class MainComponent implements OnInit {
   };
   cols: any[];
   selectedOrderStatus: OrderQgoldStatus | null = null;
-
   isCheckAll: boolean = false;
+  subscription = Subscription.EMPTY;
+  listChoosePagination = [
+    {
+      key: 25,
+      value: '25 results'
+    },
+    {
+      key: 50,
+      value: '50 results'
+    },
+    {
+      key: 100,
+      value: '100 results'
+    },
+    {
+      key: 200,
+      value: '200 results'
+    }
+  ];
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
     private notiflix: NgxNotiflixService,
     private serviceAmazon: OrdersAmazonService,
+    private serviceWalmart: OrdersWalmartService,
   ) { }
 
   ngOnInit() {
@@ -80,7 +101,7 @@ export class MainComponent implements OnInit {
 
   loadData() {
     this.notiflix.showLoading();
-    this.service.getData(this.pagination, this.searchQgoldProcessParam).subscribe({
+    this.subscription = this.service.getData(this.pagination, this.searchQgoldProcessParam).subscribe({
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
@@ -112,6 +133,9 @@ export class MainComponent implements OnInit {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketOrderId);
       this.router.navigate(['/orders-processor/detail-amazon']);
+    } else if (item.marketplace.includes('Walmart')) {
+      this.serviceWalmart.currentID(item.marketOrderId);
+      this.router.navigate(['/orders-processor/detail-walmart']);
     }
   }
   pageChanged(event: any) {
@@ -151,7 +175,7 @@ export class MainComponent implements OnInit {
       return;
     this.notiflix.confirm('Message', 'Do you want delete orders?', () => {
       this.notiflix.showLoading();
-      // this.service.deleteOrder(this.listDelete).subscribe({
+      //this.subscription = this.service.deleteOrder(this.listDelete).subscribe({
       //   next: res => {
       //     res.success ? this.notiflix.success(res.message) :
       //       this.notiflix.error(res.message);
@@ -164,5 +188,15 @@ export class MainComponent implements OnInit {
       //   }
       // })
     })
+  }
+  filterPagination(e: any) {
+    if (e == 0) {
+      e = 1
+    }
+    this.pagination.pageSize = e;
+    this.loadData();
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
   }
 }
