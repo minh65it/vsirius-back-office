@@ -17,6 +17,7 @@ export class SubmitOrderComponent implements OnInit {
   checkValidated: boolean = false;
   qgoldFtpOrderObject: QgoldFtpOrderObject = {} as QgoldFtpOrderObject;
   listItemQgold: QgoldFtpOrderItem[] = [];
+  isNewSubmit: boolean = true;
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
@@ -37,6 +38,7 @@ export class SubmitOrderComponent implements OnInit {
           this.qgoldFtpOrderObject = res;
           this.listItemQgold = [];
           this.listItemQgold = res.item;
+          this.isNewSubmit = false;
         }
       }
     })
@@ -46,25 +48,44 @@ export class SubmitOrderComponent implements OnInit {
     this.qgoldFtpOrderObject.item = this.listItemQgold;
     if (this.myForm.valid) {
       this.checkValidated = false;
-      this.notiflix.showLoading();
       let dataSubmit: QgoldFtpOrderObject[] = [];
       dataSubmit.push(this.qgoldFtpOrderObject);
-      // this.service.submitOrder(dataSubmit).subscribe({
-      //   next: res => {
-      //     if (!res.success) {
-      //       this.notiflix.error(res.message);
-      //       this.notiflix.hideLoading();
-      //       return;
-      //     }
-      //     this.notiflix.success(res.message);
-      //     this.cancel();
-      //     this.notiflix.hideLoading();
-      //   },
-      //   error: () => {
-      //     this.notiflix.error('Error System');
-      //     this.notiflix.hideLoading();
-      //   }
-      // });
+      //this.notiflix.showLoading();
+      if (this.isNewSubmit) {
+        // this.service.submitOrder(dataSubmit).subscribe({
+        //   next: res => {
+        //     if (!res.success) {
+        //       this.notiflix.error(res.message);
+        //       this.notiflix.hideLoading();
+        //       return;
+        //     }
+        //     this.notiflix.success(res.message);
+        //     this.cancel();
+        //     this.notiflix.hideLoading();
+        //   },
+        //   error: () => {
+        //     this.notiflix.error('Error System');
+        //     this.notiflix.hideLoading();
+        //   }
+        // });
+      } else {
+        // this.service.callReSubmitOrder(dataSubmit).subscribe({
+        //   next: res => {
+        //     if (!res.success) {
+        //       this.notiflix.error(res.message);
+        //       this.notiflix.hideLoading();
+        //       return;
+        //     }
+        //     this.notiflix.success(res.message);
+        //     this.cancel();
+        //     this.notiflix.hideLoading();
+        //   },
+        //   error: () => {
+        //     this.notiflix.error('Error System');
+        //     this.notiflix.hideLoading();
+        //   }
+        // });
+      }
     }
     else {
       this.checkValidated = true;
@@ -74,6 +95,7 @@ export class SubmitOrderComponent implements OnInit {
   clearForm() {
     this.myForm.resetForm();
     this.checkValidated = false;
+    this.isNewSubmit = true;
   }
   cancel() {
     this.router.navigate(['/orders-processor/Qgold']);
