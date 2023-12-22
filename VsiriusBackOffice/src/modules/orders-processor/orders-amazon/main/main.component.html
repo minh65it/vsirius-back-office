@@ -93,8 +93,8 @@
             item.value}}</ng-option>
         </ng-select>
       </div>
-      <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listAmazonOrder" dataKey="id"
-        [rows]="listAmazonOrder.length">
+      <p-table [scrollable]="true" scrollHeight="800px" [columns]="selectedColumns" responsiveLayout="scroll"
+        [value]="listAmazonOrder" dataKey="id" [rows]="listAmazonOrder.length">
         <!-- Header -->
         <ng-template pTemplate="header" let-columns>
           <tr>

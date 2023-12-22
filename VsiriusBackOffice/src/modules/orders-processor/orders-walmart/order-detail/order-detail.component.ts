@@ -64,7 +64,6 @@ export class OrderDetailComponent implements OnInit {
     this.router.navigate(['/orders-processor/Walmart']);
   }
   ReSubmitQgold(item: WalmartOrderDetailDTO) {
-    console.log(item);
 
     const model = {} as QgoldFtpOrderObject;
     model.shipToName = item.buyerName;

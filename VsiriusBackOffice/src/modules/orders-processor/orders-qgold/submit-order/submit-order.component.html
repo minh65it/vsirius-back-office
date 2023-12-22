@@ -54,17 +54,6 @@
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
-          <label for="TextInput" class="form-label fw-bold">Ship to state province <span
-              class="text-danger">*</span></label>
-          <input type="text" class="form-control" placeholder="Enter ship to state province... "
-            name="shipToState_Province" [(ngModel)]="qgoldFtpOrderObject.shipToState_Province"
-            #shipToState_Province="ngModel" required [maxLength]="2" />
-          <div class="text-danger mt-2 d-flex align-items-center"
-            *ngIf="shipToState_Province.invalid && (shipToState_Province.touched || shipToState_Province.dirty || checkValidated)">
-            <span>*Ship to state province </span>
-          </div>
-        </div>
-        <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Ship to zip <span class="text-danger">*</span></label>
           <input type="text" class="form-control" placeholder="Enter ship to zip... " name="shipToZip"
             [(ngModel)]="qgoldFtpOrderObject.shipToZip" #shipToZip="ngModel" required />
@@ -81,6 +70,17 @@
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="shipToCountryCode.invalid && (shipToCountryCode.touched || shipToCountryCode.dirty || checkValidated)">
             <span>*Ship to country code </span>
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-1">
+          <label for="TextInput" class="form-label fw-bold">Ship to state province <span
+              class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter ship to state province... "
+            name="shipToState_Province" [(ngModel)]="qgoldFtpOrderObject.shipToState_Province"
+            #shipToState_Province="ngModel" required [maxLength]="2" />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="shipToState_Province.invalid && (shipToState_Province.touched || shipToState_Province.dirty || checkValidated)">
+            <span>*Ship to state province </span>
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
@@ -136,8 +136,14 @@
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Ship method code <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" placeholder="Enter ship method code... " name="ship_Method_Code"
-            [(ngModel)]="qgoldFtpOrderObject.ship_Method_Code" #ship_Method_Code="ngModel" required />
+          <!-- <input type="text" class="form-control" placeholder="Enter ship method code... " name="ship_Method_Code"
+            [(ngModel)]="qgoldFtpOrderObject.ship_Method_Code" #ship_Method_Code="ngModel" required /> -->
+          <ng-select [placeholder]="'Ship Method Code...'" (ngModelChange)="getShipMethodCode($event)"
+            [(ngModel)]="qgoldFtpOrderObject.ship_Method_Code" name="ship_Method_Code" [clearable]="false"
+            #ship_Method_Code="ngModel">
+            <ng-option *ngFor="let item of listShipMethodCode" [value]="item.value">{{
+              item.key}}</ng-option>
+          </ng-select>
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="ship_Method_Code.invalid && (ship_Method_Code.touched || ship_Method_Code.dirty || checkValidated)">
             <span>*Ship method code CA: 1701, Standard: 1102, Second Day: 220, Expedited: 1100 </span>
@@ -181,8 +187,14 @@
         </div>
         <div class="col-xl-6 col-md-6 mt-1">
           <label for="TextInput" class="form-label fw-bold">Marketplace <span class="text-danger">*</span></label>
-          <input type="text" class="form-control" placeholder="Marketplace... " name="marketplace"
-            [(ngModel)]="qgoldFtpOrderObject.marketplace" #market_place="ngModel" required="" />
+          <!-- <input type="text" class="form-control" placeholder="Marketplace... " name="marketplace"
+            [(ngModel)]="qgoldFtpOrderObject.marketplace" #market_place="ngModel" required="" /> -->
+          <ng-select [placeholder]="'Marketplace...'" (ngModelChange)="getMarketplace($event)"
+            [(ngModel)]="qgoldFtpOrderObject.marketplace" name="marketplace" [clearable]="false"
+            #market_place="ngModel">
+            <ng-option *ngFor="let item of listMarketplace" [value]="item.value">{{
+              item.key}}</ng-option>
+          </ng-select>
           <div class="text-danger mt-2 d-flex align-items-center"
             *ngIf="market_place.invalid && (market_place.touched || market_place.dirty || checkValidated)">
             <span>*Marketplace: Vsirius, Amazon, Walmart </span>

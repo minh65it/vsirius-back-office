@@ -20,6 +20,38 @@ export class SubmitOrderComponent implements OnInit {
   listItemQgold: QgoldFtpOrderItem[] = [];
   isNewSubmit: boolean = true;
   subscription = Subscription.EMPTY;
+  listMarketplace = [
+    {
+      key: 'Vsirius',
+      value: 'Vsirius'
+    },
+    {
+      key: 'Amazon',
+      value: 'Amazon'
+    },
+    {
+      key: 'Walmart',
+      value: 'Walmart'
+    }
+  ];
+  listShipMethodCode = [
+    {
+      key: 'CA',
+      value: '1701'
+    },
+    {
+      key: 'Standard',
+      value: '1102'
+    },
+    {
+      key: 'Second Day',
+      value: '220'
+    },
+    {
+      key: 'Expedited',
+      value: '1100'
+    }
+  ];
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
@@ -53,6 +85,8 @@ export class SubmitOrderComponent implements OnInit {
       this.checkValidated = false;
       let dataSubmit: QgoldFtpOrderObject[] = [];
       dataSubmit.push(this.qgoldFtpOrderObject);
+      console.log(dataSubmit);
+
       //this.notiflix.showLoading();
       if (this.isNewSubmit) {
         //this.subscription = this.service.submitOrder(dataSubmit).subscribe({
@@ -109,6 +143,8 @@ export class SubmitOrderComponent implements OnInit {
   removeItem(i: number) {
     this.listItemQgold.splice(i, 1);
   }
+  getMarketplace($event: any) { }
+  getShipMethodCode($event: any) { }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }

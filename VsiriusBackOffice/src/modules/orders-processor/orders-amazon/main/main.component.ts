@@ -189,7 +189,6 @@ export class MainComponent implements OnInit {
       e = 1
     }
     this.pagination.pageSize = e;
-    console.log(e);
     
     this.loadData();
   }

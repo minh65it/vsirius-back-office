@@ -1,15 +1,20 @@
 @import '../node_modules/@ng-select/ng-select/themes/default.theme.css';
+
 body {
   font-family: 'Quicksand';
   position: relative;
   font-size: 14px !important;
+  font-weight: 700 !important;
 }
-.label-custom{
+
+.label-custom {
   font-size: 14px !important;
 }
+
 .p-tabview .p-tabview-panels {
   min-height: 500px !important;
 }
+
 .table-scroll-view {
   padding: 1.5rem 0 0 !important;
   overflow-x: auto;
@@ -38,8 +43,8 @@ body {
   padding-left: 1rem;
   padding-right: 1rem;
   border-right: 0;
-  border-bottom: 1px dashed #e9e6e1;
-  border-left: 1px dashed #e9e6e1;
+  border-bottom: 1px dashed #13131386;
+  border-left: 1px dashed #13131386;
 }
 
 .p-column-filter-menu-button {
