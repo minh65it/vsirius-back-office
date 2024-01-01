@@ -13,7 +13,9 @@ export class NavComponent implements OnInit {
   menu: MenuRoles = <MenuRoles>{}
   listRoles: string[];
   listOrder: string[] = ["Qgold", "Amazon", "Walmart"];
+  listReturnOrder: string[] = ["Package-Claim", "Amazon", "Walmart"];
   visible = true;
+  visible2 = true;
   constructor() { }
 
   ngOnInit() {
@@ -34,7 +36,16 @@ export class NavComponent implements OnInit {
 
   }
   changeRoute() { }
-  toggleCollapse(): void {
-    this.visible = !this.visible;
+  toggleCollapse(id: string): void {
+    switch (id) {
+      case 'order-processor': {
+        this.visible = !this.visible;
+        break;
+      }
+      case 'return-orders': {
+        this.visible2 = !this.visible2;
+        break;
+      }
+    }
   }
 }

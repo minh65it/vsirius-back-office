@@ -189,7 +189,7 @@ export class MainComponent implements OnInit {
       e = 1
     }
     this.pagination.pageSize = e;
-    
+
     this.loadData();
   }
   ngOnDestroy(): void {

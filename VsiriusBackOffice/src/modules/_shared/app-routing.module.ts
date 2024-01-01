@@ -11,7 +11,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    canActivate: [AuthGuard],
+    //canActivate: [AuthGuard],
     component: DefaultLayoutComponent,
     data: {
       breadcrumb: 'Home',
@@ -44,6 +44,10 @@ const routes: Routes = [
       {
         path: 'orders-processor',
         loadChildren: () => import('../orders-processor/orders-processor.module').then((m) => m.OrdersProcessorModule),
+      },
+      {
+        path: 'return-orders',
+        loadChildren: () => import('../return-orders/return-orders.module').then((m) => m.ReturnOrdersModule),
       },
       {
         path: 'contacts',

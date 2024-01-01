@@ -1,0 +1,37 @@
+export interface ReturnFBMOrderRowDto {
+    orderID: string;
+    orderDate: string | null;
+    returnRequestDate: string | null;
+    returnRequestStatus: string;
+    amazonRMAID: string;
+    merchantRMAID: string;
+    labelType: string;
+    labelCost: string;
+    currencyCode: string;
+    returnCarrier: string;
+    trackingID: string;
+    labelToBePaidBy: string;
+    aToZClaim: boolean;
+    isPrime: boolean;
+    aSIN: string;
+    merchantSKU: string;
+    itemName: string;
+    returnQuantity: number | null;
+    returnReason: string;
+    inPolicy: boolean;
+    returnType: string;
+    resolution: string;
+    invoiceNumber: string;
+    returnDeliveryDate: string | null;
+    orderAmount: number | null;
+    orderQuantity: number | null;
+    safeTActionReason: string;
+    safeTClaimId: string;
+    safeTClaimState: string;
+    safeTClaimCreationTime: string;
+    safeTClaimReimbursementAmount: string;
+    refundedAmount: number | null;
+    category: string;
+    refNumber: string;
+    isDelete: boolean;
+}

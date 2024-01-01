@@ -5,6 +5,7 @@ export const RoleName = {
      IS_Employee: 'Employee',
      IS_Order: 'Order',
      IS_Order_Processor: 'OrderProcessor',
+     IS_Return_Orders: 'ReturnOrder',
      IS_Cart: 'Cart',
      IS_System: 'System',
      IS_Notification: 'Notification',

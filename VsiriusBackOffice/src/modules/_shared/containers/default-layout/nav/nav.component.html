@@ -54,7 +54,7 @@
 
             <!-- <li class="collapsed" > -->
             <li class="collapsed" *ngIf="menu.Admin || menu.OrderProcessor">
-              <a (click)="toggleCollapse()" data-bs-toggle="collapsed" class="m-link cursor-pointer"
+              <a (click)="toggleCollapse('order-processor')" data-bs-toggle="collapsed" class="m-link cursor-pointer"
                 [routerLink]="'/orders-processor'" routerLinkActive="active">
                 <i class="fa fa-shopping-basket"></i>
                 <span class="ms-2">Orders Processor</span>
@@ -65,6 +65,26 @@
                 <li class="collapsed" *ngFor="let child of listOrder">
                   <a class="m-link cursor-pointer" [routerLink]="'/orders-processor/'+ child" routerLinkActive="active">
                     <i class="fa fa-shopping-cart"></i>
+                    <span class="ms-2 " style="cursor: pointer;">{{child}}</span>
+                  </a>
+                </li>
+              </ul>
+            </li>
+
+            <!-- <li class="collapsed" > -->
+            <!-- <li class="collapsed" *ngIf="menu.Admin || menu.ReturnOrderProcessor"> -->
+            <li class="collapsed">
+              <a (click)="toggleCollapse('return-orders')" data-bs-toggle="collapsed" class="m-link cursor-pointer"
+                [routerLink]="'/return-orders'" routerLinkActive="active">
+                <i class="fa fa-shopping-basket"></i>
+                <span class="ms-2">Return Orders</span>
+                <span class="arrow fa  ms-auto text-end"
+                  [ngClass]="visible2  ? 'fa-angle-right' : 'fa-angle-down'"></span>
+              </a>
+              <ul class="sub-menu" [ngClass]="visible2  ? 'collapsed' : 'collapse'">
+                <li class="collapsed" *ngFor="let child of listReturnOrder">
+                  <a class="m-link cursor-pointer" [routerLink]="'/return-orders/'+ child" routerLinkActive="active">
+                    <i class="fa fa-minus-square"></i>
                     <span class="ms-2 " style="cursor: pointer;">{{child}}</span>
                   </a>
                 </li>

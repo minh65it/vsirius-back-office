@@ -14,6 +14,7 @@ export const environment = {
   imageURLIdentity: 'http://192.168.1.92:8087/',
   apiOrderURL: 'http://192.168.1.92:8090/api/',
   apiOrderProcessorURL: 'http://192.168.1.92:8089/api/',
+  apiReturnOrderURL: 'https://localhost:5000/api/',
   apiCSRURL: 'http://192.168.1.92:8091/api/',
   baseCSRURL: 'http://192.168.1.92:8091',
   clientIdCart: "OrderApi",
