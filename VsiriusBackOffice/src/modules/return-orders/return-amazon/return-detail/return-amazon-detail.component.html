@@ -1,0 +1,139 @@
+<div class="card ">
+  <div class="card-header d-flex flex-row-reverse">
+    <div class="col d-flex justify-content-end">
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Purchase Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnFBMOrder?.orderID}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnFBMOrder?.orderDate}}
+          </p>
+        </div>
+      </div>
+      <!-- <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Qgold Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailSupplier(returnFBMOrder)">
+          {{returnFBMOrder?.returnRequestDate}}
+        </div>
+      </div> -->
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Tracking Number </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.returnRequestDate}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Carrier Name </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnFBMOrder?.returnRequestStatus}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Email Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnFBMOrder?.amazonRMAID}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Submitted </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.merchantRMAID}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.orderDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Estimated Delivery Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.labelType | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Estimated Ship Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.labelCost | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Method Shipping </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnFBMOrder?.currencyCode}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Buyer Name </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.returnCarrier}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Phone </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.trackingID}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Address 1 </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.labelToBePaidBy}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Address 2 </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.aToZClaim}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">City </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.isPrime}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">State </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.aSIN}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Postal Code </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.merchantSKU}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Country </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.itemName}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

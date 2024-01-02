@@ -11,7 +11,8 @@ import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { PackageClaimsComponent } from './package-claims/package-claims.component';
-import { ReturnAmazonComponent } from './return-amazon/return-amazon.component';
+import { ReturnAmazonComponent } from './return-amazon/main/return-amazon.component';
+import { ReturnAmazonDetailComponent } from './return-amazon/return-detail/return-amazon-detail.component';
 
 @NgModule({
   imports: [
@@ -29,7 +30,8 @@ import { ReturnAmazonComponent } from './return-amazon/return-amazon.component';
   ],
   declarations: [
     PackageClaimsComponent,
-    ReturnAmazonComponent
+    ReturnAmazonComponent,
+    ReturnAmazonDetailComponent
   ]
 })
 export class ReturnOrdersModule { }

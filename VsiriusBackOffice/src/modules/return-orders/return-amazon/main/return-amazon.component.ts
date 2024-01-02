@@ -26,6 +26,32 @@ export class ReturnAmazonComponent implements OnInit {
   listReturnAmazonOrder: ReturnFBMOrderRowDto[] = [];
   _selectedColumns: any[];
   cols: any[];
+  searchOrderFrom: Date = new Date();
+  searchOrderTo: Date = new Date();
+  searchReturnRequestDateFrom: Date = new Date();
+  searchReturnRequestDateTo: Date = new Date();
+  listReturnRequestStatus: any[] = [
+    { key: "No", value: 'No' },
+    { key: "Yes", value: 'Yes' }
+  ];
+  listChoosePagination = [
+    {
+      key: 25,
+      value: '25 results'
+    },
+    {
+      key: 50,
+      value: '50 results'
+    },
+    {
+      key: 100,
+      value: '100 results'
+    },
+    {
+      key: 200,
+      value: '200 results'
+    }
+  ];
   constructor(
     private router: Router,
     private service: ReturnAmazonService,
@@ -33,6 +59,8 @@ export class ReturnAmazonComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.searchOrderFrom.setDate(this.searchOrderTo.getDate() - 45);
+    this.searchReturnRequestDateFrom.setDate(this.searchReturnRequestDateTo.getDate() - 45);
     this.generateTable();
     this.loadData();
   }
@@ -50,8 +78,7 @@ export class ReturnAmazonComponent implements OnInit {
       { field: 'orderDate', header: 'Order Date' },
       { field: 'returnRequestDate', header: 'Return Request Date' },
       { field: 'returnRequestStatus', header: 'Return Request Status' },
-      { field: 'amazonRMAID', header: 'amazon RMAID' },
-      { field: 'isDelete', header: 'isDelete' },
+      { field: 'amazonRMAID', header: 'amazon RMAID' }
     ];
     this._selectedColumns = this.cols;
   }
@@ -59,8 +86,6 @@ export class ReturnAmazonComponent implements OnInit {
     this.notiflix.showLoading();
     this.subscription = this.service.getData(this.pagination, this.returnAmazonSearchParam).subscribe({
       next: res => {
-        console.log(res);
-
         this.pagination = res;
         this.listReturnAmazonOrder = res.data;
         this.notiflix.hideLoading();
@@ -71,5 +96,39 @@ export class ReturnAmazonComponent implements OnInit {
       }
     })
   }
+  search() {
+    this.returnAmazonSearchParam.orderDateFrom = this.searchOrderFrom?.toLocaleDateString('en-CA') ?? null;
+    this.returnAmazonSearchParam.orderDateTo = this.searchOrderTo?.toLocaleDateString('en-CA') ?? null;
+    this.returnAmazonSearchParam.returnRequestDateFrom = this.searchReturnRequestDateFrom?.toLocaleDateString('en-CA') ?? null;
+    this.returnAmazonSearchParam.returnRequestDateTo = this.searchReturnRequestDateTo?.toLocaleDateString('en-CA') ?? null;
 
+    this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
+  }
+  getReturnOrderStatus($event: any) { }
+  clean() {
+    this.searchOrderTo, this.searchReturnRequestDateTo = new Date();
+    this.searchOrderFrom, this.searchReturnRequestDateFrom = new Date();
+    this.searchOrderFrom.setDate(new Date().getDate() - 45);
+    this.searchReturnRequestDateFrom.setDate(new Date().getDate() - 45);
+    this.returnAmazonSearchParam = {} as ReturnFBMOrderParams;
+    this.search();
+  }
+  detailReturnORder(item: ReturnFBMOrderRowDto) {
+    this.service.currentAmazonRMAID(item.amazonRMAID);
+    this.router.navigate(['/return-orders/detail-amazon']);
+  }
+  pageChanged(event: any) {
+    this.pagination.pageNumber = event.page;
+    this.loadData();
+  }
+  filterPagination(e: any) {
+    if (e == 0) {
+      e = 1
+    }
+    this.pagination.pageSize = e;
+    this.loadData();
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }

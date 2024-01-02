@@ -5,6 +5,7 @@ import { FunctionUtility } from '../../_helpers/function-utility';
 import { PaginationParam, PaginationResult2 } from '../../_helpers/pagination-utility';
 import { ReturnFBMOrderParams } from '../../_helpers/params/return-amazon';
 import { ReturnFBMOrderRowDto } from '../../_models/return-orders/return-amazon';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,9 +13,20 @@ import { ReturnFBMOrderRowDto } from '../../_models/return-orders/return-amazon'
 export class ReturnAmazonService {
 
   baseUrl = environment.apiReturnOrderURL;
+
+  AmazonRMAID = new BehaviorSubject<string>('');
+  currentRMAID = this.AmazonRMAID.asObservable();
+
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
+
+  currentAmazonRMAID(id: string) {
+    this.AmazonRMAID.next(id);
+  }
 
   getData(pagination: PaginationParam, param: ReturnFBMOrderParams) {
     return this.http.get<PaginationResult2<ReturnFBMOrderRowDto>>(this.baseUrl + 'ReturnOrder/GetReturnOrders', { params: { ...pagination, ...param } });
+  }
+  getDetail(amazonRMAID: string) {
+    return this.http.get<ReturnFBMOrderRowDto>(this.baseUrl + 'ReturnOrder/GetDetail', { params: { amazonRMAID } });
   }
 }
