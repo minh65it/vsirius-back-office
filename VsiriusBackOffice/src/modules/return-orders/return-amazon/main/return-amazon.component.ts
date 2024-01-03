@@ -74,10 +74,10 @@ export class ReturnAmazonComponent implements OnInit {
   generateTable() {
     this.cols = [
       { field: 'orderID', header: 'Order ID' },
+      { field: 'amazonRMAID', header: 'Return Order ID' },
       { field: 'orderDate', header: 'Order Date' },
       { field: 'returnRequestDate', header: 'Return Request Date' },
       { field: 'returnRequestStatus', header: 'Return Request Status' },
-      { field: 'amazonRMAID', header: 'Amazon RMAID' },
       { field: 'trackingID', header: 'Tracking ID' }
     ];
     this._selectedColumns = this.cols;

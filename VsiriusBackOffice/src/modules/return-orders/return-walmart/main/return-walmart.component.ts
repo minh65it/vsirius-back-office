@@ -65,9 +65,9 @@ export class ReturnWalmartComponent implements OnInit {
   }
   generateTable() {
     this.cols = [
-      { field: 'returnOrderId', header: 'Return Order Id' },
+      { field: 'returnOrderId', header: 'Return Order ID' },
       { field: 'customerName', header: 'Customer Name' },
-      { field: 'customerOrderId', header: 'Customer Order Id' },
+      { field: 'customerOrderId', header: 'Customer Order ID' },
       { field: 'returnOrderDate', header: 'Return Order Date' },
       { field: 'totalRefundAmount', header: 'Total Refund Amount' },
       { field: 'returnOrderLines', header: 'Return Order Lines' },

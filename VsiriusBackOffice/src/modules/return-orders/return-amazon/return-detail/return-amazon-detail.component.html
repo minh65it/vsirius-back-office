@@ -92,13 +92,13 @@
           {{returnFBMOrder?.trackingID}}
         </div>
       </div>
-      <div class="col-xl-12 col-md-12 mt-2">
+      <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Label To Be Paid By </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.labelToBePaidBy}}
         </div>
       </div>
-      <div class="col-xl-12 col-md-12 mt-2">
+      <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">A To Z Claim </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.aToZClaim | yesNo}}
@@ -124,8 +124,14 @@
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Item Name </label>
-        <div class="form-control" style="height: 35px;">
+        <div class="form-control" style="height: 65px;">
           {{returnFBMOrder?.itemName}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Return Reason </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.returnReason}}
         </div>
       </div>
     </div>
