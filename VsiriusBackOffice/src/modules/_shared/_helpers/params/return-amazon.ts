@@ -2,6 +2,7 @@ export interface ReturnFBMOrderParams {
     orderID: string | null;
     orderDateFrom: string | null;
     orderDateTo: string | null;
+    amazonRMAID: string | null;
     returnRequestDateFrom: string | null;
     returnRequestDateTo: string | null;
     trackingID: string | null;

@@ -33,5 +33,16 @@ export interface ReturnFBMOrderRowDto {
     refundedAmount: number | null;
     category: string;
     refNumber: string;
+    documentType: string;
+    marketplace: string | null;
+    marketplaceOrderId: string | null;
+    rMA: string | null;
+    notes: string[];
+    images: ImageInfo[];
+    scanDate: string;
     isDelete: boolean;
+}
+export interface ImageInfo {
+    text: string;
+    url: string;
 }

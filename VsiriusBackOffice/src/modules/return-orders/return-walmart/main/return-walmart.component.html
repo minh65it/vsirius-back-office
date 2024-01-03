@@ -23,6 +23,13 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Customer Name</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="returnWalmartSearchParam.customerName" name="customerName"
+            class="form-control" placeholder="Customer Name..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
         <label for="TextInput" class="form-label fw-bold">Status Return</label>
         <ng-select [placeholder]="'Status Return...'" (ngModelChange)="getReturnStatus($event)"
           [(ngModel)]="returnWalmartSearchParam.statusReturn" name="statusReturn" [clearable]="false">

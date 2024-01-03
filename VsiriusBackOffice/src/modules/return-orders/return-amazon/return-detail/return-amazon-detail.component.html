@@ -9,6 +9,7 @@
   </div>
   <div class="card-body">
     <div class="row">
+      <h4 class="text-info">Order Amazon</h4>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order ID </label>
         <div class="form-control" style="height: 35px;">
@@ -132,6 +133,19 @@
         <label class="form-label fw-bold">Return Reason </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.returnReason}}
+        </div>
+      </div>
+      <h4 class="text-info">Package claim</h4>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Document Type </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.documentType}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Scan Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnFBMOrder?.scanDate | date:'YYYY-MM-dd'}}
         </div>
       </div>
     </div>
