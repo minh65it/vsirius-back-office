@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { ReturnFBMOrderRowDto } from 'src/modules/_shared/_models/return-orders/return-amazon';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
@@ -16,11 +17,13 @@ export class ReturnAmazonDetailComponent implements OnInit {
   returnFBMOrder: ReturnFBMOrderRowDto = {} as ReturnFBMOrderRowDto;
   amazonRMAID: string = '';
   subscription = Subscription.EMPTY;
+  modalRef?: BsModalRef;
   constructor(
     private router: Router,
     private service: ReturnAmazonService,
     private notiflix: NgxNotiflixService,
     private serviceAmazon: OrdersAmazonService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -59,5 +62,8 @@ export class ReturnAmazonDetailComponent implements OnInit {
     this.serviceAmazon.currentID(orderID);
     this.router.navigate(['/orders-processor/detail-amazon']);
   }
-
+  openModal(template: TemplateRef<void>, url: string) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+    this.modalRef.content = url;
+  }
 }

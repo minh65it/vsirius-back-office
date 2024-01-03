@@ -149,7 +149,7 @@
       </ng-container>
       <ng-container *ngFor="let item of returnFBMOrder?.images">
         <div class="card mt-2" style="width: 18rem;">
-          <img [src]="item?.url" class="card-img-top" alt="...">
+          <img [src]="item?.url" class="card-img-top" alt="..." (click)="openModal(template, item?.url)">
           <div class="card-body">
             <p class="card-text">{{item?.text}}</p>
           </div>
@@ -158,3 +158,14 @@
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img [src]="modalRef?.content" class="card-img-top" alt="...">
+  </div>
+</ng-template>
