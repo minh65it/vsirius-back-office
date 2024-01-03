@@ -12,7 +12,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class ReturnAmazonService {
 
-  baseUrl = environment.apiReturnOrderURL;
+  baseUrl = environment.apiReturnOrderAmazonURL;
 
   AmazonRMAID = new BehaviorSubject<string>('');
   currentRMAID = this.AmazonRMAID.asObservable();

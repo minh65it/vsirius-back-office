@@ -1,0 +1,112 @@
+<div class="card ">
+  <div class="card-header d-flex flex-row-reverse">
+    <div class="col d-flex justify-content-end">
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Return Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnOrder?.returnOrderId}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Name</label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnOrder?.customerName?.firstName}} {{returnOrder?.customerName?.lastName}}
+          </p>
+        </div>
+      </div>
+      <!-- <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Qgold Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailSupplier(returnOrder)">
+          {{returnOrder?.returnRequestDate}}
+        </div>
+      </div> -->
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnOrder?.customerOrderId}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Return Order Date </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnOrder?.returnOrderDate | date:'YYYY-MM-dd'}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Return By Date </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnOrder?.returnByDate | date:'YYYY-MM-dd'}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Refund Mode </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnOrder?.refundMode}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Total Refund Amount </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnOrder?.totalRefundAmount?.currencyAmount}} {{returnOrder?.totalRefundAmount?.currencyUnit}}
+        </div>
+      </div>
+      <ng-container *ngFor="let item of returnOrder?.returnOrderLines">
+        <hr class="mt-2">
+        <div class="col-xl-6 col-md-6 mt-2">
+          <label class="form-label fw-bold">Purchase Order Id </label>
+          <div class="form-control" style="height: 35px;">
+            {{item.purchaseOrderId}}
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-2">
+          <label class="form-label fw-bold">Sku </label>
+          <div class="form-control" style="height: 35px;">
+            {{item.item.sku}}
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-2">
+          <label class="form-label fw-bold">Product Name </label>
+          <div class="form-control" style="height: 65px;">
+            {{item.item.productName}}
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-2">
+          <label class="form-label fw-bold">Current Refund Status </label>
+          <div class="form-control" style="height: 35px;">
+            {{item.currentRefundStatus}}
+          </div>
+        </div>
+        <div class="col-xl-6 col-md-6 mt-2">
+          <label class="form-label fw-bold">Refunded Qty </label>
+          <div class="form-control" style="height: 35px;">
+            {{item.refundedQty}}
+          </div>
+        </div>
+      </ng-container>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Return Channel </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{returnOrder?.returnChannel?.channelName}}
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

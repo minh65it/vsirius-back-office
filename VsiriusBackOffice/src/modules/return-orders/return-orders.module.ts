@@ -13,6 +13,9 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { PackageClaimsComponent } from './package-claims/package-claims.component';
 import { ReturnAmazonComponent } from './return-amazon/main/return-amazon.component';
 import { ReturnAmazonDetailComponent } from './return-amazon/return-detail/return-amazon-detail.component';
+import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
+import { ReturnWalmartComponent } from './return-walmart/main/return-walmart.component';
+import { ReturnWalmartDetailComponent } from './return-walmart/return-detail/return-walmart-detail.component';
 
 @NgModule({
   imports: [
@@ -26,12 +29,15 @@ import { ReturnAmazonDetailComponent } from './return-amazon/return-detail/retur
     ButtonModule,
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot(),
-    NgSelectModule
+    NgSelectModule,
+    SharePipeModule
   ],
   declarations: [
     PackageClaimsComponent,
     ReturnAmazonComponent,
-    ReturnAmazonDetailComponent
-  ]
+    ReturnAmazonDetailComponent,
+    ReturnWalmartComponent,
+    ReturnWalmartDetailComponent
+  ],
 })
 export class ReturnOrdersModule { }

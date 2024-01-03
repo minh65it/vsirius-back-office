@@ -1,0 +1,178 @@
+<div class="card">
+  <div class="card-header d-block">
+    <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Return Order ID</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="returnWalmartSearchParam.returnOrderID" name="returnOrderID"
+            class="form-control" placeholder="Return Order ID..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Purchase Order ID</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="returnWalmartSearchParam.purchaseOrderID" name="purchaseOrderID"
+            class="form-control" placeholder="Purchase Order ID..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">SKU</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="returnWalmartSearchParam.sKU" name="sKU" class="form-control"
+            placeholder="SKU..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Status Return</label>
+        <ng-select [placeholder]="'Status Return...'" (ngModelChange)="getReturnStatus($event)"
+          [(ngModel)]="returnWalmartSearchParam.statusReturn" name="statusReturn" [clearable]="false">
+          <ng-option *ngFor="let item of listReturnStatus" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Order Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" [(ngModel)]="searchOrderFrom" name="searchOrderFrom" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="From Order Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Order Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" [(ngModel)]="searchOrderTo" name="searchOrderTo" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="To Order Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold"><br></label>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success border lift rounded-2">
+            <i class="fa fa-search"></i>
+            Search
+          </button>
+          <button type="button" (click)="clean()" class="btn btn-secondary border lift rounded-2">
+            <i class="fa fa-refresh"></i>
+            Clean
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="card-body table-scroll-view">
+      <div class="d-flex align-items-center col-lg-6 col-md-6 col-sm-6">
+        <p class="font-weight-bold">{{pagination.totalCount}} Results </p>
+        &nbsp;
+        <ng-select [placeholder]="'page size...'" name="changePagination" (ngModelChange)="filterPagination($event)"
+          [(ngModel)]="pagination.pageSize" class="prime-select-option" [clearable]="false">
+          <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
+            item.value}}</ng-option>
+        </ng-select>
+      </div>
+      <p-table [scrollable]="true" scrollHeight="800px" [columns]="selectedColumns" responsiveLayout="scroll"
+        [value]="listReturnWalmartOrder" dataKey="id" [rows]="listReturnWalmartOrder.length">
+        <!-- Header -->
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <!-- STT -->
+            <th class="text-center"> # </th>
+            <!-- COLUMNS -->
+            <th [pSortableColumn]="item.field" [pSortableColumnDisabled]="item.field === 'isDelete'" class="text-center"
+              *ngFor="let item of columns">
+              <ng-container *ngIf="item.header != 'isDelete'">
+                <div class="d-flex justify-content-evenly">
+                  <!-- Label -->
+                  <span class="text-capitalize">
+                    {{item.header}}
+                    <!-- Sort -->
+                    <p-sortIcon [field]="item.field"></p-sortIcon>
+                  </span>
+                </div>
+              </ng-container>
+              <ng-container *ngIf="item.header == 'isDelete'">
+                <!-- <div class="text-center">
+                  <button type="button" (click)="deleteAll()" class="btn btn-sm btn-danger border lift rounded-2">
+                    <i class="fa fa-trash"></i>
+                    Delete All
+                  </button>
+                  <div class="custom-control custom-checkbox checkAll">
+                    <input type="checkbox" class="custom-control-input" id="isCheckAll" [(ngModel)]="isCheckAll"
+                      (change)="checkAll()">
+                    <label class="custom-control-label" for="isCheckAll"></label>
+                  </div>
+                </div> -->
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <!-- BODY -->
+        <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+          <tr>
+            <!-- STT -->
+            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+            <!-- DATA -->
+            <td *ngFor="let col of columns; index as ii">
+              <ng-container *ngIf="col.field == 'returnOrderId'">
+                <div class="text-info" style="cursor: pointer;" (click)="detailReturnORder(item)" target="_blank">
+                  {{item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field != 'returnOrderId' && col.field != 'isDelete' && col.field != 'returnOrderDate' 
+                && col.field != 'customerName' && col.field != 'totalRefundAmount' && col.field != 'returnOrderLines'">
+                {{item[col.field]}}
+              </ng-container>
+              <ng-container *ngIf="col.field == 'customerName'">{{item[col.field]?.firstName}}
+                {{item[col.field]?.lastName}}</ng-container>
+              <ng-container *ngIf="col.field == 'returnOrderDate'">{{item[col.field] |
+                date:'YYYY-MM-dd'}}</ng-container>
+              <ng-container *ngIf="col.field == 'totalRefundAmount'">{{item[col.field]?.currencyAmount}}
+                {{item[col.field]?.currencyUnit}}</ng-container>
+              <ng-container *ngIf="col.field == 'returnOrderLines'">
+          <tr class="w-100" *ngFor="let i of item[col.field]">
+            <div class="d-flex justify-content-around">
+              <div>
+                {{i?.purchaseOrderId}}
+              </div>
+              <div style="width: 20px !important;">
+              </div>
+              <div>
+                {{i?.item?.sku}}
+              </div>
+              <div style="width: 20px !important;">
+              </div>
+              <div>
+                {{i?.currentDeliveryStatus}}
+              </div>
+            </div>
+          </tr>
+          </ng-container>
+          </td>
+          </tr>
+        </ng-template>
+        <!-- MESSAGE WHEN EMPTY -->
+        <ng-template pTemplate="emptymessage" *ngIf="listReturnWalmartOrder.length == 0">
+          <tr>
+            <td colspan="100%" class="text-center font-weight-bold">
+              <span class="text-danger">No Data</span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+      previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+      nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+    </pagination>
+  </div>
+</div>

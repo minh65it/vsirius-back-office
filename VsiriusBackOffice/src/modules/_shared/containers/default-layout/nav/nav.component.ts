@@ -8,14 +8,12 @@ import { MenuRoles, RoleName } from 'src/modules/_shared/_constants/role-name.en
   styleUrls: ['./nav.component.scss']
 })
 export class NavComponent implements OnInit {
-  isAdmin: boolean = false;
-  isProduct: boolean = false;
   menu: MenuRoles = <MenuRoles>{}
   listRoles: string[];
   listOrder: string[] = ["Qgold", "Amazon", "Walmart"];
   listReturnOrder: string[] = ["Package-Claim", "Amazon", "Walmart"];
-  visible = true;
-  visible2 = true;
+  visible = false;
+  visible2 = false;
   constructor() { }
 
   ngOnInit() {

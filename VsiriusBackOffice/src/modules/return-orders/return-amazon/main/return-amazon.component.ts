@@ -31,8 +31,7 @@ export class ReturnAmazonComponent implements OnInit {
   searchReturnRequestDateFrom: Date = new Date();
   searchReturnRequestDateTo: Date = new Date();
   listReturnRequestStatus: any[] = [
-    { key: "No", value: 'No' },
-    { key: "Yes", value: 'Yes' }
+    { key: "Approved", value: 'Approved' }
   ];
   listChoosePagination = [
     {
@@ -78,7 +77,8 @@ export class ReturnAmazonComponent implements OnInit {
       { field: 'orderDate', header: 'Order Date' },
       { field: 'returnRequestDate', header: 'Return Request Date' },
       { field: 'returnRequestStatus', header: 'Return Request Status' },
-      { field: 'amazonRMAID', header: 'amazon RMAID' }
+      { field: 'amazonRMAID', header: 'Amazon RMAID' },
+      { field: 'trackingID', header: 'Tracking ID' }
     ];
     this._selectedColumns = this.cols;
   }

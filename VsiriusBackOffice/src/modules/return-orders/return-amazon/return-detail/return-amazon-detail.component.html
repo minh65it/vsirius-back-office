@@ -10,7 +10,7 @@
   <div class="card-body">
     <div class="row">
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Purchase Order Id </label>
+        <label class="form-label fw-bold">Order ID </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
             {{returnFBMOrder?.orderID}}
@@ -18,10 +18,10 @@
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Customer Order Id </label>
+        <label class="form-label fw-bold">Order Date </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
-            {{returnFBMOrder?.orderDate}}
+            {{returnFBMOrder?.orderDate | date:'YYYY-MM-dd'}}
           </p>
         </div>
       </div>
@@ -33,13 +33,13 @@
         </div>
       </div> -->
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Tracking Number </label>
+        <label class="form-label fw-bold">Return Request Date </label>
         <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.returnRequestDate}}
+          {{returnFBMOrder?.returnRequestDate | date:'YYYY-MM-dd'}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Carrier Name </label>
+        <label class="form-label fw-bold">Return Request Status </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
             {{returnFBMOrder?.returnRequestStatus}}
@@ -47,7 +47,7 @@
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Customer Email Id </label>
+        <label class="form-label fw-bold">AmazonRMAID </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
             {{returnFBMOrder?.amazonRMAID}}
@@ -55,31 +55,25 @@
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Submitted </label>
+        <label class="form-label fw-bold">MerchantRMAID </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.merchantRMAID}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Order Date </label>
+        <label class="form-label fw-bold">Label Type </label>
         <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.orderDate | date:'YYYY-MM-dd'}}
+          {{returnFBMOrder?.labelType}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Estimated Delivery Date </label>
+        <label class="form-label fw-bold">Label Cost </label>
         <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.labelType | date:'YYYY-MM-dd'}}
+          {{returnFBMOrder?.labelCost}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Estimated Ship Date </label>
-        <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.labelCost | date:'YYYY-MM-dd'}}
-        </div>
-      </div>
-      <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Method Shipping </label>
+        <label class="form-label fw-bold">Currency Code </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
             {{returnFBMOrder?.currencyCode}}
@@ -87,49 +81,49 @@
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Buyer Name </label>
+        <label class="form-label fw-bold">Return Carrier </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.returnCarrier}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Phone </label>
+        <label class="form-label fw-bold">Tracking ID </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.trackingID}}
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
-        <label class="form-label fw-bold">Address 1 </label>
+        <label class="form-label fw-bold">Label To Be Paid By </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.labelToBePaidBy}}
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
-        <label class="form-label fw-bold">Address 2 </label>
+        <label class="form-label fw-bold">A To Z Claim </label>
         <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.aToZClaim}}
+          {{returnFBMOrder?.aToZClaim | yesNo}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">City </label>
+        <label class="form-label fw-bold">Is Prime </label>
         <div class="form-control" style="height: 35px;">
-          {{returnFBMOrder?.isPrime}}
+          {{returnFBMOrder?.isPrime | yesNo}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">State </label>
+        <label class="form-label fw-bold">ASIN </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.aSIN}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Postal Code </label>
+        <label class="form-label fw-bold">Merchant SKU </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.merchantSKU}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Country </label>
+        <label class="form-label fw-bold">Item Name </label>
         <div class="form-control" style="height: 35px;">
           {{returnFBMOrder?.itemName}}
         </div>

@@ -17,11 +17,10 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
-import { YesNoPipe } from '../_shared/_pipes/yesNo.pipe';
+import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
 
 @NgModule({
   declarations: [
-    YesNoPipe,
     //Qgold
     MainQgoldComponent,
     SubmitOrderComponent,
@@ -34,6 +33,7 @@ import { YesNoPipe } from '../_shared/_pipes/yesNo.pipe';
     OrderDetailWalmartComponent,
   ],
   imports: [
+    SharePipeModule,
     CommonModule,
     OrdersProcessorRoutingModule,
     PaginationModule.forRoot(),
