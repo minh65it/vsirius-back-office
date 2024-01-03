@@ -10,8 +10,7 @@ export class SignalRService {
   private hubConnection: signalR.HubConnection;
   notificationChangedEmitter: EventEmitter<VsiriusOrder>;
 
-  constructor(private http: HttpClient)
-  {
+  constructor(private http: HttpClient) {
     this.hubConnection = new signalR.HubConnectionBuilder()
       .withUrl('/hub')
       .build();
@@ -20,10 +19,9 @@ export class SignalRService {
   /**
     * Bắt đầu connection
     */
-  startConnection()
-  {
+  startConnection() {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${ environment.baseURL }/orderHub`, {
+      .withUrl(`${environment.signalOrderURL}/orderHub`, {
         skipNegotiation: true,
         transport: signalR.HttpTransportType.WebSockets
       })
@@ -38,10 +36,8 @@ export class SignalRService {
   /**
    * vd
    */
-  addNotificationChangedListener()
-  {
-    this.hubConnection.on("OrderNotification", (data: VsiriusOrder) =>
-    {
+  addNotificationChangedListener() {
+    this.hubConnection.on("OrderNotification", (data: VsiriusOrder) => {
       this.notificationChangedEmitter.emit(data);
     });
   }

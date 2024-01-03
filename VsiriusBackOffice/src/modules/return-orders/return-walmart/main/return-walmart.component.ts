@@ -5,6 +5,7 @@ import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagi
 import { SearchReturnParam } from 'src/modules/_shared/_helpers/params/return-walmart';
 import { ReturnOrder } from 'src/modules/_shared/_models/return-orders/return-walmart';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersWalmartService } from 'src/modules/_shared/_services/orders-processor/orders-walmart.service';
 import { ReturnWalmartService } from 'src/modules/_shared/_services/return-orders/return-walmart.service';
 
 @Component({
@@ -49,6 +50,7 @@ export class ReturnWalmartComponent implements OnInit {
     private router: Router,
     private service: ReturnWalmartService,
     private notiflix: NgxNotiflixService,
+    private serviceWalmart: OrdersWalmartService,
   ) { }
 
   ngOnInit() {
@@ -103,9 +105,13 @@ export class ReturnWalmartComponent implements OnInit {
     this.returnWalmartSearchParam = {} as SearchReturnParam;
     this.search();
   }
-  detailReturnORder(item: ReturnOrder) {
+  detailReturnOrder(item: ReturnOrder) {
     this.service.currentWalmartID(item.returnOrderId);
     this.router.navigate(['/return-orders/detail-walmart']);
+  }
+  detailOrder(purchaseOrderId: string) {
+    this.serviceWalmart.currentID(purchaseOrderId);
+    this.router.navigate(['/orders-processor/detail-walmart']);
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;

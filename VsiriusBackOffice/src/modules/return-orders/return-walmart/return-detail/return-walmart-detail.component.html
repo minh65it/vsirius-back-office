@@ -9,6 +9,7 @@
   </div>
   <div class="card-body">
     <div class="row">
+      <h4 class="text-info">Return Order Walmart</h4>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Return Order Id </label>
         <div class="form-control" style="height: 35px;">
@@ -66,40 +67,41 @@
           {{returnOrder?.totalRefundAmount?.currencyAmount}} {{returnOrder?.totalRefundAmount?.currencyUnit}}
         </div>
       </div>
-      <ng-container *ngFor="let item of returnOrder?.returnOrderLines">
-        <hr class="mt-2">
+      <ng-container *ngFor="let item of returnOrder?.returnOrderLines; index as i">
+        <h6 class="text-info mt-2">Items {{i + 1}}</h6>
         <div class="col-xl-6 col-md-6 mt-2">
           <label class="form-label fw-bold">Purchase Order Id </label>
-          <div class="form-control" style="height: 35px;">
-            {{item.purchaseOrderId}}
+          <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+            (click)="detailOrder(item.purchaseOrderId)">
+            {{item?.purchaseOrderId}}
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-2">
           <label class="form-label fw-bold">Sku </label>
           <div class="form-control" style="height: 35px;">
-            {{item.item.sku}}
+            {{item?.item?.sku}}
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-2">
           <label class="form-label fw-bold">Product Name </label>
           <div class="form-control" style="height: 65px;">
-            {{item.item.productName}}
+            {{item?.item?.productName}}
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-2">
           <label class="form-label fw-bold">Current Refund Status </label>
           <div class="form-control" style="height: 35px;">
-            {{item.currentRefundStatus}}
+            {{item?.currentRefundStatus}}
           </div>
         </div>
         <div class="col-xl-6 col-md-6 mt-2">
           <label class="form-label fw-bold">Refunded Qty </label>
           <div class="form-control" style="height: 35px;">
-            {{item.refundedQty}}
+            {{item?.refundedQty}}
           </div>
         </div>
       </ng-container>
-      <div class="col-xl-6 col-md-6 mt-2">
+      <div class="col-xl-12 col-md-12 mt-2">
         <label class="form-label fw-bold">Return Channel </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
@@ -107,6 +109,46 @@
           </p>
         </div>
       </div>
+      <h4 class="text-info mt-2">Package claim</h4>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Document Type </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnOrder?.claim?.documentType}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Scan Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{returnOrder?.claim?.scanDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <ng-container class="col-xl-12 col-md-12 mt-2" *ngIf="returnOrder?.claim?.notes?.length > 0">
+        <label class="form-label fw-bold">Notes </label>
+        <div class="form-control" [style.height.px]="50 * returnOrder?.claim?.notes?.length">
+          <div class="form mt-1" *ngFor="let item of returnOrder?.claim?.notes; index as i">
+            Note {{i + 1}}: {{item}}
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let item of returnOrder?.claim?.images">
+        <div class="card mt-2" style="width: 18rem;">
+          <img [src]="item?.url" class="card-img-top" alt="..." (click)="openModal(template, item?.url)">
+          <div class="card-body">
+            <p class="card-text">{{item?.text}}</p>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
+
+<ng-template #template>
+  <div class="modal-header">
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+      <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <img [src]="modalRef?.content" class="card-img-top" [alt]="modalRef?.content">
+  </div>
+</ng-template>

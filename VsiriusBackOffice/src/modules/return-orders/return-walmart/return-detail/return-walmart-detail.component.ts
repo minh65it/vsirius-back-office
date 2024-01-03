@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { ReturnOrder } from 'src/modules/_shared/_models/return-orders/return-walmart';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersWalmartService } from 'src/modules/_shared/_services/orders-processor/orders-walmart.service';
 import { ReturnWalmartService } from 'src/modules/_shared/_services/return-orders/return-walmart.service';
 
 @Component({
@@ -15,10 +17,13 @@ export class ReturnWalmartDetailComponent implements OnInit {
   returnOrder: ReturnOrder = {} as ReturnOrder;
   returnOrderId: string = '';
   subscription = Subscription.EMPTY;
+  modalRef?: BsModalRef;
   constructor(
     private router: Router,
     private service: ReturnWalmartService,
     private notiflix: NgxNotiflixService,
+    private modalService: BsModalService,
+    private serviceWalmart: OrdersWalmartService,
   ) { }
 
   ngOnInit() {
@@ -52,6 +57,14 @@ export class ReturnWalmartDetailComponent implements OnInit {
   }
   back() {
     this.router.navigate(['/return-orders/Walmart']);
+  }
+  detailOrder(purchaseOrderId: string) {
+    this.serviceWalmart.currentID(purchaseOrderId);
+    this.router.navigate(['/orders-processor/detail-walmart']);
+  }
+  openModal(template: TemplateRef<void>, url: string) {
+    this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
+    this.modalRef.content = url;
   }
 
 }

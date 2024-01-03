@@ -9,7 +9,7 @@
   </div>
   <div class="card-body">
     <div class="row">
-      <h4 class="text-info">Order Amazon</h4>
+      <h4 class="text-info">Return Order Amazon</h4>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order ID </label>
         <div class="form-control text-info" style="height: 35px; cursor: pointer;">
@@ -166,6 +166,6 @@
     </button>
   </div>
   <div class="modal-body">
-    <img [src]="modalRef?.content" class="card-img-top" alt="...">
+    <img [src]="modalRef?.content" class="card-img-top" [alt]="modalRef?.content">
   </div>
 </ng-template>

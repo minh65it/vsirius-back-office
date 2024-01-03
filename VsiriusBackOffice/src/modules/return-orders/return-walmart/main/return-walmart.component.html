@@ -128,7 +128,7 @@
             <!-- DATA -->
             <td *ngFor="let col of columns; index as ii">
               <ng-container *ngIf="col.field == 'returnOrderId'">
-                <div class="text-info" style="cursor: pointer;" (click)="detailReturnORder(item)" target="_blank">
+                <div class="text-info" style="cursor: pointer;" (click)="detailReturnOrder(item)" target="_blank">
                   {{item[col.field]}}
                 </div>
               </ng-container>
@@ -145,7 +145,7 @@
               <ng-container *ngIf="col.field == 'returnOrderLines'">
           <tr class="w-100" *ngFor="let i of item[col.field]">
             <div class="d-flex justify-content-around">
-              <div>
+              <div class="text-info" style="cursor: pointer;" (click)="detailOrder(i?.purchaseOrderId)" target="_blank">
                 {{i?.purchaseOrderId}}
               </div>
               <div style="width: 20px !important;">

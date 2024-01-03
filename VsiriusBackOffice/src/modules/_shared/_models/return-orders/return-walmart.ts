@@ -12,6 +12,7 @@ export interface ReturnOrder {
     returnLineGroups: ReturnLineGroup[];
     returnOrderLines: ReturnOrderLine[];
     returnChannel: ReturnChannel;
+    claim: ClaimDTO;
 }
 
 export interface CarrierInfoList {
@@ -176,4 +177,17 @@ export interface UnitPrice {
 export interface Value {
     currencyAmount: number;
     currencyUnit: string;
+}
+export interface ClaimDTO {
+    documentType: string;
+    marketplace: string | null;
+    marketplaceOrderId: string | null;
+    rMA: string | null;
+    notes: string[];
+    images: ImageInfo[];
+    scanDate: string;
+}
+export interface ImageInfo {
+    text: string;
+    url: string;
 }
