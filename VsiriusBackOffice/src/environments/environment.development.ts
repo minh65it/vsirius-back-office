@@ -5,6 +5,7 @@ const ipOrder: string = `${hostname}${':8090'}`;
 const ipOrderProcessor: string = `${hostname}${':8089'}`;
 const ipReturnOrderAmazon: string = `${hostname}${':8083'}`;
 const ipReturnOrderWalmart: string = `${hostname}${':8093'}`;
+const ipPackage: string = `${hostname}${':8095'}`;
 //csr, favorite, notification, page view
 const ipContact: string = `${hostname}${':8091'}`;
 
@@ -18,6 +19,7 @@ export const environment = {
     apiOrderProcessorURL: 'http://118.69.37.20:8089/api/',
     apiReturnOrderAmazonURL: 'https://localhost:5000/api/',
     apiReturnOrderWalmartURL: 'https://localhost:7205/api/',
+    apiPackageURL: 'https://localhost:7275/api/',
     apiCSRURL: 'http://118.69.37.20:8091/api/',
     baseCSRURL: 'http://118.69.37.20:8091',
     clientIdCart: "OrderApi",
@@ -26,6 +28,6 @@ export const environment = {
     clientSecretOrderProcessor: "90b34412-b58e-4f88-ab30-0c1da8a139d8-OrderAPI",
     apiSystemURL: 'http://118.69.37.20:8086/api/',
     signalOrderURL: 'http://192.168.1.92:8090',
-    allowedDomains: [ipIdentity, ipProduct, ipOrder, ipContact],
+    allowedDomains: [ipIdentity, ipProduct, ipOrder, ipContact, ipPackage],
     disallowedRoutes: [`${ipIdentity}/api/Auth/Login`],
 };

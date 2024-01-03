@@ -76,7 +76,7 @@
     </form>
     <div class="card-body table-scroll-view">
       <div class="d-flex align-items-center col-lg-6 col-md-6 col-sm-6">
-        <p class="font-weight-bold">{{pagination.totalCount}} Results </p>
+        <p class="font-weight-bold">{{pagination?.totalCount}} Results </p>
         &nbsp;
         <ng-select [placeholder]="'page size...'" name="changePagination" (ngModelChange)="filterPagination($event)"
           [(ngModel)]="pagination.pageSize" class="prime-select-option" [clearable]="false">

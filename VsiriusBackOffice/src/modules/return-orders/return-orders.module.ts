@@ -10,12 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { PackageClaimsComponent } from './package-claims/package-claims.component';
 import { ReturnAmazonComponent } from './return-amazon/main/return-amazon.component';
 import { ReturnAmazonDetailComponent } from './return-amazon/return-detail/return-amazon-detail.component';
 import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
 import { ReturnWalmartComponent } from './return-walmart/main/return-walmart.component';
 import { ReturnWalmartDetailComponent } from './return-walmart/return-detail/return-walmart-detail.component';
+import { ClaimListComponent } from './package-claims/main/claim-list.component';
+import { ClaimDetailComponent } from './package-claims/detail/claim-detail.component';
 
 @NgModule({
   imports: [
@@ -33,7 +34,8 @@ import { ReturnWalmartDetailComponent } from './return-walmart/return-detail/ret
     SharePipeModule
   ],
   declarations: [
-    PackageClaimsComponent,
+    ClaimListComponent,
+    ClaimDetailComponent,
     ReturnAmazonComponent,
     ReturnAmazonDetailComponent,
     ReturnWalmartComponent,
