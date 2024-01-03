@@ -5,6 +5,7 @@ import { PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utili
 import { ReturnFBMOrderParams } from 'src/modules/_shared/_helpers/params/return-amazon';
 import { ReturnFBMOrderRowDto } from 'src/modules/_shared/_models/return-orders/return-amazon';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
+import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { ReturnAmazonService } from 'src/modules/_shared/_services/return-orders/return-amazon.service';
 
 @Component({
@@ -55,6 +56,7 @@ export class ReturnAmazonComponent implements OnInit {
     private router: Router,
     private service: ReturnAmazonService,
     private notiflix: NgxNotiflixService,
+    private serviceAmazon: OrdersAmazonService,
   ) { }
 
   ngOnInit() {
@@ -78,7 +80,8 @@ export class ReturnAmazonComponent implements OnInit {
       { field: 'orderDate', header: 'Order Date' },
       { field: 'returnRequestDate', header: 'Return Request Date' },
       { field: 'returnRequestStatus', header: 'Return Request Status' },
-      { field: 'trackingID', header: 'Tracking ID' }
+      { field: 'trackingID', header: 'Tracking ID' },
+      { field: 'itemName', header: 'Item Name' }
     ];
     this._selectedColumns = this.cols;
   }
@@ -113,7 +116,7 @@ export class ReturnAmazonComponent implements OnInit {
     this.returnAmazonSearchParam = {} as ReturnFBMOrderParams;
     this.search();
   }
-  detailReturnORder(item: ReturnFBMOrderRowDto) {
+  detailReturnOrder(item: ReturnFBMOrderRowDto) {
     this.service.currentAmazonRMAID(item.amazonRMAID);
     this.router.navigate(['/return-orders/detail-amazon']);
   }
@@ -127,6 +130,10 @@ export class ReturnAmazonComponent implements OnInit {
     }
     this.pagination.pageSize = e;
     this.loadData();
+  }
+  detailOrder(orderID: string) {
+    this.serviceAmazon.currentID(orderID);
+    this.router.navigate(['/orders-processor/detail-amazon']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

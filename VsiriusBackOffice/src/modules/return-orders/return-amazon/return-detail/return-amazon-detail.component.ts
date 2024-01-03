@@ -55,5 +55,9 @@ export class ReturnAmazonDetailComponent implements OnInit {
   back() {
     this.router.navigate(['/return-orders/Amazon']);
   }
+  detailOrder(orderID: string) {
+    this.serviceAmazon.currentID(orderID);
+    this.router.navigate(['/orders-processor/detail-amazon']);
+  }
 
 }

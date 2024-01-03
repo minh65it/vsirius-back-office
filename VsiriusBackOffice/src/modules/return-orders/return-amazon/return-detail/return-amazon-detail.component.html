@@ -12,8 +12,8 @@
       <h4 class="text-info">Order Amazon</h4>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order ID </label>
-        <div class="form-control" style="height: 35px;">
-          <p class="font-weight-bold">
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;">
+          <p class="font-weight-bold" (click)="detailOrder(returnFBMOrder?.orderID)">
             {{returnFBMOrder?.orderID}}
           </p>
         </div>
@@ -21,18 +21,9 @@
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order Date </label>
         <div class="form-control" style="height: 35px;">
-          <p class="font-weight-bold">
-            {{returnFBMOrder?.orderDate | date:'YYYY-MM-dd'}}
-          </p>
+          {{returnFBMOrder?.orderDate | date:'YYYY-MM-dd'}}
         </div>
       </div>
-      <!-- <div class="col-xl-6 col-md-6 mt-2">
-        <label class="form-label fw-bold">Qgold Order Id </label>
-        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
-          (click)="detailSupplier(returnFBMOrder)">
-          {{returnFBMOrder?.returnRequestDate}}
-        </div>
-      </div> -->
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Return Request Date </label>
         <div class="form-control" style="height: 35px;">
@@ -135,7 +126,7 @@
           {{returnFBMOrder?.returnReason}}
         </div>
       </div>
-      <h4 class="text-info">Package claim</h4>
+      <h4 class="text-info mt-2">Package claim</h4>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Document Type </label>
         <div class="form-control" style="height: 35px;">
@@ -148,6 +139,22 @@
           {{returnFBMOrder?.scanDate | date:'YYYY-MM-dd'}}
         </div>
       </div>
+      <ng-container class="col-xl-12 col-md-12 mt-2" *ngIf="returnFBMOrder?.notes?.length > 0">
+        <label class="form-label fw-bold">Notes </label>
+        <div class="form-control" [style.height.px]="50 * returnFBMOrder?.notes?.length">
+          <div class="form mt-1" *ngFor="let item of returnFBMOrder?.notes; index as i">
+            Note {{i + 1}}: {{item}}
+          </div>
+        </div>
+      </ng-container>
+      <ng-container *ngFor="let item of returnFBMOrder?.images">
+        <div class="card mt-2" style="width: 18rem;">
+          <img [src]="item?.url" class="card-img-top" alt="...">
+          <div class="card-body">
+            <p class="card-text">{{item?.text}}</p>
+          </div>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>
