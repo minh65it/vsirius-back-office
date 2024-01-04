@@ -66,5 +66,8 @@ export class ReturnWalmartDetailComponent implements OnInit {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
     this.modalRef.content = url;
   }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 
 }
