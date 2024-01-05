@@ -11,7 +11,7 @@ export class NavComponent implements OnInit {
   menu: MenuRoles = <MenuRoles>{}
   listRoles: string[];
   listOrder: string[] = ["Qgold", "Amazon", "Walmart"];
-  listReturnOrder: string[] = ["Package-Claim", "Amazon", "Walmart"];
+  listReturnOrder: string[] = ["Amazon", "Walmart", "Package-Claim"];
   visible = false;
   visible2 = false;
   constructor() { }
