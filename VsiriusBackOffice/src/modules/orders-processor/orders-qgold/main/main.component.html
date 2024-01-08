@@ -148,7 +148,8 @@
                 </div>
               </ng-container>
               <ng-container *ngIf="col.field != 'orderQgoldId' && col.field != 'orderDate' 
-                && col.field != 'items' && col.field != 'isDelete' && col.field != 'marketOrderId'">
+                && col.field != 'items' && col.field != 'isDelete' && col.field != 'marketOrderId' 
+                && col.field != 'isSendMailLostPackage'">
                 {{item[col.field]}}
               </ng-container>
               <ng-container *ngIf="col.field == 'items'">
@@ -167,6 +168,11 @@
           </ng-container>
           <ng-container *ngIf="col.field == 'orderDate'">{{item[col.field] |
             date:'YYYY-MM-dd'}}</ng-container>
+          <ng-container *ngIf="col.field == 'isSendMailLostPackage'" class="text-danger">
+            <div class="text-danger">{{item[col.field] |
+              yesNoSendMail }}
+            </div>
+          </ng-container>
           <ng-container *ngIf="col.field == 'isDelete'" style="width: 80px;">
             <div class="custom-control custom-checkbox d-flex justify-content-center">
               <input type="checkbox" class="custom-control-input" [(ngModel)]="item[col.field]" id="{{ii}}"

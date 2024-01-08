@@ -35,6 +35,12 @@
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Send Mail Lost Package </label>
+        <div class="form-control text-danger" style="height: 35px;">
+          {{qgoldOrderDetail?.isSendMailLostPackage | yesNoSendMail}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Location </label>
         <div class="form-control" style="height: 35px;">
           {{qgoldOrderDetail?.location}}

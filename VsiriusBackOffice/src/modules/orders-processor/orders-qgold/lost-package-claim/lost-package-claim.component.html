@@ -9,16 +9,16 @@
       <div class="col-xl-6 col-md-6 mt-1">
         <label for="TextInput" class="form-label fw-bold">Qgold order ID <span class="text-danger">*</span></label>
         <input type="text" class="form-control" placeholder="Enter ship to phone... " name="orderQgoldId"
-          [(ngModel)]="data.orderQgoldId" #orderQgoldId="ngModel" required />
+          [(ngModel)]="dataSend.orderQgoldId" readonly #orderQgoldId="ngModel" required />
         <div class="text-danger mt-2 d-flex align-items-center"
           *ngIf="orderQgoldId.invalid && (orderQgoldId.touched || orderQgoldId.dirty || checkValidated)">
-          <span>*Ship to phone </span>
+          <span>*Qgold order ID </span>
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-1">
         <label for="TextInput" class="form-label fw-bold">Ship to phone <span class="text-danger">*</span></label>
         <input type="text" class="form-control" placeholder="Enter ship to phone... " name="shipToPhone"
-          [(ngModel)]="data.shipToPhone" #shipToPhone="ngModel" required />
+          [(ngModel)]="dataSend.shipToPhone" #shipToPhone="ngModel" required />
         <div class="text-danger mt-2 d-flex align-items-center"
           *ngIf="shipToPhone.invalid && (shipToPhone.touched || shipToPhone.dirty || checkValidated)">
           <span>*Ship to phone </span>

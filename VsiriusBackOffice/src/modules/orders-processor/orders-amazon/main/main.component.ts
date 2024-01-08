@@ -65,9 +65,9 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searchFrom.setDate(this.searchTo.getDate() - 15);
+    this.searchFrom.setDate(this.searchTo.getDate() - 30);
     this.generateTable();
-    this.loadData();
+    this.search();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -146,7 +146,7 @@ export class MainComponent implements OnInit {
   clean() {
     this.searchTo = new Date();
     this.searchFrom = new Date();
-    this.searchFrom.setDate(new Date().getDate() - 15);
+    this.searchFrom.setDate(new Date().getDate() - 30);
     this.amazonSearchParam = {} as AmazonProcessSearchParam;
     this.search();
   }

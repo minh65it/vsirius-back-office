@@ -67,9 +67,9 @@ export class MainComponent implements OnInit {
   ngOnInit() {
     this.orderQgoldStatusOptions = Object.keys(OrderQgoldStatus)
       .filter(key => isNaN(Number(key))).map(key => ({ key, value: OrderQgoldStatus[key] }));
-    this.searchFrom.setDate(this.searchTo.getDate() - 15);
+    this.searchFrom.setDate(this.searchTo.getDate() - 30);
     this.generateTable();
-    this.loadData();
+    this.search();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -83,6 +83,7 @@ export class MainComponent implements OnInit {
     this.cols = [
       { field: 'orderQgoldId', header: 'Order Qgold Id' },
       { field: 'orderStatus', header: 'Order Status' },
+      { field: 'isSendMailLostPackage', header: 'Send Mail Lost Package' },
       { field: 'orderDate', header: 'Order Date' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
@@ -151,7 +152,7 @@ export class MainComponent implements OnInit {
   clean() {
     this.searchTo = new Date();
     this.searchFrom = new Date();
-    this.searchFrom.setDate(new Date().getDate() - 15);
+    this.searchFrom.setDate(new Date().getDate() - 30);
     this.searchQgoldProcessParam = {} as SearchQgoldProcessParam;
     this.search();
   }

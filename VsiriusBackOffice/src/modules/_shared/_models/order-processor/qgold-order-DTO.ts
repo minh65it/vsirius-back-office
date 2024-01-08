@@ -12,6 +12,7 @@ export interface QgoldOrderDTO {
     marketplace: string | null;
     marketOrderId: string | null;
     isDelete: boolean;
+    isSendMailLostPackage: boolean | null;
 }
 
 export interface QgoldOrderDetailDTO {
@@ -41,6 +42,7 @@ export interface QgoldOrderDetailDTO {
     marketOrderId: string | null;
     shipToPhone: string | null;
     items: ItemQgold[] | null;
+    isSendMailLostPackage: boolean | null;
 }
 
 export interface ItemQgold {

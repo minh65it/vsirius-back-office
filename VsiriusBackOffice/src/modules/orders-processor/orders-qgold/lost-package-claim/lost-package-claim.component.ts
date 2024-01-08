@@ -14,6 +14,7 @@ import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-process
 export class LostPackageClaimComponent implements OnInit {
 
   data: QgoldOrderDetailDTO = {} as QgoldOrderDetailDTO;
+  dataSend: QgoldOrderDetailDTO = {} as QgoldOrderDetailDTO;
   modalRef: BsModalRef;
   subscription = Subscription.EMPTY;
   checkValidated: boolean = false;
@@ -25,6 +26,7 @@ export class LostPackageClaimComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.dataSend = { ...this.data };
   }
   closeModal() {
     this.modalService.hide();
@@ -35,8 +37,7 @@ export class LostPackageClaimComponent implements OnInit {
   sendMail() {
     if (this.myForm.valid) {
       this.checkValidated = false;
-      this.data.items = null;
-      this.subscription = this.service.sendMailPackageClaimQgold(this.data).subscribe({
+      this.subscription = this.service.sendMailPackageClaimQgold(this.dataSend).subscribe({
         next: res => {
           if (!res.success) {
             this.notiflix.error(res.message);
