@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subscription } from 'rxjs';
 import { QgoldOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/qgold-order-DTO';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { OrdersAmazonService } from 'src/modules/_shared/_services/orders-processor/orders-amazon.service';
 import { OrdersQgoldService } from 'src/modules/_shared/_services/orders-processor/orders-qgold.service';
+import { LostPackageClaimComponent } from '../lost-package-claim/lost-package-claim.component';
 
 @Component({
   selector: 'app-order-detail',
@@ -16,11 +18,14 @@ export class OrderDetailComponent implements OnInit {
   qgoldOrderDetail: QgoldOrderDetailDTO = {} as QgoldOrderDetailDTO;
   id: string = '';
   subscription = Subscription.EMPTY;
+  modalRef: BsModalRef;
+
   constructor(
     private router: Router,
     private service: OrdersQgoldService,
     private notiflix: NgxNotiflixService,
     private serviceAmazon: OrdersAmazonService,
+    private modalService: BsModalService
   ) { }
 
   ngOnInit() {
@@ -60,6 +65,15 @@ export class OrderDetailComponent implements OnInit {
   }
   back() {
     this.router.navigate(['/orders-processor/Qgold']);
+  }
+  sendMailLostPackage(item: QgoldOrderDetailDTO) {
+    const config = {
+      class: 'modal-lg',
+      initialState: {
+        data: item
+      }
+    };
+    this.modalRef = this.modalService.show(LostPackageClaimComponent, config);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

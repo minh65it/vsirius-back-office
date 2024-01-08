@@ -18,6 +18,7 @@ import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.c
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
+import { LostPackageClaimComponent } from './orders-qgold/lost-package-claim/lost-package-claim.component';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
     MainQgoldComponent,
     SubmitOrderComponent,
     OrderDetailComponent,
+    LostPackageClaimComponent,
     //Amazon
     MainAmazonComponent,
     OrderDetailAmazonComponent,

@@ -108,4 +108,9 @@ export class OrdersQgoldService {
   getDetail(id: string) {
     return this.http.get<QgoldOrderDetailDTO>(this.baseUrl + 'QgoldProcess/Detail', { params: { id } });
   }
+  sendMailPackageClaimQgold(model: QgoldOrderDetailDTO) {
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.post<OperationResult>(this.baseUrl + 'PackageClaimQgold', model, { headers: { clientId, clientSecret } });
+  }
 }

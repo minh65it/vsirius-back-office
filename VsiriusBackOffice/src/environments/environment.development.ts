@@ -16,7 +16,7 @@ export const environment = {
     apiURL: 'http://118.69.37.20:8087/api/',
     imageURLIdentity: 'http://118.69.37.20:8087/',
     apiOrderURL: 'http://118.69.37.20:8090/api/',
-    apiOrderProcessorURL: 'http://118.69.37.20:8089/api/',
+    apiOrderProcessorURL: 'https://localhost:7130/api/',
     apiReturnOrderAmazonURL: 'https://localhost:5000/api/',
     apiReturnOrderWalmartURL: 'https://localhost:7205/api/',
     apiPackageURL: 'https://localhost:7275/api/',
