@@ -40,9 +40,13 @@
               Import file
             </button>
             <input #fileInput type="file" style="display: none;" (change)="onFileSelected($event)">
-            <button class="btn btn-secondary lift me-2 rounded-2" (click)="goToProductHome()" type="button">
+            <button class="btn btn-info lift me-2 rounded-2" (click)="goToProductHome()" type="button">
               <i class="fa fa-arrow-right"></i>
               Home product
+            </button>
+            <button class="btn btn-secondary lift me-2 rounded-2" (click)="clean()" type="button">
+              <i class="fa fa-refresh"></i>
+              Clean
             </button>
           </div>
         </div>
@@ -54,11 +58,11 @@
           <!-- Thanh Chọn Cột -->
           <ng-template pTemplate="caption">
             <div class="flex">
-              <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" (click)="removeFilterSearch()"
-                optionLabel="header" class="chooseColumn" styleClass="prime-select-option"
-                placeholder="Chọn Cột Hiển Thị" appendTo="body">
+              <p-multiSelect [options]="cols" [(ngModel)]="selectedColumns" (click)="removeFilterSearch($event)"
+                (onChange)="onChangeFilterSearch($event)" optionLabel="header" class="chooseColumn"
+                styleClass="prime-select-option" placeholder="Chọn Cột Hiển Thị" appendTo="body">
               </p-multiSelect>
-              <ng-select [placeholder]="'Tổng số trang...'" name="changePagination"
+              <ng-select [placeholder]="'Tổng số trang...'" name="changePagination" [clearable]="false"
                 (ngModelChange)="filterPagination($event)" [(ngModel)]="numberPage" class="prime-select-option">
                 <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
                   item.value}}</ng-option>
@@ -138,8 +142,9 @@
               <!-- DATA -->
               <td *ngFor="let col of columns" [ngClass]="col.field == 'main_image_url' ? 'text-center' :''">
                 <ng-container *ngIf="col.field != 'main_image_url' ">{{item[col.field]}}</ng-container>
-                <ng-container *ngIf="col.field == 'main_image_url'" >
-                 <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'" class="rounded lg avatar" [alt]="item[col.field]">
+                <ng-container *ngIf="col.field == 'main_image_url'">
+                  <img [src]="item[col.field] != null ? item[col.field] : 'assets/images/NO-PHOTO_165x165.png'"
+                    class="rounded lg avatar" [alt]="item[col.field]">
                 </ng-container>
               </td>
             </tr>
@@ -186,8 +191,8 @@
           </div>
           <div class="col-md-12 d-flex">
             <label for="TextInput" class="form-label fw-bold">IsPopular:</label>
-            <input class="form-check-input ms-2" [(ngModel)]="productHomeModel.isPopular" type="checkbox" name="isPopular"
-              role="switch" [checked]="productHomeModel.isPopular" />
+            <input class="form-check-input ms-2" [(ngModel)]="productHomeModel.isPopular" type="checkbox"
+              name="isPopular" role="switch" [checked]="productHomeModel.isPopular" />
           </div>
         </div>
       </div>

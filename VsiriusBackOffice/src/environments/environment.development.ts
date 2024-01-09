@@ -1,6 +1,6 @@
 const hostname: string = '118.69.37.20';
 const ipIdentity: string = `${hostname}${':8087'}`;
-const ipProduct: string = `${hostname}${':8082'}`;
+const ipProduct: string = `${hostname}${':7001'}`;
 const ipOrder: string = `${hostname}${':8090'}`;
 const ipOrderProcessor: string = `${hostname}${':8089'}`;
 const ipReturnOrderAmazon: string = `${hostname}${':8083'}`;
@@ -11,10 +11,10 @@ const ipContact: string = `${hostname}${':8091'}`;
 
 export const environment = {
     production: false,
-    imageURL: 'http://118.69.37.20:8082',
-    apiProductURL: 'http://118.69.37.20:8082/api/',
-    apiURL: 'http://118.69.37.20:8087/api/',
-    imageURLIdentity: 'http://118.69.37.20:8087/',
+    imageURL: 'http://118.69.37.20:7001/product',
+    apiProductURL: 'http://118.69.37.20:7001/product/api/',
+    apiURL: 'http://118.69.37.20:7001/identity/api/',
+    imageURLIdentity: 'http://118.69.37.20:7001/identity/',
     apiOrderURL: 'http://118.69.37.20:8090/api/',
     apiOrderProcessorURL: 'https://localhost:7130/api/',
     apiReturnOrderAmazonURL: 'https://localhost:5000/api/',

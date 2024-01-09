@@ -29,7 +29,7 @@
                     <!-- Thanh Chọn Cột -->
                     <ng-template pTemplate="caption">
                         <ng-select [placeholder]="'Tổng số trang...'" name="changePagination"
-                            (ngModelChange)="filterPagination($event)" [(ngModel)]="numberPage"
+                            (ngModelChange)="filterPagination($event)" [(ngModel)]="numberPage" [clearable]="false"
                             class="prime-select-option">
                             <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
                                 item.value}}</ng-option>

@@ -9,6 +9,7 @@ import { ProductService } from 'src/modules/_shared/_services/products/product.s
 import { ModalDirective } from 'ngx-bootstrap/modal';
 import { VsiriusHomeProduct } from 'src/modules/_shared/_models/vsiriusHomeProduct';
 import { ProductHomeService } from 'src/modules/_shared/_services/products/product-home.service';
+import { Subscription } from 'rxjs';
 @Component({
   selector: 'app-main',
   templateUrl: './main.component.html',
@@ -57,8 +58,8 @@ export class MainComponent implements OnInit {
   listItemType: any[] = [];
   listMetalType: any[] = [];
   productType: string = 'Product Type';
-  item_type: string = 'item_type';
-  metal_type: string = 'metal_type';
+  item_type: string = '';
+  metal_type: string = '';
   item_typeList: string[] = [];
   metal_typeList: string[] = [];
   productTypeFilter: VsiriusFilter = <VsiriusFilter>{};
@@ -73,15 +74,17 @@ export class MainComponent implements OnInit {
     isPopular: false,
     item_sku: ''
   } as VsiriusHomeProduct;
-  listProductsHome: VsiriusHomeProduct[] = []; 
+  listProductsHome: VsiriusHomeProduct[] = [];
+  subscription = Subscription.EMPTY;
   constructor(private filterService: FilterService,
     private service: ProductService,
-    private productHomeService:ProductHomeService,
+    private productHomeService: ProductHomeService,
     private router: Router,
     private notiflix: NgxNotiflixService) {
 
   }
   ngOnInit() {
+    this.getFilterSearch();
     this.generateTable();
     this.registerFilter();
     this.loadFilter();
@@ -701,22 +704,22 @@ export class MainComponent implements OnInit {
     this._selectedColumns = this.cols.filter(x => this.selectedColumnsInitial.find(y => y.field == x.field));
   }
 
-  loadListProductInHome(){
-    this.notiflix.showLoading();
-    this.productHomeService.getData().subscribe({
-      next:res=>{
+  loadListProductInHome() {
+    //this.notiflix.showLoading();
+    this.subscription = this.productHomeService.getData().subscribe({
+      next: res => {
         this.listProductsHome = res;
-        this.notiflix.hideLoading();
+        //this.notiflix.hideLoading();
       },
-      error:()=>{
-        this.notiflix.error('Error System');
-        this.notiflix.hideLoading();
+      error: () => {
+        //this.notiflix.error('Error System');
+        //this.notiflix.hideLoading();
       }
     })
   }
 
   loadFilter() {
-    this.service.getDataFilter('').subscribe({
+    this.subscription = this.service.getDataFilter('').subscribe({
       next: res => {
         res.map(item => this.listProductType.push(item.value))
       },
@@ -728,14 +731,14 @@ export class MainComponent implements OnInit {
 
   loadData() {
     this.notiflix.showLoading();
-    this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
+    this.subscription = this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
       next: res => {
         this.listProducts = res.result;
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
       error: err => {
-        this.notiflix.error(err);
+        this.notiflix.error('Error System');
         this.notiflix.hideLoading();
       }
     })
@@ -754,7 +757,7 @@ export class MainComponent implements OnInit {
       groupName: ''
     }
     this.isShowSelect = false;
-    this.service.getDataFilter(this.productType).subscribe({
+    this.subscription = this.service.getDataFilter(this.productType).subscribe({
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
@@ -811,7 +814,7 @@ export class MainComponent implements OnInit {
     }
     this.filterParam.push(this.productTypeFilter);
     this.filterParam.length != 0 ? this.filterParam : [];
-    if(Object.keys(this.productTypeFilter).length === 0){
+    if (Object.keys(this.productTypeFilter).length === 0) {
       this.filterParam = [];
     }
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
@@ -820,14 +823,36 @@ export class MainComponent implements OnInit {
     this.router.navigate(['products/product/create']);
   }
 
-  removeFilterSearch() {
-    document.querySelector('.p-multiselect').classList.add('hidden');
+  removeFilterSearch(cols: any) {
+    // document.querySelector('.p-multiselect').classList.add('hidden');
+  }
+  onChangeFilterSearch(event: any) {
+    localStorage.setItem('FilterSearch', JSON.stringify(event.value));
+  }
+  getFilterSearch() {
+    let tmp = localStorage.getItem('FilterSearch');
+    if (tmp) {
+      this.selectedColumnsInitial = JSON.parse(tmp);
+    }
+  }
+  clean() {
+    this.selectedColumnsInitial = [
+      { field: 'main_image_url', header: 'main_image_url' },
+      { field: 'feed_product_type', header: 'feed_product_type' },
+      { field: 'brand_name', header: 'brand_name' },
+      { field: 'item_type', header: 'item_type' },
+      { field: 'metal_type', header: 'metal_type' }
+    ];
+    localStorage.removeItem('FilterSearch');
+    this.keyword = '';
+    this.generateTable();
+    this.search();
   }
 
   onFileSelected(event: any) {
     const files: File = event.target.files[0] as File;
     this.notiflix.showLoading();
-    this.service.importData(files).subscribe({
+    this.subscription = this.service.importData(files).subscribe({
       next: res => {
         res.success ?
           this.notiflix.success(res.message)
@@ -849,7 +874,7 @@ export class MainComponent implements OnInit {
   delete(product: Product) {
     this.notiflix.confirm('Message', 'Do you want delete product?', () => {
       this.notiflix.showLoading();
-      this.service.delete(product.item_sku).subscribe({
+      this.subscription = this.service.delete(product.item_sku).subscribe({
         next: res => {
           res.success ? this.notiflix.success(res.message) :
             this.notiflix.error(res.message);
@@ -864,30 +889,30 @@ export class MainComponent implements OnInit {
     })
   }
   chooseProductShowHome(item: Product) {
-    const index = this.listProductsHome.findIndex(x=>x.item_sku == item.item_sku);
-    if(index < 0){
+    const index = this.listProductsHome.findIndex(x => x.item_sku == item.item_sku);
+    if (index < 0) {
       this.productHomeModel = {
         item_sku: item.item_sku,
-        item_name:item.item_name,
-        isLatest:false,
-        isPopular:false,
-        isActive:true
+        item_name: item.item_name,
+        isLatest: false,
+        isPopular: false,
+        isActive: true
       } as VsiriusHomeProduct;
     }
-    else{
+    else {
       this.productHomeModel = {
         item_sku: item.item_sku,
-        item_name:item.item_name,
-        isLatest:this.listProductsHome[index].isLatest,
-        isPopular:this.listProductsHome[index].isPopular,
-        isActive:true
+        item_name: item.item_name,
+        isLatest: this.listProductsHome[index].isLatest,
+        isPopular: this.listProductsHome[index].isPopular,
+        isActive: true
       } as VsiriusHomeProduct;
     }
     this.modalAdd?.show();
   }
   send() {
     this.notiflix.showLoading();
-    this.productHomeService.createOrUpdate(this.productHomeModel).subscribe({
+    this.subscription = this.productHomeService.createOrUpdate(this.productHomeModel).subscribe({
       next: res => {
         res.success ? this.notiflix.success(res.message) :
           this.notiflix.error(res.message);
@@ -901,11 +926,12 @@ export class MainComponent implements OnInit {
     })
   }
 
-  goToProductHome(){
+  goToProductHome() {
     this.router.navigate(['products/product-home']);
-    
-  }
 
-  
+  }
+  ngOnDestroy(): void {
+    this.subscription.unsubscribe();
+  }
 }
 

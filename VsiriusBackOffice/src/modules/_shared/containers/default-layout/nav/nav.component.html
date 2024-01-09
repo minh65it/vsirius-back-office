@@ -45,17 +45,11 @@
                 <span class="ms-2">Employees</span>
               </a>
             </li>
-            <!-- <li class="collapsed" *ngIf="menu.Admin || menu.Order">
-              <a class="m-link cursor-pointer" [routerLink]="'/orders'" routerLinkActive="active">
-                <i class="fa fa-shopping-bag"></i>
-                <span class="ms-2">Orders</span>
-              </a>
-            </li> -->
 
             <!-- <li class="collapsed" > -->
-            <li class="collapsed" *ngIf="menu.Admin || menu.Order">
+            <li class="collapsed" style="cursor: pointer;" *ngIf="menu.Admin || menu.Order">
               <a (click)="toggleCollapse('order-processor')" data-bs-toggle="collapsed" class="m-link cursor-pointer"
-                [routerLink]="''" routerLinkActive="active">
+                routerLinkActive="active">
                 <i class="fa fa-shopping-cart"></i>
                 <span class="ms-2">Orders</span>
                 <span class="arrow fa  ms-auto text-end"
@@ -101,23 +95,6 @@
                 <span class="ms-2">Driven Html Pages</span>
               </a>
             </li>
-            <!-- Menu level 1 -->
-            <!-- <li class="collapsed">
-          <a class="m-link" data-bs-toggle="collapse" href="#">
-            <i class="fa fa-home"></i>
-            <span class="ms-2">Home</span>
-            <span class="arrow fa fa-angle-right ms-auto text-end"></span>
-          </a>
-          
-          <ul class="sub-menu collapse" [id]="'menu-' + menu.name" *ngIf="menu?.children">
-            <li class="collapsed" *ngFor="let child of menu?.children">
-              <a class="m-link cursor-pointer" (click)="changeRoute(child)">
-                <i class="{{ child.icon }}"></i>
-                <span class="ms-2">{{ child.title }}</span>
-              </a>
-            </li>
-          </ul>
-        </li> -->
           </ng-container>
         </ul>
 
