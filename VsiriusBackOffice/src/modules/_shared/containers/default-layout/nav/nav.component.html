@@ -95,6 +95,12 @@
                 <span class="ms-2">Driven Html Pages</span>
               </a>
             </li>
+            <li class="collapsed" *ngIf="menu.Admin || menu.QAQgold">
+              <a class="m-link cursor-pointer" [routerLink]="'/qa-qgold'" routerLinkActive="active">
+                <i class="fa fa-question"></i>
+                <span class="ms-2">Q&A Qgold</span>
+              </a>
+            </li>
           </ng-container>
         </ul>
 

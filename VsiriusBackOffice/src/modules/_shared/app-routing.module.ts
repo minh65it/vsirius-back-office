@@ -50,6 +50,10 @@ const routes: Routes = [
         loadChildren: () => import('../return-orders/return-orders.module').then((m) => m.ReturnOrdersModule),
       },
       {
+        path: 'qa-qgold',
+        loadChildren: () => import('../qa-qgold/qa-qgold.module').then((m) => m.QaQgoldModule),
+      },
+      {
         path: 'contacts',
         loadChildren: () => import('../contacts/contacts.module').then((m) => m.ContactsModule),
       },

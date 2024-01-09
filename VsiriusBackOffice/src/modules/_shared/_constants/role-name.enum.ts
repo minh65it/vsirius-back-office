@@ -10,6 +10,7 @@ export const RoleName = {
      IS_System: 'System',
      IS_Notification: 'Notification',
      IS_DrivenHTML: 'DrivenHTML',
+     IS_QAQgold: 'QAQgold',
 }
 
 export interface MenuRoles {
@@ -23,5 +24,5 @@ export interface MenuRoles {
      System: boolean;
      Notification: boolean;
      DrivenHTML: boolean;
-
+     QAQgold: boolean;
 }
