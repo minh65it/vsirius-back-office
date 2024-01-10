@@ -1,3 +1,149 @@
-<p>
-  list-question works!
-</p>
+<div class="card">
+  <div class="card-header d-flex flex-row-reverse">
+    <div class="">
+      <fieldset class="form-icon-group left-icon position-relative">
+        <button type="button" class="btn btn-success" (click)="sendNewQuestion()">
+          <i class="fa fa-send"></i>
+          Send New Question</button>
+      </fieldset>
+    </div>
+  </div>
+  <div class="card-header d-block">
+    <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Title</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.title" name="title" class="form-control"
+            placeholder="Title..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Description</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.description" name="description" class="form-control"
+            placeholder="Description..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">SKU</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.sKU" name="sKU" class="form-control"
+            placeholder="SKU..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Customer Name</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.customerName" name="customerName" class="form-control"
+            placeholder="Customer Name..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Customer Email</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.customerEmail" name="customerEmail" class="form-control"
+            placeholder="Customer Email..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Marketplace</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.marketplace" name="marketplace" class="form-control"
+            placeholder="marketplace..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">MarketOrder Id</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="qAQgoldSearchParam.marketOrderId" name="marketOrderId" class="form-control"
+            placeholder="marketOrderId..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold"><br></label>
+        <div class="d-flex justify-content-end">
+          <button type="submit" class="btn btn-success border lift rounded-2">
+            <i class="fa fa-search"></i>
+            Search
+          </button>
+          <button type="button" (click)="clean()" class="btn btn-secondary border lift rounded-2">
+            <i class="fa fa-refresh"></i>
+            Clean
+          </button>
+        </div>
+      </div>
+    </form>
+    <div class="card-body table-scroll-view">
+      <div class="d-flex align-items-center col-lg-6 col-md-6 col-sm-6">
+        <p class="font-weight-bold">{{pagination.totalCount}} Results </p>
+        &nbsp;
+        <ng-select [placeholder]="'page size...'" name="changePagination" (ngModelChange)="filterPagination($event)"
+          [(ngModel)]="pagination.pageSize" class="prime-select-option" [clearable]="false">
+          <ng-option *ngFor="let item of listChoosePagination" [value]=" item.key">{{
+            item.value}}</ng-option>
+        </ng-select>
+      </div>
+      <p-table [scrollable]="true" scrollHeight="800px" [columns]="selectedColumns" responsiveLayout="scroll"
+        [value]="listQAQgold" dataKey="id" [rows]="listQAQgold.length">
+        <!-- Header -->
+        <ng-template pTemplate="header" let-columns>
+          <tr>
+            <!-- STT -->
+            <th class="text-center"> # </th>
+            <!-- COLUMNS -->
+            <th [pSortableColumn]="item.field" [pSortableColumnDisabled]="item.field === 'isDelete'" class="text-center"
+              *ngFor="let item of columns">
+              <ng-container *ngIf="item.header != 'isDelete'">
+                <div class="d-flex justify-content-evenly">
+                  <!-- Label -->
+                  <span class="text-capitalize">
+                    {{item.header}}
+                    <!-- Sort -->
+                    <p-sortIcon [field]="item.field"></p-sortIcon>
+                  </span>
+                </div>
+              </ng-container>
+            </th>
+          </tr>
+        </ng-template>
+        <!-- BODY -->
+        <ng-template pTemplate="body" let-item let-columns="columns" let-rowIndex="rowIndex">
+          <tr>
+            <!-- STT -->
+            <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
+            <!-- DATA -->
+            <td *ngFor="let col of columns; index as ii">
+              <ng-container *ngIf="col.field != 'description' && col.field != 'date' ">
+                {{item[col.field]}}
+              </ng-container>
+              <ng-container *ngIf="col.field == 'description' " (click)="detail(item)">
+                <div class="text-info" style="cursor: pointer;" (click)="detail(item)">
+                  {{item[col.field].split('').length > 99 ?
+                  item[col.field].split('').splice(0,99).join('') + '........' :
+                  item[col.field]}}
+                </div>
+              </ng-container>
+              <ng-container *ngIf="col.field == 'date'">{{item[col.field] |
+                date:'YYYY-MM-dd'}}</ng-container>
+            </td>
+          </tr>
+        </ng-template>
+        <!-- MESSAGE WHEN EMPTY -->
+        <ng-template pTemplate="emptymessage" *ngIf="listQAQgold.length == 0">
+          <tr>
+            <td colspan="100%" class="text-center font-weight-bold">
+              <span class="text-danger">No Data</span>
+            </td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </div>
+  </div>
+  <!-- Pagination -->
+  <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.pageCount > 1">
+    <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+      previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+      nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+    </pagination>
+  </div>
+</div>

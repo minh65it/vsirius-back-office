@@ -1,6 +1,7 @@
 import { Routes, RouterModule } from '@angular/router';
 import { ListQuestionComponent } from './main/list-question.component';
 import { SendMailQuestionComponent } from './send-mail-question/send-mail-question.component';
+import { DetailQuestionComponent } from './detail-question/detail-question.component';
 
 const routes: Routes = [
   {
@@ -15,6 +16,13 @@ const routes: Routes = [
     component: SendMailQuestionComponent,
     data: {
       breadcrumb: 'Send mail to Qgold',
+    },
+  },
+  {
+    path: 'detail',
+    component: DetailQuestionComponent,
+    data: {
+      breadcrumb: 'Detail Question',
     },
   },
 ];

@@ -1,3 +1,45 @@
-<p>
-  send-mail-question works!
-</p>
+<div class="card ">
+  <form #myForm="ngForm" autocomplete="off" (ngSubmit)="sendMail()">
+    <div class="card-body ">
+      <div class="row">
+        <div class="col-xl-12 col-md-12">
+          <label for="TextInput" class="form-label fw-bold">Title</label>
+          <input type="text" class="form-control" placeholder="Enter title... " name="title"
+            [(ngModel)]="question.title" #title="ngModel" />
+        </div>
+        <div class="col-xl-12 col-md-12">
+          <label for="TextInput" class="form-label fw-bold">SKU <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" placeholder="Enter Send... " name="sKU" [(ngModel)]="question.sKU"
+            #sKU="ngModel" required />
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="sKU.invalid && (sKU.touched || sKU.dirty || checkValidated)">
+            <span>*Please enter SKU </span>
+          </div>
+        </div>
+        <div class="col-xl-12 col-md-12 mt-2">
+          <label for="TextInput" class="form-label fw-bold">Description <span class="text-danger">*</span></label>
+          <textarea class="form-control" rows="5" cols="200" [(ngModel)]="question.description"
+            placeholder="Enter description.. " #description="ngModel" name="description" required></textarea>
+          <div class="text-danger mt-2 d-flex align-items-center"
+            *ngIf="description.invalid && (description.touched || description.dirty || checkValidated)">
+            <span>*Please enter Description </span>
+          </div>
+        </div>
+
+      </div>
+    </div>
+    <div class="card-footer text-end mt-5">
+      <button class="btn btn-secondary me-2 lift rounded-2" type="button" (click)="clearForm()">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+        Reset
+      </button>
+      <button class="btn btn-success me-2 lift rounded-2" type="submit">
+        <i class="fa fa-send"></i> Send Mail
+      </button>
+      <button class="btn btn-danger lift rounded-2" type="button" (click)="cancel()">
+        <i class="fa fa-close"></i>
+        Cancel
+      </button>
+    </div>
+  </form>
+</div>

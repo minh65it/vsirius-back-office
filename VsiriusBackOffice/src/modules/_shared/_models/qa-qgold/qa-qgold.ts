@@ -6,6 +6,7 @@ export interface QgoldQADTO {
     customerPhone: string | null;
     customerName: string | null;
     orderQgoldId: string | null;
+    sKU: string | null;
     status: string | null;
     location: string | null;
     dateOrder: string | null;
@@ -30,6 +31,7 @@ export interface FilesInfo {
 export interface SearchQgoldQAParam {
     title: string | null;
     description: string | null;
+    sKU: string | null;
     customerEmail: string | null;
     customerPhone: string | null;
     customerName: string | null;

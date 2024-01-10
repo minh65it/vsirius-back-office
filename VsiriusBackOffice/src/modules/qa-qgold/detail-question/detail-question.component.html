@@ -1,0 +1,88 @@
+<div class="card ">
+  <div class="card-header d-flex flex-row">
+    <div class="col d-flex justify-content-start">
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Title </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{questionDetail?.title}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Description </label>
+        <div class="form-control" style="height: auto">
+          {{questionDetail?.description}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Email </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.customerEmail}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Phone </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.customerPhone}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Qgold Id </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.orderQgoldId}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">SKU </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.sKU}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Date Order </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.dateOrder | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Date Question </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.date | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Address 1 </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.customerAddress1}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Marketplace </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.marketplace}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Market Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.marketOrderId}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Tracking </label>
+        <div class="form-control" style="height: 35px;">
+          {{questionDetail?.tracking}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
