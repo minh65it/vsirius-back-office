@@ -52,6 +52,7 @@ export class AuthService {
     localStorage.removeItem('ROLES');
     localStorage.removeItem('USERNAME');
     localStorage.removeItem('expirationTime');
+    localStorage.removeItem('FilterSearch');
     this.router.navigate(['/login']);
     this.notiflix.hideLoading();
   }
