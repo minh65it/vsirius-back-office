@@ -6,7 +6,7 @@ import { AppComponent } from './app.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { FormsModule } from '@angular/forms';
 import { NgxBreadcrumbModule } from 'ngx-dynamic-breadcrumb';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { DefaultLayoutComponent } from './containers';
 import { NavComponent } from './containers/default-layout/nav/nav.component';
 import { HeaderComponent } from './containers/default-layout/header/header.component';
@@ -21,6 +21,7 @@ import { AuthService } from './_services/users/auth.service';
 import { ContactSignalRService } from './_services/contact-signalR.service';
 import { GlobalErrorHandler } from './_helpers/log-interceptor ';
 import { SystemLoggingService } from './_services/system-logging.service';
+import { AuthInterceptor } from './_helpers/auth-interceptor ';
 export function tokenGetter() {
   return localStorage.getItem('TOKEN');
 }
@@ -58,7 +59,12 @@ export function tokenGetter() {
       multi: true,
       deps: [AuthService]
     },
-    //  Khởi động SignalR
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true,
+    },
+    ////  Khởi động SignalR
     // {
     //   provide: APP_INITIALIZER,
     //   useFactory: (contactSignalrService: ContactSignalRService) => () => contactSignalrService.startConnectionContact(),

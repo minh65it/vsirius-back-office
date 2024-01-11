@@ -1,4 +1,4 @@
-const hostname: string = '192.168.1.99';
+const hostname: string = '192.168.1.92';
 const ipIdentity: string = `${hostname}${':7001/identity'}`;
 const ipProduct: string = `${hostname}${':7001/product'}`;
 const ipOrder: string = `${hostname}${':7001/order'}`;
@@ -24,7 +24,7 @@ export const environment = {
 
     apiOrderURL: `${domainManager}/order/api/`,
     signalOrderURL: `${domainManager}/order`,
-    apiOrderProcessorURL: 'https://localhost:7130/api/',
+    apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
     apiReturnOrderAmazonURL: 'http://192.168.1.91:8083/api/',
     apiReturnOrderWalmartURL: 'http://192.168.1.91:8093/api/',
     apiPackageURL: `${domainManager}/package/api/`,
@@ -36,8 +36,6 @@ export const environment = {
     allowedDomains: [ipIdentity, ipProduct, ipOrder, ipCsr, ipPackage],
     disallowedRoutes: [`${ipIdentity}/api/Auth/Login`],
 };
-
-
 
 
 // const hostname: string = '192.168.1.99';
