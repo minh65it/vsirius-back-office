@@ -5,7 +5,7 @@ import { Block, Confirm, Loading, Notify, Report } from 'notiflix';
 export class NgxNotiflixService {
   private okButton: string = 'OK';
   private cancelButton: string = 'Cancel';
-  private loadingType: string = 'standard';
+  private loadingType: string = 'circle';
   private loadingColor: string = '#fff';
   private loadingSvgUrl: string | null = null;
 
@@ -52,7 +52,6 @@ export class NgxNotiflixService {
       svgSize: '128px',
     });
   }
-
   /* --------------------------------- Notify --------------------------------- */
 
   success = (message: string): void => {
@@ -88,33 +87,34 @@ export class NgxNotiflixService {
   /* --------------------------------- Loading --------------------------------- */
 
   showLoading = (): void => {
+    const mes = 'Loading...';
     switch (this.loadingType) {
       case 'hourglass':
-        Loading.hourglass();
+        Loading.hourglass(mes);
         break;
 
       case 'circle':
-        Loading.circle();
+        Loading.circle(mes);
         break;
 
       case 'arrows':
-        Loading.arrows();
+        Loading.arrows(mes);
         break;
 
       case 'dots':
-        Loading.dots();
+        Loading.dots(mes);
         break;
 
       case 'pulse':
-        Loading.pulse();
+        Loading.pulse(mes);
         break;
 
       case 'custom':
-        Loading.custom();
+        Loading.custom(mes);
         break;
 
       default:
-        Loading.standard();
+        Loading.standard(mes);
         break;
     }
   }

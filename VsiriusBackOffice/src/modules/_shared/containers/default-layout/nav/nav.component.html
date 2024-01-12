@@ -58,7 +58,7 @@
               <ul class="sub-menu" [ngClass]="visible  ? 'collapsed' : 'collapse'">
                 <li class="collapsed" *ngFor="let child of listOrder">
                   <a class="m-link cursor-pointer" [routerLink]="''+ child.url" routerLinkActive="active">
-                    <i class="fa fa-shopping-basket"></i>
+                    <i class="fa fa-minus"></i>
                     <span class="ms-2 " style="cursor: pointer;">{{child.title}}</span>
                   </a>
                 </li>
