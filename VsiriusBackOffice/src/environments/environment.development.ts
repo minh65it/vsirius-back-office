@@ -1,13 +1,13 @@
-const hostname: string = '192.168.1.92';
-const ipIdentity: string = `${hostname}${':7001/identity'}`;
-const ipProduct: string = `${hostname}${':7001/product'}`;
-const ipOrder: string = `${hostname}${':7001/order'}`;
-const ipCsr: string = `${hostname}${':7001/csr'}`;
-const ipPackage: string = `${hostname}${':7001/package'}`;
-const ipOrderProcessor: string = `${hostname}${':8089'}`;
-const ipReturnOrderAmazon: string = `${hostname}${':8083'}`;
-const ipReturnOrderWalmart: string = `${hostname}${':8093'}`;
-const domainManager: string = `http://${hostname}${':7001'}`;
+const hostname: string = '192.168.2.160';
+const ipIdentity: string = `${hostname}${':5102/identity'}`;
+const ipProduct: string = `${hostname}${':5102/product'}`;
+const ipOrder: string = `${hostname}${':5102/order'}`;
+const ipCsr: string = `${hostname}${':5102/csr'}`;
+const ipPackage: string = `${hostname}${':5102/package'}`;
+const ipOrderProcessor: string = `${hostname}${':5115'}`;
+const ipReturnOrderAmazon: string = `${hostname}${':5113'}`;
+const ipReturnOrderWalmart: string = `${hostname}${':5114'}`;
+const domainManager: string = `http://${hostname}${':5102'}`;
 
 export const environment = {
     production: false,
@@ -25,8 +25,8 @@ export const environment = {
     apiOrderURL: `${domainManager}/order/api/`,
     signalOrderURL: `${domainManager}/order`,
     apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
-    apiReturnOrderAmazonURL: 'http://192.168.1.91:8083/api/',
-    apiReturnOrderWalmartURL: 'http://192.168.1.91:8093/api/',
+    apiReturnOrderAmazonURL: `http://192.168.2.160:5113/api/`,
+    apiReturnOrderWalmartURL: `http://192.168.2.160:5114/api/`,
     apiPackageURL: `${domainManager}/package/api/`,
 
     apiCSRURL: `${domainManager}/csr/api/`,
