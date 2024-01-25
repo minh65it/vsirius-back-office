@@ -1,4 +1,4 @@
-const hostname: string = '192.168.2.160';
+const hostname: string = '192.168.2.163';
 const ipIdentity: string = `${hostname}${':5102/identity'}`;
 const ipProduct: string = `${hostname}${':5102/product'}`;
 const ipOrder: string = `${hostname}${':5102/order'}`;
@@ -25,8 +25,8 @@ export const environment = {
   apiOrderURL: `${domainManager}/order/api/`,
   signalOrderURL: `${domainManager}/order`,
   apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
-  apiReturnOrderAmazonURL: `http://192.168.2.160:5113/api/`,
-  apiReturnOrderWalmartURL: `http://192.168.2.160:5114/api/`,
+  apiReturnOrderAmazonURL: `http://192.168.2.163:5113/api/`,
+  apiReturnOrderWalmartURL: `http://192.168.2.163:5114/api/`,
   apiPackageURL: `${domainManager}/package/api/`,
 
   apiCSRURL: `${domainManager}/csr/api/`,
