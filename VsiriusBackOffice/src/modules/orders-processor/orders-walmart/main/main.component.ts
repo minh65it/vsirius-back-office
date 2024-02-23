@@ -122,10 +122,6 @@ export class MainComponent implements OnInit {
     if (this.walmartSearchParam.fromDate === null || this.walmartSearchParam.toDate === null) {
       return this.notiflix.warning('Date is not null');
     }
-    console.log(this.walmartSearchParam);
-    console.log(this.pagination);
-
-
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 
