@@ -219,7 +219,7 @@
     </div>
   </div>
   <!-- Pagination -->
-  <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.pageCount > 1">
+  <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
     <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
       previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
       nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">

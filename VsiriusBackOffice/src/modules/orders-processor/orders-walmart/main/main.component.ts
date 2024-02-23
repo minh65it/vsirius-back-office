@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
+import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { WalmartOrderType, WalmartProcessSearchParam } from 'src/modules/_shared/_helpers/params/search-walmart-process-param';
 import { WalmartOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/walmart-order-Dto';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
@@ -22,12 +22,9 @@ export class MainComponent implements OnInit {
   _selectedColumns: any[];
   cols: any[];
 
-  pagination: PaginationResult2<WalmartOrderDetailDTO> = {
-    data: [],
+  pagination: Pagination = <Pagination>{
     pageNumber: 1,
     pageSize: 25,
-    totalCount: null,
-    pageCount: 1
   };
   searchFrom: Date = new Date();
   searchTo: Date = new Date();
@@ -105,8 +102,8 @@ export class MainComponent implements OnInit {
     this.subscription = this.service.getData(this.pagination, this.walmartSearchParam).subscribe({
       next: res => {
         this.isCheckAll = false;
-        this.pagination = res;
-        this.listWalmartOrder = res.data;
+        this.pagination = res.pagination;
+        this.listWalmartOrder = res.result;
         this.notiflix.hideLoading();
       },
       error: () => {
@@ -122,6 +119,12 @@ export class MainComponent implements OnInit {
   search() {
     this.walmartSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
     this.walmartSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
+    if (this.walmartSearchParam.fromDate === null || this.walmartSearchParam.toDate === null) {
+      return this.notiflix.warning('Date is not null');
+    }
+    console.log(this.walmartSearchParam);
+    console.log(this.pagination);
+
 
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }

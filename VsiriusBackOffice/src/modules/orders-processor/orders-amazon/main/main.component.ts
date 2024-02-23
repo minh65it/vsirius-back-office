@@ -121,7 +121,9 @@ export class MainComponent implements OnInit {
   search() {
     this.amazonSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
     this.amazonSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
-
+    if (this.amazonSearchParam.fromDate === null || this.amazonSearchParam.toDate === null) {
+      return this.notiflix.warning('Date is not null');
+    }
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 

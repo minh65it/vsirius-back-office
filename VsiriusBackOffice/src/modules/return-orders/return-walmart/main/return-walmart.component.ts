@@ -17,7 +17,10 @@ export class ReturnWalmartComponent implements OnInit {
 
   subscription = Subscription.EMPTY;
   returnWalmartSearchParam: SearchReturnParam = {} as SearchReturnParam;
-  pagination: Pagination = {} as Pagination;
+  pagination: Pagination = <Pagination>{
+    pageNumber: 1,
+    pageSize: 25,
+  };
   listReturnWalmartOrder: ReturnOrder[] = [];
   _selectedColumns: any[];
   cols: any[];
@@ -56,7 +59,7 @@ export class ReturnWalmartComponent implements OnInit {
   ngOnInit() {
     this.searchOrderFrom.setDate(this.searchOrderTo.getDate() - 45);
     this.generateTable();
-    this.loadData();
+    this.search();
   }
   @Input() get selectedColumns(): any[] {
     return this._selectedColumns;
@@ -94,7 +97,9 @@ export class ReturnWalmartComponent implements OnInit {
   search() {
     this.returnWalmartSearchParam.fromDate = this.searchOrderFrom?.toLocaleDateString('en-CA') ?? null;
     this.returnWalmartSearchParam.toDate = this.searchOrderTo?.toLocaleDateString('en-CA') ?? null;
-
+    if (this.returnWalmartSearchParam.fromDate === null || this.returnWalmartSearchParam.toDate === null) {
+      return this.notiflix.warning('Date is not null');
+    }
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   getReturnStatus($event: any) { }

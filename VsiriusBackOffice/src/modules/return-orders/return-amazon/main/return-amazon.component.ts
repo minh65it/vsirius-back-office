@@ -63,7 +63,7 @@ export class ReturnAmazonComponent implements OnInit {
     this.searchOrderFrom.setDate(this.searchOrderTo.getDate() - 45);
     this.searchReturnRequestDateFrom.setDate(this.searchReturnRequestDateTo.getDate() - 45);
     this.generateTable();
-    this.loadData();
+    this.search();
   }
 
   @Input() get selectedColumns(): any[] {
@@ -104,6 +104,10 @@ export class ReturnAmazonComponent implements OnInit {
     this.returnAmazonSearchParam.orderDateTo = this.searchOrderTo?.toLocaleDateString('en-CA') ?? null;
     this.returnAmazonSearchParam.returnRequestDateFrom = this.searchReturnRequestDateFrom?.toLocaleDateString('en-CA') ?? null;
     this.returnAmazonSearchParam.returnRequestDateTo = this.searchReturnRequestDateTo?.toLocaleDateString('en-CA') ?? null;
+    if (this.returnAmazonSearchParam.orderDateFrom === null || this.returnAmazonSearchParam.orderDateTo === null ||
+      this.returnAmazonSearchParam.returnRequestDateFrom === null || this.returnAmazonSearchParam.returnRequestDateTo === null) {
+      return this.notiflix.warning('Date is not null');
+    }
 
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }

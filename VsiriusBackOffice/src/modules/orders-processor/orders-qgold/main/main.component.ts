@@ -122,7 +122,9 @@ export class MainComponent implements OnInit {
   search() {
     this.searchQgoldProcessParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
     this.searchQgoldProcessParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
-
+    if (this.searchQgoldProcessParam.fromDate === null || this.searchQgoldProcessParam.toDate === null) {
+      return this.notiflix.warning('Date is not null');
+    }
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
 

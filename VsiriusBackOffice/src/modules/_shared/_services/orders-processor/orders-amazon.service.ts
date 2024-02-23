@@ -12,7 +12,7 @@ import { AmazonOrderDTO, AmazonOrderDetailDTO } from '../../_models/order-proces
 })
 export class OrdersAmazonService {
 
-  baseUrl = environment.apiOrderProcessorURL;
+  baseUrl = environment.apiAmazonURL;
   clientId = environment.clientIdOrderProcessor;
   clientSecret = environment.clientSecretOrderProcessor;
 
@@ -26,11 +26,11 @@ export class OrdersAmazonService {
   }
 
   getData(pagination: PaginationParam, param: AmazonProcessSearchParam) {
-    return this.http.get<PaginationResult2<AmazonOrderDTO>>(this.baseUrl + 'AmazonProcess/GetOrders', { params: { ...pagination, ...param } });
+    return this.http.get<PaginationResult2<AmazonOrderDTO>>(this.baseUrl + 'OrderAmazonProcessor/GetOrders', { params: { ...pagination, ...param } });
   }
 
-  getDetail(id: string) {
-    return this.http.get<AmazonOrderDetailDTO>(this.baseUrl + 'AmazonProcess/Detail', { params: { id } });
+  getDetail(sellerOrderId: string) {
+    return this.http.get<AmazonOrderDetailDTO>(this.baseUrl + 'OrderAmazonProcessor/GetDetailOrder', { params: { sellerOrderId } });
   }
 
 }

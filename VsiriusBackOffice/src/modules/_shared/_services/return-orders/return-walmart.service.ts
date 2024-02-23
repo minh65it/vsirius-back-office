@@ -12,7 +12,7 @@ import { SearchReturnParam } from '../../_helpers/params/return-walmart';
 })
 export class ReturnWalmartService {
 
-  baseUrl = environment.apiReturnOrderWalmartURL;
+  baseUrl = environment.apiWalmartURL;
 
   walmartID = new BehaviorSubject<string>('');
   currentID = this.walmartID.asObservable();
@@ -24,10 +24,10 @@ export class ReturnWalmartService {
   }
 
   getData(pagination: PaginationParam, param: SearchReturnParam) {
-    return this.http.get<PaginationResult<ReturnOrder>>(this.baseUrl + 'WalmartProcess/returns', { params: { ...pagination, ...param } });
+    return this.http.get<PaginationResult<ReturnOrder>>(this.baseUrl + 'Order/returns', { params: { ...pagination, ...param } });
   }
   getDetail(id: string) {
-    return this.http.get<ReturnOrder>(this.baseUrl + 'WalmartProcess/detailreturn', { params: { id } });
+    return this.http.get<ReturnOrder>(this.baseUrl + 'Order/detailreturn', { params: { id } });
   }
 
 }

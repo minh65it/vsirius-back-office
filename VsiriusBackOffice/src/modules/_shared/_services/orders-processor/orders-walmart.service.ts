@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { QgoldFtpOrderObject } from '../../_models/order-processor/qgold-ftp-order-object';
 import { HttpClient } from '@angular/common/http';
 import { FunctionUtility } from '../../_helpers/function-utility';
-import { PaginationParam, PaginationResult2 } from '../../_helpers/pagination-utility';
+import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
 import { WalmartProcessSearchParam } from '../../_helpers/params/search-walmart-process-param';
 import { WalmartOrderDetailDTO } from '../../_models/order-processor/walmart-order-Dto';
 
@@ -13,7 +13,7 @@ import { WalmartOrderDetailDTO } from '../../_models/order-processor/walmart-ord
 })
 export class OrdersWalmartService {
 
-  baseUrl = environment.apiOrderProcessorURL;
+  baseUrl = environment.apiWalmartURL;
   clientId = environment.clientIdOrderProcessor;
   clientSecret = environment.clientSecretOrderProcessor;
 
@@ -33,10 +33,10 @@ export class OrdersWalmartService {
   }
 
   getData(pagination: PaginationParam, param: WalmartProcessSearchParam) {
-    return this.http.get<PaginationResult2<WalmartOrderDetailDTO>>(this.baseUrl + 'WalmartProcess/GetOrders', { params: { ...pagination, ...param } });
+    return this.http.get<PaginationResult<WalmartOrderDetailDTO>>(this.baseUrl + 'Order/GetOrders', { params: { ...pagination, ...param } });
   }
 
   getDetail(id: string) {
-    return this.http.get<WalmartOrderDetailDTO>(this.baseUrl + 'WalmartProcess/Detail', { params: { id } });
+    return this.http.get<WalmartOrderDetailDTO>(this.baseUrl + 'Order/DetailOrder', { params: { id } });
   }
 }
