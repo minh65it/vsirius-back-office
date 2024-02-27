@@ -103,7 +103,7 @@ export class OrdersQgoldService {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
     const formData = this.funUtility.ToFormData(model);
-    return this.http.post<OperationResult>(this.baseUrl + 'ReSubmitOrder', formData, { headers: { clientId, clientSecret } });
+    return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder?isResubmit=true', formData, { headers: { clientId, clientSecret } });
   }
   getDetail(id: string) {
     return this.http.get<QgoldOrderDetailDTO>(this.baseUrl + 'QgoldProcess/Detail', { params: { id } });
