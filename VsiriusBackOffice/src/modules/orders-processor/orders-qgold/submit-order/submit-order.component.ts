@@ -85,43 +85,42 @@ export class SubmitOrderComponent implements OnInit {
       this.checkValidated = false;
       let dataSubmit: QgoldFtpOrderObject[] = [];
       dataSubmit.push(this.qgoldFtpOrderObject);
-      console.log(dataSubmit);
 
-      //this.notiflix.showLoading();
+      this.notiflix.showLoading();
       if (this.isNewSubmit) {
-        //this.subscription = this.service.submitOrder(dataSubmit).subscribe({
-        //   next: res => {
-        //     if (!res.success) {
-        //       this.notiflix.error(res.message);
-        //       this.notiflix.hideLoading();
-        //       return;
-        //     }
-        //     this.notiflix.success(res.message);
-        //     this.cancel();
-        //     this.notiflix.hideLoading();
-        //   },
-        //   error: () => {
-        //     this.notiflix.error('Error System');
-        //     this.notiflix.hideLoading();
-        //   }
-        // });
+        this.subscription = this.service.submitOrder(dataSubmit).subscribe({
+          next: res => {
+            if (!res.success) {
+              this.notiflix.error(res.message);
+              this.notiflix.hideLoading();
+              return;
+            }
+            this.notiflix.success(res.message);
+            this.cancel();
+            this.notiflix.hideLoading();
+          },
+          error: () => {
+            this.notiflix.error('Error System');
+            this.notiflix.hideLoading();
+          }
+        });
       } else {
-        //this.subscription = this.service.callReSubmitOrder(dataSubmit).subscribe({
-        //   next: res => {
-        //     if (!res.success) {
-        //       this.notiflix.error(res.message);
-        //       this.notiflix.hideLoading();
-        //       return;
-        //     }
-        //     this.notiflix.success(res.message);
-        //     this.cancel();
-        //     this.notiflix.hideLoading();
-        //   },
-        //   error: () => {
-        //     this.notiflix.error('Error System');
-        //     this.notiflix.hideLoading();
-        //   }
-        // });
+        this.subscription = this.service.callReSubmitOrder(dataSubmit).subscribe({
+          next: res => {
+            if (!res.success) {
+              this.notiflix.error(res.message);
+              this.notiflix.hideLoading();
+              return;
+            }
+            this.notiflix.success(res.message);
+            this.cancel();
+            this.notiflix.hideLoading();
+          },
+          error: () => {
+            this.notiflix.error('Error System');
+            this.notiflix.hideLoading();
+          }
+        });
       }
     }
     else {
