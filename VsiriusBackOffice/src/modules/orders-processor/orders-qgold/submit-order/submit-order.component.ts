@@ -59,8 +59,8 @@ export class SubmitOrderComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.listItemQgold.push({} as QgoldFtpOrderItem);
-    this.qgoldFtpOrderObject.marketplace = "Vsirius";
+    this.listItemQgold.push({ item: '', price: '', qty: '', size: '' } as QgoldFtpOrderItem);
+    this.qgoldFtpOrderObject.marketplace = "VSirius";
     this.qgoldFtpOrderObject.item = []
     this.loadData();
   }
@@ -80,7 +80,7 @@ export class SubmitOrderComponent implements OnInit {
   }
 
   submitOrder() {
-    this.qgoldFtpOrderObject.item = this.listItemQgold;
+    this.qgoldFtpOrderObject.item = this.listItemQgold.map(item => ({ ...item, qty: item.qty.toString() }));
     if (this.myForm.valid) {
       this.checkValidated = false;
       let dataSubmit: QgoldFtpOrderObject[] = [];

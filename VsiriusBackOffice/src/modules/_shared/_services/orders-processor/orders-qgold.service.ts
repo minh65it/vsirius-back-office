@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class OrdersQgoldService {
 
-  baseUrl = environment.apiOrderProcessorURL;
+  baseUrl = "https://localhost:7130/api/";
   clientId = environment.clientIdOrderProcessor;
   clientSecret = environment.clientSecretOrderProcessor;
 
@@ -93,19 +93,15 @@ export class OrdersQgoldService {
   getData(pagination: PaginationParam, param: SearchQgoldProcessParam) {
     return this.http.get<PaginationResult2<QgoldOrderDTO>>(this.baseUrl + 'QgoldProcess/GetOrders', { params: { ...pagination, ...param } });
   }
-  submitOrder(model: QgoldFtpOrderObject[]) {
+  submitOrder(order: QgoldFtpOrderObject[]) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
-    //const formData = this.funUtility.ToFormData(model);
-    const formData = JSON.stringify(model);
-    return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder', formData, { headers: { clientId, clientSecret } });
+    return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder', order, { headers: { clientId, clientSecret } });
   }
-  callReSubmitOrder(model: QgoldFtpOrderObject[]) {
+  callReSubmitOrder(order: QgoldFtpOrderObject[]) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
-    //const formData = this.funUtility.ToFormData(model);
-    const formData = JSON.stringify(model);
-    return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder?isResubmit=true', formData, { headers: { clientId, clientSecret } });
+    return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder?isResubmit=true', order, { headers: { clientId, clientSecret } });
   }
   getDetail(id: string) {
     return this.http.get<QgoldOrderDetailDTO>(this.baseUrl + 'QgoldProcess/Detail', { params: { id } });
