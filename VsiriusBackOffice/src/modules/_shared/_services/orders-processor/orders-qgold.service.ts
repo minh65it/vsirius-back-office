@@ -14,7 +14,7 @@ import { BehaviorSubject } from 'rxjs';
 })
 export class OrdersQgoldService {
 
-  baseUrl = "https://localhost:7130/api/";
+  baseUrl = environment.apiOrderProcessorURL;
   clientId = environment.clientIdOrderProcessor;
   clientSecret = environment.clientSecretOrderProcessor;
 
