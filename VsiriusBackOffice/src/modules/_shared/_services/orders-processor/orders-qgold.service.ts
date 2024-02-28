@@ -96,13 +96,15 @@ export class OrdersQgoldService {
   submitOrder(model: QgoldFtpOrderObject[]) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
-    const formData = this.funUtility.ToFormData(model);
+    //const formData = this.funUtility.ToFormData(model);
+    const formData = JSON.stringify(model);
     return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder', formData, { headers: { clientId, clientSecret } });
   }
   callReSubmitOrder(model: QgoldFtpOrderObject[]) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
-    const formData = this.funUtility.ToFormData(model);
+    //const formData = this.funUtility.ToFormData(model);
+    const formData = JSON.stringify(model);
     return this.http.post<OperationResult>(this.baseUrl + 'SubmitOrder?isResubmit=true', formData, { headers: { clientId, clientSecret } });
   }
   getDetail(id: string) {
