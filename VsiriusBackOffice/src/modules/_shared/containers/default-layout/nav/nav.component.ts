@@ -18,6 +18,11 @@ export class NavComponent implements OnInit {
       icon: 'fa-shopping-cart'
     },
     {
+      title: 'Stuller',
+      url: '/orders-processor/Stuller',
+      icon: 'fa-shopping-cart'
+    },
+    {
       title: 'Vsirius',
       url: '/orders',
     },

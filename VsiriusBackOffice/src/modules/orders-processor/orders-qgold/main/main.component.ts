@@ -1,3 +1,4 @@
+import { listMarketplace } from './../../../_shared/_constants/marketplace.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,6 +37,7 @@ export class MainComponent implements OnInit {
   };
   cols: any[];
   selectedOrderStatus: OrderQgoldStatus | null = null;
+  selectedMarketplace = listMarketplace;
   isCheckAll: boolean = false;
   subscription = Subscription.EMPTY;
   listChoosePagination = [
@@ -83,12 +85,12 @@ export class MainComponent implements OnInit {
     this.cols = [
       { field: 'orderQgoldId', header: 'Order Qgold Id' },
       { field: 'orderStatus', header: 'Order Status' },
+      { field: 'marketplace', header: 'Marketplace' },
+      { field: 'marketOrderId', header: 'Market Order Id' },
       { field: 'isSendMailLostPackage', header: 'Send Mail Lost Package' },
       { field: 'orderDate', header: 'Order Date' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
-      { field: 'marketplace', header: 'Marketplace' },
-      { field: 'marketOrderId', header: 'Market Order Id' },
       { field: 'items', header: 'items' },
       { field: 'total', header: 'Total' },
       { field: 'zipCode', header: 'Zip Code' },

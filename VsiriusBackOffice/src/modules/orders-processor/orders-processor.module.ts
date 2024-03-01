@@ -10,11 +10,13 @@ import { ButtonModule } from 'primeng/button';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.component';
+import { MainComponent as MainStullerComponent } from './orders-stuller/main/main.component';
 import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
 import { MainComponent as MainWalmartComponent } from './orders-walmart/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailStullerComponent } from './orders-stuller/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 import { SharePipeModule } from '../_shared/_pipes/share-pipe.module';
@@ -27,6 +29,9 @@ import { LostPackageClaimComponent } from './orders-qgold/lost-package-claim/los
     SubmitOrderComponent,
     OrderDetailComponent,
     LostPackageClaimComponent,
+    //Stuller
+    MainStullerComponent,
+    OrderDetailStullerComponent,
     //Amazon
     MainAmazonComponent,
     OrderDetailAmazonComponent,

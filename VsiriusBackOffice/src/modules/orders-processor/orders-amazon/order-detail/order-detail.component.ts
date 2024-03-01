@@ -55,8 +55,8 @@ export class OrderDetailComponent implements OnInit {
     })
   }
   detailSupplier(item: AmazonOrderDetailDTO) {
-    if (item.qgoldOrderId != null) {
-      this.serviceQgold.currentID(item.qgoldOrderId);
+    if (item.supplierOrderId != null) {
+      this.serviceQgold.currentID(item.supplierOrderId);
       this.router.navigate(['/orders-processor/detail-qgold']);
     }
   }
