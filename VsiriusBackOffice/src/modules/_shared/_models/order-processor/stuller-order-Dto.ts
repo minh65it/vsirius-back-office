@@ -23,6 +23,7 @@ export interface StullerOrderDTO {
     shippingMethod: string | null;
     marketplace: string | null;
     marketplaceOrderId: string | null;
+    isDelete: boolean;
 }
 
 export interface ItemStuller {

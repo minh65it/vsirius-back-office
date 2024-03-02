@@ -1,3 +1,163 @@
-<p>
-  order-detail works!
-</p>
+<div class="card ">
+  <div class="card-header d-flex flex-row">
+    <div class="col d-flex justify-content-start">
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Stuller ID </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{stullerOrderDetail?.orderID}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Confirmation </label>
+        <div class="form-control font-weight-normal" style="height: 35px;">
+          {{stullerOrderDetail?.confirmation}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">PO </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.pO}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.orderDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Status </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.status}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Account </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.account}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Est Total Price </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.estTotalPrice}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Url Detail </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.urlDetail}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Invoice </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.invoice}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Ship Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.shipDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Delivery Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.deliveryDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Carrier </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.carrier}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Tracking </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.tracking}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Shipping Updates </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.shippingUpdates}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Invoice Amount </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.invoiceAmount}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2" *ngIf="stullerOrderDetail?.items">
+        <label class="form-label fw-bold">Items </label>
+        <div class="form-control" [style.height.px]="50 * stullerOrderDetail?.items.length">
+          <div class="form mt-1" *ngFor="let item of stullerOrderDetail?.items">
+            Product: {{item?.productSku}}, &nbsp; Qty Order: {{item?.ordered}}, &nbsp; Est Price: {{item?.estPrice}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Shipping </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.shipping}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Billing </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.billing}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Zip Code </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.zipCode}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Address 1 </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.address1}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Buyer Name </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.buyerName}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Shipping Method </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.shippingMethod}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Marketplace </label>
+        <div class="form-control" style="height: 35px;">
+          {{stullerOrderDetail?.marketplace}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Market Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailMarket(stullerOrderDetail)">
+          {{stullerOrderDetail?.marketplaceOrderId}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
