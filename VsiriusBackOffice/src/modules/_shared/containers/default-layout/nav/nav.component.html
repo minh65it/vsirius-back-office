@@ -56,15 +56,24 @@
                   [ngClass]="visible  ? 'fa-angle-right' : 'fa-angle-down'"></span>
               </a>
               <ul class="sub-menu" [ngClass]="visible  ? 'collapsed' : 'collapse'">
-                <li class="collapsed" *ngFor="let child of listOrder">
-                  <a class="m-link cursor-pointer" [routerLink]="''+ child.url" routerLinkActive="active">
-                    <i class="fa fa-minus"></i>
-                    <span class="ms-2 " style="cursor: pointer;">{{child.title}}</span>
+                <li class="collapsed" *ngFor="let child1 of listOrder">
+                  <a (click)="toggleCollapseOrder(child1)" class="m-link cursor-pointer">
+                    <i class="fa fa-shopping-bag"></i>
+                    <span class="ms-2 " style="cursor: pointer;">{{child1.title}}</span>
+                    <span *ngIf="child1.items !== null" class="arrow fa  ms-auto text-end"
+                      [ngClass]="child1.visible  ? 'fa-angle-right' : 'fa-angle-down'"></span>
                   </a>
+                  <ul class="sub-menu" [ngClass]="child1.visible  ? 'collapsed' : 'collapse'">
+                    <li class="collapsed" *ngFor="let child2 of child1.items">
+                      <a class="m-link cursor-pointer" [routerLink]="''+ child2.url" routerLinkActive="active">
+                        <i class="fa fa-minus"></i>
+                        <span class="ms-2 " style="cursor: pointer;">{{child2.title}}</span>
+                      </a>
+                    </li>
+                  </ul>
                 </li>
               </ul>
             </li>
-
             <li class="collapsed" *ngIf="menu.Admin || menu.DrivenHTML">
               <a class="m-link cursor-pointer" [routerLink]="'/contacts'" routerLinkActive="active">
                 <i class="fa fa-envelope"></i>

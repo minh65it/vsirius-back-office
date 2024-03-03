@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { MenuRoles, RoleName } from 'src/modules/_shared/_constants/role-name.enum';
 import { Order } from 'src/modules/_shared/_helpers/params/order-param';
 
@@ -13,43 +14,58 @@ export class NavComponent implements OnInit {
   listRoles: string[];
   listOrder: Order[] = [
     {
-      title: 'Qgold',
-      url: '/orders-processor/Qgold',
-      icon: 'fa-shopping-cart'
+      title: 'Supplier',
+      icon: 'fa-shopping-cart',
+      visible: false,
+      items: [
+        {
+          title: 'Qgold',
+          url: '/orders-processor/Qgold',
+        },
+        {
+          title: 'Stuller',
+          url: '/orders-processor/Stuller',
+        },
+      ]
     },
     {
-      title: 'Stuller',
-      url: '/orders-processor/Stuller',
-      icon: 'fa-shopping-cart'
-    },
-    {
-      title: 'Vsirius',
-      url: '/orders',
-    },
-    {
-      title: 'Amazon',
-      url: '/orders-processor/Amazon',
-    },
-    {
-      title: 'Walmart',
-      url: '/orders-processor/Walmart',
-    },
-    {
-      title: 'Amazon Return',
-      url: '/return-orders/Amazon',
-    },
-    {
-      title: 'Walmart Return',
-      url: '/return-orders/Walmart',
+      title: 'Marketplace',
+      icon: 'fa-shopping-cart',
+      visible: false,
+      items: [
+        {
+          title: 'VSirius',
+          url: '/orders/orders-vsirius',
+        },
+        {
+          title: 'Amazon',
+          url: '/orders-processor/Amazon',
+        },
+        {
+          title: 'Walmart',
+          url: '/orders-processor/Walmart',
+        },
+        {
+          title: 'Amazon Return',
+          url: '/return-orders/Amazon',
+        },
+        {
+          title: 'Walmart Return',
+          url: '/return-orders/Walmart',
+        },
+      ]
     },
     {
       title: 'Package-Claim',
       url: '/return-orders/Package-Claim',
+      icon: 'fa-shopping-cart',
+      items: null
     },
   ];
   visible = false;
-  visible2 = false;
-  constructor() { }
+  constructor(
+    private router: Router,
+  ) { }
 
   ngOnInit() {
     this.loadData();
@@ -75,10 +91,22 @@ export class NavComponent implements OnInit {
         this.visible = !this.visible;
         break;
       }
-      case 'return-orders': {
-        this.visible2 = !this.visible2;
-        break;
+    }
+  }
+  toggleCollapseOrder(menuOrder: Order) {
+    this.listOrder = this.listOrder.map(elm => {
+      if (elm.title === menuOrder.title) {
+        return {
+          ...elm, visible: !elm.visible
+        }
+      } else {
+        return {
+          ...elm
+        }
       }
+    });
+    if (menuOrder.url !== '' || menuOrder.url !== null) {
+      this.router.navigate([menuOrder.url]);
     }
   }
 }

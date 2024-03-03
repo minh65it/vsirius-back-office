@@ -4,8 +4,8 @@ import { MainComponent } from './main/main.component';
 
 const routes: Routes = [
   {
-    path:'',
-    component:MainComponent,
+    path: 'orders-vsirius',
+    component: MainComponent,
     data: {
       breadcrumb: 'List Orders',
     },
