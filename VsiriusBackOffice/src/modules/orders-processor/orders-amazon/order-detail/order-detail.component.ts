@@ -57,11 +57,11 @@ export class OrderDetailComponent implements OnInit {
   detailSupplier(item: AmazonOrderDetailDTO) {
     if (item.supplierOrderId != null) {
       this.serviceQgold.currentID(item.supplierOrderId);
-      this.router.navigate(['/orders-processor/detail-qgold']);
+      this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   back() {
-    this.router.navigate(['/orders-processor/Amazon']);
+    this.router.navigate(['orders/marketplace/amazon']);
   }
   ReSubmitQgold(item: AmazonOrderDetailDTO) {
     const model = {} as QgoldFtpOrderObject;
@@ -103,7 +103,7 @@ export class OrderDetailComponent implements OnInit {
     });
     model.marketplace = "Amazon";
     this.serviceQgold.currentReOrder(model);
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

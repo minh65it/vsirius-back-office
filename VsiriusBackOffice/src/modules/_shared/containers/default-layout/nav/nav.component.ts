@@ -15,49 +15,51 @@ export class NavComponent implements OnInit {
   listOrder: Order[] = [
     {
       title: 'Supplier',
+      url: null,
       icon: 'fa-shopping-cart',
       visible: false,
       items: [
         {
           title: 'Qgold',
-          url: '/orders-processor/Qgold',
+          url: '/orders/supplier/qgold',
         },
         {
           title: 'Stuller',
-          url: '/orders-processor/Stuller',
+          url: '/orders/supplier/stuller',
         },
       ]
     },
     {
       title: 'Marketplace',
+      url: null,
       icon: 'fa-shopping-cart',
       visible: false,
       items: [
         {
           title: 'VSirius',
-          url: '/orders/orders-vsirius',
+          url: '/orders/marketplace/vsirius',
         },
         {
           title: 'Amazon',
-          url: '/orders-processor/Amazon',
+          url: '/orders/marketplace/amazon',
         },
         {
           title: 'Walmart',
-          url: '/orders-processor/Walmart',
+          url: '/orders/marketplace/walmart',
         },
         {
           title: 'Amazon Return',
-          url: '/return-orders/Amazon',
+          url: '/orders/marketplace/return-amazon',
         },
         {
           title: 'Walmart Return',
-          url: '/return-orders/Walmart',
+          url: '/orders/marketplace/return-walmart',
         },
       ]
     },
     {
       title: 'Package-Claim',
-      url: '/return-orders/Package-Claim',
+      url: '/orders/package-claim',
       icon: 'fa-shopping-cart',
       items: null
     },
@@ -105,7 +107,7 @@ export class NavComponent implements OnInit {
         }
       }
     });
-    if (menuOrder.url !== '' || menuOrder.url !== null) {
+    if (typeof (menuOrder.url) === 'string') {
       this.router.navigate([menuOrder.url]);
     }
   }

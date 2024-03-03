@@ -140,7 +140,7 @@ export class MainComponent implements OnInit {
     this.subscription.unsubscribe();
   }
   submitLink() {
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   checkAll() {
     this.listStullerOrder.map(item => {
@@ -151,15 +151,15 @@ export class MainComponent implements OnInit {
   }
   detail(item: StullerOrderDTO) {
     this.service.currentID(item.orderID);
-    this.router.navigate(['/orders-processor/detail-stuller']);
+    this.router.navigate(['orders/supplier/detail-stuller']);
   }
   detailMarket(item: StullerOrderDTO) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketplaceOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     } else if (item.marketplace.includes('Walmart')) {
       this.serviceWalmart.currentID(item.marketplaceOrderId);
-      this.router.navigate(['/orders-processor/detail-walmart']);
+      this.router.navigate(['orders/marketplace/detail-walmart']);
     }
   }
   deleteAll() {

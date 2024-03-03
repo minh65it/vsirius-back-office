@@ -127,12 +127,12 @@ export class MainComponent implements OnInit {
 
   detail(item: WalmartOrderDetailDTO) {
     this.service.currentID(item.purchaseOrderId);
-    this.router.navigate(['/orders-processor/detail-walmart']);
+    this.router.navigate(['orders/marketplace/detail-walmart']);
   }
   detailSupplier(item: WalmartOrderDetailDTO) {
     if (item.qgoldOrderId != null) {
       this.serviceQgold.currentID(item.qgoldOrderId);
-      this.router.navigate(['/orders-processor/detail-qgold']);
+      this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   pageChanged(event: any) {
@@ -141,7 +141,7 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();

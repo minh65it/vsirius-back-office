@@ -56,11 +56,11 @@ export class ReturnAmazonDetailComponent implements OnInit {
     })
   }
   back() {
-    this.router.navigate(['/return-orders/Amazon']);
+    this.router.navigate(['orders/marketplace/return-amazon']);
   }
   detailOrder(orderID: string) {
     this.serviceAmazon.currentID(orderID);
-    this.router.navigate(['/orders-processor/detail-amazon']);
+    this.router.navigate(['orders/marketplace/detail-amazon']);
   }
   openModal(template: TemplateRef<void>, url: string) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));

@@ -112,11 +112,11 @@ export class ReturnWalmartComponent implements OnInit {
   }
   detailReturnOrder(item: ReturnOrder) {
     this.service.currentWalmartID(item.returnOrderId);
-    this.router.navigate(['/return-orders/detail-walmart']);
+    this.router.navigate(['orders/marketplace/detail-return-walmart']);
   }
   detailOrder(purchaseOrderId: string) {
     this.serviceWalmart.currentID(purchaseOrderId);
-    this.router.navigate(['/orders-processor/detail-walmart']);
+    this.router.navigate(['orders/marketplace/detail-walmart']);
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;

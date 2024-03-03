@@ -132,12 +132,12 @@ export class MainComponent implements OnInit {
 
   detail(item: AmazonOrderDTO) {
     this.service.currentID(item.amazonOrderId);
-    this.router.navigate(['/orders-processor/detail-amazon']);
+    this.router.navigate(['orders/marketplace/detail-amazon']);
   }
   detailSupplier(item: AmazonOrderDTO) {
     if (item.supplierOrderId != null) {
       this.serviceQgold.currentID(item.supplierOrderId);
-      this.router.navigate(['/orders-processor/detail-qgold']);
+      this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   pageChanged(event: any) {
@@ -146,7 +146,7 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();

@@ -13,21 +13,21 @@ import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-wa
 const routes: Routes = [
   //Qgold
   {
-    path: 'Qgold',
+    path: 'supplier/qgold',
     component: MainQgoldComponent,
     data: {
       breadcrumb: 'Orders Qgold',
     },
   },
   {
-    path: 'submit-qgold',
+    path: 'supplier/submit-qgold',
     component: SubmitOrderComponent,
     data: {
       breadcrumb: 'Submit Order',
     },
   },
   {
-    path: 'detail-qgold',
+    path: 'supplier/detail-qgold',
     component: OrderDetailComponent,
     data: {
       breadcrumb: 'Order Detail Qgold',
@@ -35,14 +35,14 @@ const routes: Routes = [
   },
   //Stuller
   {
-    path: 'Stuller',
+    path: 'supplier/stuller',
     component: MainStullerComponent,
     data: {
       breadcrumb: 'Orders Stuller',
     },
   },
   {
-    path: 'detail-stuller',
+    path: 'supplier/detail-stuller',
     component: OrderDetailStullerComponent,
     data: {
       breadcrumb: 'Order Detail Stuller',
@@ -50,14 +50,14 @@ const routes: Routes = [
   },
   //Amazon
   {
-    path: 'Amazon',
+    path: 'marketplace/amazon',
     component: MainAmazonComponent,
     data: {
       breadcrumb: 'Orders Amazon',
     },
   },
   {
-    path: 'detail-amazon',
+    path: 'marketplace/detail-amazon',
     component: OrderDetailAmazonComponent,
     data: {
       breadcrumb: 'Order Detail Amazon',
@@ -65,14 +65,14 @@ const routes: Routes = [
   },
   //Walmart
   {
-    path: 'Walmart',
+    path: 'marketplace/walmart',
     component: MainWalmartComponent,
     data: {
       breadcrumb: 'Orders Walmart',
     },
   },
   {
-    path: 'detail-walmart',
+    path: 'marketplace/detail-walmart',
     component: OrderDetailWalmartComponent,
     data: {
       breadcrumb: 'Order Detail Walmart',

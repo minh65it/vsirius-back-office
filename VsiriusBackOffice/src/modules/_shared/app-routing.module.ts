@@ -34,20 +34,8 @@ const routes: Routes = [
         loadChildren: () => import('../cart/cart.module').then((m) => m.CartModule),
       },
       {
-        path: 'order-status',
-        loadChildren: () => import('../orders/order-status/order-status.module').then((m) => m.OrderStatusModule),
-      },
-      {
         path: 'orders',
-        loadChildren: () => import('../orders/orders/orders.module').then((m) => m.OrdersModule),
-      },
-      {
-        path: 'orders-processor',
-        loadChildren: () => import('../orders-processor/orders-processor.module').then((m) => m.OrdersProcessorModule),
-      },
-      {
-        path: 'return-orders',
-        loadChildren: () => import('../return-orders/return-orders.module').then((m) => m.ReturnOrdersModule),
+        loadChildren: () => import('../orders/orders.module').then((m) => m.OrdersModule),
       },
       {
         path: 'qa-qgold',

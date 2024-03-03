@@ -122,7 +122,7 @@ export class ReturnAmazonComponent implements OnInit {
   }
   detailReturnOrder(item: ReturnFBMOrderRowDto) {
     this.service.currentAmazonRMAID(item.amazonRMAID);
-    this.router.navigate(['/return-orders/detail-amazon']);
+    this.router.navigate(['orders/marketplace/detail-return-amazon']);
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;
@@ -137,7 +137,7 @@ export class ReturnAmazonComponent implements OnInit {
   }
   detailOrder(orderID: string) {
     this.serviceAmazon.currentID(orderID);
-    this.router.navigate(['/orders-processor/detail-amazon']);
+    this.router.navigate(['orders/marketplace/detail-amazon']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

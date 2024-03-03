@@ -132,15 +132,15 @@ export class MainComponent implements OnInit {
 
   detail(item: QgoldOrderDTO) {
     this.service.currentID(item.orderQgoldId);
-    this.router.navigate(['/orders-processor/detail-qgold']);
+    this.router.navigate(['orders/supplier/detail-qgold']);
   }
   detailMarket(item: QgoldOrderDTO) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     } else if (item.marketplace.includes('Walmart')) {
       this.serviceWalmart.currentID(item.marketOrderId);
-      this.router.navigate(['/orders-processor/detail-walmart']);
+      this.router.navigate(['orders/marketplace/detail-walmart']);
     }
   }
   pageChanged(event: any) {
@@ -151,7 +151,7 @@ export class MainComponent implements OnInit {
   submitLink() {
     const model = {} as QgoldFtpOrderObject;
     this.service.currentReOrder(model);
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();
