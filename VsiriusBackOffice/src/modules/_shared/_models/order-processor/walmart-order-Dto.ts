@@ -1,7 +1,8 @@
 export interface WalmartOrderDetailDTO {
     purchaseOrderId: string | null;
     customerOrderId: string | null;
-    qgoldOrderId: string | null;
+    supplierOrderId: string | null;
+    supplier: string | null;
     trackingNumber: string | null;
     carrierName: string | null;
     customerEmailId: string | null;
@@ -13,12 +14,12 @@ export interface WalmartOrderDetailDTO {
     buyerName: string | null;
     address1: string | null;
     address2: string | null;
+    phone: string | null;
     city: string | null;
     state: string | null;
     postalCode: string | null;
     country: string | null;
     items: WalmartItemDTO[] | null;
-    phone: string | null;
     isDelete: boolean;
 }
 

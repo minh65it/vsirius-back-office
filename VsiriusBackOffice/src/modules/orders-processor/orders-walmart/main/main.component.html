@@ -16,17 +16,25 @@
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Customer Order Id</label>
+        <label for="TextInput" class="form-label fw-bold">Walmart Order Id</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="walmartSearchParam.customerOrderId" name="customerOrderId"
-            class="form-control" placeholder="Customer Order Id..." />
+            class="form-control" placeholder="Walmart Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Qgold Order Id</label>
+        <label for="TextInput" class="form-label fw-bold">Supplier</label>
+        <ng-select [placeholder]="'Supplier...'" [(ngModel)]="walmartSearchParam.supplier" name="Supplier"
+          [clearable]="false">
+          <ng-option *ngFor="let item of selectSuppliers" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Supplier Order Id</label>
         <fieldset class="">
-          <input type="text" [(ngModel)]="walmartSearchParam.qgoldOrderId" name="qgoldOrderId" class="form-control"
-            placeholder="Qgold Order Id..." />
+          <input type="text" [(ngModel)]="walmartSearchParam.supplierOrderId" name="supplierOrderId"
+            class="form-control" placeholder="Supplier Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
@@ -95,7 +103,7 @@
             item.key}}</ng-option>
         </ng-select>
       </div>
-      <div class="col-lg-3 col-md-6 col-sm-12">
+      <div class="col d-flex justify-content-end">
         <label for="TextInput" class="form-label fw-bold"><br></label>
         <div class="d-flex justify-content-end">
           <button type="submit" class="btn btn-success border lift rounded-2">
@@ -167,13 +175,13 @@
                   {{item[col.field]}}
                 </div>
               </ng-container>
-              <ng-container *ngIf="col.field == 'qgoldOrderId'">
+              <ng-container *ngIf="col.field == 'supplierOrderId'">
                 <div class="text-info" style="cursor: pointer;" (click)="detailSupplier(item)" target="_blank">
                   {{item[col.field]}}
                 </div>
               </ng-container>
               <ng-container *ngIf="col.field != 'purchaseOrderId' && col.field != 'isSubmitted' && col.field != 'items' 
-                && col.field != 'isDelete' && col.field != 'orderDate' && col.field != 'qgoldOrderId'">
+                && col.field != 'isDelete' && col.field != 'orderDate' && col.field != 'supplierOrderId'">
                 {{item[col.field]}}
               </ng-container>
               <ng-container *ngIf="col.field == 'items'">
