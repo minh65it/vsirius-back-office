@@ -26,7 +26,7 @@ export const environment = {
   apiOrderURL: `${domainManager}/order/api/`,
   signalOrderURL: `${domainManager}/order`,
   apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
-  apiStullerOrderURL: `${domainManager}/stullerOrder/api/`,
+  apiStullerOrderURL: `${domainManager}/stullerOrder/`,
   apiAmazonURL: `${domainManager}/amazon/api/`,
   apiWalmartURL: `${domainManager}/walmart/api/`,
   apiPackageURL: `${domainManager}/package/api/`,
