@@ -1,4 +1,4 @@
-const hostname: string = '192.168.1.92';
+const hostname: string = '108.2.208.210';
 const ipIdentity: string = `${hostname}${':5102/identity'}`;
 const ipProduct: string = `${hostname}${':5102/product'}`;
 const ipOrder: string = `${hostname}${':5102/order'}`;
@@ -7,7 +7,7 @@ const ipPackage: string = `${hostname}${':5102/package'}`;
 const ipOrderProcessor: string = `${hostname}${':5115'}`;
 const ipAmazon: string = `${hostname}${':5113'}`;
 const ipWalmart: string = `${hostname}${':5114'}`;
-const domainManager: string = `http://${hostname}${':5102'}`;
+const domainManager: string = `http://${hostname}${':15102'}`;
 
 export const environment = {
     production: false,

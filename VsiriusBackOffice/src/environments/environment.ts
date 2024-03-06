@@ -1,13 +1,13 @@
 const hostname: string = '192.168.2.163';
-const ipIdentity: string = `${hostname}${':5102/identity'}`;
-const ipProduct: string = `${hostname}${':5102/product'}`;
-const ipOrder: string = `${hostname}${':5102/order'}`;
-const ipCsr: string = `${hostname}${':5102/csr'}`;
-const ipPackage: string = `${hostname}${':5102/package'}`;
-const ipOrderProcessor: string = `${hostname}${':5115'}`;
-const ipAmazon: string = `${hostname}${':5113'}`;
-const ipWalmart: string = `${hostname}${':5114'}`;
-const domainManager: string = `http://${hostname}${':5102'}`;
+const ipIdentity: string = `${hostname}${':5202/identity'}`;
+const ipProduct: string = `${hostname}${':5202/product'}`;
+const ipOrder: string = `${hostname}${':5202/order'}`;
+const ipCsr: string = `${hostname}${':5202/csr'}`;
+const ipPackage: string = `${hostname}${':5202/package'}`;
+const ipOrderProcessor: string = `${hostname}${':5215'}`;
+const ipAmazon: string = `${hostname}${':5213'}`;
+const ipWalmart: string = `${hostname}${':5214'}`;
+const domainManager: string = `http://${hostname}${':5202'}`;
 
 export const environment = {
   production: true,
