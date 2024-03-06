@@ -87,7 +87,7 @@ export class MainComponent implements OnInit {
       { field: 'supplierOrderId', header: 'Supplier Order Id' },
       { field: 'trackingNumber', header: 'Tracking Number' },
       { field: 'orderDate', header: 'Order Date' },
-      { field: 'methodShipping', header: 'Method Shipping' },
+      { field: 'isSubmitted', header: 'Submitted' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
       { field: 'address2', header: 'Address 2' },

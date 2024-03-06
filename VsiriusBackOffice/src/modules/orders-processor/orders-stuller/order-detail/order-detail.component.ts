@@ -55,11 +55,11 @@ export class OrderDetailComponent implements OnInit {
   detailMarket(item: StullerOrderDTO) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketplaceOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     }
   }
   back() {
-    this.router.navigate(['/orders-processor/Stuller']);
+    this.router.navigate(['orders/supplier/stuller']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
