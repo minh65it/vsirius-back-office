@@ -134,7 +134,7 @@ export class SubmitOrderComponent implements OnInit {
     this.isNewSubmit = true;
   }
   cancel() {
-    this.router.navigate(['/orders-processor/Qgold']);
+    this.router.navigate(['orders/supplier/qgold']);
   }
   addItem() {
     this.listItemQgold.push({} as QgoldFtpOrderItem);

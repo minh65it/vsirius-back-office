@@ -61,10 +61,11 @@
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <label for="TextInput" class="form-label fw-bold">Marketplace</label>
-        <fieldset>
-          <input type="text" [(ngModel)]="searchQgoldProcessParam.marketplace" name="marketplace" class="form-control"
-            placeholder="Marketplace..." />
-        </fieldset>
+        <ng-select [placeholder]="'Marketplace...'" [(ngModel)]="searchQgoldProcessParam.marketplace" name="Marketplace"
+          [clearable]="false">
+          <ng-option *ngFor="let item of selectedMarketplace" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
         <label for="TextInput" class="form-label fw-bold">MarketOrder Id</label>

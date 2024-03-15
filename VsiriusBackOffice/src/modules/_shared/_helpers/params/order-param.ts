@@ -5,7 +5,9 @@ export interface OrderParam {
 }
 export interface Order {
     title: string;
-    url: string;
+    url?: string | null;
     icon?: string | null;
-    index?: number | null
+    index?: number | null;
+    items?: Order[];
+    visible?: boolean;
 }

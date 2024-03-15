@@ -60,11 +60,11 @@ export class OrderDetailComponent implements OnInit {
   detailMarket(item: QgoldOrderDetailDTO) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     }
   }
   back() {
-    this.router.navigate(['/orders-processor/Qgold']);
+    this.router.navigate(['orders/supplier/qgold']);
   }
   sendMailLostPackage(item: QgoldOrderDetailDTO) {
     const config = {

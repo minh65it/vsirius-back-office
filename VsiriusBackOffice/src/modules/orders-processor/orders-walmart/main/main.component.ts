@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { listSupplier } from 'src/modules/_shared/_constants/supplier.enum';
 import { Pagination, PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { WalmartOrderType, WalmartProcessSearchParam } from 'src/modules/_shared/_helpers/params/search-walmart-process-param';
 import { WalmartOrderDetailDTO } from 'src/modules/_shared/_models/order-processor/walmart-order-Dto';
@@ -54,6 +55,7 @@ export class MainComponent implements OnInit {
       value: '200 results'
     }
   ];
+  selectSuppliers = listSupplier;
   constructor(
     private router: Router,
     private service: OrdersWalmartService,
@@ -80,11 +82,12 @@ export class MainComponent implements OnInit {
   generateTable() {
     this.cols = [
       { field: 'purchaseOrderId', header: 'Purchase Order Id' },
-      { field: 'customerOrderId', header: 'Customer Order Id' },
-      { field: 'qgoldOrderId', header: 'Qgold Order Id' },
+      { field: 'customerOrderId', header: 'Walmart Order Id' },
+      { field: 'supplier', header: 'Supplier' },
+      { field: 'supplierOrderId', header: 'Supplier Order Id' },
       { field: 'trackingNumber', header: 'Tracking Number' },
       { field: 'orderDate', header: 'Order Date' },
-      { field: 'methodShipping', header: 'Method Shipping' },
+      { field: 'isSubmitted', header: 'Submitted' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
       { field: 'address2', header: 'Address 2' },
@@ -127,12 +130,12 @@ export class MainComponent implements OnInit {
 
   detail(item: WalmartOrderDetailDTO) {
     this.service.currentID(item.purchaseOrderId);
-    this.router.navigate(['/orders-processor/detail-walmart']);
+    this.router.navigate(['orders/marketplace/detail-walmart']);
   }
   detailSupplier(item: WalmartOrderDetailDTO) {
-    if (item.qgoldOrderId != null) {
-      this.serviceQgold.currentID(item.qgoldOrderId);
-      this.router.navigate(['/orders-processor/detail-qgold']);
+    if (item.supplierOrderId != null) {
+      this.serviceQgold.currentID(item.supplierOrderId);
+      this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   pageChanged(event: any) {
@@ -141,7 +144,7 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();

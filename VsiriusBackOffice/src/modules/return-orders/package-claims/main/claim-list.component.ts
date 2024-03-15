@@ -105,15 +105,15 @@ export class ClaimListComponent implements OnInit {
   detailReturnOrder(item: ClaimDto) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketplaceOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     } else if (item.marketplace.includes('Walmart')) {
       this.serviceWalmart.currentID(item.marketplaceOrderId);
-      this.router.navigate(['/orders-processor/detail-walmart']);
+      this.router.navigate(['orders/marketplace/detail-walmart']);
     }
   }
   detailClaim(rma: string) {
     this.service.currentClaimRMAID(rma);
-    this.router.navigate(['/return-orders/detail-claim']);
+    this.router.navigate(['orders/detail-claim']);
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;

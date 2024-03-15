@@ -1,3 +1,4 @@
+import { listMarketplace } from './../../../_shared/_constants/marketplace.enum';
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
@@ -36,6 +37,7 @@ export class MainComponent implements OnInit {
   };
   cols: any[];
   selectedOrderStatus: OrderQgoldStatus | null = null;
+  selectedMarketplace = listMarketplace;
   isCheckAll: boolean = false;
   subscription = Subscription.EMPTY;
   listChoosePagination = [
@@ -83,12 +85,12 @@ export class MainComponent implements OnInit {
     this.cols = [
       { field: 'orderQgoldId', header: 'Order Qgold Id' },
       { field: 'orderStatus', header: 'Order Status' },
+      { field: 'marketplace', header: 'Marketplace' },
+      { field: 'marketOrderId', header: 'Market Order Id' },
       { field: 'isSendMailLostPackage', header: 'Send Mail Lost Package' },
       { field: 'orderDate', header: 'Order Date' },
       { field: 'buyerName', header: 'Buyer Name' },
       { field: 'address1', header: 'Address 1' },
-      { field: 'marketplace', header: 'Marketplace' },
-      { field: 'marketOrderId', header: 'Market Order Id' },
       { field: 'items', header: 'items' },
       { field: 'total', header: 'Total' },
       { field: 'zipCode', header: 'Zip Code' },
@@ -130,15 +132,15 @@ export class MainComponent implements OnInit {
 
   detail(item: QgoldOrderDTO) {
     this.service.currentID(item.orderQgoldId);
-    this.router.navigate(['/orders-processor/detail-qgold']);
+    this.router.navigate(['orders/supplier/detail-qgold']);
   }
   detailMarket(item: QgoldOrderDTO) {
     if (item.marketplace.includes('Amazon')) {
       this.serviceAmazon.currentID(item.marketOrderId);
-      this.router.navigate(['/orders-processor/detail-amazon']);
+      this.router.navigate(['orders/marketplace/detail-amazon']);
     } else if (item.marketplace.includes('Walmart')) {
       this.serviceWalmart.currentID(item.marketOrderId);
-      this.router.navigate(['/orders-processor/detail-walmart']);
+      this.router.navigate(['orders/marketplace/detail-walmart']);
     }
   }
   pageChanged(event: any) {
@@ -149,7 +151,7 @@ export class MainComponent implements OnInit {
   submitLink() {
     const model = {} as QgoldFtpOrderObject;
     this.service.currentReOrder(model);
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();

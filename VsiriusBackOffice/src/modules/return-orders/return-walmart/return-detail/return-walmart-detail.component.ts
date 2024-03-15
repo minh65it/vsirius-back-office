@@ -56,11 +56,11 @@ export class ReturnWalmartDetailComponent implements OnInit {
     })
   }
   back() {
-    this.router.navigate(['/return-orders/Walmart']);
+    this.router.navigate(['orders/marketplace/return-walmart']);
   }
   detailOrder(purchaseOrderId: string) {
     this.serviceWalmart.currentID(purchaseOrderId);
-    this.router.navigate(['/orders-processor/detail-walmart']);
+    this.router.navigate(['orders/marketplace/detail-walmart']);
   }
   openModal(template: TemplateRef<void>, url: string) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));

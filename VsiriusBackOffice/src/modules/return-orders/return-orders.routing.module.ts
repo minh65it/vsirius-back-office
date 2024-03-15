@@ -8,7 +8,7 @@ import { ClaimDetailComponent } from './package-claims/detail/claim-detail.compo
 
 const routes: Routes = [
   {
-    path: 'Package-Claim',
+    path: 'package-claim',
     component: ClaimListComponent,
     data: {
       breadcrumb: 'Package Claim',
@@ -22,28 +22,28 @@ const routes: Routes = [
     },
   },
   {
-    path: 'Amazon',
+    path: 'marketplace/return-amazon',
     component: ReturnAmazonComponent,
     data: {
       breadcrumb: 'Amazon',
     },
   },
   {
-    path: 'detail-amazon',
+    path: 'marketplace/detail-return-amazon',
     component: ReturnAmazonDetailComponent,
     data: {
       breadcrumb: 'Detail Return Amazon',
     },
   },
   {
-    path: 'Walmart',
+    path: 'marketplace/return-walmart',
     component: ReturnWalmartComponent,
     data: {
       breadcrumb: 'Walmart',
     },
   },
   {
-    path: 'detail-walmart',
+    path: 'marketplace/detail-return-walmart',
     component: ReturnWalmartDetailComponent,
     data: {
       breadcrumb: 'Detail Return Walmart',

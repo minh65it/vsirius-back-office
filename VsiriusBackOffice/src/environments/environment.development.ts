@@ -5,12 +5,14 @@ const ipOrder: string = `${hostname}${':5102/order'}`;
 const ipCsr: string = `${hostname}${':5102/csr'}`;
 const ipPackage: string = `${hostname}${':5102/package'}`;
 const ipOrderProcessor: string = `${hostname}${':5115'}`;
+const ipStullerOrder: string = `${hostname}${':5120'}`;
 const ipAmazon: string = `${hostname}${':5113'}`;
 const ipWalmart: string = `${hostname}${':5114'}`;
 const domainManager: string = `http://${hostname}${':15102'}`;
 
 export const environment = {
     production: false,
+    qa:false,
     clientIdCart: "OrderApi",
     clientSecretCart: "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJkYXRhIjoiN2MwMTgxOTMtN2I4Yi00ODNmLTllZDAtNTUxZjk5NTQ1YzI2LU9yZGVyQXBpIiwibmJmIjoxNjg3NTA3NDAzLCJleHAiOjE2ODc1MTEwMDMsImlhdCI6MTY4NzUwNzQwM30.",
     clientIdOrderProcessor: "OrderStullerQgoldApi",
@@ -25,6 +27,7 @@ export const environment = {
     apiOrderURL: `${domainManager}/order/api/`,
     signalOrderURL: `${domainManager}/order`,
     apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
+    apiStullerOrderURL: `${domainManager}/stullerOrder/`,
     apiAmazonURL: `${domainManager}/amazon/api/`,
     apiWalmartURL: `${domainManager}/walmart/api/`,
     apiPackageURL: `${domainManager}/package/api/`,

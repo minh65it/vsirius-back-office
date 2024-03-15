@@ -166,6 +166,6 @@ export class MainComponent implements OnInit {
     })
   }
   goToOrderStatus() {
-    this.router.navigate(['order-status'])
+    this.router.navigate(['orders/marketplace/order-status-vsirius'])
   }
 }

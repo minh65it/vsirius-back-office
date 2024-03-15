@@ -1,7 +1,8 @@
 export interface WalmartProcessSearchParam {
     purchaseOrderId: string | null;
     customerOrderId: string | null;
-    qgoldOrderId: string | null;
+    supplierOrderId: string | null;
+    supplier: string | null;
     trackingNumber: string | null;
     buyerName: string | null;
     address1: string | null;

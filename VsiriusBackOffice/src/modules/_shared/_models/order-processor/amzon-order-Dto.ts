@@ -1,6 +1,5 @@
 export interface AmazonOrderDTO {
     amazonOrderId: string | null;
-    qgoldOrderId: string | null;
     isSubmitted: boolean | null;
     orderStatus: string | null;
     fulfillmentChannel: string | null;
@@ -28,6 +27,8 @@ export interface AmazonOrderDTO {
     buyerEmail: string | null;
     orderItemList: ItemAmazon[] | null;
     isDelete: boolean;
+    supplierOrderId: string | null;
+    supplier: string | null;
 }
 
 export interface ItemAmazon {
@@ -42,7 +43,6 @@ export interface ItemAmazon {
 
 export interface AmazonOrderDetailDTO {
     amazonOrderId: string | null;
-    qgoldOrderId: string | null;
     isSubmitted: boolean | null;
     orderStatus: string | null;
     fulfillmentChannel: string | null;
@@ -69,4 +69,6 @@ export interface AmazonOrderDetailDTO {
     phone: string | null;
     buyerEmail: string | null;
     orderItemList: ItemAmazon[] | null;
+    supplierOrderId: string | null;
+    supplier: string | null;
 }

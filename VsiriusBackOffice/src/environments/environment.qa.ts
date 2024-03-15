@@ -11,6 +11,7 @@ const domainManager: string = `http://${hostname}${':5202'}`;
 
 export const environment = {
     production: false,
+    qa: true,
     clientIdCart: "OrderApi",
     clientSecretCart: "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJkYXRhIjoiN2MwMTgxOTMtN2I4Yi00ODNmLTllZDAtNTUxZjk5NTQ1YzI2LU9yZGVyQXBpIiwibmJmIjoxNjg3NTA3NDAzLCJleHAiOjE2ODc1MTEwMDMsImlhdCI6MTY4NzUwNzQwM30.",
     clientIdOrderProcessor: "OrderStullerQgoldApi",
@@ -25,6 +26,7 @@ export const environment = {
     apiOrderURL: `${domainManager}/order/api/`,
     signalOrderURL: `${domainManager}/order`,
     apiOrderProcessorURL: `${domainManager}/orderprocess/api/`,
+    apiStullerOrderURL: `${domainManager}/stullerOrder/`,
     apiAmazonURL: `${domainManager}/amazon/api/`,
     apiWalmartURL: `${domainManager}/walmart/api/`,
     apiPackageURL: `${domainManager}/package/api/`,

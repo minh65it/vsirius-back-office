@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Subscription } from 'rxjs';
+import { listSupplier } from 'src/modules/_shared/_constants/supplier.enum';
 import { PaginationResult2 } from 'src/modules/_shared/_helpers/pagination-utility';
 import { AmazonProcessSearchParam } from 'src/modules/_shared/_helpers/params/search-amazon-process-param';
 import { AmazonOrderDTO } from 'src/modules/_shared/_models/order-processor/amzon-order-Dto';
@@ -56,6 +57,7 @@ export class MainComponent implements OnInit {
       value: '200 results'
     }
   ];
+  selectSuppliers = listSupplier;
   constructor(
     private router: Router,
     private service: OrdersAmazonService,
@@ -80,7 +82,8 @@ export class MainComponent implements OnInit {
   generateTable() {
     this.cols = [
       { field: 'amazonOrderId', header: 'Amazon Order Id' },
-      { field: 'qgoldOrderId', header: 'Qgold Order Id' },
+      { field: 'supplier', header: 'Supplier' },
+      { field: 'supplierOrderId', header: 'Supplier Order Id' },
       { field: 'isSubmitted', header: 'Submitted' },
       { field: 'orderStatus', header: 'Order Status' },
       { field: 'purchaseDate', header: 'Purchase Date' },
@@ -129,12 +132,12 @@ export class MainComponent implements OnInit {
 
   detail(item: AmazonOrderDTO) {
     this.service.currentID(item.amazonOrderId);
-    this.router.navigate(['/orders-processor/detail-amazon']);
+    this.router.navigate(['orders/marketplace/detail-amazon']);
   }
   detailSupplier(item: AmazonOrderDTO) {
-    if (item.qgoldOrderId != null) {
-      this.serviceQgold.currentID(item.qgoldOrderId);
-      this.router.navigate(['/orders-processor/detail-qgold']);
+    if (item.supplierOrderId != null) {
+      this.serviceQgold.currentID(item.supplierOrderId);
+      this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   pageChanged(event: any) {
@@ -143,7 +146,7 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
-    this.router.navigate(['/orders-processor/submit-qgold']);
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
   clean() {
     this.searchTo = new Date();

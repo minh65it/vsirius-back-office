@@ -1,6 +1,6 @@
 export interface AmazonProcessSearchParam {
     amazonOrderId: string | null;
-    qgoldOrderId: string | null;
+    supplier: string | null;
     sKU: string | null;
     fromDate: string | null;
     toDate: string | null;

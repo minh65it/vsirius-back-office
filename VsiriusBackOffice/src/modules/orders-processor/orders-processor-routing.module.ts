@@ -1,58 +1,78 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.component';
+import { MainComponent as MainStullerComponent } from './orders-stuller/main/main.component';
 import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
 import { MainComponent as MainWalmartComponent } from './orders-walmart/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailStullerComponent } from './orders-stuller/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 
 const routes: Routes = [
+  //Qgold
   {
-    path: 'Qgold',
+    path: 'supplier/qgold',
     component: MainQgoldComponent,
     data: {
       breadcrumb: 'Orders Qgold',
     },
   },
   {
-    path: 'submit-qgold',
+    path: 'supplier/submit-qgold',
     component: SubmitOrderComponent,
     data: {
       breadcrumb: 'Submit Order',
     },
   },
   {
-    path: 'detail-qgold',
+    path: 'supplier/detail-qgold',
     component: OrderDetailComponent,
     data: {
       breadcrumb: 'Order Detail Qgold',
     },
   },
+  //Stuller
   {
-    path: 'Amazon',
+    path: 'supplier/stuller',
+    component: MainStullerComponent,
+    data: {
+      breadcrumb: 'Orders Stuller',
+    },
+  },
+  {
+    path: 'supplier/detail-stuller',
+    component: OrderDetailStullerComponent,
+    data: {
+      breadcrumb: 'Order Detail Stuller',
+    },
+  },
+  //Amazon
+  {
+    path: 'marketplace/amazon',
     component: MainAmazonComponent,
     data: {
       breadcrumb: 'Orders Amazon',
     },
   },
   {
-    path: 'detail-amazon',
+    path: 'marketplace/detail-amazon',
     component: OrderDetailAmazonComponent,
     data: {
       breadcrumb: 'Order Detail Amazon',
     },
   },
+  //Walmart
   {
-    path: 'Walmart',
+    path: 'marketplace/walmart',
     component: MainWalmartComponent,
     data: {
       breadcrumb: 'Orders Walmart',
     },
   },
   {
-    path: 'detail-walmart',
+    path: 'marketplace/detail-walmart',
     component: OrderDetailWalmartComponent,
     data: {
       breadcrumb: 'Order Detail Walmart',

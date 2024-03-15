@@ -54,7 +54,7 @@ export class ClaimDetailComponent implements OnInit {
     })
   }
   back() {
-    this.router.navigate(['/return-orders/Package-Claim']);
+    this.router.navigate(['orders/package-claim']);
   }
   openModal(template: TemplateRef<void>, url: string) {
     this.modalRef = this.modalService.show(template, Object.assign({}, { class: 'gray modal-lg' }));
