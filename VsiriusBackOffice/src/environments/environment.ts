@@ -1,14 +1,14 @@
-const hostname: string = '192.168.2.163';
-const ipIdentity: string = `${hostname}${':5102/identity'}`;
-const ipProduct: string = `${hostname}${':5102/product'}`;
-const ipOrder: string = `${hostname}${':5102/order'}`;
-const ipCsr: string = `${hostname}${':5102/csr'}`;
-const ipPackage: string = `${hostname}${':5102/package'}`;
+const hostname: string = 'api.vsirius.com';
+const ipIdentity: string = `${hostname}${'/identity'}`;
+const ipProduct: string = `${hostname}${'/product'}`;
+const ipOrder: string = `${hostname}${'/order'}`;
+const ipCsr: string = `${hostname}${'/csr'}`;
+const ipPackage: string = `${hostname}${'/package'}`;
 const ipOrderProcessor: string = `${hostname}${':5115'}`;
 const ipStullerOrder: string = `${hostname}${':5120'}`;
 const ipAmazon: string = `${hostname}${':5113'}`;
 const ipWalmart: string = `${hostname}${':5114'}`;
-const domainManager: string = `http://${hostname}${':5102'}`;
+const domainManager: string = `http://${hostname}${''}`;
 
 export const environment = {
   production: true,
