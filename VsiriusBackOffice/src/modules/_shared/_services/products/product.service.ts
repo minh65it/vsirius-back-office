@@ -4,7 +4,7 @@ import { environment } from 'src/environments/environment';
 import { BehaviorSubject } from 'rxjs';
 import { FunctionUtility } from '../../_helpers/function-utility';
 import { Product } from '../../_models/product';
-import { VsiriusFilter } from '../../_models/vsirius-filter';
+import { SearchParams, VsiriusFilter } from '../../_models/vsirius-filter';
 import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
 import { OperationResult } from '../../_helpers/operation-result';
 @Injectable({
@@ -21,10 +21,10 @@ export class ProductService {
     this.productSource.next(model);
   }
 
-  getProducts(filterParam: VsiriusFilter[], pagination: PaginationParam, keyWord: string) {
+  getProducts(filterParam: VsiriusFilter[], pagination: PaginationParam, searchParams: SearchParams) {
     const queryParams = {
       ...pagination,
-      keyWord,
+      ...searchParams,
     }
     return this.http.post<PaginationResult<Product>>(this.baseUrl + '/GetAllBackOffice', filterParam, { params: queryParams });
   }

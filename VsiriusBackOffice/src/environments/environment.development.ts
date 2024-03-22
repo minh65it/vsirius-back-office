@@ -1,18 +1,18 @@
-const hostname: string = '108.2.208.210';
-const ipIdentity: string = `${hostname}${':15102/identity'}`;
-const ipProduct: string = `${hostname}${':15102/product'}`;
-const ipOrder: string = `${hostname}${':15102/order'}`;
-const ipCsr: string = `${hostname}${':15102/csr'}`;
-const ipPackage: string = `${hostname}${':15102/package'}`;
+const hostname: string = '192.168.1.92';
+const ipIdentity: string = `${hostname}${':5102/identity'}`;
+const ipProduct: string = `${hostname}${':5102/product'}`;
+const ipOrder: string = `${hostname}${':5102/order'}`;
+const ipCsr: string = `${hostname}${':5102/csr'}`;
+const ipPackage: string = `${hostname}${':5102/package'}`;
 const ipOrderProcessor: string = `${hostname}${':5115'}`;
 const ipStullerOrder: string = `${hostname}${':5120'}`;
 const ipAmazon: string = `${hostname}${':5113'}`;
 const ipWalmart: string = `${hostname}${':5114'}`;
-const domainManager: string = `http://${hostname}${':15102'}`;
+const domainManager: string = `http://${hostname}${':5102'}`;
 
 export const environment = {
     production: false,
-    qa:false,
+    qa: false,
     clientIdCart: "OrderApi",
     clientSecretCart: "eyJhbGciOiJub25lIiwidHlwIjoiSldUIn0.eyJkYXRhIjoiN2MwMTgxOTMtN2I4Yi00ODNmLTllZDAtNTUxZjk5NTQ1YzI2LU9yZGVyQXBpIiwibmJmIjoxNjg3NTA3NDAzLCJleHAiOjE2ODc1MTEwMDMsImlhdCI6MTY4NzUwNzQwM30.",
     clientIdOrderProcessor: "OrderStullerQgoldApi",
