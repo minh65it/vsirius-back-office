@@ -12,14 +12,9 @@ import { OperationResult } from '../../_helpers/operation-result';
 })
 export class ProductService {
   baseUrl = environment.apiProductURL + 'VsiriusProduct';
-  productSource = new BehaviorSubject<Product>({} as Product);
-  currentProductSource = this.productSource.asObservable();
+  itemVSiriusProduct: string = 'itemVSiriusProduct';
 
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
-
-  paramEdit(model: Product) {
-    this.productSource.next(model);
-  }
 
   getProducts(filterParam: VsiriusFilter[], pagination: PaginationParam, searchParams: SearchParams) {
     const queryParams = {

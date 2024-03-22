@@ -34,24 +34,20 @@ export class UpdateComponent implements OnInit {
     private notiflix: NgxNotiflixService) { }
 
   ngOnInit() {
-    this.item_sku = this.route.snapshot.params['id'];
     this.loadSourceParam();
     this.loadData();
   }
 
   loadSourceParam() {
-    this.notiflix.showLoading();
-    this.service.currentProductSource.subscribe({
-      next: res => {
-        this.feed_product_type = res.feed_product_type;
-        this.loadValueForAdd(this.feed_product_type);
-        this.notiflix.hideLoading();
-      },
-      error: () => {
-        this.notiflix.error('Error system')
-        this.notiflix.hideLoading();
-      }
-    })
+    let tmp = localStorage.getItem(this.service.itemVSiriusProduct);
+    if (tmp === null) {
+      this.cancel();
+    } else {
+      this.product = <Product>JSON.parse(tmp);
+      this.loadValueForAdd(this.product.feed_product_type);
+      this.item_sku = this.product.item_sku;
+      localStorage.removeItem(this.service.itemVSiriusProduct);
+    }
   }
 
   loadValueForAdd(e) {
@@ -70,7 +66,6 @@ export class UpdateComponent implements OnInit {
     })
   }
 
- 
   loadData() {
     this.notiflix.showLoading();
     this.service.getDetail(this.item_sku).subscribe({
@@ -101,13 +96,13 @@ export class UpdateComponent implements OnInit {
     this.notiflix.showLoading();
     this.service.update(this.product).subscribe({
       next: res => {
-        if(res.success ){
+        if (res.success) {
           this.notiflix.success(res.message)
           this.cancel();
-         }
-         else{
+        }
+        else {
           this.notiflix.error(res.message);
-         }
+        }
         this.notiflix.hideLoading();
       },
       error: err => {

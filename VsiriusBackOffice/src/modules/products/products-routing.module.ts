@@ -7,11 +7,11 @@ const routes: Routes = [
     // canActivate: [AuthGuard],
     // component: DefaultLayoutComponent,
     data: {
-      breadcrumb: 'Vsirius Product',
+      breadcrumb: 'VSirius Product',
     },
     children: [
       {
-        path: 'product',
+        path: '',
         loadChildren: () => import('../products/vsirius-product/vsirius-product.module').then((m) => m.VsiriusProductModule),
       },
       {

@@ -828,7 +828,7 @@ export class MainComponent implements OnInit {
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   goToAdd() {
-    this.router.navigate(['products/product/create']);
+    this.router.navigate(['products/create']);
   }
 
   removeFilterSearch(cols: any) {
@@ -875,8 +875,9 @@ export class MainComponent implements OnInit {
   }
 
   update(product: Product) {
-    this.service.paramEdit(product);
-    this.router.navigate(['products/product/update/', product.item_sku]);
+    localStorage.removeItem(this.service.itemVSiriusProduct);
+    localStorage.setItem(this.service.itemVSiriusProduct, JSON.stringify(product));
+    this.router.navigate([]).then(result => { window.open('/#/products/update', '_blank'); });
   }
 
   delete(product: Product) {
@@ -936,7 +937,9 @@ export class MainComponent implements OnInit {
 
   goToProductHome() {
     this.router.navigate(['products/product-home']);
-
+  }
+  goToFilter() {
+    this.router.navigate(['products/filter']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

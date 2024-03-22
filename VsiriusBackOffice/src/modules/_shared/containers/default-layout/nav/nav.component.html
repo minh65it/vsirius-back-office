@@ -22,17 +22,17 @@
           <ng-container>
             <!-- Menu level 0 -->
             <li class="collapsed" *ngIf="menu.Admin || menu.Product">
-              <a class="m-link cursor-pointer" [routerLink]="'/products/product'" routerLinkActive="active">
+              <a class="m-link cursor-pointer" [routerLink]="'/products'" routerLinkActive="active">
                 <i class="fa fa-product-hunt"></i>
                 <span class="ms-2">Product</span>
               </a>
             </li>
-            <li class="collapsed" *ngIf="menu.Admin || menu.Product">
+            <!-- <li class="collapsed" *ngIf="menu.Admin || menu.Product">
               <a class="m-link cursor-pointer" [routerLink]="'/products/filter'" routerLinkActive="active">
                 <i class="fa fa-bars"></i>
                 <span class="ms-2">Filter</span>
               </a>
-            </li>
+            </li> -->
             <li class="collapsed" *ngIf="menu.Admin || menu.User">
               <a class="m-link cursor-pointer" [routerLink]="'/users'" routerLinkActive="active">
                 <i class="fa fa-users"></i>

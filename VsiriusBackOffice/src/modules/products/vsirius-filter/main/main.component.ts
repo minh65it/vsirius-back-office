@@ -145,12 +145,13 @@ export class MainComponent implements OnInit {
   }
 
   showAdd() {
-    this.router.navigate(['products/filter/create'])
+    this.router.navigate([]).then(result => { window.open('/#/products/filter/create', '_blank'); });
   }
 
   updateShow(model: VsiriusFilterDto) {
-    this.service.paramEdit(model);
-    this.router.navigate(['products/filter/update'])
+    localStorage.removeItem(this.service.itemProductFilter);
+    localStorage.setItem(this.service.itemProductFilter, JSON.stringify(model));
+    this.router.navigate([]).then(result => { window.open('/#/products/filter/update', '_blank'); });
   }
 
   delete(model: VsiriusFilterDto) {
