@@ -6,6 +6,7 @@ import { PaginationParam, PaginationResult } from '../_helpers/pagination-utilit
 import { LogParams } from '../_models/system-logging/logparams';
 import { LogDto } from '../_models/system-logging/log';
 import { Router } from '@angular/router';
+import * as uuid from 'uuid';
 
 @Injectable({
   providedIn: 'root'
@@ -43,18 +44,18 @@ export class SystemLoggingService {
     const clientSecret = this.clientSecret;
     return this.http.get<string[]>(this.baseUrl + 'FilterURL', { params: { projectName }, headers: { clientId, clientSecret } });
   }
-  writeLogs(error: string) {
+  writeLogs(error: string, correlationId: string) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
     let log: LogDto = {
       logId: "00000000-0000-0000-0000-000000000000",
       message: null,
       level: "Error",
-      timeStamp: "2023-06-23T16:27:39.219Z",
+      timeStamp: null,
       exception: error,
-      url: this.router.url,
+      url: this.router.url == '/' ? "Home Page" : this.router.url,
       projectName: "Back Office",
-      correlationId: "00000000-0000-0000-0000-000000000000"
+      correlationId: correlationId != null ? correlationId : uuid.v4()
     };
     return this.http.post<OperationResult>(this.baseUrl + 'WriteLogs', log, { headers: { clientId, clientSecret } });
   }
