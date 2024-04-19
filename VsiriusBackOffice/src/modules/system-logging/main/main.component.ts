@@ -6,7 +6,7 @@ import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { LogDto } from 'src/modules/_shared/_models/system-logging/log';
 import { LogParams } from 'src/modules/_shared/_models/system-logging/logparams';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { SystemLoggingService } from 'src/modules/_shared/_services/system-logging.service';
+import { SystemLoggingService } from 'src/modules/_shared/_services/system/system-logging.service';
 
 @Component({
   selector: 'app-main',

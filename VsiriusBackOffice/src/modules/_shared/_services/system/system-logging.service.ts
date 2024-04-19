@@ -1,10 +1,10 @@
-import { OperationResult } from './../_helpers/operation-result';
+import { OperationResult } from '../../_helpers/operation-result';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
-import { PaginationParam, PaginationResult } from '../_helpers/pagination-utility';
-import { LogParams } from '../_models/system-logging/logparams';
-import { LogDto } from '../_models/system-logging/log';
+import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
+import { LogParams } from '../../_models/system-logging/logparams';
+import { LogDto } from '../../_models/system-logging/log';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
 import { KeyValue } from '@angular/common';

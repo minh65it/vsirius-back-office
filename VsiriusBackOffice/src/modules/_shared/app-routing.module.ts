@@ -50,6 +50,10 @@ const routes: Routes = [
         loadChildren: () => import('../system-logging/system-logging.module').then((m) => m.SystemLoggingModule),
       },
       {
+        path: 'job',
+        loadChildren: () => import('../system-job/system-job.module').then((m) => m.SystemJobModule),
+      },
+      {
         path: 'notifications',
         loadChildren: () => import('../notifications/notifications.module').then((m) => m.NotificationsModule),
       },

@@ -20,7 +20,7 @@ import { ModalModule } from 'ngx-bootstrap/modal';
 import { AuthService } from './_services/users/auth.service';
 import { ContactSignalRService } from './_services/contact-signalR.service';
 import { GlobalErrorHandler } from './_helpers/log-interceptor ';
-import { SystemLoggingService } from './_services/system-logging.service';
+import { SystemLoggingService } from './_services/system/system-logging.service';
 import { AuthInterceptor } from './_helpers/auth-interceptor ';
 export function tokenGetter() {
   return localStorage.getItem('TOKEN');

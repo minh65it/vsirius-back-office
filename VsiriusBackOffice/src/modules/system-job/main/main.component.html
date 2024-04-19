@@ -1,0 +1,97 @@
+<div class="col-md-12">
+  <div class="card">
+    <div class="card-header d-block">
+      <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <input class="form-control rounded" type="text" [(ngModel)]="searchJobInfoDto.searchKey" autocomplete="off"
+            name="Keyword" placeholder="Enter Keyword...." />
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <input class="form-control rounded" type="text" [(ngModel)]="searchJobInfoDto.cron" autocomplete="off"
+            name="cron" placeholder="Enter cron...." />
+        </div>
+        <div class="col-lg-2 col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+          <div class="form-check mt-0 ml-0 mb-0">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="searchJobInfoDto.isRestartDocker"
+              id="isRestartDocker" name="isRestartDocker">
+            <label class="form-check-label" for="isRestartDocker">
+              Started Docker
+            </label>
+          </div>
+        </div>
+        <div class="col-lg-1 col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+          <div class="form-check mt-0 ml-0 mb-0">
+            <input class="form-check-input" type="checkbox" [(ngModel)]="searchJobInfoDto.isStop" id="isStop"
+              name="isStop">
+            <label class="form-check-label" for="isStop">
+              Stopped
+            </label>
+          </div>
+        </div>
+        <div class="col-sm-12 ">
+          <div class="">
+            <button type="submit" class="btn btn-secondary border lift rounded-2">
+              <i class="fa fa-search"></i>
+              Search
+            </button>
+            <button type="button" (click)="clear()" class="btn btn-danger ms-2 border lift rounded-2">
+              <i class="fa fa-trash"></i>
+              Clear
+            </button>
+          </div>
+        </div>
+      </form>
+      <div class="card-body table-scroll-view">
+        <p-table responsiveLayout="scroll" [value]="listJob" dataKey="id" [rows]="listJob?.length">
+          <ng-template pTemplate="header">
+            <tr>
+              <th style="width:5%"></th>
+              <th pSortableColumn="projectName" style="width:20%">Tittle<p-sortIcon field="projectName"></p-sortIcon>
+              </th>
+              <th pSortableColumn="url" style="width:20%">Description <p-sortIcon field="url"></p-sortIcon></th>
+              <th pSortableColumn="url" style="width:20%">Time (cron) <p-sortIcon field="url"></p-sortIcon></th>
+              <th pSortableColumn="exception"
+                style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">Is Restart Docker
+                <p-sortIcon field="exception"></p-sortIcon>
+              </th>
+              <th pSortableColumn="level" style="width:10%">Stop<p-sortIcon field="level"></p-sortIcon></th>
+              <th pSortableColumn="timeStamp" style="width:20%">Start Date<p-sortIcon field="timeStamp"></p-sortIcon>
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-job>
+            <tr>
+              <td class="text-center">
+                <button type="button" class="btn btn-link btn-sm text-muted" (click)="getDetail(job?.tittle)"
+                  tooltip="Chi tiết" data-bs-toggle="modal">
+                  <i class="fa fa-info text-success"></i>
+                </button>
+              </td>
+              <td>{{ job.tittle }}</td>
+              <td>{{ job.description }}</td>
+              <td>{{ job.cron }}</td>
+              <td>{{ job.isRestartDocker }}</td>
+              <td>{{ job.isStop }}</td>
+              <td>{{ job.startDate | date : 'MM/dd/YY' }}</td>
+            </tr>
+          </ng-template>
+          <!-- MESSAGE WHEN EMPTY -->
+          <ng-template pTemplate="emptymessage" *ngIf="listJob == null">
+            <tr>
+              <td colspan="100%" class="text-center font-weight-bold">
+                <span class="text-danger">No Data</span>
+              </td>
+            </tr>`
+          </ng-template>
+        </p-table>
+      </div>
+    </div>
+    <!-- Pagination -->
+    <div class="d-flex justify-content-center" style="margin-bottom: 0.5rem" *ngIf="pagination.totalPage > 1">
+      <pagination [boundaryLinks]="true" [totalItems]="pagination.totalCount" [itemsPerPage]="pagination.pageSize"
+        previousText="&lsaquo;" [(ngModel)]="pagination.pageNumber" (pageChanged)="pageChanged($event)"
+        nextText="&rsaquo;" firstText="&laquo;" lastText="&raquo;" [maxSize]="5">
+      </pagination>
+    </div>
+  </div>
+</div>

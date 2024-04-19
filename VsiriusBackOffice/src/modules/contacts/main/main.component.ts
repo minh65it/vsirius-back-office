@@ -57,7 +57,7 @@ export class MainComponent implements OnInit {
     ];
     this._selectedColumns = this.cols;
   }
-  loadContactNotification(){
+  loadContactNotification() {
     this.serviceSignalR.notificationContactChangedEmitter.subscribe(res => {
       if (res != null) {
         this.loadData();
@@ -70,6 +70,8 @@ export class MainComponent implements OnInit {
     this.service.getAllContacts(this.pagination, this.keyword).subscribe({
       next: res => {
         this.listContacts = res.result;
+        console.log(this.listContacts);
+        
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
@@ -80,7 +82,7 @@ export class MainComponent implements OnInit {
     })
   }
 
-  loadDetail(id:string) {
+  loadDetail(id: string) {
     this.notiflix.showLoading();
     this.service.getDetail(id).subscribe({
       next: res => {
@@ -109,7 +111,7 @@ export class MainComponent implements OnInit {
   }
 
   update(item: Contact) {
-    this.ContactModel = {...item};
+    this.ContactModel = { ...item };
     this.ContactModel.status = !item.status;
     this.ContactModel.employeeId = this.user.id;
     this.service.update(this.ContactModel).subscribe({

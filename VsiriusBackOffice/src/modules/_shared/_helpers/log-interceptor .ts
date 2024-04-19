@@ -1,5 +1,5 @@
 import { Injectable, ErrorHandler } from '@angular/core';
-import { SystemLoggingService } from '../_services/system-logging.service';
+import { SystemLoggingService } from '../_services/system/system-logging.service';
 import { HttpErrorResponse } from '@angular/common/http';
 
 @Injectable()
