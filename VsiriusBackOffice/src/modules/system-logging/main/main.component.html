@@ -2,21 +2,31 @@
   <div class="card">
     <div class="card-header d-block">
       <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
-        <div class="col-lg-6 col-md-6 col-sm-12">
-          <ng-select [placeholder]="'Project Name...'" name="projectName" (close)="changeFilterProjectName($event)"
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Level log...'" name="levelLog" [(ngModel)]="logParams.level">
+            <ng-option *ngFor="let item of levelLog | keyvalue" [value]="item.key">{{
+              item.value}}</ng-option>
+          </ng-select>
+        </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Project...'" name="projectName" (close)="changeFilterProjectName($event)"
             [(ngModel)]="logParams.projectName" (clear)="clearProjectName()">
             <ng-option *ngFor="let item of filterProjectName" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
-        <div class="col-lg-6 col-md-6 col-sm-12">
+        <div class="col-lg-4 col-md-6 col-sm-12">
           <ng-select [placeholder]="'Url...'" name="filterUrl" (clear)="clearFilterUrl()"
             (close)="changeFilterUrl($event)" [(ngModel)]="logParams.uRL">
             <ng-option *ngFor="let item of filterUrl" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <input class="form-control rounded" type="text" [(ngModel)]="logParams.correlationId" autocomplete="off"
+            name="correlationId" placeholder="Enter Correlation Id...." />
+        </div>
+        <div class="col-lg-4 col-md-3 col-sm-6">
           <fieldset class="form-icon-group left-icon position-relative">
             <input type="text" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker [maxDate]="maxDate"
               [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY', adaptivePosition: true }"
@@ -26,7 +36,7 @@
             </div>
           </fieldset>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-6">
+        <div class="col-lg-4 col-md-3 col-sm-6">
           <fieldset class="form-icon-group left-icon position-relative">
             <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker [minDate]="searchFrom"
               [maxDate]="maxDate" [bsConfig]="{ isAnimated: true, dateInputFormat: 'MM/DD/YY', adaptivePosition: true }"
@@ -59,11 +69,12 @@
               <th pSortableColumn="projectName" style="width:20%">Project Name <p-sortIcon
                   field="projectName"></p-sortIcon></th>
               <th pSortableColumn="url" style="width:20%">Url <p-sortIcon field="url"></p-sortIcon></th>
+              <th pSortableColumn="url" style="width:20%">Correlation Id <p-sortIcon field="url"></p-sortIcon></th>
               <th pSortableColumn="exception"
                 style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">Exception
                 <p-sortIcon field="exception"></p-sortIcon>
               </th>
-              <th pSortableColumn="level" style="width:20%">Level<p-sortIcon field="level"></p-sortIcon></th>
+              <th pSortableColumn="level" style="width:10%">Level<p-sortIcon field="level"></p-sortIcon></th>
               <th pSortableColumn="timeStamp" style="width:20%">Date<p-sortIcon field="timeStamp"></p-sortIcon></th>
             </tr>
           </ng-template>
@@ -77,6 +88,7 @@
               </td>
               <td>{{ log.projectName }}</td>
               <td>{{ log.url }}</td>
+              <td>{{ log.correlationId }}</td>
               <td style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">{{ log.exception }}
               </td>
               <td>{{ log.level }}</td>

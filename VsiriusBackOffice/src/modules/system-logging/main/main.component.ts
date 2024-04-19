@@ -1,3 +1,4 @@
+import { KeyValue } from '@angular/common';
 import { SystemLoggingDetailComponent } from './../system-logging-detail/system-logging-detail.component';
 import { Component, OnInit } from '@angular/core';
 import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
@@ -26,12 +27,24 @@ export class MainComponent implements OnInit {
   searchFrom: Date = null;
   searchTo: Date = null;
   maxDate: Date = new Date();
+  levelLog: KeyValue<number, string>[];
   constructor(private systemLoggingService: SystemLoggingService,
     private notiflix: NgxNotiflixService,
     private modalService: BsModalService) { }
 
   ngOnInit() {
     this.getFilterProjectName();
+    this.getLevelLog();
+  }
+  getLevelLog() {
+    this.systemLoggingService.getLevelLog().subscribe({
+      next: res => {
+        this.levelLog = res;
+
+      },
+      error: () => {
+      }
+    })
   }
 
   getFilterProjectName() {

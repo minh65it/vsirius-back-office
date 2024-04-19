@@ -7,6 +7,7 @@ import { LogParams } from '../_models/system-logging/logparams';
 import { LogDto } from '../_models/system-logging/log';
 import { Router } from '@angular/router';
 import * as uuid from 'uuid';
+import { KeyValue } from '@angular/common';
 
 @Injectable({
   providedIn: 'root'
@@ -28,6 +29,11 @@ export class SystemLoggingService {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
     return this.http.get<PaginationResult<LogDto>>(this.baseUrl + 'GetListLog', { params: queryParams, headers: { clientId, clientSecret } },);
+  }
+  getLevelLog() {
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<KeyValue<number, string>[]>(this.baseUrl + 'GetLevelLog', { headers: { clientId, clientSecret } },);
   }
   getDetail(logId: string) {
     const clientId = this.clientId;
