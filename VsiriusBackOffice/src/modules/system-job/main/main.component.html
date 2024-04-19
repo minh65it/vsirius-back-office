@@ -10,25 +10,22 @@
           <input class="form-control rounded" type="text" [(ngModel)]="searchJobInfoDto.cron" autocomplete="off"
             name="cron" placeholder="Enter cron...." />
         </div>
-        <div class="col-lg-2 col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
-          <div class="form-check mt-0 ml-0 mb-0">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="searchJobInfoDto.isRestartDocker"
-              id="isRestartDocker" name="isRestartDocker">
-            <label class="form-check-label" for="isRestartDocker">
-              Started Docker
-            </label>
-          </div>
+        <div class="col-lg-4"></div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Restarted Docker...'" name="isRestartDocker" [clearable]="false"
+            [(ngModel)]="searchJobInfoDto.isRestartDocker">
+            <ng-option *ngFor="let item of listRestartDocker" [value]="item.key">{{
+              item.value}}</ng-option>
+          </ng-select>
         </div>
-        <div class="col-lg-1 col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
-          <div class="form-check mt-0 ml-0 mb-0">
-            <input class="form-check-input" type="checkbox" [(ngModel)]="searchJobInfoDto.isStop" id="isStop"
-              name="isStop">
-            <label class="form-check-label" for="isStop">
-              Stopped
-            </label>
-          </div>
+        <div class="col-lg-4 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'Stopped..'" name="isStop" [(ngModel)]="searchJobInfoDto.isStop"
+            [clearable]="false">
+            <ng-option *ngFor="let item of listStop" [value]="item.key">{{
+              item.value}}</ng-option>
+          </ng-select>
         </div>
-        <div class="col-sm-12 ">
+        <div class="col-lg-4 col-md-6 col-sm-12 ">
           <div class="">
             <button type="submit" class="btn btn-secondary border lift rounded-2">
               <i class="fa fa-search"></i>
@@ -51,10 +48,10 @@
               <th pSortableColumn="url" style="width:20%">Description <p-sortIcon field="url"></p-sortIcon></th>
               <th pSortableColumn="url" style="width:20%">Time (cron) <p-sortIcon field="url"></p-sortIcon></th>
               <th pSortableColumn="exception"
-                style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">Is Restart Docker
+                style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">Restarted Docker
                 <p-sortIcon field="exception"></p-sortIcon>
               </th>
-              <th pSortableColumn="level" style="width:10%">Stop<p-sortIcon field="level"></p-sortIcon></th>
+              <th pSortableColumn="level" style="width:10%">Stopped<p-sortIcon field="level"></p-sortIcon></th>
               <th pSortableColumn="timeStamp" style="width:20%">Start Date<p-sortIcon field="timeStamp"></p-sortIcon>
               </th>
             </tr>

@@ -1,4 +1,4 @@
-const hostname: string = '192.168.1.92';
+const hostname: string = '118.69.37.20';
 const ipIdentity: string = `${hostname}${':5102/identity'}`;
 const ipProduct: string = `${hostname}${':5102/product'}`;
 const ipOrder: string = `${hostname}${':5102/order'}`;

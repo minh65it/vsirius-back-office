@@ -3,8 +3,10 @@ import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { SearchJobInfoDto } from 'src/modules/_shared/_models/system-job/search-job';
 import { JobInfoDto } from 'src/modules/_shared/_models/system-job/job-info';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { BsModalService } from 'ngx-bootstrap/modal';
+import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SystemJobService } from 'src/modules/_shared/_services/system/system-job.service';
+import { Subscription } from 'rxjs';
+import { SystemJobDetailComponent } from '../system-job-detail/system-job-detail.component';
 
 @Component({
   selector: 'app-main',
@@ -18,7 +20,10 @@ export class MainComponent implements OnInit {
     pageSize: 10,
   } as Pagination;
   searchJobInfoDto: SearchJobInfoDto = <SearchJobInfoDto>{};
-  listJob: JobInfoDto[] = [];
+  listJob: JobInfoDto[];
+  subscription: Subscription;
+  listRestartDocker = [{ key: true, value: 'Yes' }, { key: false, value: 'No' }];
+  listStop = [{ key: true, value: 'Yes' }, { key: false, value: 'No' }];
   constructor(private systemJobService: SystemJobService,
     private notiflix: NgxNotiflixService,
     private modalService: BsModalService) { }
@@ -29,10 +34,9 @@ export class MainComponent implements OnInit {
   getListJob() {
 
     this.notiflix.showLoading();
-    this.systemJobService.getListJobScheduler(this.pagination, this.searchJobInfoDto).subscribe({
+    this.subscription = this.systemJobService.getListJobScheduler(this.pagination, this.searchJobInfoDto).subscribe({
       next: res => {
         this.listJob = res.result;
-        console.log(this.listJob);
 
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
@@ -43,12 +47,33 @@ export class MainComponent implements OnInit {
       }
     })
   }
-  search() { }
-  clear() { }
-  getDetail(jobTitle: string) { }
+  search() {
+    this.pagination.pageNumber == 1 ? this.getListJob() : this.pagination.pageNumber = 1;
+  }
+  clear() {
+    this.pagination = <Pagination>{
+      pageNumber: 1
+    };
+    this.searchJobInfoDto = <SearchJobInfoDto>{};
+    this.listJob = [];
+    this.getListJob();
+  }
+  getDetail(jobTitle: string) {
+    const initialState: ModalOptions = {
+      initialState: {
+        tittle: jobTitle
+      },
+      class: 'modal-lg',
+    };
+    this.modalService.show(SystemJobDetailComponent, initialState);
+  }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;
     this.getListJob();
   }
-
+  ngOnDestroy(): void {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
+  }
 }

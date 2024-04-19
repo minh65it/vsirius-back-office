@@ -8,6 +8,7 @@ import { TableModule } from 'primeng/table';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { BsDatepickerModule } from 'ngx-bootstrap/datepicker';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SystemJobDetailComponent } from './system-job-detail/system-job-detail.component';
 
 @NgModule({
   imports: [
@@ -20,6 +21,6 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     BsDatepickerModule.forRoot(),
     ModalModule.forRoot()
   ],
-  declarations: [MainComponent]
+  declarations: [MainComponent, SystemJobDetailComponent]
 })
 export class SystemJobModule { }

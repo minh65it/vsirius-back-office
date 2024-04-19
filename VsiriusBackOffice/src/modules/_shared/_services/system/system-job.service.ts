@@ -5,6 +5,7 @@ import { environment } from 'src/environments/environment';
 import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
 import { SearchJobInfoDto } from '../../_models/system-job/search-job';
 import { JobInfoDto } from '../../_models/system-job/job-info';
+import { OperationResult } from '../../_helpers/operation-result';
 
 @Injectable({
   providedIn: 'root'
@@ -24,5 +25,15 @@ export class SystemJobService {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
     return this.http.get<PaginationResult<JobInfoDto>>(this.baseUrl, { params: queryParams, headers: { clientId, clientSecret } },);
+  }
+  getDetail(jobId: string) {
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.get<JobInfoDto>(this.baseUrl + `${jobId}`, { headers: { clientId, clientSecret } });
+  }
+  update(model: JobInfoDto) {
+    const clientId = this.clientId;
+    const clientSecret = this.clientSecret;
+    return this.http.put<OperationResult>(this.baseUrl, model, { headers: { clientId, clientSecret } });
   }
 }
