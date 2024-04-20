@@ -3,7 +3,7 @@ import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { SearchJobInfoDto } from 'src/modules/_shared/_models/system-job/search-job';
 import { JobInfoDto } from 'src/modules/_shared/_models/system-job/job-info';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { SystemJobService } from 'src/modules/_shared/_services/system/system-job.service';
 import { Subscription } from 'rxjs';
 import { SystemJobDetailComponent } from '../system-job-detail/system-job-detail.component';
@@ -24,6 +24,7 @@ export class MainComponent implements OnInit {
   subscription: Subscription;
   listRestartDocker = [{ key: true, value: 'Yes' }, { key: false, value: 'No' }];
   listStop = [{ key: true, value: 'Yes' }, { key: false, value: 'No' }];
+  modalRef: BsModalRef;
   constructor(private systemJobService: SystemJobService,
     private notiflix: NgxNotiflixService,
     private modalService: BsModalService) { }
@@ -32,7 +33,6 @@ export class MainComponent implements OnInit {
     this.getListJob();
   }
   getListJob() {
-
     this.notiflix.showLoading();
     this.subscription = this.systemJobService.getListJobScheduler(this.pagination, this.searchJobInfoDto).subscribe({
       next: res => {
@@ -65,7 +65,11 @@ export class MainComponent implements OnInit {
       },
       class: 'modal-lg',
     };
-    this.modalService.show(SystemJobDetailComponent, initialState);
+    this.modalRef = this.modalService.show(SystemJobDetailComponent, initialState);
+    this.modalRef.onHidden.subscribe(() => {
+      // call api after model hidden
+      this.getListJob();
+    });
   }
   pageChanged(event: any) {
     this.pagination.pageNumber = event.page;

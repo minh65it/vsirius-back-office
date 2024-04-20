@@ -33,7 +33,7 @@ export class SystemJobDetailComponent implements OnInit {
       {
         next: res => {
           this.dataDetail = res;
-
+          this.convertHourMinuteTime();
           this.notiflix.hideLoading();
         },
         error: () => {
@@ -69,5 +69,18 @@ export class SystemJobDetailComponent implements OnInit {
     this.dataDetail.cron = this.times != 0 ?
       `0 ${this.minute} ${this.hour}/${this.times} * * ?` :
       `0 ${this.minute} ${this.hour} * * ?`;
+  }
+  convertHourMinuteTime() {
+    let arr = this.dataDetail.cron.split(" ");
+    if (arr && arr.length >= 0) {
+      this.minute = Number(arr[1]) || 0;
+      if (arr[2].includes("/")) {
+        let tmp = arr[2].split('/');
+        this.hour = Number(tmp[0]) || 0;
+        this.times = Number(tmp[1]) || 0;
+      } else {
+        this.hour = Number(arr[2]) || 0;
+      }
+    }
   }
 }
