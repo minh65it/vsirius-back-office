@@ -31,9 +31,10 @@
             </div>
           </div>
           <div class="col-xl-6 col-md-12">
-            <label for="TextInput" class="form-label fw-bold">Cron (<span class="text-danger"
+            <label for="TextInput" class="form-label fw-bold">Cron (<span class="text-danger" style="cursor: pointer;"
                 (click)="isEditCron = !isEditCron">Edit Cron</span>)</label>
-            <input type="text" class="form-control" name="cron" [(ngModel)]="dataDetail.cron" [disabled]="isEditCron" />
+            <input type="text" (input)="convertHourMinuteTime()" class="form-control" name="cron"
+              [(ngModel)]="dataDetail.cron" [disabled]="isEditCron" />
           </div>
           <div class="col-xl-4 col-md-12">
             <label for="TextInput" class="form-label fw-bold">Hour start</label>
