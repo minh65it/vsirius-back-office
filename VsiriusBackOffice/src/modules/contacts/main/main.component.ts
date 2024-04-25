@@ -70,8 +70,6 @@ export class MainComponent implements OnInit {
     this.service.getAllContacts(this.pagination, this.keyword).subscribe({
       next: res => {
         this.listContacts = res.result;
-        console.log(this.listContacts);
-        
         this.pagination = res.pagination;
         this.notiflix.hideLoading();
       },
