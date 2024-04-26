@@ -68,6 +68,7 @@
               <th style="width:5%"></th>
               <th pSortableColumn="projectName" style="width:20%">Project Name <p-sortIcon
                   field="projectName"></p-sortIcon></th>
+              <th pSortableColumn="timeStamp" style="width:20%">Date<p-sortIcon field="timeStamp"></p-sortIcon></th>
               <th pSortableColumn="url" style="width:20%">Url <p-sortIcon field="url"></p-sortIcon></th>
               <th pSortableColumn="url" style="width:20%">Correlation Id <p-sortIcon field="url"></p-sortIcon></th>
               <th pSortableColumn="exception"
@@ -75,7 +76,6 @@
                 <p-sortIcon field="exception"></p-sortIcon>
               </th>
               <th pSortableColumn="level" style="width:10%">Level<p-sortIcon field="level"></p-sortIcon></th>
-              <th pSortableColumn="timeStamp" style="width:20%">Date<p-sortIcon field="timeStamp"></p-sortIcon></th>
             </tr>
           </ng-template>
           <ng-template pTemplate="body" let-log>
@@ -87,12 +87,12 @@
                 </button>
               </td>
               <td>{{ log.projectName }}</td>
+              <td>{{ log.timeStamp | date : 'MM/dd/YY HH:mm:ss:SSS' }}</td>
               <td>{{ log.url }}</td>
               <td>{{ log.correlationId }}</td>
               <td style="max-width: 250px !important; overflow: hidden; text-overflow: ellipsis;">{{ log.exception }}
               </td>
               <td>{{ log.level }}</td>
-              <td>{{ log.timeStamp | date : 'MM/dd/YY' }}</td>
             </tr>
           </ng-template>
           <!-- MESSAGE WHEN EMPTY -->

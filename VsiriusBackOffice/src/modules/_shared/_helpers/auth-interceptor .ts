@@ -1,7 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse, HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
-import * as uuid from 'uuid';
+import { Observable } from 'rxjs';
 import { SystemLoggingService } from '../_services/system/system-logging.service';
 import { NgxNotiflixService } from '../_services/ngx-notiflix.service';
 
@@ -17,25 +16,6 @@ export class AuthInterceptor implements HttpInterceptor {
                 setHeaders: { Authorization: `Bearer ${token}` }
             });
         }
-        let correlation = req.headers.get("X-Correlation-Id");
-        if (correlation == null) {
-            correlation = uuid.v4();
-        }
-        req = req.clone({
-            setHeaders: { 'X-Correlation-Id': correlation }
-        });
-        // return next.handle(req).pipe(
-        //     tap(
-        //         () => { },
-        //         (error: any) => {
-        //             if (error instanceof HttpErrorResponse) {
-        //                 correlation = error.headers.get('X-Correlation-Id');
-        //                 this.systemLoggingService.writeLogs(error?.toString(), correlation).subscribe({});
-        //                 console.error('API Error:', error);
-        //             }
-        //         }
-        //     )
-        // );
 
         return new Observable((observer) => {
             next.handle(req).subscribe({
@@ -44,9 +24,9 @@ export class AuthInterceptor implements HttpInterceptor {
                 },
                 error: (error: any) => {
                     if (error instanceof HttpErrorResponse) {
-                        correlation = error.headers.get('X-Correlation-Id');
+                        let correlation = error.headers.get('X-Correlation-Id');
                         this.systemLoggingService.writeLogs(error?.toString(), correlation).subscribe({});
-                        console.error('API Error:', error);
+                        console.error('API Error:', error.headers);
                         this.notiflix.hideLoading();
                     }
                 }
