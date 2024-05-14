@@ -34,6 +34,6 @@ export class SystemJobService {
   update(model: JobInfoDto) {
     const clientId = this.clientId;
     const clientSecret = this.clientSecret;
-    return this.http.put<OperationResult>(this.baseUrl, model, { headers: { clientId, clientSecret } });
+    return this.http.put<OperationResult>(this.baseUrl + "UpdateJobClient", model, { headers: { clientId, clientSecret } });
   }
 }
