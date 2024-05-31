@@ -1,0 +1,125 @@
+<div class="card ">
+  <div class="card-header d-flex flex-row">
+    <div class="col d-flex justify-content-start">
+      <button *ngIf="ebayOrderDetail != null" class="btn btn-danger me-2 lift rounded-2" type="button"
+        (click)="ReSubmitQgold(ebayOrderDetail)">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+        Re-Submit to Qgold
+      </button>
+      <button *ngIf="ebayOrderDetail != null" class="btn btn-danger me-2 lift rounded-2" type="button"
+        (click)="ReSubmitStuller(ebayOrderDetail)">
+        <i class="fa fa-repeat" aria-hidden="true"></i>
+        Re-Submit to Stuller
+      </button>
+      <button type="button" (click)="back()" class="btn btn-sm btn-secondary border lift rounded-2">
+        <i class="fa fa-arrow-left"></i>
+        Back
+      </button>
+    </div>
+  </div>
+  <div class="card-body">
+    <div class="row">
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Ebay Order Id </label>
+        <div class="form-control" style="height: 35px;">
+          <p class="font-weight-bold">
+            {{ebayOrderDetail?.OrderId}}
+          </p>
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Supplier Order Id </label>
+        <div class="form-control text-info" style="height: 35px; cursor: pointer;"
+          (click)="detailSupplier(ebayOrderDetail)">
+          <!-- {{ebayOrderDetail?.CustomerId}} -->
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Submitted </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.IsSubmit | yesNo}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Status </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.StatusOrder}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Total Price </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.TotalPrice}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Order Date </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.OrderDate | date:'YYYY-MM-dd'}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Name </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.CustomerName}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Phone </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.CustomerPhone}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2" *ngIf="ebayOrderDetail?.OrderDetails">
+        <label class="form-label fw-bold">Item List </label>
+        <div class="form-control" [style.height.px]="50 * ebayOrderDetail?.OrderDetails.length">
+          <div class="form mt-1" *ngFor="let item of ebayOrderDetail?.OrderDetails">
+            Style: {{item?.Sku}}, &nbsp; Qty: {{item?.Quantity}}, &nbsp; Price: {{item?.Price}}
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Address Line 1 </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.Address1}}
+        </div>
+      </div>
+      <div class="col-xl-12 col-md-12 mt-2">
+        <label class="form-label fw-bold">Address Line 2 </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.Address2}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">City </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.City}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">State Or Region </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.State}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Postal Code </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.ZipCode}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Country </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.Country}}
+        </div>
+      </div>
+      <div class="col-xl-6 col-md-6 mt-2">
+        <label class="form-label fw-bold">Customer Email </label>
+        <div class="form-control" style="height: 35px;">
+          {{ebayOrderDetail?.CustomerEmail}}
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -48,6 +48,10 @@ export class NavComponent implements OnInit {
           url: '/orders/marketplace/walmart',
         },
         {
+          title: 'Ebay',
+          url: '/orders/marketplace/ebay',
+        },
+        {
           title: 'Amazon Return',
           url: '/orders/marketplace/return-amazon',
         },

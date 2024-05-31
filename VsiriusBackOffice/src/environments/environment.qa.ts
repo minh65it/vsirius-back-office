@@ -30,6 +30,7 @@ export const environment = {
     apiStullerOrderURL: `${domainManager}/stullerOrder/`,
     apiAmazonURL: `${domainManager}/amazon/api/`,
     apiWalmartURL: `${domainManager}/walmart/api/`,
+    apiEbayURL: `${domainManager}/ebay/api/`,
     apiPackageURL: `${domainManager}/package/api/`,
 
     apiCSRURL: `${domainManager}/csr/api/`,
