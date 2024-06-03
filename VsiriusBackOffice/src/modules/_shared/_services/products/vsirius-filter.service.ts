@@ -12,15 +12,10 @@ import { OperationResult } from '../../_helpers/operation-result';
 })
 export class VsiriusFilterService {
   baseUrl = environment.apiProductURL + 'VsiriusFilter';
-  filterSource = new BehaviorSubject<VsiriusFilterDto>({} as VsiriusFilterDto);
-  currentFitlterSource = this.filterSource.asObservable();
+  itemProductFilter: string = 'itemProductFilter';
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
 
-  paramEdit(model: VsiriusFilterDto) {
-    this.filterSource.next(model);
-  }
-
-  getFilters( pagination: PaginationParam, fullTextSearch: string) {
+  getFilters(pagination: PaginationParam, fullTextSearch: string) {
     const queryParams = {
       ...pagination,
       fullTextSearch
@@ -28,7 +23,7 @@ export class VsiriusFilterService {
     return this.http.get<PaginationResult<VsiriusFilterDto>>(this.baseUrl + '/GetListFilter', { params: queryParams });
   }
 
-  create(model:VsiriusFilterDto){
+  create(model: VsiriusFilterDto) {
     const formData = this.funUtility.ToFormData(model);
     return this.http.post<OperationResult>(this.baseUrl + '/AddFilter', formData);
   }
@@ -37,9 +32,9 @@ export class VsiriusFilterService {
     return this.http.delete<OperationResult>(this.baseUrl + '/DeleteFilter', { params: { filterId } });
   }
 
-  update(model:VsiriusFilterDto){
+  update(model: VsiriusFilterDto) {
     const formData = this.funUtility.ToFormData(model);
-    return this.http.put<OperationResult>(this.baseUrl + '/UpdateFilter' , formData);
+    return this.http.put<OperationResult>(this.baseUrl + '/UpdateFilter', formData);
   }
 
   importData(fileExcel: File) {

@@ -26,21 +26,14 @@ export class UpdateComponent implements OnInit {
     this.loadDataFormUpdate();
   }
   loadDataFormUpdate() {
-    this.notiflix.showLoading();
-    this.service.currentFitlterSource.subscribe({
-      next: res => {
-        if (Object.keys(res).length === 0) {
-          this.cancel();
-        }
-        res.imageURL != null ? this.image = this.url + res?.imageURL : this.image;
-
-        this.filterModel = res;
-        this.notiflix.hideLoading();
-      },
-      error: () => {
-        this.notiflix.hideLoading();
-      }
-    })
+    let tmp = localStorage.getItem(this.service.itemProductFilter);
+    if (tmp === null) {
+      this.cancel();
+    } else {
+      this.filterModel = <VsiriusFilterDto>JSON.parse(tmp);
+      this.filterModel.imageURL != null ? this.image = this.filterModel?.imageURL : this.image;
+      localStorage.removeItem(this.service.itemProductFilter);
+    }
   }
 
   selectFileImage(e: any) {

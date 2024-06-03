@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { BsModalService } from 'ngx-bootstrap/modal';
 import { LogDto } from 'src/modules/_shared/_models/system-logging/log';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
-import { SystemLoggingService } from 'src/modules/_shared/_services/system-logging.service';
+import { SystemLoggingService } from 'src/modules/_shared/_services/system/system-logging.service';
 
 @Component({
   selector: 'app-system-logging-detail',
@@ -30,7 +30,6 @@ export class SystemLoggingDetailComponent implements OnInit {
       {
         next: res => {
           this.dataDetail = res;
-          console.log(res);
 
           this.notiflix.hideLoading();
         },

@@ -1,32 +1,65 @@
 <div class="col-md-12">
   <div class="card">
+    <div class="card-header d-flex flex-row-reverse">
+      <div class="">
+        <button class="btn btn-info lift me-2 rounded-2" (click)="goToFilter()" type="button">
+          <i class="fa fa-filter"></i>
+          Filter
+        </button>
+        <button class="btn btn-info lift me-2 rounded-2" (click)="goToProductHome()" type="button">
+          <i class="fa fa-home"></i>
+          Top products
+        </button>
+      </div>
+    </div>
     <div class="card-header d-block">
       <form class="row g-3" (ngSubmit)="search()">
-        <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'feed_product_type...'" [clearable]="productType == null" name="feed_product_type"
-            (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'feed_product_type...'" [clearable]="productType == null" id="feed_product_type"
+            name="feed_product_type" (ngModelChange)="filterProductType($event)" [(ngModel)]="productType">
             <ng-option *ngFor="let item of listProductType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
-          <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect" [multiple]="true"
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <ng-select [placeholder]="'item_type...'" [disabled]="isShowSelect" [multiple]="true" id="item_type"
             (ngModelChange)="filterItemType($event)" [(ngModel)]="item_type" name="item_type">
             <ng-option *ngFor="let item of listItemType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
-        <div class="col-lg-3 col-md-3 col-sm-12">
+        <div class="col-lg-6 col-md-6 col-sm-12">
           <ng-select [placeholder]="'metal_type...'" name="metal_type" [disabled]="isShowSelect" [multiple]="true"
-            (ngModelChange)="filterMetalType($event)" [(ngModel)]="metal_type">
+            id="metal_type" (ngModelChange)="filterMetalType($event)" [(ngModel)]="metal_type">
             <ng-option *ngFor="let item of listMetalType.toString().split(',')" [value]="item">{{
               item}}</ng-option>
           </ng-select>
         </div>
+        <div class="col-lg-6 col-md-6 col-sm-12">
+          <div class="row">
+            <div class="col">
+              <input class="form-control rounded" type="number" [(ngModel)]="searchParams.minPrice" min="0"
+                autocomplete="off" id="minPrice" name="minPrice" placeholder="Min Price...." />
+            </div>
+            <div class="col">
+              <input class="form-control rounded" type="number" [(ngModel)]="searchParams.maxPrice" min="1"
+                autocomplete="off" id="maxPrice" name="maxPrice" placeholder="Max Price...." />
+            </div>
+            <div class="col d-flex justify-content-start align-items-center">
+              <div class="form-check mt-0 ml-0 mb-0">
+                <input class="form-check-input" type="checkbox" [(ngModel)]="searchParams.includeNoStock"
+                  id="includeNoStock" name="includeNoStock">
+                <label class="form-check-label" for="includeNoStock">
+                  Include Out Of Stock
+                </label>
+              </div>
+            </div>
+          </div>
+        </div>
         <div class="col-lg-12 col-md-12 col-sm-12">
           <div class="input-group">
-            <input class="form-control rounded" type="text" [(ngModel)]="keyword" autocomplete="off" name="keyword"
-              placeholder="Enter search keywords...." />
+            <input class="form-control rounded" type="text" [(ngModel)]="searchParams.keyword" autocomplete="off"
+              name="keyword" id="keyword" placeholder="Enter search keywords...." />
             <button type="submit" class="btn btn-secondary me-2 ms-2 border lift rounded-2">
               <i class="fa fa-search"></i>
               Search
@@ -40,10 +73,7 @@
               Import file
             </button>
             <input #fileInput type="file" style="display: none;" (change)="onFileSelected($event)">
-            <button class="btn btn-info lift me-2 rounded-2" (click)="goToProductHome()" type="button">
-              <i class="fa fa-arrow-right"></i>
-              Home product
-            </button>
+
             <button class="btn btn-secondary lift me-2 rounded-2" (click)="clean()" type="button">
               <i class="fa fa-refresh"></i>
               Clean

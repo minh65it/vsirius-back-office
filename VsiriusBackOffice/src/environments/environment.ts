@@ -5,6 +5,7 @@ const ipOrder: string = `${hostname}${'/order'}`;
 const ipCsr: string = `${hostname}${'/csr'}`;
 const ipPackage: string = `${hostname}${'/package'}`;
 const ipOrderProcessor: string = `${hostname}${':5215'}`;
+const ipStullerOrder: string = `${hostname}${':5220'}`;
 const ipAmazon: string = `${hostname}${':5213'}`;
 const ipWalmart: string = `${hostname}${':5214'}`;
 const domainManager: string = `http://${hostname}${''}`;

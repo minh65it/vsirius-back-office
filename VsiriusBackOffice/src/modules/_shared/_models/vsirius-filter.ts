@@ -3,5 +3,11 @@ export interface VsiriusFilter {
     labelName: string;
     value: string[];
     productType: string;
-    groupName:string
+    groupName: string
+}
+export interface SearchParams {
+    keyword: string;
+    minPrice: number;
+    maxPrice: number;
+    includeNoStock: boolean;
 }

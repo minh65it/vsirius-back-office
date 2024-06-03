@@ -22,17 +22,17 @@
           <ng-container>
             <!-- Menu level 0 -->
             <li class="collapsed" *ngIf="menu.Admin || menu.Product">
-              <a class="m-link cursor-pointer" [routerLink]="'/products/product'" routerLinkActive="active">
+              <a class="m-link cursor-pointer" [routerLink]="'/products'" routerLinkActive="active">
                 <i class="fa fa-product-hunt"></i>
                 <span class="ms-2">Product</span>
               </a>
             </li>
-            <li class="collapsed" *ngIf="menu.Admin || menu.Product">
+            <!-- <li class="collapsed" *ngIf="menu.Admin || menu.Product">
               <a class="m-link cursor-pointer" [routerLink]="'/products/filter'" routerLinkActive="active">
                 <i class="fa fa-bars"></i>
                 <span class="ms-2">Filter</span>
               </a>
-            </li>
+            </li> -->
             <li class="collapsed" *ngIf="menu.Admin || menu.User">
               <a class="m-link cursor-pointer" [routerLink]="'/users'" routerLinkActive="active">
                 <i class="fa fa-users"></i>
@@ -74,7 +74,7 @@
                 </li>
               </ul>
             </li>
-            <li class="collapsed" *ngIf="menu.Admin || menu.DrivenHTML">
+            <li class="collapsed" *ngIf="menu.Admin">
               <a class="m-link cursor-pointer" [routerLink]="'/contacts'" routerLinkActive="active">
                 <i class="fa fa-envelope"></i>
                 <span class="ms-2">Contacts</span>
@@ -90,6 +90,12 @@
               <a class="m-link cursor-pointer" [routerLink]="'/system-logging'" routerLinkActive="active">
                 <i class="fa fa-gear"></i>
                 <span class="ms-2">System Logging</span>
+              </a>
+            </li>
+            <li class="collapsed" *ngIf="menu.Admin || menu.System">
+              <a class="m-link cursor-pointer" [routerLink]="'/job'" routerLinkActive="active">
+                <i class="fa fa-gavel"></i>
+                <span class="ms-2">Job</span>
               </a>
             </li>
             <li class="collapsed" *ngIf="menu.Admin || menu.Notification">

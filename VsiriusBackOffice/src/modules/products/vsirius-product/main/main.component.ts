@@ -2,7 +2,7 @@ import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { FilterService } from 'primeng/api';
 import { Pagination } from 'src/modules/_shared/_helpers/pagination-utility';
 import { Router } from '@angular/router';
-import { VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
+import { SearchParams, VsiriusFilter } from 'src/modules/_shared/_models/vsirius-filter';
 import { NgxNotiflixService } from 'src/modules/_shared/_services/ngx-notiflix.service';
 import { Product } from 'src/modules/_shared/_models/product';
 import { ProductService } from 'src/modules/_shared/_services/products/product.service';
@@ -33,7 +33,7 @@ export class MainComponent implements OnInit {
     pageSize: 10,
   };
   filterParam: VsiriusFilter[] = [];
-  keyword: string = '';
+  searchParams: SearchParams = <SearchParams>{};
   listChoosePagination = [
     {
       key: 10,
@@ -731,7 +731,7 @@ export class MainComponent implements OnInit {
 
   loadData() {
     this.notiflix.showLoading();
-    this.subscription = this.service.getProducts(this.filterParam, this.pagination, this.keyword).subscribe({
+    this.subscription = this.service.getProducts(this.filterParam, this.pagination, this.searchParams).subscribe({
       next: res => {
         this.listProducts = res.result;
         this.pagination = res.pagination;
@@ -817,10 +817,18 @@ export class MainComponent implements OnInit {
     if (Object.keys(this.productTypeFilter).length === 0) {
       this.filterParam = [];
     }
+    if (this.searchParams.maxPrice === null) {
+      delete this.searchParams.maxPrice;
+    }
+    if (this.searchParams.minPrice === null) {
+      delete this.searchParams.minPrice;
+    } else if (this.searchParams.minPrice > this.searchParams.maxPrice) {
+      return this.notiflix.warning('Min price can`t be greater than the Max price');
+    }
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   goToAdd() {
-    this.router.navigate(['products/product/create']);
+    this.router.navigate(['products/create']);
   }
 
   removeFilterSearch(cols: any) {
@@ -844,7 +852,7 @@ export class MainComponent implements OnInit {
       { field: 'metal_type', header: 'metal_type' }
     ];
     localStorage.removeItem('FilterSearch');
-    this.keyword = '';
+    this.searchParams = <SearchParams>{};
     this.generateTable();
     this.search();
   }
@@ -867,8 +875,9 @@ export class MainComponent implements OnInit {
   }
 
   update(product: Product) {
-    this.service.paramEdit(product);
-    this.router.navigate(['products/product/update/', product.item_sku]);
+    localStorage.removeItem(this.service.itemVSiriusProduct);
+    localStorage.setItem(this.service.itemVSiriusProduct, JSON.stringify(product));
+    this.router.navigate([]).then(result => { window.open('/#/products/update', '_blank'); });
   }
 
   delete(product: Product) {
@@ -928,7 +937,9 @@ export class MainComponent implements OnInit {
 
   goToProductHome() {
     this.router.navigate(['products/product-home']);
-
+  }
+  goToFilter() {
+    this.router.navigate(['products/filter']);
   }
   ngOnDestroy(): void {
     this.subscription.unsubscribe();

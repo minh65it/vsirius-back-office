@@ -17,7 +17,7 @@
             <div class="card-body table-scroll-view">
                 <p-table [columns]="selectedColumns" responsiveLayout="scroll" [value]="listContacts" dataKey="id"
                     [rows]="listContacts.length">
-                   
+
                     <!-- Header -->
                     <ng-template pTemplate="header" let-columns>
                         <tr>
@@ -79,7 +79,8 @@
                             <td class="text-center">
                                 <button type="button" class="btn btn-link btn-sm text-muted" (click)="update(item)"
                                     [tooltip]="item.status ? 'Read':'Unread'" [disabled]="item.status">
-                                    <i [class]="!item.status ? 'fa fa-times text-danger':'fa fa-check text-success'" aria-hidden="true"></i>
+                                    <i [class]="!item.status ? 'fa fa-times text-danger':'fa fa-check text-success'"
+                                        aria-hidden="true"></i>
                                 </button>
                                 <button type="button" class="btn btn-link btn-sm text-muted" (click)="detail(item)"
                                     tooltip="See detail" data-bs-toggle="modal" data-bs-target="#RequestQuoteEdit">
@@ -94,8 +95,10 @@
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
                             <td *ngFor="let col of columns" [ngClass]="col.field == 'avatar' ? 'text-center' :''">
-                                <ng-container *ngIf="col.field != 'createTime' && col.field != 'content' ">{{item[col.field]}}</ng-container>
-                                <ng-container *ngIf="col.field == 'content' ">{{item[col.field].split('').length > 15 ? item[col.field].split('').splice(0,9).join('') +
+                                <ng-container
+                                    *ngIf="col.field != 'createTime' && col.field != 'content' ">{{item[col.field]}}</ng-container>
+                                <ng-container *ngIf="col.field == 'content' ">{{item[col.field]?.split('').length > 15 ?
+                                    item[col.field]?.split('').splice(0,9).join('') +
                                     '........' : item[col.field]}}</ng-container>
                                 <ng-container *ngIf="col.field == 'createTime' ">
                                     {{item[col.field] | date:"dd-MM-YYYY HH:mm"}}
@@ -125,42 +128,42 @@
 </div>
 
 <div bsModal #modalEdit="bs-modal" class="modal fade" tabindex="-1" [config]="{backdrop: 'static'}" role="dialog"
-  aria-labelledby="dialog-sizes-name1">
-  <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title text-uppercase fw-bold">Detail Contact</h5>
-        <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-          <div class="col-4 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Name:</label>
-            <span class="ms-2">{{contactDetailModel?.fullName}}</span>
-          </div>
-          <div class="col-4 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Email:</label>
-            <span class="ms-2">{{contactDetailModel?.email}}</span>
-          </div>
-          <div class="col-4 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Phone: </label>
-            <span class="ms-2">{{contactDetailModel?.phone}}</span>
-          </div>
-          <div class="col-4 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Create Time: </label>
-            <span class="ms-2">{{contactDetailModel?.createTime | date:"dd/MM/YYYY HH:mm"}}</span>
-          </div>
-          <div class="col-4 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Approved Staff: </label>
-            <span class="ms-2">{{contactDetailModel?.employeeName}}</span>
-          </div>
-          <div class="col-12 mb-2">
-            <label for="TextInput" class="form-label fw-bold label-custom">Content: </label>
-            <span class="ms-2">{{contactDetailModel?.content}}</span>
-          </div>
-        </div>
-      </div>
+    aria-labelledby="dialog-sizes-name1">
+    <form class="modal-dialog modal-lg modal-dialog-scrollable" #myForm="ngForm" autocomplete="off">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title text-uppercase fw-bold">Detail Contact</h5>
+                <button type="button" class="btn-close" (click)="modalEdit.hide()" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Name:</label>
+                        <span class="ms-2">{{contactDetailModel?.fullName}}</span>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Email:</label>
+                        <span class="ms-2">{{contactDetailModel?.email}}</span>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Phone: </label>
+                        <span class="ms-2">{{contactDetailModel?.phone}}</span>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Create Time: </label>
+                        <span class="ms-2">{{contactDetailModel?.createTime | date:"dd/MM/YYYY HH:mm"}}</span>
+                    </div>
+                    <div class="col-4 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Approved Staff: </label>
+                        <span class="ms-2">{{contactDetailModel?.employeeName}}</span>
+                    </div>
+                    <div class="col-12 mb-2">
+                        <label for="TextInput" class="form-label fw-bold label-custom">Content: </label>
+                        <span class="ms-2">{{contactDetailModel?.content}}</span>
+                    </div>
+                </div>
+            </div>
 
-    </div>
-  </form>
+        </div>
+    </form>
 </div>
