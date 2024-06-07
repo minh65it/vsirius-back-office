@@ -72,7 +72,7 @@ export class OrderDetailComponent implements OnInit {
     model.shipToCity = item.city;
     model.shipToState_Province = item.state;
     model.shipToZip = item.postalCode;
-    model.shipToCountryCode = item.country;
+    model.shipToCountryCode = item.country === 'USA' ? 'US' : item.country;
     model.shipToPhone = item.phone;
     model.amz_Order_ID = item.purchaseOrderId;
     model.ship_Option_Code = '100';
@@ -99,6 +99,7 @@ export class OrderDetailComponent implements OnInit {
     item.items.forEach(el => {
       ii.item = el.sku;
       ii.qty = el.quantity?.toString();
+      ii.price = el.price.toString();
       model.item.push(ii);
     });
     model.marketplace = "Walmart";
