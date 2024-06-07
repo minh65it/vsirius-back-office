@@ -80,7 +80,7 @@ export class SubmitOrderComponent implements OnInit {
   }
 
   submitOrder() {
-    this.qgoldFtpOrderObject.item = this.listItemQgold.map(item => ({ ...item, qty: item.qty.toString() }));
+    this.qgoldFtpOrderObject.item = this.listItemQgold.map(item => ({ ...item, qty: item.qty.toString(), price: item.price.toString() }));
     if (this.myForm.valid) {
       this.checkValidated = false;
       let dataSubmit: QgoldFtpOrderObject[] = [];
