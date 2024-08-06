@@ -67,7 +67,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searchFrom.setDate(this.searchTo.getDate() - 30);
+    //this.searchFrom.setDate(this.searchTo.getDate() - 30);
     this.generateTable();
     this.search();
   }
@@ -122,8 +122,8 @@ export class MainComponent implements OnInit {
   }
 
   search() {
-    this.amazonSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
-    this.amazonSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
+    //this.amazonSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
+    //this.amazonSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
     if (this.amazonSearchParam.fromDate === null || this.amazonSearchParam.toDate === null) {
       return this.notiflix.warning('Date is not null');
     }

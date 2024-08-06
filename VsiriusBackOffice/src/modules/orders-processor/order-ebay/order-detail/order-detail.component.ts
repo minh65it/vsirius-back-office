@@ -34,7 +34,10 @@ export class OrderDetailComponent implements OnInit {
           this.back();
         } else {
           this.id = res;
-          this.getDetail();
+          if(this.id) {
+            this.getDetail();
+          }
+          
         }
       }
     })
@@ -61,16 +64,16 @@ export class OrderDetailComponent implements OnInit {
   }
   ReSubmitQgold(item: EbayDto) {
     const model = {} as QgoldFtpOrderObject;
-    model.shipToName = item.CustomerName;
-    model.shipToAddress1 = item.Address1;
-    model.shipToAddress2 = item.Address2;
+    model.shipToName = item.customerName;
+    model.shipToAddress1 = item.address1;
+    model.shipToAddress2 = item.address2;
     model.shipToAddress3 = null;
-    model.shipToCity = item.City;
-    model.shipToState_Province = item.State;
-    model.shipToZip = item.ZipCode;
-    model.shipToCountryCode = item.Country;
-    model.shipToPhone = item.CustomerPhone;
-    model.amz_Order_ID = item.OrderId;
+    model.shipToCity = item.city;
+    model.shipToState_Province = item.state;
+    model.shipToZip = item.zipCode;
+    model.shipToCountryCode = item.country;
+    model.shipToPhone = item.customerPhone;
+    model.amz_Order_ID = item.orderId;
     model.ship_Option_Code = '100';
     // switch (item.Ship) {
     //   case 'Standard':
@@ -92,9 +95,9 @@ export class OrderDetailComponent implements OnInit {
     // }
     model.item = [];
     let ii = {} as QgoldFtpOrderItem;
-    item.OrderDetails.forEach(el => {
-      ii.item = el.Sku;
-      ii.qty = el.Quantity?.toString();
+    item.orderDetails.forEach(el => {
+      ii.item = el.sku;
+      ii.qty = el.quantity?.toString();
       model.item.push(ii);
     });
     model.marketplace = "Ebay";

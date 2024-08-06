@@ -112,6 +112,6 @@ export class UpdateComponent implements OnInit {
     })
   }
   cancel() {
-    this.router.navigate(['products/product']);
+    this.router.navigate(['products']);
   }
 }
