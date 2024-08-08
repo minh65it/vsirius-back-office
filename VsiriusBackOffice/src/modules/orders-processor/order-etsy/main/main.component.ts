@@ -76,6 +76,7 @@ export class MainComponent implements OnInit {
       { field: 'seller_email', header: 'Seller Email' },
       { field: 'buyer_user_id', header: 'Customer Id' },
       { field: 'buyer_email', header: 'Customer Email' },
+      { field: 'supplier', header: 'Supplier' },
       { field: 'name', header: 'Customer Name' },
       { field: 'city', header: 'City' },
       { field: 'state', header: 'State' },
@@ -108,7 +109,7 @@ export class MainComponent implements OnInit {
   }
 
   submitLink() {
-
+    this.router.navigate(['orders/supplier/submit-qgold']);
   }
 
   submitLinkStuller() {

@@ -74,6 +74,7 @@ export class MainComponent implements OnInit {
       { field: 'customerId', header: 'Customer Id' },
       { field: 'customerName', header: 'Customer Name' },
       { field: 'customerPhone', header: 'Customer Phone' },
+      { field: 'supplier', header: 'Supplier' },
       { field: 'address1', header: 'Address 1' },
       { field: 'trackingNo', header: 'Tracking No' },
       { field: 'orderDetails', header: 'Order Details' },

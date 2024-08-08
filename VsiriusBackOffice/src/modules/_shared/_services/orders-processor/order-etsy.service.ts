@@ -5,13 +5,14 @@ import { PaginationEtsy, PaginationResult } from '../../_helpers/pagination-util
 import { EtsyDto } from '../../_models/order-processor/etsy-order-Dto';
 import { BehaviorSubject } from 'rxjs/internal/BehaviorSubject';
 import { EtsyProcessSearchParam } from '../../_helpers/params/search-ebay-process-param';
+import { environment } from 'src/environments/environment';
 
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderEtsyService {
-  baseUrl = 'https://localhost:7045/api/Order/';
+  baseUrl = environment.apiEbayURL;;
   IdOrder = new BehaviorSubject<number>(0);
   currentIdOrder = this.IdOrder.asObservable();
 

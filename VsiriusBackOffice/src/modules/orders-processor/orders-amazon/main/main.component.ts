@@ -108,7 +108,8 @@ export class MainComponent implements OnInit {
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
-        this.listAmazonOrder = res.data;
+        this.listAmazonOrder = res.data; console.log(this.listAmazonOrder);
+        
         this.notiflix.hideLoading();
       },
       error: () => {
