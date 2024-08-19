@@ -75,15 +75,6 @@
         </ng-select>
       </div>
 
-      <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Submitted</label>
-        <ng-select [placeholder]="'Submitted...'" 
-          [(ngModel)]="etsySearchParam.is_submit" name="isSubmitted" [clearable]="false">
-          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
-            item.key}}</ng-option>
-        </ng-select>
-      </div>
-
       <div class="col d-flex justify-content-end">
         <label for="TextInput" class="form-label fw-bold">&nbsp;</label>
         <div class="d-flex justify-content-end align-items-end">
