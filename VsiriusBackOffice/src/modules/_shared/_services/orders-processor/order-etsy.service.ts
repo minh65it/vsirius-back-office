@@ -21,7 +21,7 @@ export class OrderEtsyService {
   getData(pagination: PaginationEtsy, param: EtsyProcessSearchParam) {
     console.log(this.baseUrl);
     
-    return this.http.get<PaginationResult<EtsyDto>>('https://localhost:7045/api/' + `Order/GetAllOrder`, { params: { ...pagination, ...param } });
+    return this.http.get<PaginationResult<EtsyDto>>(this.baseUrl + `Order/GetAllOrder`, { params: { ...pagination, ...param } });
   }
 
   getDetail(receipt_id: number) {
