@@ -41,7 +41,7 @@ export class CreateComponent implements OnInit {
   }
 
   loadDataProductType() {
-    this.service.getDataFilter().subscribe({
+    this.service.getDataFilter('').subscribe({
       next: (res) => {
         console.log(res);
         
@@ -58,7 +58,7 @@ export class CreateComponent implements OnInit {
       this.loadData(e);
       this.loadValueForAdd(e);
       this.isSearchField = false;
-      this.product.feed_product_type = e;
+      this.product.feed_product_type = '';
     } 
   }
 
@@ -117,7 +117,7 @@ export class CreateComponent implements OnInit {
 
   add() {
     if (this.productType == '' || this.productType == null) {
-      this.product.feed_product_type = this.listProductType[0];
+      this.product.feed_product_type = '';
     }
     this.notiflix.showLoading();
     this.service.create(this.product).subscribe({

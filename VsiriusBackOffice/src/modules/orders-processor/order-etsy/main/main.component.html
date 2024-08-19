@@ -12,19 +12,78 @@
   <div class="card-header d-block">
     <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Order Id</label>
+        <label for="TextInput" class="form-label fw-bold">Order Etsy Id</label>
         <fieldset class="">
           <input type="text" [(ngModel)]="etsySearchParam.ids" name="ID" class="form-control"
             placeholder="Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Search</label>
+        <label for="TextInput" class="form-label fw-bold">Customer Name</label>
         <fieldset class="">
-          <input type="text" [(ngModel)]="etsySearchParam.keySearch" name="keySearch" class="form-control"
-            placeholder="Search..." />
+          <input type="text" [(ngModel)]="etsySearchParam.name" name="keySearch" class="form-control"
+            placeholder="Customer name..." />
         </fieldset>
       </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Customer Email</label>
+        <fieldset class="">
+          <input type="text" [(ngModel)]="etsySearchParam.buyer_email" name="keySearch" class="form-control"
+            placeholder="Customer name..." />
+        </fieldset>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Paided</label>
+        <ng-select [placeholder]="'Submitted...'" 
+          [(ngModel)]="etsySearchParam.is_paid" name="isSubmitted" [clearable]="false">
+          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" (ngModelChange)="setSearchFrom()" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="From Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" (ngModelChange)="setSearchTo()" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="To Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Shipped</label>
+        <ng-select [placeholder]="'Submitted...'" 
+          [(ngModel)]="etsySearchParam.is_shipped" name="isSubmitted" [clearable]="false">
+          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Submitted</label>
+        <ng-select [placeholder]="'Submitted...'" 
+          [(ngModel)]="etsySearchParam.is_submit" name="isSubmitted" [clearable]="false">
+          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+
       <div class="col d-flex justify-content-end">
         <label for="TextInput" class="form-label fw-bold">&nbsp;</label>
         <div class="d-flex justify-content-end align-items-end">
@@ -97,8 +156,12 @@
               </ng-container>
 
               <ng-container *ngIf="col.field != 'receipt_id' && col.field != 'buyer_user_id' && col.field != 'is_paid' 
-                && col.field != 'is_shipped'">
+                && col.field != 'is_shipped' && col.field != 'created_timestamp'">
                 {{item[col.field]}}
+              </ng-container>
+
+              <ng-container *ngIf="col.field == 'created_timestamp'">
+                {{convertTimeStampToDate(item[col.field])}}
               </ng-container>
 
               <ng-container *ngIf="col.field == 'is_paid'">{{item[col.field]? 'Yes' : 'No'}}</ng-container>

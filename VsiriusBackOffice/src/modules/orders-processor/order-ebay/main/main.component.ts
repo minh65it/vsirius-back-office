@@ -29,6 +29,9 @@ export class MainComponent implements OnInit {
     { key: "No", value: false },
     { key: "Yes", value: true }
   ];
+  searchFrom : Date ;
+  searchTo : Date ;
+
 
   subscription = Subscription.EMPTY;
   listChoosePagination = [
@@ -58,6 +61,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //this.searchFrom.setDate(this.searchTo.getDate() - 120);
     this.generateTable();
     this.loadData();
   }
@@ -76,14 +80,9 @@ export class MainComponent implements OnInit {
       { field: 'customerPhone', header: 'Customer Phone' },
       { field: 'supplier', header: 'Supplier' },
       { field: 'address1', header: 'Address 1' },
-      { field: 'trackingNo', header: 'Tracking No' },
-      { field: 'orderDetails', header: 'Order Details' },
-      { field: 'city', header: 'City' },
       { field: 'statusOrder', header: 'Status Order' },
       { field: 'orderDate', header: 'Order Date' },
-      { field: 'supplier', header: 'Supplier' },
-      { field: 'isSubmit', header: 'Submit' },
-      { field: 'isDelete', header: 'Deleted' },
+      { field: 'isSubmit', header: 'Submit' }
     ];
     this._selectedColumns = this.cols;
   }
@@ -103,6 +102,8 @@ export class MainComponent implements OnInit {
     });
   }
   search() {
+    this.ebaySearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? '';
+    this.ebaySearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? '';
     this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   submitLink() {
@@ -136,7 +137,20 @@ export class MainComponent implements OnInit {
     this.pagination.pageSize = e;
     this.loadData();
   }
+  getIsSubmitted(e : Event) {
+
+  }
+
+  setSearchFrom() {
+    this.searchFrom = new Date();
+  }
+
+  setSearchTo() {
+    this.searchTo = new Date();
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }

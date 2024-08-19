@@ -92,5 +92,6 @@ import { ReturnWalmartDetailComponent } from '../return-orders/return-walmart/re
     NgSelectModule,
     SharePipeModule
   ],
+  
 })
 export class OrdersModule { }
