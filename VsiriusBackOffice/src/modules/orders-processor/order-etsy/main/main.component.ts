@@ -101,9 +101,7 @@ export class MainComponent implements OnInit {
     this.subscription = this.service.getData(this.pagunation, this.etsySearchParam).subscribe({
       next: res => {
         this.listEtsyOrder = res['result']
-        this.pagination = res['pagination'];
-        console.log(res);
-        
+        this.pagination = res['pagination'];       
         this.notiflix.hideLoading();
       },
       error: () => {
@@ -128,6 +126,8 @@ export class MainComponent implements OnInit {
   }
 
   clean() {
+    this.searchFrom = null;
+    this.searchTo = null;
     this.etsySearchParam = {} as EtsyProcessSearchParam;
     this.search();
   }

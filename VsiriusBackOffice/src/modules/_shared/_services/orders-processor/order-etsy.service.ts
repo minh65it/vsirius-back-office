@@ -19,8 +19,6 @@ export class OrderEtsyService {
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
 
   getData(pagination: PaginationEtsy, param: EtsyProcessSearchParam) {
-    console.log(this.baseUrl);
-    
     return this.http.get<PaginationResult<EtsyDto>>(this.baseUrl + `Order/GetAllOrder`, { params: { ...pagination, ...param } });
   }
 

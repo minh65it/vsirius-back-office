@@ -53,7 +53,6 @@ export class OrderDetailComponent implements OnInit {
     this.subscription = this.service.getDetail(this.id).subscribe({
       next: res => {
         this.etsyOrderDetail = res;
-        console.log(res);
         this.notiflix.hideLoading();
       },
       error: () => {

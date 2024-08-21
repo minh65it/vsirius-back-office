@@ -123,6 +123,8 @@ export class MainComponent implements OnInit {
     }
   }
   clean() {
+    this.searchFrom = null;
+    this.searchTo = null;
     this.ebaySearchParam = {} as EbayProcessSearchParam;
     this.search();
   }

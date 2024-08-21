@@ -43,8 +43,6 @@ export class CreateComponent implements OnInit {
   loadDataProductType() {
     this.service.getDataFilter('').subscribe({
       next: (res) => {
-        console.log(res);
-        
         this.listProductType = res.map(x => x.value);
       },
       error: (err) => {

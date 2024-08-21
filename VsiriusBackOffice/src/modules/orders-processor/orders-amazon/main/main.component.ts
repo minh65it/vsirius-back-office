@@ -67,9 +67,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    this.searchFrom.setDate(this.searchTo.getDate() - 120);
-    console.log(this.searchFrom);
-    
+    this.searchFrom.setDate(this.searchTo.getDate() - 30);
     this.generateTable();
     this.search();
   }
@@ -103,15 +101,13 @@ export class MainComponent implements OnInit {
     this._selectedColumns = this.cols;
   }
 
-
   loadData() {
     this.notiflix.showLoading();
     this.subscription = this.service.getData(this.pagination, this.amazonSearchParam).subscribe({
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
-        this.listAmazonOrder = res.data; console.log(this.listAmazonOrder);
-        
+        this.listAmazonOrder = res.data; 
         this.notiflix.hideLoading();
       },
       error: () => {
