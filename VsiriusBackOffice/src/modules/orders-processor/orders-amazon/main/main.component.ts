@@ -67,7 +67,7 @@ export class MainComponent implements OnInit {
 
   ngOnInit() {
 
-    //this.searchFrom.setDate(this.searchTo.getDate() - 30);
+    this.searchFrom.setDate(this.searchTo.getDate() - 30);
     this.generateTable();
     this.search();
   }
@@ -101,14 +101,13 @@ export class MainComponent implements OnInit {
     this._selectedColumns = this.cols;
   }
 
-
   loadData() {
     this.notiflix.showLoading();
     this.subscription = this.service.getData(this.pagination, this.amazonSearchParam).subscribe({
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
-        this.listAmazonOrder = res.data;
+        this.listAmazonOrder = res.data; 
         this.notiflix.hideLoading();
       },
       error: () => {
@@ -118,12 +117,12 @@ export class MainComponent implements OnInit {
     })
   }
   getIsSubmitted($event: any) {
-    //console.log(this.amazonSearchParam);
+    
   }
 
   search() {
-    //this.amazonSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
-    //this.amazonSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
+    this.amazonSearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? null;
+    this.amazonSearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? null;
     if (this.amazonSearchParam.fromDate === null || this.amazonSearchParam.toDate === null) {
       return this.notiflix.warning('Date is not null');
     }

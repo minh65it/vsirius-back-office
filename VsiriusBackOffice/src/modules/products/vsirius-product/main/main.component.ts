@@ -720,7 +720,7 @@ export class MainComponent implements OnInit {
   }
 
   loadFilter() {
-    this.subscription = this.service.getDataFilter(this.productType).subscribe({
+    this.subscription = this.service.getDataFilter('').subscribe({
       next: res => {
         res.map(item => this.listProductType.push(item.value))
         this.listVsiriusFilter = res;
@@ -745,6 +745,7 @@ export class MainComponent implements OnInit {
       }
     })
     
+    
   }
 
   filterProductType(e: any) {
@@ -752,16 +753,15 @@ export class MainComponent implements OnInit {
     if (e != null || e != '') {
       this.productType = e;
     }
-    let vf = this.listVsiriusFilter.find(f => f.value.includes(this.productType));
     this.productTypeFilter = <VsiriusFilter>{
-      fieldName: vf.fieldName,
-      productType: vf.productType,
-      value: vf.value,
-      labelName: vf.labelName,
-      groupName: vf.groupName
+      fieldName: 'feed_product_type',
+      productType: '',
+      value: [e],
+      labelName: '',
+      groupName: ''
     }
     this.isShowSelect = false;
-    this.subscription = this.service.getDataFilter(this.productType).subscribe({
+    this.subscription = this.service.getDataFilter('').subscribe({
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);

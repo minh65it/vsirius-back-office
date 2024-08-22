@@ -11,19 +11,65 @@
   <div class="card-header d-block">
     <form class="row g-3" (ngSubmit)="search()" autocomplete="off">
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Order Id</label>
+        <label for="TextInput" class="form-label fw-bold">Ebay Order Id </label>
         <fieldset class="">
           <input type="text" [(ngModel)]="ebaySearchParam.ids" name="ID" class="form-control"
             placeholder="Order Id..." />
         </fieldset>
       </div>
       <div class="col-lg-3 col-md-6 col-sm-12">
-        <label for="TextInput" class="form-label fw-bold">Search</label>
-        <fieldset class="">
-          <input type="text" [(ngModel)]="ebaySearchParam.keySearch" name="keySearch" class="form-control"
-            placeholder="Search..." />
+        <label for="TextInput" class="form-label fw-bold">Supplier</label>
+        <ng-select [placeholder]="'Supplier...'" [(ngModel)]="ebaySearchParam.supplier" name="Supplier"
+          [clearable]="false">
+          <ng-option *ngFor="let item of selectSuppliers" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Buyer Name</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="ebaySearchParam.buyerName" name="BuyerName" class="form-control"
+            placeholder="Buyer Name..." />
         </fieldset>
       </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">From Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" (ngModelChange)="setSearchFrom()" [(ngModel)]="searchFrom" name="searchFrom" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="From Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">To Date</label>
+        <fieldset class="form-icon-group left-icon position-relative">
+          <input type="text" [(ngModel)]="searchTo" name="searchTo" bsDatepicker
+            [bsConfig]="{ isAnimated: true, dateInputFormat: 'YYYY-MM-DD' }" class="form-control"
+            placeholder="To Date..." />
+          <div class="form-icon position-absolute">
+            <i class="fa fa-calendar" aria-hidden="true"></i>
+          </div>
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Address Line 1</label>
+        <fieldset>
+          <input type="text" [(ngModel)]="ebaySearchParam.address1" name="addressLine1" class="form-control"
+            placeholder="Address..." />
+        </fieldset>
+      </div>
+      <div class="col-lg-3 col-md-6 col-sm-12">
+        <label for="TextInput" class="form-label fw-bold">Submitted</label>
+        <ng-select [placeholder]="'Submitted...'" (ngModelChange)="getIsSubmitted($event)"
+          [(ngModel)]="ebaySearchParam.submitted" name="isSubmitted" [clearable]="false">
+          <ng-option *ngFor="let item of selectIsSubmitted" [value]="item.value">{{
+            item.key}}</ng-option>
+        </ng-select>
+      </div>
+      
       <div class="col d-flex justify-content-end">
         <label for="TextInput" class="form-label fw-bold">&nbsp;</label>
         <div class="d-flex justify-content-end align-items-end">

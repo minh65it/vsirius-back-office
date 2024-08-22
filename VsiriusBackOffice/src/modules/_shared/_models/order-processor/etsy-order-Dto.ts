@@ -5,6 +5,7 @@ export interface EtsyDto {
     seller_email: string | null;
     buyer_user_id: number | null;
     buyer_email: string | null;
+    supplier: string | null;
     name: string | null;
     first_line: string | null;
     second_line: string | null;
