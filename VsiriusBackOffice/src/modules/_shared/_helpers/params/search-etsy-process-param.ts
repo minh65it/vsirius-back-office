@@ -1,6 +1,7 @@
 export interface EtsyProcessSearchParam {
     ids: number | null;
     name: string | null;
+    address : string | null;
     fromDate: string | null;
     toDate: string | null;
     buyer_email: string | null;
