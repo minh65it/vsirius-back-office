@@ -761,10 +761,11 @@ export class MainComponent implements OnInit {
       groupName: ''
     }
     this.isShowSelect = false;
-    this.subscription = this.service.getDataFilter('').subscribe({
+    this.subscription = this.service.getDataFilter(e).subscribe({
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
+        console.log(this.listMetalType);
         this.notiflix.hideLoading();
 
       },
