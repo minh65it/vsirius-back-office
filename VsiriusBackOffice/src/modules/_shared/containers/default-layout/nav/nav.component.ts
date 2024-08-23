@@ -52,6 +52,10 @@ export class NavComponent implements OnInit {
           url: '/orders/marketplace/ebay',
         },
         {
+          title: 'Etsy',
+          url: '/orders/marketplace/etsy',
+        },
+        {
           title: 'Amazon Return',
           url: '/orders/marketplace/return-amazon',
         },

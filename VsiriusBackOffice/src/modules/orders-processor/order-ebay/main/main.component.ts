@@ -22,13 +22,16 @@ export class MainComponent implements OnInit {
   _selectedColumns: any[];
   cols: any[];
   pagination: PaginationEbay = <PaginationEbay>{
-    PageNumber: 1,
-    PageSize: 25,
+    pageNumber: 1,
+    pageSize: 25,
   };
   selectIsSubmitted: any[] = [
     { key: "No", value: false },
     { key: "Yes", value: true }
   ];
+  searchFrom : Date ;
+  searchTo : Date ;
+
 
   subscription = Subscription.EMPTY;
   listChoosePagination = [
@@ -58,6 +61,7 @@ export class MainComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    //this.searchFrom.setDate(this.searchTo.getDate() - 120);
     this.generateTable();
     this.loadData();
   }
@@ -70,19 +74,15 @@ export class MainComponent implements OnInit {
   }
   generateTable() {
     this.cols = [
-      { field: 'OrderId', header: 'Order Id' },
-      { field: 'CustomerId', header: 'Customer Id' },
-      { field: 'CustomerName', header: 'Customer Name' },
-      { field: 'CustomerPhone', header: 'Customer Phone' },
-      { field: 'Address1', header: 'Address 1' },
-      { field: 'TrackingNo', header: 'Tracking No' },
-      { field: 'OrderDetails', header: 'Order Details' },
-      { field: 'City', header: 'City' },
-      { field: 'StatusOrder', header: 'Status Order' },
-      { field: 'OrderDate', header: 'Order Date' },
-      { field: 'Supplier', header: 'Supplier' },
-      { field: 'IsSubmit', header: 'Submit' },
-      { field: 'isDelete', header: 'Deleted' },
+      { field: 'orderId', header: 'Order Id' },
+      { field: 'customerId', header: 'Customer Id' },
+      { field: 'customerName', header: 'Customer Name' },
+      { field: 'customerPhone', header: 'Customer Phone' },
+      { field: 'supplier', header: 'Supplier' },
+      { field: 'address1', header: 'Address 1' },
+      { field: 'statusOrder', header: 'Status Order' },
+      { field: 'orderDate', header: 'Order Date' },
+      { field: 'isSubmit', header: 'Submit' }
     ];
     this._selectedColumns = this.cols;
   }
@@ -91,8 +91,8 @@ export class MainComponent implements OnInit {
     this.notiflix.showLoading();
     this.subscription = this.service.getData(this.pagination, this.ebaySearchParam).subscribe({
       next: res => {
-        this.pagination = res.Pagination;
-        this.listEbayOrder = res.Result;
+        this.pagination = res.pagination; 
+        this.listEbayOrder = res.result;
         this.notiflix.hideLoading();
       },
       error: () => {
@@ -102,7 +102,9 @@ export class MainComponent implements OnInit {
     });
   }
   search() {
-    this.pagination.PageNumber == 1 ? this.loadData() : this.pagination.PageNumber = 1;
+    this.ebaySearchParam.fromDate = this.searchFrom?.toLocaleDateString('en-CA') ?? '';
+    this.ebaySearchParam.toDate = this.searchTo?.toLocaleDateString('en-CA') ?? '';
+    this.pagination.pageNumber == 1 ? this.loadData() : this.pagination.pageNumber = 1;
   }
   submitLink() {
     this.router.navigate(['orders/supplier/submit-qgold']);
@@ -111,31 +113,46 @@ export class MainComponent implements OnInit {
     this.router.navigate(['orders/supplier/submit-stuller']);
   }
   detail(item: EbayDto) {
-    this.service.currentID(item.OrderId);
+    this.service.currentID(item.orderId);
     this.router.navigate(['orders/marketplace/detail-ebay']);
   }
   detailSupplier(item: EbayDto) {
-    if (item.CustomerId != null) {
+    if (item.customerId != null) {
       //this.serviceQgold.currentID(item.supplierOrderId);
       this.router.navigate(['orders/supplier/detail-qgold']);
     }
   }
   clean() {
+    this.searchFrom = null;
+    this.searchTo = null;
     this.ebaySearchParam = {} as EbayProcessSearchParam;
     this.search();
   }
   pageChanged(event: any) {
-    this.pagination.PageNumber = event.page;
+    this.pagination.pageNumber = event.page;
     this.loadData();
   }
   filterPagination(e: any) {
     if (e == 0) {
       e = 1
     }
-    this.pagination.PageSize = e;
+    this.pagination.pageSize = e;
     this.loadData();
   }
+  getIsSubmitted(e : Event) {
+
+  }
+
+  setSearchFrom() {
+    this.searchFrom = new Date();
+  }
+
+  setSearchTo() {
+    this.searchTo = new Date();
+  }
+
   ngOnDestroy(): void {
     this.subscription.unsubscribe();
   }
+
 }

@@ -23,7 +23,7 @@
         <label class="form-label fw-bold">Ebay Order Id </label>
         <div class="form-control" style="height: 35px;">
           <p class="font-weight-bold">
-            {{ebayOrderDetail?.OrderId}}
+            {{ebayOrderDetail?.orderId}}
           </p>
         </div>
       </div>
@@ -37,89 +37,90 @@
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Submitted </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.IsSubmit | yesNo}}
+          {{ebayOrderDetail?.isSubmit | yesNo}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order Status </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.StatusOrder}}
+          {{ebayOrderDetail?.statusOrder}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Total Price </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.TotalPrice}}
+          {{ebayOrderDetail?.totalPrice}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Order Date </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.OrderDate | date:'YYYY-MM-dd'}}
+          {{ebayOrderDetail?.orderDate | date:'YYYY-MM-dd'}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Customer Name </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.CustomerName}}
+          {{ebayOrderDetail?.customerName}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Customer Phone </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.CustomerPhone}}
+          {{ebayOrderDetail?.customerPhone}}
         </div>
       </div>
-      <div class="col-xl-12 col-md-12 mt-2" *ngIf="ebayOrderDetail?.OrderDetails">
+      <div class="col-xl-12 col-md-12 mt-2" *ngIf="ebayOrderDetail?.orderDetails.length">
         <label class="form-label fw-bold">Item List </label>
-        <div class="form-control" [style.height.px]="50 * ebayOrderDetail?.OrderDetails.length">
-          <div class="form mt-1" *ngFor="let item of ebayOrderDetail?.OrderDetails">
-            Style: {{item?.Sku}}, &nbsp; Qty: {{item?.Quantity}}, &nbsp; Price: {{item?.Price}}
+        <div class="form-control" [style.height.px]="50 * ebayOrderDetail?.orderDetails.length">
+          <div class="form mt-1" *ngFor="let item of ebayOrderDetail?.orderDetails">
+            Style: {{item?.sku}}, &nbsp; Qty: {{item?.quantity}}, &nbsp; Price: {{item?.price}}
           </div>
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
         <label class="form-label fw-bold">Address Line 1 </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.Address1}}
+          {{ebayOrderDetail?.address1}}
         </div>
       </div>
       <div class="col-xl-12 col-md-12 mt-2">
         <label class="form-label fw-bold">Address Line 2 </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.Address2}}
+          {{ebayOrderDetail?.address2}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">City </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.City}}
+          {{ebayOrderDetail?.city}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">State Or Region </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.State}}
+          {{ebayOrderDetail?.state}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Postal Code </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.ZipCode}}
+          {{ebayOrderDetail?.zipCode}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Country </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.Country}}
+          {{ebayOrderDetail?.country}}
         </div>
       </div>
       <div class="col-xl-6 col-md-6 mt-2">
         <label class="form-label fw-bold">Customer Email </label>
         <div class="form-control" style="height: 35px;">
-          {{ebayOrderDetail?.CustomerEmail}}
+          {{ebayOrderDetail?.customerEmail}}
         </div>
       </div>
+      
     </div>
   </div>
 </div>

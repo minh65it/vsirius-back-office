@@ -27,7 +27,9 @@
     <div class="card-body">
         <form class="row">
             <p-tabView>
+                
                 <p-tabPanel *ngFor="let group of groupName" [header]="group">
+                    
                     <div class="row">
                         <ng-container *ngFor="let item of listTabView(group)">
                             <div class="col-4 mb-3" *ngIf="item.groupName == group && item.value != null">

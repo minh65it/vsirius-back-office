@@ -101,14 +101,13 @@ export class MainComponent implements OnInit {
     this._selectedColumns = this.cols;
   }
 
-
   loadData() {
     this.notiflix.showLoading();
     this.subscription = this.service.getData(this.pagination, this.amazonSearchParam).subscribe({
       next: res => {
         this.isCheckAll = false;
         this.pagination = res;
-        this.listAmazonOrder = res.data;
+        this.listAmazonOrder = res.data; 
         this.notiflix.hideLoading();
       },
       error: () => {
@@ -118,7 +117,7 @@ export class MainComponent implements OnInit {
     })
   }
   getIsSubmitted($event: any) {
-    //console.log(this.amazonSearchParam);
+    
   }
 
   search() {

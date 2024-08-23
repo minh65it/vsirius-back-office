@@ -6,11 +6,19 @@ export interface Pagination {
   skip: number;
 }
 export interface PaginationEbay {
-  TotalCount: number;
-  TotalPage: number;
-  PageNumber: number;
-  PageSize: number;
-  Skip: number;
+  totalCount: number;
+  totalPage: number;
+  pageNumber: number;
+  pageSize: number;
+  skip: number;
+}
+
+export interface PaginationEtsy {
+  totalCount: number;
+  totalPage: number;
+  pageNumber: number;
+  pageSize: number;
+  skip: number;
 }
 
 export interface PaginationParam {
@@ -23,8 +31,8 @@ export class PaginationResult<T> {
   pagination: Pagination;
 }
 export class PaginationResultEbay<T> {
-  Result: T[];
-  Pagination: PaginationEbay;
+  result: T[];
+  pagination: PaginationEbay;
 }
 
 export interface PaginationResult2<T> {

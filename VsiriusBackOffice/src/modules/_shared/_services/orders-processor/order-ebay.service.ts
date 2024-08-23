@@ -26,6 +26,7 @@ export class OrderEbayService {
   }
 
   getDetail(orderID: string) {
-    return this.http.get<EbayDto>(this.baseUrl + `Order/${orderID}`, { params: { orderID } });
+    return this.http.get<EbayDto>(this.baseUrl + `Order/api/order/${orderID}`, { params: { orderID } });
   }
+  
 }

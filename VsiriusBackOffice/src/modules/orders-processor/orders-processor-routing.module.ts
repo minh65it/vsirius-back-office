@@ -11,7 +11,8 @@ import { OrderDetailComponent as OrderDetailStullerComponent } from './orders-st
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailEbayComponent } from './order-ebay/order-detail/order-detail.component';
-
+import { MainComponent as MainEtsyComponent } from './order-etsy/main/main.component';
+import {OrderDetailComponent as OrderDetailEtsyComponent} from './order-etsy/order-detail/order-detail.component';
 const routes: Routes = [
   //Qgold
   {
@@ -96,6 +97,22 @@ const routes: Routes = [
       breadcrumb: 'Order Detail Ebay',
     },
   },
+
+  // Etsy
+  {
+    path: 'marketplace/etsy',
+    component: MainEtsyComponent,
+    data: {
+      breadcrumb: 'Orders Etsy',
+    },
+  },
+  {
+    path: 'marketplace/detail-etsy',
+    component: OrderDetailEtsyComponent,
+    data: {
+      breadcrumb: 'Order Detail Etsy',
+    },
+  }
 ];
 
 @NgModule({

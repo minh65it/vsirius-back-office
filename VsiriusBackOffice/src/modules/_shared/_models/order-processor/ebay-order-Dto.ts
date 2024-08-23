@@ -1,28 +1,28 @@
 export interface EbayDto {
-    OrderId: string | null;
-    CustomerId: string | null;
-    CustomerName: string | null;
-    CustomerPhone: string | null;
-    CustomerEmail: string | null;
-    Address1: string | null;
-    Address2: string | null;
-    TrackingNo: string | null;
-    City: string | null;
-    State: string | null;
-    Country: string | null;
-    ZipCode: string | null;
-    TotalPrice: number | null;
-    StatusOrder: string | null;
-    OrderDate: string | null;
-    IsSubmit: boolean;
-    Supplier: string | null;
-    OrderDetails: OrderDetail[];
+    orderId: string | null;
+    customerId: string | null;
+    customerName: string | null;
+    customerPhone: string | null;
+    customerEmail: string | null;
+    address1: string | null;
+    address2: string | null;
+    trackingNo: string | null;
+    city: string | null;
+    state: string | null;
+    country: string | null;
+    zipCode: string | null;
+    totalPrice: number | null;
+    statusOrder: string | null;
+    orderDate: string | null;
+    isSubmit: boolean;
+    supplier: string | null;
+    orderDetails: OrderDetail[];
 }
 
 interface OrderDetail {
-    OrderDetailId: string | null;
-    OrderId: string | null;
-    Sku: string | null;
-    Quantity: number | null;
-    Price: number | null;
+    orderDetailId: string | null;
+    orderId: string | null;
+    sku: string | null;
+    quantity: number | null;
+    price: number | null;
 }
