@@ -4,12 +4,15 @@ import { MainComponent as MainQgoldComponent } from './orders-qgold/main/main.co
 import { MainComponent as MainStullerComponent } from './orders-stuller/main/main.component';
 import { MainComponent as MainAmazonComponent } from './orders-amazon/main/main.component';
 import { MainComponent as MainWalmartComponent } from './orders-walmart/main/main.component';
+import { MainComponent as MainEbayComponent } from './order-ebay/main/main.component';
 import { SubmitOrderComponent } from './orders-qgold/submit-order/submit-order.component';
 import { OrderDetailComponent } from './orders-qgold/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailStullerComponent } from './orders-stuller/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from './orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from './orders-walmart/order-detail/order-detail.component';
-
+import { OrderDetailComponent as OrderDetailEbayComponent } from './order-ebay/order-detail/order-detail.component';
+import { MainComponent as MainEtsyComponent } from './order-etsy/main/main.component';
+import {OrderDetailComponent as OrderDetailEtsyComponent} from './order-etsy/order-detail/order-detail.component';
 const routes: Routes = [
   //Qgold
   {
@@ -78,6 +81,38 @@ const routes: Routes = [
       breadcrumb: 'Order Detail Walmart',
     },
   },
+
+  //Ebay
+  {
+    path: 'marketplace/ebay',
+    component: MainEbayComponent,
+    data: {
+      breadcrumb: 'Orders Ebay',
+    },
+  },
+  {
+    path: 'marketplace/detail-ebay',
+    component: OrderDetailEbayComponent,
+    data: {
+      breadcrumb: 'Order Detail Ebay',
+    },
+  },
+
+  // Etsy
+  {
+    path: 'marketplace/etsy',
+    component: MainEtsyComponent,
+    data: {
+      breadcrumb: 'Orders Etsy',
+    },
+  },
+  {
+    path: 'marketplace/detail-etsy',
+    component: OrderDetailEtsyComponent,
+    data: {
+      breadcrumb: 'Order Detail Etsy',
+    },
+  }
 ];
 
 @NgModule({

@@ -20,10 +20,14 @@ import { MainComponent as MainQgoldComponent } from '../orders-processor/orders-
 import { MainComponent as MainStullerComponent } from '../orders-processor/orders-stuller/main/main.component';
 import { MainComponent as MainAmazonComponent } from '../orders-processor/orders-amazon/main/main.component';
 import { MainComponent as MainWalmartComponent } from '../orders-processor/orders-walmart/main/main.component';
+import { MainComponent as MainEbayComponent } from '../orders-processor/order-ebay/main/main.component';
+import { MainComponent as MainEtsyComponent} from '../orders-processor/order-etsy/main/main.component';
 import { OrderDetailComponent as OrderDetailQgoldComponent } from '../orders-processor/orders-qgold/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailStullerComponent } from '../orders-processor/orders-stuller/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailAmazonComponent } from '../orders-processor/orders-amazon/order-detail/order-detail.component';
 import { OrderDetailComponent as OrderDetailWalmartComponent } from '../orders-processor/orders-walmart/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailEbayComponent } from '../orders-processor/order-ebay/order-detail/order-detail.component';
+import { OrderDetailComponent as OrderDetailEtsyComponent} from '../orders-processor/order-etsy/order-detail/order-detail.component';
 import { LostPackageClaimComponent } from '../orders-processor/orders-qgold/lost-package-claim/lost-package-claim.component';
 import { SubmitOrderComponent as SubmitOrderQgoldComponent } from '../orders-processor/orders-qgold/submit-order/submit-order.component';
 import { NgSelectModule } from '@ng-select/ng-select';
@@ -54,6 +58,12 @@ import { ReturnWalmartDetailComponent } from '../return-orders/return-walmart/re
     //Walmart
     MainWalmartComponent,
     OrderDetailWalmartComponent,
+    //Ebay
+    MainEbayComponent,
+    OrderDetailEbayComponent,
+    // Etsy
+    MainEtsyComponent,
+    OrderDetailEtsyComponent,
     //Claim
     ClaimListComponent,
     ClaimDetailComponent,
@@ -82,5 +92,6 @@ import { ReturnWalmartDetailComponent } from '../return-orders/return-walmart/re
     NgSelectModule,
     SharePipeModule
   ],
+  
 })
 export class OrdersModule { }

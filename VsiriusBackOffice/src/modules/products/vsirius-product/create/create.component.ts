@@ -51,11 +51,13 @@ export class CreateComponent implements OnInit {
     })
   }
 
-  filterProductType(e: string) {
-    this.loadData(e);
-    this.loadValueForAdd(e);
-    this.isSearchField = false;
-    this.product.feed_product_type = e;
+  filterProductType(e: string) {  
+    if(e != null) {
+      this.loadData(e);
+      this.loadValueForAdd(e);
+      this.isSearchField = false;
+      this.product.feed_product_type = '';
+    } 
   }
 
   loadValueForAdd(e) {
@@ -69,6 +71,10 @@ export class CreateComponent implements OnInit {
         this.listFilter = this.listFieldDataSearch.filter(x=>x.groupName == 'Required')
                                         .filter(item => /1$/.test(item.fieldName));
         this.notiflix.hideLoading();
+        console.log(this.groupName);
+        console.log(res);
+        
+        
       },
       error: (err) => {
         console.log(err);
@@ -109,7 +115,7 @@ export class CreateComponent implements OnInit {
 
   add() {
     if (this.productType == '' || this.productType == null) {
-      this.product.feed_product_type = this.listProductType[0];
+      this.product.feed_product_type = '';
     }
     this.notiflix.showLoading();
     this.service.create(this.product).subscribe({

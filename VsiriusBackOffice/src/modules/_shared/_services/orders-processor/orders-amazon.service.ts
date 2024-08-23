@@ -12,7 +12,7 @@ import { AmazonOrderDTO, AmazonOrderDetailDTO } from '../../_models/order-proces
 })
 export class OrdersAmazonService {
 
-  baseUrl = environment.apiAmazonURL;
+  baseUrl = environment.apiAmazonURL ;
   clientId = environment.clientIdOrderProcessor;
   clientSecret = environment.clientSecretOrderProcessor;
 
