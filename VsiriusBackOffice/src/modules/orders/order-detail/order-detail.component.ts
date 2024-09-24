@@ -31,7 +31,9 @@ export class OrderDetailComponent implements OnInit {
     this.service.currentIdOrder.subscribe({
       next: res => {
         if (Object.keys(res).length === 0) {
-          console.log('khong co id');
+          this.back()
+          console.log('kh co ai đi');
+          
         } else {
           this.orderId = res;
           if(this.orderId) {
@@ -58,5 +60,17 @@ export class OrderDetailComponent implements OnInit {
         this.notiflix.hideLoading();
       }
     })
+  }
+
+  ReSubmitQgold(item : VsiriusOrderDetail) {
+
+  }
+
+  ReSubmitStuller(item : VsiriusOrderDetail) {
+
+  }
+
+  back() {
+    this.router.navigate(['orders/marketplace/vsirius']);
   }
 }
