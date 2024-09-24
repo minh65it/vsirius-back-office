@@ -5,12 +5,19 @@ import { OrderParam } from '../../_helpers/params/order-param';
 import { PaginationParam, PaginationResult } from '../../_helpers/pagination-utility';
 import { OperationResult } from '../../_helpers/operation-result';
 import { VsiriusOrder } from '../../_models/vsiriusOrder';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class OrderService {
   baseUrl = environment.apiOrderURL + 'Order';
+  IdOrder = new BehaviorSubject<string>('');
+  currentIdOrder = this.IdOrder.asObservable();
+  
+  currentID(id: string) {
+    this.IdOrder.next(id);
+  }
   constructor(private http: HttpClient) { }
 
   getData(pagination: PaginationParam, param: OrderParam) {
