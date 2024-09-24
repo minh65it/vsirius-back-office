@@ -113,11 +113,24 @@
                             <td> {{ ((pagination.pageNumber - 1) * pagination.pageSize) + rowIndex + 1 }} </td>
                             <!-- DATA -->
                             <td *ngFor="let col of columns" [ngClass]="col.field == 'isActive' ? 'text-center':''">
-                                <ng-container
-                                    *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate'">{{item[col.field]}}</ng-container>
-                                <ng-container *ngIf="col.field == 'birthDay'">{{item[col.field] | date}}</ng-container>
-                                <ng-container *ngIf="col.field == 'createOrderDate'">{{item[col.field] |
-                                    date:'dd-MM-YYYY'}}</ng-container>
+                                <ng-container *ngIf="col.field == 'orderId'">
+                                    <div class="text-info" style="cursor: pointer;" (click)="detail(item)" target="_blank">
+                                        {{item[col.field]}}
+                                      </div>
+                                </ng-container>
+
+                                <ng-container *ngIf="col.field != 'birthDay' && col.field != 'createOrderDate' && col.field != 'orderId'">
+                                    {{item[col.field]}}
+                                </ng-container>
+
+                                <ng-container *ngIf="col.field == 'birthDay'">
+                                    {{item[col.field] | date}}
+                                </ng-container>
+
+                                <ng-container *ngIf="col.field == 'createOrderDate'">
+                                    {{item[col.field] |
+                                    date:'dd-MM-YYYY'}}
+                                </ng-container>
                             </td>
                         </tr>
                     </ng-template>
@@ -202,8 +215,8 @@
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Create Order Date</label>
                         <input type="text" class="form-control" bsDatepicker
-                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY hh:mm a' }" name="createOrderDate"
-                            [(ngModel)]="createOrderDate" />
+                            [bsConfig]="{ isAnimated: true, dateInputFormat: 'DD/MM/YYYY hh:mm a' }"
+                            name="createOrderDate" [(ngModel)]="createOrderDate" />
                     </div>
                     <div class="col-4 mb-2">
                         <label for="TextInput" class="form-label fw-bold label-custom">Total Quantity </label>

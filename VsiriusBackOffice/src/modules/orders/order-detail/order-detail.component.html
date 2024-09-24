@@ -1,0 +1,130 @@
+<div class="card-body">
+    <h3>Detail</h3>
+    <div class="row">
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Vsirius Order Id </label>
+            <div class="form-control" style="height: 35px;">
+              <p class="font-weight-bold">
+                {{vsiriusOrder?.orderId}}
+              </p>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Card Id </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.cartId}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Full name </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.fullName}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Email </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.email}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Birthday </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.birthDay}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Gender </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.gender}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Address 1 </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.address1}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Address 2 </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.address2}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Phone </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.phone}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">City </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.city}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Shipping </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.shipping}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Payment Method </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.paymentMethod}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Note </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.note}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Created Order </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.createOrderDate | date}}
+            </div>
+        </div>
+
+        <div class="col-xl-12 col-md-12 mt-2" *ngIf="vsiriusOrder?.listProducts.length">
+            <label class="form-label fw-bold">Item List </label>
+            <div class="form-control" [style.height.px]="35 * vsiriusOrder?.listProducts.length">
+              <div class="form mt-1" *ngFor="let item of vsiriusOrder?.listProducts">
+                &bull; Item: {{item?.item_sku}}, &nbsp; Qty: {{item?.quantity}}, &nbsp; Price: {{item?.standard_price}}
+              </div>
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Total Quantity Item </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.totalQuantityItem}}
+            </div>
+        </div>
+
+        <div class="col-xl-6 col-md-6 mt-2">
+            <label class="form-label fw-bold">Total Price </label>
+            <div class="form-control" style="height: 35px;">
+              {{vsiriusOrder?.totalPrice}}
+            </div>
+        </div>
+
+        
+          
+    </div>
+</div>

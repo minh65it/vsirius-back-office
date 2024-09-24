@@ -16,6 +16,8 @@ import { ReturnOrdersRoutes } from '../return-orders/return-orders.routing.modul
 
 import { MainComponent as MainVSiriusComponent } from './orders/main/main.component';
 import { MainComponent as MainVSiriusStatusComponent } from './order-status/main/main.component';
+import { OrderDetailComponent } from './order-detail/order-detail.component';
+
 import { MainComponent as MainQgoldComponent } from '../orders-processor/orders-qgold/main/main.component';
 import { MainComponent as MainStullerComponent } from '../orders-processor/orders-stuller/main/main.component';
 import { MainComponent as MainAmazonComponent } from '../orders-processor/orders-amazon/main/main.component';
@@ -51,6 +53,7 @@ import { ReturnWalmartDetailComponent } from '../return-orders/return-walmart/re
     OrderDetailStullerComponent,
     //VSirius
     MainVSiriusComponent,
+    OrderDetailComponent,
     MainVSiriusStatusComponent,
     //Amazon
     MainAmazonComponent,
@@ -72,7 +75,8 @@ import { ReturnWalmartDetailComponent } from '../return-orders/return-walmart/re
     ReturnAmazonDetailComponent,
     //Return-Walmart
     ReturnWalmartComponent,
-    ReturnWalmartDetailComponent
+    ReturnWalmartDetailComponent,
+    OrderDetailComponent
   ],
   imports: [
     CommonModule,
