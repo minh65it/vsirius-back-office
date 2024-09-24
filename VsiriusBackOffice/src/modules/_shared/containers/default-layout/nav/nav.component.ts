@@ -36,7 +36,7 @@ export class NavComponent implements OnInit {
       visible: false,
       items: [
         {
-          title: 'VSirius',
+          title: 'Vsirius',
           url: '/orders/marketplace/vsirius',
         },
         {
@@ -46,6 +46,14 @@ export class NavComponent implements OnInit {
         {
           title: 'Walmart',
           url: '/orders/marketplace/walmart',
+        },
+        {
+          title: 'Ebay',
+          url: '/orders/marketplace/ebay',
+        },
+        {
+          title: 'Etsy',
+          url: '/orders/marketplace/etsy',
         },
         {
           title: 'Amazon Return',

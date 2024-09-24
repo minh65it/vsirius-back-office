@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { MainComponent } from './main/main.component';
 import { MainComponent as MainStatusComponent } from '../order-status/main/main.component';
+import { OrderDetailComponent } from '../order-detail/order-detail.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,13 @@ const routes: Routes = [
     component: MainStatusComponent,
     data: {
       breadcrumb: 'List Order Status',
+    },
+  },
+  {
+    path: 'marketplace/order-detail',
+    component: OrderDetailComponent,
+    data: {
+      breadcrumb: 'Order Detail',
     },
   }
 ];

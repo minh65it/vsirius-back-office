@@ -55,6 +55,7 @@ export class MainComponent implements OnInit {
   numberPage = 10;
   listDataFilter: VsiriusFilter[] = [];
   listProductType: any[] = [];
+  listVsiriusFilter: VsiriusFilter[] = [];
   listItemType: any[] = [];
   listMetalType: any[] = [];
   productType: string = 'Product Type';
@@ -722,6 +723,7 @@ export class MainComponent implements OnInit {
     this.subscription = this.service.getDataFilter('').subscribe({
       next: res => {
         res.map(item => this.listProductType.push(item.value))
+        this.listVsiriusFilter = res;
       },
       error: (err) => {
         console.log(err);
@@ -742,6 +744,8 @@ export class MainComponent implements OnInit {
         this.notiflix.hideLoading();
       }
     })
+    
+    
   }
 
   filterProductType(e: any) {
@@ -757,10 +761,11 @@ export class MainComponent implements OnInit {
       groupName: ''
     }
     this.isShowSelect = false;
-    this.subscription = this.service.getDataFilter(this.productType).subscribe({
+    this.subscription = this.service.getDataFilter(e).subscribe({
       next: res => {
         this.listItemType = res.filter(x => x.fieldName == 'item_type').map(x => x.value);
         this.listMetalType = res.filter(x => x.fieldName == 'metal_type').map(x => x.value);
+        console.log(this.listMetalType);
         this.notiflix.hideLoading();
 
       },

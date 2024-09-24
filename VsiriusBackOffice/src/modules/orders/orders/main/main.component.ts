@@ -66,6 +66,7 @@ export class MainComponent implements OnInit {
 
   generateTable() {
     this.cols = [
+      { field: 'orderId', header: 'Order ID' },
       { field: 'fullName', header: 'full Name' },
       { field: 'email', header: 'email' },
       { field: 'address1', header: 'address 1' },
@@ -167,5 +168,9 @@ export class MainComponent implements OnInit {
   }
   goToOrderStatus() {
     this.router.navigate(['orders/marketplace/order-status-vsirius'])
+  }
+  detail(item : string) {
+    this.service.currentID(item['orderId']);
+    this.router.navigate(['orders/marketplace/order-detail']);
   }
 }

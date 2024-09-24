@@ -11,7 +11,7 @@ import { OperationResult } from '../../_helpers/operation-result';
   providedIn: 'root'
 })
 export class ProductService {
-  baseUrl = environment.apiProductURL + 'VsiriusProduct';
+  baseUrl = environment.apiProductURL + 'VsiriusProduct' ;
   itemVSiriusProduct: string = 'itemVSiriusProduct';
 
   constructor(private http: HttpClient, private funUtility: FunctionUtility) { }
